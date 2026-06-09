@@ -14,11 +14,20 @@ async function fetchJSON(path) {
 
 /* ---- Rutas relativas a la raíz desde cualquier subcarpeta ---- */
 function rootPath(path) {
-  // Detecta si estamos en una subcarpeta (equipo/, portafolio/, material/)
-  const depth = window.location.pathname.split('/').filter(Boolean).length - 1;
-  const prefix = depth > 0 ? '../'.repeat(depth) : '';
-  // return prefix + 'umdfilms/' + path;
-  return prefix + path;
+  // Calcula el prefijo de la "raíz del sitio" de forma robusta.
+  // Funciona en local (sin subfolder) y en GitHub Pages (/umdfilms/).
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  const isFile = parts.length > 0 && parts[parts.length - 1].includes('.');
+  const folders = isFile ? parts.slice(0, -1) : parts;
+
+  // Subir tantos niveles como carpetas haya sobre la raíz del proyecto
+  // En local: /index.html → folders=[] → prefix=''
+  // En GH Pages: /umdfilms/index.html → folders=['umdfilms'] → prefix='../'  ← PROBLEMA
+  // Solución: detectar el repo name y excluirlo del conteo
+  const knownSubfolders = ['equipo', 'portafolio', 'material'];
+  const depth = folders.filter(f => knownSubfolders.includes(f)).length;
+
+  return depth > 0 ? '../'.repeat(depth) + path : path;
 }
 
 /* ---- Reveal on scroll ---- */
