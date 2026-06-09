@@ -10,8 +10,8 @@
     "synopsis": "Placeholder — descripción del proyecto pendiente.",
     "thumb": "https://img.youtube.com/vi/UWEjMHWISyc/maxresdefault.jpg",
     "photos_extra": [
-      "./assets/portafolio/cautivo-malaga-2.webp",
-      "./assets/portafolio/cautivo-malaga-3.webp"
+      "assets/portafolio/cautivo-malaga-2.webp",
+      "assets/portafolio/cautivo-malaga-3.webp"
     ],
     "trailer_youtube": "https://youtu.be/UWEjMHWISyc",
     "full_video_youtube": "",

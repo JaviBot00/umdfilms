@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- Carga de datos ---- */
   const [config, team, portfolio, services] = await Promise.all([
-    UMD.fetchJSON('./data/config.json'),
-    UMD.fetchJSON('./data/team.json'),
-    UMD.fetchJSON('./data/portfolio.json'),
-    UMD.fetchJSON('./data/services.json')
+    UMD.fetchJSON('data/config.json'),
+    UMD.fetchJSON('data/team.json'),
+    UMD.fetchJSON('data/portfolio.json'),
+    UMD.fetchJSON('data/services.json')
   ]);
 
   /* ---- Nav + Footer + FAB + Schema ---- */

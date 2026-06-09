@@ -71,11 +71,11 @@ async function renderNav(config) {
       <span></span><span></span><span></span>
     </button>
     <nav class="nav__links" id="navLinks" role="navigation">
-      <a href="${rootPath('./index.html')}#nosotros">Quiénes somos</a>
-      <a href="${rootPath('./index.html')}#servicios">Servicios</a>
-      <a href="${rootPath('./index.html')}#portafolio">Portafolio</a>
-      <a href="${rootPath('./index.html')}#equipo">Equipo</a>
-      <a href="${rootPath('./material/index.html')}">Material</a>
+      <a href="${rootPath('index.html')}#nosotros">Quiénes somos</a>
+      <a href="${rootPath('index.html')}#servicios">Servicios</a>
+      <a href="${rootPath('index.html')}#portafolio">Portafolio</a>
+      <a href="${rootPath('index.html')}#equipo">Equipo</a>
+      <a href="${rootPath('material/index.html')}">Material</a>
       <a href="${waHref}" class="nav__cta btn-outline" target="_blank" rel="noopener">Hablemos</a>
     </nav>
   `;
@@ -85,7 +85,7 @@ async function renderNav(config) {
 
 /* ---- Footer HTML compartido ---- */
 async function renderFooter(config) {
-  const cfg = config || await fetchJSON(rootPath('./data/config.json'));
+  const cfg = config || await fetchJSON(rootPath('data/config.json'));
   const footer = document.getElementById('footer');
   if (!footer) return;
 
@@ -114,12 +114,12 @@ async function renderFooter(config) {
       </div>
       <nav class="footer__nav">
         <strong>Navegar</strong>
-        <a href="${rootPath('./index.html')}#nosotros">Quiénes somos</a>
-        <a href="${rootPath('./index.html')}#servicios">Servicios</a>
-        <a href="${rootPath('./index.html')}#portafolio">Portafolio</a>
-        <a href="${rootPath('./index.html')}#equipo">Equipo</a>
-        <a href="${rootPath('./material/index.html')}">Alquiler de material</a>
-        <a href="${rootPath('./index.html')}#contacto">Contacto</a>
+        <a href="${rootPath('index.html')}#nosotros">Quiénes somos</a>
+        <a href="${rootPath('index.html')}#servicios">Servicios</a>
+        <a href="${rootPath('index.html')}#portafolio">Portafolio</a>
+        <a href="${rootPath('index.html')}#equipo">Equipo</a>
+        <a href="${rootPath('material/index.html')}">Alquiler de material</a>
+        <a href="${rootPath('index.html')}#contacto">Contacto</a>
       </nav>
       <nav class="footer__nav">
         <strong>Redes</strong>

@@ -27,9 +27,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- Carga de datos ---- */
   const [config, portfolio, team] = await Promise.all([
-    UMD.fetchJSON(UMD.rootPath('./data/config.json')),
-    UMD.fetchJSON(UMD.rootPath('./data/portfolio.json')),
-    UMD.fetchJSON(UMD.rootPath('./data/team.json'))
+    UMD.fetchJSON(UMD.rootPath('data/config.json')),
+    UMD.fetchJSON(UMD.rootPath('data/portfolio.json')),
+    UMD.fetchJSON(UMD.rootPath('data/team.json'))
   ]);
 
   const project = portfolio.find(p => p.id === projectId);
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (filmHero) {
     filmHero.innerHTML = `
       <div class="film-hero__bg">
-        <img src="${UMD.rootPath(project.thumb).replace('../', '')}"
+        <img src="${UMD.rootPath(project.thumb).replace('.', '')}"
              alt="${project.title} — UMD Films"
              fetchpriority="high" />
       </div>
