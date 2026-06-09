@@ -1,0 +1,139 @@
+/* =====================================================
+   material.css — Catálogo de material en alquiler
+   ===================================================== */
+
+.material-hero {
+  padding-top: 10rem;
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+  background: var(--black);
+  position: relative;
+}
+.material-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--red), transparent);
+  opacity: 0.3;
+}
+
+.material-note {
+  background: var(--dark-mid);
+  border: 1px solid rgba(192,32,42,0.2);
+  border-left: 3px solid var(--red);
+  border-radius: var(--radius-card);
+  padding: 1rem 1.5rem;
+  font-size: 0.88rem;
+  color: var(--cream-mid);
+  margin-top: 2rem;
+  max-width: 600px;
+}
+
+/* ---- CATEGORÍAS ---- */
+.material-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-block: 2.5rem;
+}
+
+/* ---- GRID DE EQUIPOS ---- */
+.material-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.gear-card {
+  background: var(--dark-mid);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.35s var(--ease-expo);
+  opacity: 0;
+  transform: translateY(18px);
+}
+.gear-card.visible { opacity: 1; transform: none; }
+.gear-card:hover { border-color: rgba(192,32,42,0.35); transform: translateY(-4px); }
+.gear-card--unavailable { opacity: 0.45 !important; }
+
+.gear-card__img-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--dark-soft);
+}
+.gear-card__img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-expo);
+  filter: grayscale(20%);
+}
+.gear-card:hover .gear-card__img { transform: scale(1.05); filter: grayscale(0%); }
+
+.gear-card__qty {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: rgba(8,8,8,0.85);
+  border: 1px solid rgba(192,32,42,0.4);
+  color: var(--red-light);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3em 0.7em;
+  border-radius: 100px;
+}
+.gear-card__unavailable-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: rgba(8,8,8,0.85);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.3em 0.7em;
+  border-radius: 100px;
+}
+
+.gear-card__body { padding: 1.25rem; }
+.gear-card__cat {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.35rem;
+}
+.gear-card__name {
+  font-family: var(--ff-display);
+  font-size: 1.2rem;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.gear-card__desc { font-size: 0.84rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+
+.gear-card__specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+.gear-spec {
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream-mid);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.2em 0.65em;
+  border-radius: 100px;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 600px) {
+  .material-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,200 @@
+/* =====================================================
+   equipo.css — Página individual de miembro del equipo
+   Hereda variables de style.css
+   ===================================================== */
+
+/* ---- HERO DEL PERFIL ---- */
+.profile-hero {
+  position: relative;
+  min-height: 90svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding-bottom: clamp(3rem, 6vh, 5rem);
+}
+
+.profile-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: var(--dark-mid);
+}
+.profile-hero__bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0.55;
+  filter: grayscale(20%);
+}
+.profile-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.4) 60%, transparent 100%),
+    linear-gradient(to top, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.2) 45%);
+}
+
+.profile-hero__content {
+  position: relative;
+  z-index: 2;
+  padding-inline: clamp(1.5rem, 8vw, 8rem);
+  max-width: 720px;
+}
+
+.profile-hero__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3rem;
+  transition: color 0.25s;
+}
+.profile-hero__back:hover { color: var(--red-light); }
+.profile-hero__back svg { width: 14px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+.profile-hero__eyebrow { margin-bottom: 0.8rem; }
+
+.profile-hero__name {
+  font-size: clamp(3rem, 7vw, 6rem);
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+
+.profile-hero__role {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--red-light);
+  font-family: var(--ff-body);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+}
+
+.profile-hero__specialties {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.specialty-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream-mid);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.3em 0.9em;
+  border-radius: 100px;
+}
+
+/* ---- PROFILE BODY ---- */
+.profile-body { background: var(--black); padding-block: clamp(4rem, 8vw, 7rem); }
+.profile-body__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.profile-bio {
+  font-size: 1.1rem;
+  color: var(--cream-mid);
+  line-height: 1.85;
+  margin-bottom: 2.5rem;
+}
+
+/* Social links */
+.profile-socials { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.profile-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 0.5em 1.2em;
+  border-radius: 100px;
+  transition: all 0.25s;
+}
+.profile-social:hover {
+  color: var(--white);
+  border-color: var(--red);
+  background: var(--red-dim);
+}
+.profile-social svg { width: 14px; height: 14px; fill: currentColor; }
+
+/* Sidebar info */
+.profile-sidebar { position: sticky; top: 7rem; }
+.profile-info-card {
+  background: var(--dark-mid);
+  border: 1px solid rgba(192,32,42,0.12);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.profile-info-card__header {
+  background: var(--red);
+  padding: 1rem 1.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+}
+.profile-info-card__body { padding: 1.5rem; }
+.profile-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  gap: 1rem;
+}
+.profile-info-row:last-child { border-bottom: none; }
+.profile-info-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.profile-info-value { font-size: 0.88rem; color: var(--cream); text-align: right; }
+
+/* ---- EXTRA PHOTOS ---- */
+.profile-photos { background: var(--dark); padding-block: clamp(3rem, 6vw, 5rem); }
+.profile-photos__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.profile-photos__img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  filter: grayscale(20%);
+  transition: filter 0.4s, transform 0.4s var(--ease-expo);
+  cursor: zoom-in;
+}
+.profile-photos__img:hover { filter: grayscale(0%); transform: scale(1.02); }
+
+/* ---- PROYECTOS ---- */
+.profile-projects { background: var(--black); padding-block: clamp(3rem, 6vw, 5rem); }
+.profile-projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 860px) {
+  .profile-body__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .profile-sidebar { position: static; }
+}
+@media (max-width: 600px) {
+  .profile-hero__content { padding-inline: 1.5rem; }
+}
