@@ -27,9 +27,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- Carga de datos ---- */
   const [config, portfolio, team] = await Promise.all([
-    UMD.fetchJSON(UMD.rootPath('umdfilms/data/config.json')),
-    UMD.fetchJSON(UMD.rootPath('umdfilms/data/portfolio.json')),
-    UMD.fetchJSON(UMD.rootPath('umdfilms/data/team.json'))
+    UMD.fetchJSON(UMD.rootPath('data/config.json')),
+    UMD.fetchJSON(UMD.rootPath('data/portfolio.json')),
+    UMD.fetchJSON(UMD.rootPath('data/team.json'))
   ]);
 
   const project = portfolio.find(p => p.id === projectId);
