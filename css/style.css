@@ -265,6 +265,8 @@ body::before {
   .nav__links {
     position: fixed;
     inset: 0;
+    top: 0;
+    height: 100dvh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
