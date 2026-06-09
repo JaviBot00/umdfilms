@@ -16,7 +16,7 @@ async function fetchJSON(path) {
 function rootPath(path) {
   // Detecta si estamos en una subcarpeta (equipo/, portafolio/, material/)
   const depth = window.location.pathname.split('/').filter(Boolean).length - 1;
-  const prefix = depth > 0 ? '../'.repeat(depth) : '';
+  const prefix = depth > 0 ? '../'.repeat(depth) : 'umdfilms/';
   // return prefix + 'umdfilms/' + path;
   return prefix + path;
 }
