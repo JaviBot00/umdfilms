@@ -1,0 +1,75 @@
+[
+  {
+    "id": "produccion-audiovisual",
+    "icon": "🎬",
+    "title": "Producción Audiovisual",
+    "description": "La magia del cine aplicada a tu historia. Producción completa con material y equipo profesional.",
+    "core": true,
+    "video_preview": "./assets/servicios/video-produccion.mp4"
+  },
+  {
+    "id": "produccion-musical",
+    "icon": "🎵",
+    "title": "Producción Musical",
+    "description": "Grabación, mezcla y masterización profesional. La misma calidad que una gran discográfica.",
+    "core": true,
+    "video_preview": "./assets/servicios/video-musical.mp4"
+  },
+  {
+    "id": "vfx-edicion",
+    "icon": "✨",
+    "title": "VFX y Edición",
+    "description": "Del montaje al VFX. Calidad cinematográfica en cada fotograma.",
+    "core": true,
+    "video_preview": "./assets/servicios/video-vfx.mp4"
+  },
+  {
+    "id": "fotografia",
+    "icon": "📸",
+    "title": "Fotografía",
+    "description": "Imágenes que cuentan historias. Mirada artística y calidad profesional.",
+    "core": false,
+    "video_preview": "./assets/servicios/video-foto.mp4"
+  },
+  {
+    "id": "diseno-grafico",
+    "icon": "🎨",
+    "title": "Diseño Gráfico",
+    "description": "Identidades visuales únicas que transmiten la esencia de tu marca.",
+    "core": false,
+    "video_preview": "./assets/servicios/video-diseno.mp4"
+  },
+  {
+    "id": "web-seo",
+    "icon": "💻",
+    "title": "Desarrollo Web & SEO",
+    "description": "Páginas web profesionales optimizadas para destacar en Google.",
+    "core": false,
+    "video_preview": "./assets/servicios/video-web.mp4"
+  },
+  {
+    "id": "representacion-artistas",
+    "icon": "🤝",
+    "title": "Representación de Artistas",
+    "description": "Gestión de marca en redes y representación con estrategia creativa.",
+    "core": false,
+    "video_preview": "./assets/servicios/video-rep.mp4"
+  },
+  {
+    "id": "maquillaje",
+    "icon": "💄",
+    "title": "Maquillaje y Peluquería",
+    "description": "Cuidamos cada detalle de imagen para cine, eventos y sesiones.",
+    "core": false,
+    "video_preview": "./assets/servicios/video-maquillaje.mp4"
+  },
+  {
+    "id": "alquiler-material",
+    "icon": "🎥",
+    "title": "Alquiler de Material",
+    "description": "Cámara, sonido, iluminación y soporte profesional. Disponible para producciones externas.",
+    "core": false,
+    "video_preview": "",
+    "link": "./material/index.html"
+  }
+]

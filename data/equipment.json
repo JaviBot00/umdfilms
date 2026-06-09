@@ -1,0 +1,71 @@
+[
+  {
+    "_comment": "Formato nombre: 'Nombre del producto xN' donde N es la cantidad. Fotos en assets/material/",
+
+    "id": "sony-fx3",
+    "name": "Sony FX3",
+    "category": "camara",
+    "quantity": 1,
+    "description": "Cámara de cine full-frame. Ideal para videoclips, publicidad y ficción.",
+    "specs": ["Full-frame", "4K 120fps", "S-Cinetone"],
+    "photo": "assets/material/sony-fx3.webp",
+    "price_day": 0,
+    "available": true
+  },
+  {
+    "id": "dji-ronin-4d",
+    "name": "DJI Ronin 4D",
+    "category": "camara",
+    "quantity": 1,
+    "description": "Placeholder — descripción pendiente.",
+    "specs": [],
+    "photo": "assets/material/placeholder-gear.webp",
+    "price_day": 0,
+    "available": true
+  },
+  {
+    "id": "rode-ntg5",
+    "name": "Rode NTG5",
+    "category": "audio",
+    "quantity": 2,
+    "description": "Micrófono de cañón ultraligero para producción de campo.",
+    "specs": ["Shotgun", "Phantom 48V", "Ultra-lightweight"],
+    "photo": "assets/material/rode-ntg5.webp",
+    "price_day": 0,
+    "available": true
+  },
+  {
+    "id": "aputure-300d",
+    "name": "Aputure 300D Mark II",
+    "category": "iluminacion",
+    "quantity": 2,
+    "description": "Luz LED de alta potencia para cine y vídeo.",
+    "specs": ["300W", "5500K", "Bowens mount"],
+    "photo": "assets/material/aputure-300d.webp",
+    "price_day": 0,
+    "available": true
+  },
+  {
+    "id": "dji-rs3-pro",
+    "name": "DJI RS3 Pro",
+    "category": "soporte",
+    "quantity": 1,
+    "description": "Estabilizador gimbal de 3 ejes para cámaras profesionales.",
+    "specs": ["3 ejes", "Hasta 4.5kg", "Bluetooth"],
+    "photo": "assets/material/dji-rs3-pro.webp",
+    "price_day": 0,
+    "available": true
+  },
+  {
+    "_comment": "Añade más equipos aquí. La página de material se actualiza sola.",
+    "id": "equipo-placeholder",
+    "name": "Nombre del equipo",
+    "category": "otro",
+    "quantity": 1,
+    "description": "Placeholder — pendiente de rellenar.",
+    "specs": [],
+    "photo": "assets/material/placeholder-gear.webp",
+    "price_day": 0,
+    "available": false
+  }
+]
