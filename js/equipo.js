@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const card = document.createElement('div');
         card.className = 'portfolio-card reveal';
         card.innerHTML = `
-          <img src="${UMD.rootPath(proj.thumb)}" alt="${proj.title} — UMD Films" loading="lazy" />
+          <img src="${proj.thumb}" alt="${proj.title} — UMD Films" loading="lazy" />
           <div class="portfolio-card__overlay">
             <p class="portfolio-card__cat">${proj.category} · ${proj.year}</p>
             <p class="portfolio-card__title">${proj.title}</p>

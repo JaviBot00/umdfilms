@@ -64,6 +64,46 @@ function initNav() {
   });
 }
 
+/* ---- Tema claro / oscuro ---- */
+function getStoredTheme() {
+  return localStorage.getItem('umd-theme');
+}
+
+function getPreferredTheme() {
+  const stored = getStoredTheme();
+  if (stored === 'light' || stored === 'dark') return stored;
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.setAttribute('aria-label', theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+  }
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = current === 'light' ? 'dark' : 'light';
+  localStorage.setItem('umd-theme', next);
+  applyTheme(next);
+}
+
+function initTheme() {
+  applyTheme(getPreferredTheme());
+
+  const btn = document.getElementById('themeToggle');
+  if (btn) btn.addEventListener('click', toggleTheme);
+
+  // Si el usuario no eligió manualmente, sigue los cambios del sistema
+  if (!getStoredTheme()) {
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+      if (!getStoredTheme()) applyTheme(e.matches ? 'light' : 'dark');
+    });
+  }
+}
+
 /* ---- Nav HTML compartido ---- */
 async function renderNav(config) {
   const cfg = config || await fetchJSON(rootPath('data/config.json'));
@@ -87,10 +127,20 @@ async function renderNav(config) {
       <a href="${rootPath('index.html')}#equipo">Equipo</a>
       <a href="${rootPath('material/index.html')}">Material</a>
       <a href="${waHref}" class="nav__cta btn-outline" target="_blank" rel="noopener">Hablemos</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+        </svg>
+      </button>
     </nav>
   `;
 
   initNav();
+  initTheme();
 }
 
 /* ---- Footer HTML compartido ---- */
@@ -211,5 +261,8 @@ window.UMD = {
   renderFooter,
   renderFAB,
   injectLocalBusinessSchema,
-  animateCounter
+  animateCounter,
+  initTheme,
+  applyTheme,
+  toggleTheme
 };

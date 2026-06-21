@@ -275,4 +275,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  
+      /* ---- Reveal: al final, para detectar también los elementos
+     .reveal creados dinámicamente (servicios, etc.) ---- */
+  UMD.initReveal();
+
 });

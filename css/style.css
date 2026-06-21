@@ -35,6 +35,51 @@
   /* Animaciones */
   --ease-expo:  cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out:   cubic-bezier(0.0, 0.0, 0.2, 1);
+
+  /* Colores de línea decorativa */
+  --line: rgba(255, 255, 255, 0.12);
+}
+
+/* ---- TEMA CLARO ---- */
+html[data-theme="light"] {
+  --black:      #faf9f7;
+  --dark:       #f3f1ec;
+  --dark-mid:   #ffffff;
+  --dark-soft:  #f5f2ec;
+  --red:        #c0202a;
+  --red-light:  #a01620;
+  --red-dim:    rgba(192, 32, 42, 0.08);
+  --red-glow:   rgba(192, 32, 42, 0.22);
+  --white:      #14110f;
+  --cream:      #1b1816;
+  --cream-mid:  #5c5650;
+  --muted:      #8d8780;
+  --line:       rgba(0, 0, 0, 0.1);
+}
+
+/* Los logos de clientes se invierten a blanco en modo oscuro;
+   en modo claro los dejamos en negro para que se sigan viendo */
+html[data-theme="light"] .trust__inner img {
+  filter: brightness(0);
+}
+
+/* Hero, CTA band y Nav: siempre oscuros, da igual el tema activo */
+.hero,
+.cta-band,
+.nav {
+  --black:      #080808;
+  --dark:       #0f0f0f;
+  --dark-mid:   #161616;
+  --dark-soft:  #1e1e1e;
+  --red:        #c0202a;
+  --red-light:  #e02d38;
+  --red-dim:    rgba(192, 32, 42, 0.15);
+  --red-glow:   rgba(192, 32, 42, 0.35);
+  --white:      #ffffff;
+  --cream:      #f0ece6;
+  --cream-mid:  #b8b0a6;
+  --muted:      #666666;
+  --line:       rgba(255, 255, 255, 0.15);
 }
 
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -53,7 +98,7 @@ img, video { display: block; max-width: 100%; }
 button { font-family: var(--ff-body); cursor: pointer; border: none; background: none; }
 ul { list-style: none; }
 
-::selection { background: var(--red); color: var(--white); }
+::selection { background: var(--red); color: #fff; }
 
 /* ---- LAYOUT ---- */
 .container {
@@ -106,7 +151,7 @@ em, i { font-style: italic; color: var(--red-light); }
 
 .btn-primary {
   background: var(--red);
-  color: var(--white);
+  color: #fff;
   border: 1px solid var(--red);
 }
 .btn-primary:hover {
@@ -119,7 +164,7 @@ em, i { font-style: italic; color: var(--red-light); }
 .btn-ghost {
   background: transparent;
   color: var(--white);
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid var(--line);
 }
 .btn-ghost:hover {
   border-color: var(--red);
@@ -134,7 +179,7 @@ em, i { font-style: italic; color: var(--red-light); }
 }
 .btn-outline:hover {
   background: var(--red);
-  color: var(--white);
+  color: #fff;
 }
 
 .btn-lg  { padding: 1em 2.5em; font-size: 0.92rem; }
@@ -196,7 +241,7 @@ body::before {
 .nav__logo img {
   height: 42px;
   width: auto;
-  filter: brightness(0) invert(1);
+  /* filter: brightness(0) invert(1); */
   transition: height 0.4s ease, opacity 0.3s;
 }
 .nav__logo img:hover { opacity: 0.8; }
@@ -306,6 +351,37 @@ body::before {
     opacity: 0.4;
   }
 }
+
+/* Botón de tema claro/oscuro */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  color: var(--cream);
+  background: transparent;
+  flex-shrink: 0;
+  transition: border-color 0.3s, background 0.3s, transform 0.4s var(--ease-expo);
+}
+.theme-toggle:hover {
+  border-color: var(--red);
+  background: var(--red-dim);
+  transform: rotate(20deg);
+}
+.theme-toggle svg {
+  width: 17px; height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.theme-toggle .icon-sun { display: none; }
+html[data-theme="light"] .theme-toggle .icon-sun { display: block; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 
 /* =====================================================
    HERO
@@ -591,12 +667,12 @@ body::before {
   text-transform: uppercase;
   font-weight: 500;
   color: var(--muted);
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid var(--line);
   border-radius: 100px;
   transition: all 0.25s;
   cursor: pointer;
 }
-.filter:hover { color: var(--cream); border-color: rgba(255,255,255,0.25); }
+.filter:hover { color: var(--cream); border-color: var(--line); }
 .filter.active { background: var(--red); color: var(--white); border-color: var(--red); }
 
 .portfolio__grid {
@@ -643,7 +719,7 @@ body::before {
 .portfolio-card__title {
   font-family: var(--ff-display);
   font-size: 1.15rem;
-  color: var(--white);
+  color: #fff;
 }
 
 .portfolio-card__play {
@@ -803,7 +879,7 @@ body::before {
 .form-group select,
 .form-group textarea {
   background: var(--dark-mid);
-  border: 1px solid rgba(255,255,255,0.07);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   color: var(--cream);
   font-family: var(--ff-body);
@@ -838,7 +914,7 @@ body::before {
 }
 .footer__logo {
   height: 32px;
-  filter: brightness(0) invert(1);
+  /* filter: brightness(0) invert(1); */
   opacity: 0.85;
   margin-bottom: 1.2rem;
 }
@@ -850,7 +926,7 @@ body::before {
 }
 .footer__social-icon {
   width: 36px; height: 36px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--line);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   color: var(--muted);
@@ -876,7 +952,7 @@ body::before {
 .footer__nav a:hover { color: var(--cream); }
 
 .footer__bottom {
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid var(--line);
   padding: 1.5rem clamp(1.5rem, 5vw, 4rem);
   display: flex;
   justify-content: space-between;
