@@ -112,7 +112,7 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--muted);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--line);
   padding: 0.5em 1.2em;
   border-radius: 100px;
   transition: all 0.25s;
@@ -147,7 +147,7 @@
   justify-content: space-between;
   align-items: flex-start;
   padding: 0.65rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid var(--line);
   gap: 1rem;
 }
 .profile-info-row:last-child { border-bottom: none; }

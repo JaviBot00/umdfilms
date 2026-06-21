@@ -47,7 +47,7 @@
 
 .gear-card {
   background: var(--dark-mid);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid var(--line);
   border-radius: var(--radius-card);
   overflow: hidden;
   transition: border-color 0.3s, transform 0.35s var(--ease-expo);
@@ -76,15 +76,23 @@
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  background: rgba(8,8,8,0.85);
-  border: 1px solid rgba(192,32,42,0.4);
-  color: var(--red-light);
-  font-size: 0.62rem;
+  background: rgba(8, 8, 8, 0.85);
+  border: 1px solid rgba(192, 32, 42, 0.4);
+  color: var(--white);
+  font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   padding: 0.3em 0.7em;
   border-radius: 100px;
 }
+
+/* Tema claro: invertimos el combo — fondo rojo, texto oscuro */
+html[data-theme="light"] .gear-card__qty {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--dark-mid);
+}
+
 .gear-card__unavailable-badge {
   position: absolute;
   top: 0.75rem;
@@ -92,7 +100,7 @@
   background: rgba(8,8,8,0.85);
   border: 1px solid rgba(255,255,255,0.1);
   color: var(--muted);
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   padding: 0.3em 0.7em;
