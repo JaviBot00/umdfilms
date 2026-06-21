@@ -2,6 +2,21 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+
+  <!-- Tema: light / dark
+      Se aplica al <html> para que CSS pueda usarlo con [data-theme="light"] o [data-theme="dark"]
+      Se rellena dinámicamente desde localStorage o media query (prefers-color-scheme)
+  -->
+  <script>
+  (function () {
+    var stored = localStorage.getItem('umd-theme');
+    var theme = (stored === 'light' || stored === 'dark')
+      ? stored
+      : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+  </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO: título y description se sobrescriben dinámicamente por equipo.js -->
