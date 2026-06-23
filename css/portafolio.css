@@ -10,6 +10,7 @@
   display: flex;
   align-items: flex-end;
   overflow: hidden;
+  padding-top: 7rem;
 }
 .film-hero__bg {
   position: absolute;
@@ -238,4 +239,5 @@
 }
 @media (max-width: 600px) {
   .film-hero__content { padding: 1.5rem; }
+  .film-hero__back { margin-bottom: 2rem; }
 }

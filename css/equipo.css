@@ -10,6 +10,7 @@
   display: flex;
   align-items: flex-end;
   overflow: hidden;
+  padding-top: 7rem;
   padding-bottom: clamp(3rem, 6vh, 5rem);
 }
 
@@ -197,4 +198,5 @@
 }
 @media (max-width: 600px) {
   .profile-hero__content { padding-inline: 1.5rem; }
+  .profile-hero__back { margin-bottom: 1.5rem; }
 }
