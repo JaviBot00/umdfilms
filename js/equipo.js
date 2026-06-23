@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
           Volver al equipo
         </a>
-        <p class="eyebrow profile-hero__eyebrow reveal">UMD Films · Equipo</p>
+        <!-- <p class="eyebrow profile-hero__eyebrow reveal">UMD Films · Equipo</p> -->
         <h1 class="profile-hero__name reveal d1">${member.name}${member.surname ? ' ' + member.surname : ''}</h1>
         <p class="profile-hero__role reveal d2">${member.role}</p>
         ${member.specialties?.length ? `
