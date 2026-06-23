@@ -104,6 +104,48 @@ function initTheme() {
   }
 }
 
+/* ---- Lightbox de imágenes ---- */
+function initLightbox(selector) {
+  const images = document.querySelectorAll(selector);
+  if (!images.length) return;
+
+  let lightbox = document.getElementById('umdLightbox');
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.id = 'umdLightbox';
+    lightbox.innerHTML = `
+      <button class="lightbox__close" type="button" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <img src="" alt="" />
+    `;
+    document.body.appendChild(lightbox);
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    lightbox.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  }
+
+  const imgEl = lightbox.querySelector('img');
+  images.forEach(img => {
+    img.addEventListener('click', () => {
+      imgEl.src = img.src;
+      imgEl.alt = img.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+}
+
 /* ---- Nav HTML compartido ---- */
 async function renderNav(config) {
   const cfg = config || await fetchJSON(rootPath('data/config.json'));
@@ -264,5 +306,6 @@ window.UMD = {
   animateCounter,
   initTheme,
   applyTheme,
-  toggleTheme
+  toggleTheme,
+  initLightbox
 };

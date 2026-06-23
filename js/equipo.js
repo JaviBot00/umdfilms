@@ -149,6 +149,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       photosSection.style.display = 'none';
     }
+    /* ---- Lightbox de la galería ---- */
+    UMD.initLightbox('.profile-photos__img');
   }
 
   /* ---- PROYECTOS EN LOS QUE PARTICIPA ---- */

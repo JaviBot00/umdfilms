@@ -216,6 +216,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     gallerySection?.style.setProperty('display', 'none');
   }
 
+  /* ---- Lightbox de la galería ---- */
+  UMD.initLightbox('.film-gallery__img');
+
   /* ---- Reveal ---- */
   UMD.initReveal();
   setTimeout(() => {
