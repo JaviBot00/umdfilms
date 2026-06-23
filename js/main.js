@@ -33,9 +33,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
   }, 120);
 
-  /* ---- Trust bar: logos duplicados para marquee infinito ---- */
+/* ---- Trust bar: logos duplicados para marquee infinito ----
+     Repetimos el set de logos hasta que sea más ancho que la pantalla
+     (con margen), y luego lo duplicamos una vez más: el bucle necesita
+     dos mitades idénticas para que translateX(-50%) sea perfecto.
+  ---- */
   const trustInner = document.getElementById('trustInner');
-  if (trustInner) trustInner.innerHTML += trustInner.innerHTML;
+  if (trustInner) {
+    const original = trustInner.innerHTML;
+    let set = original;
+    let safety = 0;
+    while (trustInner.scrollWidth < window.innerWidth * 1.2 && safety < 6) {
+      set += original;
+      trustInner.innerHTML = set;
+      safety++;
+    }
+    trustInner.innerHTML = set + set;
+  }
 
   /* =====================================================
      ESTADÍSTICAS — calculadas desde los datos
