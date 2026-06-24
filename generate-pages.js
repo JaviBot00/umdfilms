@@ -114,3 +114,23 @@ try {
   console.error('\n❌ Error:', err.message);
   process.exit(1);
 }
+
+// ---- Generar sitemap.xml ----
+const teamIds      = teamData.map(m => m.id);
+const portfolioIds = portfolioData.map(p => p.id);
+
+const configData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/config.json'), 'utf8'));
+const BASE_URL     = configData.brand.site_url;
+
+const today        = new Date().toISOString().split('T')[0];
+
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>${BASE_URL}/</loc><lastmod>${today}</lastmod><priority>1.0</priority></url>
+  <url><loc>${BASE_URL}/material/</loc><lastmod>${today}</lastmod><priority>0.7</priority></url>
+${teamIds.map(id => `  <url><loc>${BASE_URL}/equipo/${id}.html</loc><lastmod>${today}</lastmod><priority>0.6</priority></url>`).join('\n')}
+${portfolioIds.map(id => `  <url><loc>${BASE_URL}/portafolio/${id}.html</loc><lastmod>${today}</lastmod><priority>0.8</priority></url>`).join('\n')}
+</urlset>`;
+
+fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemap, 'utf8');
+console.log('✅ sitemap.xml generado');
