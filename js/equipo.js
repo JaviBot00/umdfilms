@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- Si no existe el miembro ---- */
   if (!member) {
-    document.title = 'Perfil no encontrado — UMD Films';
+    document.title = 'Perfil no encontrado — UMD Films Málaga';
     document.querySelector('main').innerHTML = `
       <div class="container" style="padding-block:8rem;text-align:center">
         <p class="eyebrow">Error 404</p>
@@ -46,9 +46,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   /* ---- SEO ---- */
-  document.title = `${member.name} — ${member.role} | UMD Films`;
+  document.title = `${member.name} — ${member.role} | ${config.seo.site_suffix}`;
   document.querySelector('meta[name="description"]')
-    ?.setAttribute('content', `Conoce a ${member.name}, ${member.role} en UMD Films Málaga.`);
+    ?.setAttribute('content', `Conoce a ${member.name}, ${member.role} en ${config.seo.site_suffix}.`);
+
+  // Canonical dinámico
+  const canonical = document.querySelector('link[rel="canonical"]') 
+    || Object.assign(document.createElement('link'), { rel: 'canonical' });
+  canonical.href = `${config.brand.site_url}/equipo/${member.id}.html`;
+  if (!canonical.parentNode) document.head.appendChild(canonical);
+
+  // Open Graph
+  const setMeta = (prop, content) => {
+    let el = document.querySelector(`meta[property="${prop}"]`);
+    if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
+    el.setAttribute('content', content);
+  };
+  setMeta('og:title',       document.title);
+  setMeta('og:description', `Conoce a ${member.name}, ${member.role} en UMD Films Málaga.`);
+  setMeta('og:image',       `${config.brand.site_url}/${member.photo_cover}`);
+  setMeta('og:type',        'profile');
+  setMeta('og:url',         `${config.brand.site_url}/equipo/${member.id}.html`);
+
 
   /* ---- HERO DEL PERFIL ---- */
   const heroSection = document.getElementById('profileHero');
@@ -56,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     heroSection.innerHTML = `
       <div class="profile-hero__bg">
         <img src="${UMD.rootPath(member.photo_cover)}"
-             alt="${member.name} — ${member.role} — UMD Films" />
+             alt="${member.name} — ${member.role} — UMD Films Málaga" />
       </div>
       <div class="profile-hero__overlay"></div>
       <div class="profile-hero__content container">
@@ -64,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
           Volver al equipo
         </a>
-        <!-- <p class="eyebrow profile-hero__eyebrow reveal">UMD Films · Equipo</p> -->
+        <!-- <p class="eyebrow profile-hero__eyebrow reveal">UMD Films Málaga · Equipo</p> -->
         <h1 class="profile-hero__name reveal d1">${member.name}${member.surname ? ' ' + member.surname : ''}</h1>
         <p class="profile-hero__role reveal d2">${member.role}</p>
         ${member.specialties?.length ? `
@@ -141,7 +160,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       member.photos_extra.forEach(src => {
         const img = document.createElement('img');
         img.src     = UMD.rootPath(src);
-        img.alt     = `${member.name} — UMD Films`;
+        img.alt     = `${member.name} — UMD Films Málaga`;
         img.loading = 'lazy';
         img.className = 'profile-photos__img reveal';
         photosGrid.appendChild(img);
@@ -165,7 +184,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const card = document.createElement('div');
         card.className = 'portfolio-card reveal';
         card.innerHTML = `
-          <img src="${proj.thumb}" alt="${proj.title} — UMD Films" loading="lazy" />
+          <img src="${proj.thumb}" alt="${proj.title} — UMD Films Málaga" loading="lazy" />
           <div class="portfolio-card__overlay">
             <p class="portfolio-card__cat">${proj.category} · ${proj.year}</p>
             <p class="portfolio-card__title">${proj.title}</p>

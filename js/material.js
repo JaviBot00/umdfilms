@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- SEO ---- */
   document.title = 'Alquiler de Material | UMD Films Málaga';
   document.querySelector('meta[name="description"]')
-    ?.setAttribute('content', 'Alquila material de cine profesional en Málaga. Cámaras, iluminación, sonido y más. UMD Films.');
+    ?.setAttribute('content', 'Alquila material de cine profesional en Málaga. Cámaras, iluminación, sonido y más. UMD Films Málaga.');
 
   /* ---- FILTROS: generados dinámicamente desde las categorías existentes ---- */
   const filtersEl = document.getElementById('materialFilters');
@@ -90,9 +90,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="gear-card__img-wrap">
           <img class="gear-card__img"
                src="${UMD.rootPath(gear.photo)}"
-               alt="${gear.name} — UMD Films alquiler material"
+               alt="${gear.name} — UMD Films Málaga alquiler material"
                loading="lazy"
-               onerror="this.src='${UMD.rootPath('assets/material/placeholder-gear.webp')}'" />
+               onerror="this.onerror=null; this.src='${UMD.rootPath('assets/material/placeholder-gear.webp')}'" />
           <span class="gear-card__qty">×${gear.quantity}</span>
           ${!gear.available ? '<span class="gear-card__unavailable-badge">No disponible</span>' : ''}
         </div>

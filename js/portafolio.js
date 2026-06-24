@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- Proyecto no encontrado ---- */
   if (!project) {
-    document.title = 'Proyecto no encontrado — UMD Films';
+    document.title = 'Proyecto no encontrado — UMD Films Málaga';
     document.querySelector('main').innerHTML = `
       <div class="container" style="padding-block:8rem;text-align:center">
         <p class="eyebrow">Error 404</p>
@@ -52,9 +52,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   /* ---- SEO + Schema VideoObject ---- */
-  document.title = `${project.title} | UMD Films`;
+  document.title = `${project.title} | ${config.seo.site_suffix}`;
   document.querySelector('meta[name="description"]')
     ?.setAttribute('content', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
+
+    // Canonical dinámico
+  const canonical = document.querySelector('link[rel="canonical"]')
+    || Object.assign(document.createElement('link'), { rel: 'canonical' });
+  canonical.href = `${config.brand.site_url}/portafolio/${project.id}.html`;
+  if (!canonical.parentNode) document.head.appendChild(canonical);
+
+  // Open Graph
+  const setMeta = (prop, content) => {
+    let el = document.querySelector(`meta[property="${prop}"]`);
+    if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
+    el.setAttribute('content', content);
+  };
+  setMeta('og:title',       document.title);
+  setMeta('og:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
+  setMeta('og:image',       `${config.brand.site_url}/${project.thumb}`);
+  setMeta('og:type',        'video.other');
+  setMeta('og:url',         `${config.brand.site_url}/portafolio/${project.id}.html`);
 
   // Schema VideoObject para proyectos con vídeo
   if (project.trailer_youtube && !project.trailer_youtube.includes('PLACEHOLDER')) {
