@@ -106,7 +106,7 @@
   border-radius: var(--radius-card);
   overflow: hidden;
   background: var(--dark-mid);
-  border: 1px solid rgba(192,32,42,0.15);
+  border: 1px solid var(--red-dim);
   margin-bottom: 2rem;
 }
 .film-trailer iframe {
@@ -149,7 +149,7 @@
 /* Ficha técnica — estilo cartelera */
 .film-sheet {
   background: var(--dark-mid);
-  border: 1px solid rgba(192,32,42,0.15);
+  border: 1px solid var(--red-dim);
   border-radius: var(--radius-card);
   overflow: hidden;
   position: sticky;

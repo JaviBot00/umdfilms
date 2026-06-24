@@ -395,7 +395,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
    ===================================================== */
 .hero {
   position: relative;
-  min-height: 100svh;
+  height: 100svh;
   min-height: 640px;
   display: flex;
   align-items: flex-end;
@@ -527,11 +527,15 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   gap: 4rem;
   align-items: center;
   width: max-content;
-  animation: marquee 30s linear infinite;
+  /* animation: marquee 30s linear infinite; */
+  /* más lento */
+  /* animation: marquee 50s linear infinite; */
+  /* aún más lento */
+  animation: marquee 80s linear infinite;
 }
 .trust__inner:hover { animation-play-state: paused; }
 .trust__inner img {
-  height: 40px;
+  height: 60px;
   width: auto;
   filter: brightness(0) invert(1);
   opacity: 0.5;
@@ -1047,6 +1051,22 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 /* =====================================================
    RESPONSIVE GENERAL
    ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .gear-card,
+  .team-card,
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  /* .trust__inner {
+    animation: none;
+  } */
+  .hero__scroll-line::after {
+    animation: none;
+  }
+}
+
 @media (max-width: 860px) {
   .about__grid,
   .contact__grid { grid-template-columns: 1fr; gap: 3.5rem; }

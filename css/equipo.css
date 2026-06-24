@@ -127,7 +127,7 @@
 .profile-sidebar { position: sticky; top: 7rem; }
 .profile-info-card {
   background: var(--dark-mid);
-  border: 1px solid rgba(192,32,42,0.12);
+  border: 1px solid var(--red-dim);
   border-radius: var(--radius-card);
   overflow: hidden;
 }
