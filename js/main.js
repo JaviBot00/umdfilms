@@ -12,11 +12,12 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- Carga de datos ---- */
-  const [config, team, portfolio, services] = await Promise.all([
+  const [config, team, portfolio, services, partners] = await Promise.all([
     UMD.fetchJSON(UMD.rootPath('data/config.json')),
     UMD.fetchJSON(UMD.rootPath('data/team.json')),
     UMD.fetchJSON(UMD.rootPath('data/portfolio.json')),
-    UMD.fetchJSON(UMD.rootPath('data/services.json'))
+    UMD.fetchJSON(UMD.rootPath('data/services.json')),
+    UMD.fetchJSON(UMD.rootPath('data/partners.json'))
   ]);
 
   /* ---- Nav + Footer + FAB + Schema ---- */
@@ -24,9 +25,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   await UMD.renderFooter(config);
   UMD.renderFAB(config);
   UMD.injectLocalBusinessSchema(config);
-
-  /* ---- Reveal ---- */
-  UMD.initReveal();
 
   /* ---- Hero: reveal inicial ---- */
   setTimeout(() => {
@@ -40,11 +38,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   ---- */
   const trustInner = document.getElementById('trustInner');
   if (trustInner) {
-    const original = trustInner.innerHTML;
-    let set = original;
+    // Renderizar logos desde el JSON
+    trustInner.innerHTML = partners.map(p =>
+      `<img src="${UMD.rootPath(p.logo)}" alt="${p.name}" loading="lazy" />`
+    ).join('');
+
+    // Duplicar para el marquee (misma lógica que antes)
+    let set = trustInner.innerHTML;
     let safety = 0;
-    while (trustInner.scrollWidth < window.innerWidth * 1.2 && safety < 6) {
-      set += original;
+    while (trustInner.scrollWidth < window.innerWidth * 2 && safety < 10) {
+      set += trustInner.innerHTML;
       trustInner.innerHTML = set;
       safety++;
     }
@@ -211,7 +214,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  // Generar filtros dinámicamente desde el JSON
+  const categories = ['all', ...new Set(portfolio.map(p => p.category))];
+  const FILTER_LABELS = {
+    all: 'Todo', videoclip: 'Videoclips', publicidad: 'Publicidad',
+    cine: 'Cine', corporativo: 'Corporativo'
+  };
   if (portfolioFilters) {
+    categories.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = `filter${cat === 'all' ? ' active' : ''}`;
+      btn.dataset.filter = cat;
+      btn.textContent = FILTER_LABELS[cat] || cat;
+      portfolioFilters.appendChild(btn);
+    });
     portfolioFilters.querySelectorAll('.filter').forEach(btn => {
       btn.addEventListener('click', () => {
         portfolioFilters.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
@@ -220,6 +236,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     });
   }
+
   renderPortfolio('all');
 
   /* =====================================================
@@ -255,7 +272,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const goToProfile = () => { window.location.href = `equipo/${member.id}.html`; };
       card.addEventListener('click', goToProfile);
-      card.addEventListener('keydown', e => { if (e.key === 'Enter') goToProfile(); });
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          goToProfile();
+        }
+      });
 
       teamGrid.appendChild(card);
       teamObs.observe(card);
@@ -275,8 +297,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       const service = form.querySelector('#service').value;
       const message = form.querySelector('#message').value.trim();
 
-      if (!name || !email) {
-        alert('Por favor, rellena tu nombre y email.');
+      const nameInput  = form.querySelector('#name');
+      const emailInput = form.querySelector('#email');
+      let hasError = false;
+
+      [nameInput, emailInput].forEach(input => {
+        if (!input.value.trim()) {
+          input.setAttribute('aria-invalid', 'true');
+          input.style.borderColor = 'var(--red)';
+          hasError = true;
+        } else {
+          input.removeAttribute('aria-invalid');
+          input.style.borderColor = '';
+        }
+      });
+
+      if (hasError) {
+        nameInput.focus();
         return;
       }
 

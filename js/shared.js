@@ -52,6 +52,8 @@ function initNav() {
   burger.addEventListener('click', () => {
     const open = burger.classList.toggle('open');
     links.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
     document.body.style.overflow = open ? 'hidden' : '';
   });
 
@@ -142,6 +144,7 @@ function initLightbox(selector) {
       imgEl.alt = img.alt;
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
+      lightbox.querySelector('.lightbox__close').focus();
     });
   });
 }
@@ -257,7 +260,7 @@ function injectLocalBusinessSchema(config) {
     "@type": "LocalBusiness",
     "name": b.name,
     "description": config.seo.description_home,
-    "url": "https://umdfilms.com",
+    "url": config.brand.site_url,
     "telephone": `+${config.contact.whatsapp}`,
     "email": config.contact.email,
     "address": {

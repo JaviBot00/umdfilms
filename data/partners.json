@@ -1,0 +1,10 @@
+[
+  { "id": "malaga-cf",        "name": "Málaga C.F.",          "logo": "assets/logo-partners/logo-malaga.webp" },
+  { "id": "victoria",         "name": "Cervezas Victoria",    "logo": "assets/logo-partners/logo-victoria.webp" },
+  { "id": "santa-cristina",   "name": "Cafés Santa Cristina", "logo": "assets/logo-partners/logo-santa-cristina.webp" },
+  { "id": "cautivo",          "name": "Cautivo Málaga",       "logo": "assets/logo-partners/logo-cautivo.webp" },
+  { "id": "banda-cautivo",    "name": "Banda Cautivo",        "logo": "assets/logo-partners/logo-banda-cautivo.webp" },
+  { "id": "diputacion",       "name": "Diputación de Málaga", "logo": "assets/logo-partners/logo-diputacion-malaga.webp" },
+  { "id": "sergio-pastor",    "name": "Sergio Pastor",        "logo": "assets/logo-partners/logo-sergio-pastor.webp" },
+  { "id": "la-joya-music",    "name": "La Joya Music",        "logo": "assets/logo-partners/logo-la-joya-music.webp" }
+]

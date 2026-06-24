@@ -47,7 +47,11 @@
   <!-- Fuentes: preconnect primero para reducir latencia -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  </noscript>
 
   <!-- CSS global -->
   <link rel="stylesheet" href="css/style.css" />
@@ -68,8 +72,9 @@
   <section class="hero" id="hero" aria-label="Portada UMD Films">
     <!-- Vídeo de fondo. poster: imagen estática mientras carga -->
     <video class="hero__video"
+           width="1920" height="1080"
            autoplay muted loop playsinline
-           preload="none"
+           preload="metadata"
            poster="assets/portafolio/hero-poster.jpg"
            aria-hidden="true">
       <source src="assets/video/hero.webm" type="video/webm" />
@@ -114,16 +119,7 @@
     <p class="trust__label">Han confiado en nosotros</p>
     <div class="trust__track" aria-hidden="true">
       <div class="trust__inner" id="trustInner">
-        <!-- Los logos se renderizan aquí. Al añadir un cliente nuevo,
-             añade un <img> con la ruta en assets/partners/ -->
-        <img src="assets/logo-partners/logo-malaga.webp"         alt="Málaga C.F." />
-        <img src="assets/logo-partners/logo-victoria.webp"       alt="Cervezas Victoria" />
-        <img src="assets/logo-partners/logo-santa-cristina.webp" alt="Cafés Santa Cristina" />
-        <img src="assets/logo-partners/logo-cautivo.webp"        alt="Cautivo Málaga" />
-        <img src="assets/logo-partners/logo-banda-cautivo.webp"  alt="Banda Cautivo" />
-        <img src="assets/logo-partners/logo-diputacion-malaga.webp" alt="Diputación de Málaga" />
-        <img src="assets/logo-partners/logo-sergio-pastor.webp" alt="Sergio Pastor" />
-        <img src="assets/logo-partners/logo-la-joya-music.webp" alt="La Joya Music" />
+        <!-- Relleno por main.js desde data/partners.json -->
       </div>
     </div>
   </section>
@@ -141,8 +137,8 @@
       <div class="about__text">
         <p class="eyebrow reveal">Quiénes somos</p>
         <h2 class="section-title reveal">
-          Cine que nace en <em>Málaga</em>.<br/>
-          Llega a cualquier parte.
+          Productora audiovisual en <em>Málaga</em>.<br/>
+          Cine que llega a cualquier parte.
         </h2>
         <p class="about__body reveal">
           Somos UMD Films, una productora fundada en 2019 por Alejandro y Adrián con
@@ -207,13 +203,8 @@
       <h2 class="section-title reveal">Portafolio</h2>
 
       <!-- Filtros (all, videoclip, publicidad, cine, corporativo) -->
-      <div class="portfolio__filters reveal" id="portfolioFilters" role="group" aria-label="Filtrar por categoría">
-        <!-- Botones generados por main.js -->
-        <button class="filter active" data-filter="all">Todo</button>
-        <button class="filter" data-filter="videoclip">Videoclips</button>
-        <button class="filter" data-filter="publicidad">Publicidad</button>
-        <button class="filter" data-filter="cine">Cine</button>
-        <button class="filter" data-filter="corporativo">Corporativo</button>
+      <div class="portfolio__filters reveal" id="portfolioFilters"
+            role="group" aria-label="Filtrar por categoría"></div>
       </div>
 
       <!-- Grid de proyectos, generado por main.js -->
