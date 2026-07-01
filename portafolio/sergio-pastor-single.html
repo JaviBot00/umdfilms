@@ -16,13 +16,29 @@
     document.documentElement.setAttribute('data-theme', theme);
   })();
   </script>
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO: sobrescrito dinámicamente por portafolio.js -->
-  <title>Sergio Pastor — Single | UMD Films</title>
-  <meta name="description" content="Sergio Pastor — Single — videoclip producido por UMD Films en 2024." />
+  <!-- SEO: título, description y canonical se sobrescriben dinámicamente por portafolio.js -->
+  <title>Sergio Pastor — Single | UMD Films Málaga</title>
+  <meta name="description" content="Sergio Pastor — Single — videoclip producido por UMD Films en 2024. Descubre este proyecto." />
   <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://umdfilms.com/portafolio/" />
+
+  <!-- Open Graph (portafolio.js sobrescribe title, description, image, url) -->
+  <meta property="og:type"      content="video.other" />
+  <meta property="og:locale"    content="es_ES" />
+  <meta property="og:site_name" content="UMD Films" />
+  <meta property="og:title"     content="Proyecto | UMD Films Málaga" />
+  <meta property="og:description" content="Descubre nuestros proyectos de producción audiovisual en Málaga." />
+  <meta property="og:image"     content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />
+  <meta property="og:url"       content="https://umdfilms.com/portafolio/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Proyecto | UMD Films Málaga" />
+  <meta name="twitter:description" content="Descubre nuestros proyectos de producción audiovisual en Málaga." />
+  <meta name="twitter:image"       content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />
 
   <!-- Favicon -->
   <link rel="icon"             href="../assets/logo/favicon.ico" />
@@ -32,7 +48,11 @@
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  </noscript>
 
   <!-- CSS -->
   <link rel="stylesheet" href="../css/style.css" />

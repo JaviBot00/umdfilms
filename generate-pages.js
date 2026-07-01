@@ -21,6 +21,7 @@
  * QUÉ HACE:
  *   - Lee data/team.json → genera equipo/[id].html para cada miembro
  *   - Lee data/portfolio.json → genera portafolio/[id].html para cada proyecto
+ *   - Genera sitemap.xml con todas las URLs
  *   - Cada HTML generado es una copia de la plantilla correspondiente
  *   - El JS de la página (equipo.js / portafolio.js) se encarga
  *     de leer el id desde la URL y rellenar el contenido.
@@ -52,27 +53,29 @@ function writeFile(relPath, content) {
   console.log(`  ✓ ${relPath}`);
 }
 
+/* ---- Leer datos una sola vez (reutilizados por page gen y sitemap) ---- */
+const team      = readJSON('data/team.json');
+const portfolio = readJSON('data/portfolio.json');
+const config    = readJSON('data/config.json');
+
 /* =====================================================
    GENERAR PÁGINAS DE EQUIPO
    ===================================================== */
 function generateTeamPages() {
-  const team     = readJSON('data/team.json');
   const template = readTemplate('equipo/plantilla.html');
 
   console.log(`\n👤 Generando ${team.length} páginas de equipo...`);
 
   team.forEach(member => {
-    // Solo necesitamos cambiar el <title> inicial para SEO básico
-    // (equipo.js sobrescribe el título dinámicamente, pero esto ayuda
-    //  a crawlers que no ejecutan JS)
+    const fullName = member.name + (member.surname ? ' ' + member.surname : '');
     const html = template
       .replace(
-        '<title>Perfil | UMD Films</title>',
-        `<title>${member.name}${member.surname ? ' ' + member.surname : ''} — ${member.role} | UMD Films</title>`
+        '<title>Equipo | UMD Films — Productora Audiovisual Málaga</title>',
+        `<title>${fullName} — ${member.role} | UMD Films Málaga</title>`
       )
       .replace(
         '<meta name="description" content="Perfil de miembro del equipo UMD Films Málaga." />',
-        `<meta name="description" content="${member.name}, ${member.role} en UMD Films Málaga." />`
+        `<meta name="description" content="${fullName}, ${member.role} en UMD Films Málaga. Conoce a nuestro equipo." />`
       );
 
     writeFile(`equipo/${member.id}.html`, html);
@@ -83,24 +86,49 @@ function generateTeamPages() {
    GENERAR PÁGINAS DE PORTAFOLIO
    ===================================================== */
 function generatePortfolioPages() {
-  const portfolio = readJSON('data/portfolio.json');
-  const template  = readTemplate('portafolio/plantilla.html');
+  const template = readTemplate('portafolio/plantilla.html');
 
   console.log(`\n🎬 Generando ${portfolio.length} páginas de portafolio...`);
 
   portfolio.forEach(project => {
     const html = template
       .replace(
-        '<title>Proyecto | UMD Films</title>',
-        `<title>${project.title} | UMD Films</title>`
+        '<title>Proyecto | UMD Films — Productora Audiovisual Málaga</title>',
+        `<title>${project.title} | UMD Films Málaga</title>`
       )
       .replace(
         '<meta name="description" content="Proyecto de UMD Films, productora audiovisual en Málaga." />',
-        `<meta name="description" content="${project.title} — ${project.category} producido por UMD Films en ${project.year}." />`
+        `<meta name="description" content="${project.title} — ${project.category} producido por UMD Films en ${project.year}. Descubre este proyecto." />`
       );
 
     writeFile(`portafolio/${project.id}.html`, html);
   });
+}
+
+/* =====================================================
+   GENERAR SITEMAP.XML
+   ===================================================== */
+function generateSitemap() {
+  const BASE_URL = config.brand.site_url;
+  const today    = new Date().toISOString().split('T')[0];
+
+  const teamUrls = team.map(m =>
+    `  <url><loc>${BASE_URL}/equipo/${m.id}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`
+  ).join('\n');
+
+  const portfolioUrls = portfolio.map(p =>
+    `  <url><loc>${BASE_URL}/portafolio/${p.id}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`
+  ).join('\n');
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>${BASE_URL}/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>${BASE_URL}/material/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+${teamUrls}
+${portfolioUrls}
+</urlset>`;
+
+  writeFile('sitemap.xml', sitemap);
 }
 
 /* ---- Main ---- */
@@ -109,28 +137,9 @@ console.log('🚀 UMD Films — Generador de páginas\n' + '='.repeat(40));
 try {
   generateTeamPages();
   generatePortfolioPages();
+  generateSitemap();
   console.log('\n✅ Listo. Sube la carpeta completa a Hostinger.\n');
 } catch (err) {
   console.error('\n❌ Error:', err.message);
   process.exit(1);
 }
-
-// ---- Generar sitemap.xml ----
-const teamIds      = teamData.map(m => m.id);
-const portfolioIds = portfolioData.map(p => p.id);
-
-const configData = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/config.json'), 'utf8'));
-const BASE_URL     = configData.brand.site_url;
-
-const today        = new Date().toISOString().split('T')[0];
-
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>${BASE_URL}/</loc><lastmod>${today}</lastmod><priority>1.0</priority></url>
-  <url><loc>${BASE_URL}/material/</loc><lastmod>${today}</lastmod><priority>0.7</priority></url>
-${teamIds.map(id => `  <url><loc>${BASE_URL}/equipo/${id}.html</loc><lastmod>${today}</lastmod><priority>0.6</priority></url>`).join('\n')}
-${portfolioIds.map(id => `  <url><loc>${BASE_URL}/portafolio/${id}.html</loc><lastmod>${today}</lastmod><priority>0.8</priority></url>`).join('\n')}
-</urlset>`;
-
-fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemap, 'utf8');
-console.log('✅ sitemap.xml generado');
