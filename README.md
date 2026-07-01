@@ -1,7 +1,7 @@
 # UMD Films — Documentación Técnica Completa
 
 > Versión 2.0 · Junio 2026  
-> Desarrollado por **Javier Becario** con ayuda de **Claude (Anthropic)**
+> Desarrollado por **Javier Botella** con ayuda de **Claude (Anthropic)**
 
 ---
 
@@ -24,7 +24,7 @@
 
 ## 1. Estructura del proyecto
 
-```
+```cmd
 umdfilms/
 │
 ├── index.html                  ← Home (una sola página, todas las secciones)
@@ -80,6 +80,7 @@ umdfilms/
 Toda la información editable de la web vive en `data/`. **Nunca hay que tocar el HTML o el JS** para actualizar contenido habitual.
 
 ### `data/config.json`
+
 Constantes globales de la empresa. Se carga en todas las páginas.
 
 | Campo | Descripción | Ejemplo |
@@ -91,6 +92,7 @@ Constantes globales de la empresa. Se carga en todas las páginas.
 | `footer.dev_name` | Nombre del desarrollador en el copyright | `"Javier Becario"` |
 
 ### `data/team.json`
+
 Array de objetos. Cada objeto es un miembro del equipo.
 
 ```jsonc
@@ -113,6 +115,7 @@ Array de objetos. Cada objeto es un miembro del equipo.
 ```
 
 ### `data/portfolio.json`
+
 Array de proyectos. Estilo "ficha de cartelera de cine".
 
 ```jsonc
@@ -135,6 +138,7 @@ Array de proyectos. Estilo "ficha de cartelera de cine".
 ```
 
 ### `data/equipment.json`
+
 Array de equipos disponibles en alquiler.
 
 ```jsonc
@@ -156,7 +160,9 @@ Array de equipos disponibles en alquiler.
 ## 3. Cómo funciona cada página
 
 ### Home (`index.html`)
+
 Carga `shared.js` y `main.js`. El JS:
+
 1. Hace `fetch` paralelo de los 4 JSON
 2. Renderiza nav y footer dinámicamente (desde config.json)
 3. Duplica logos del trust bar para el marquee
@@ -164,21 +170,26 @@ Carga `shared.js` y `main.js`. El JS:
 5. Renderiza tarjetas de servicios, portafolio y equipo
 
 ### Páginas de equipo (`equipo/[id].html`)
+
 Todas son copias de `equipo/plantilla.html`. Cargan `shared.js` + `equipo.js`.
 El JS:
+
 1. Lee el nombre del archivo HTML para obtener el `id` (`alejandro.html` → `"alejandro"`)
 2. Busca ese ID en `team.json`
 3. Rellena hero, bio, redes, ficha lateral, fotos extra y proyectos
 
 ### Páginas de portafolio (`portafolio/[id].html`)
+
 Mismo patrón. Cargan `shared.js` + `portafolio.js`.
 El JS:
+
 1. Lee el `id` desde la URL
 2. Busca en `portfolio.json`
 3. Rellena hero, tráiler (iframe YouTube), sinopsis, ficha técnica, equipo del proyecto, galería
 4. Inyecta Schema `VideoObject` en el `<head>` para SEO
 
 ### Material (`material/index.html`)
+
 Carga `shared.js` + `material.js`.
 Genera filtros por categoría dinámicamente desde los datos y renderiza las tarjetas.
 
@@ -186,7 +197,7 @@ Genera filtros por categoría dinámicamente desde los datos y renderiza las tar
 
 ## 4. Flujo de carga de una página
 
-```
+```cmd
 Usuario abre equipo/alejandro.html
   ↓
 Navegador carga HTML (estructura vacía)
@@ -238,9 +249,11 @@ DOMContentLoaded dispara:
 5. Sube `portafolio/[id].html` + la imagen a Hostinger
 
 ### ✏️ Editar textos de la home
+
 Los textos del hero, la sección "Nosotros" y el formulario están directamente en `index.html`. Búscalos por el comentario de sección (`<!-- ======= HERO =======`).
 
 ### 🎨 Cambiar colores
+
 Abre `css/style.css`. Al principio del archivo están todas las variables CSS:
 ```css
 :root {
@@ -252,10 +265,12 @@ Abre `css/style.css`. Al principio del archivo están todas las variables CSS:
 ```
 
 ### 🖼️ Cambiar el logo
+
 1. Sustituye `assets/logo/logo-umd-films.svg` por el nuevo archivo (mismo nombre)
 2. O actualiza la ruta en `data/config.json` → `brand.logo`
 
 ### 📞 Cambiar el número de WhatsApp
+
 Edita `data/config.json` → `contact.whatsapp`. El cambio se propaga a toda la web.
 
 ---
@@ -272,6 +287,7 @@ node generate-pages.js
 Esto genera automáticamente los HTML individuales. **Solo necesita Node.js instalado.**
 
 Si no tienes Node.js:
+
 - Descarga desde https://nodejs.org (versión LTS)
 - O instálalo con: `winget install OpenJS.NodeJS` (Windows)
 
@@ -300,30 +316,57 @@ stats.sede = config.schema.address_locality    // "Málaga"
 
 ## 8. SEO implementado
 
+### Arquitectura de meta tags
+
+Los meta tags tienen **dos capas**: plantillas HTML con placeholders estáticos (para crawlers que no ejecutan JS), y JS que los sobrescribe con valores dinámicos del JSON.
+
 ### En todas las páginas
-- `<title>` único con nombre del proyecto/miembro
-- `<meta name="description">` único y descriptivo
-- `<link rel="canonical">` para evitar contenido duplicado
+
+- `<title>` único — pre-llenado por `generate-pages.js`, sobrescrito por JS
+- `<meta name="description">` único — mismo flujo
+- `<link rel="canonical">` dinámico por JS
+- Open Graph completo: `og:title`, `og:description`, `og:image` (URL absoluta), `og:url`, `og:site_name`, `og:type`, `og:locale`
+- Twitter Card (`summary_large_image`): `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
 - Etiquetas semánticas HTML5: `<header>`, `<main>`, `<section>`, `<article>`, `<footer>`
 - Un solo `<h1>` por página
 - `alt` descriptivo en todas las imágenes
 - `loading="lazy"` en imágenes fuera del viewport inicial
 
 ### En la home
+
 - Schema JSON-LD tipo `LocalBusiness` (inyectado por `shared.js`)
-- Open Graph y Twitter Card
+- Open Graph y Twitter Card con imagen absoluta
 - "Málaga" en `<h1>`, `<h2>` y meta description
 
 ### En páginas de proyectos
+
 - Schema JSON-LD tipo `VideoObject` (si hay URL de YouTube real)
+- `thumbnailUrl` con URL absoluta
+
+### En páginas de equipo
+
+- Schema JSON-LD tipo `Person` con `sameAs` para redes sociales
+- Perfil completo: nombre, rol, empresa, foto
+
+### En material
+
+- Canonical, Open Graph y Twitter Card
+
+### Sitemap y robots
+
+- `sitemap.xml` generado por `generate-pages.js` — ejecutar el script tras añadir/eliminar entradas
+- `robots.txt` permite todo, bloquea `/v1/` (versión antigua)
 
 ### Pendiente (acción manual de Alejandro)
+
 - Optimizar ficha de Google Business Profile
 - Conseguir reseñas de clientes en Google
 - Registrar la web en directorios (Sortlist, Páginas Amarillas, etc.)
 
 ### Redirecciones 301 al migrar desde WordPress
+
 Si las URLs cambian respecto a las del WordPress actual, hay que añadir en Hostinger:
+
 - Panel hPanel → Redirects → Añadir redirección 301
 - Ejemplo: `/contacto/` → `/index.html#contacto`
 
@@ -334,11 +377,13 @@ Si las URLs cambian respecto a las del WordPress actual, hay que añadir en Host
 Los navegadores modernos bloquean `fetch()` con `file://`. Necesitas un servidor local.
 
 **Opción A — VS Code (recomendada)**
+
 1. Instala la extensión **Live Server** (Ritwick Dey)
 2. Clic derecho en `index.html` → "Open with Live Server"
 3. Abre http://localhost:5500
 
 **Opción B — Python (sin instalar nada extra)**
+
 ```bash
 # En la carpeta raíz del proyecto
 python -m http.server 8000
@@ -346,6 +391,7 @@ python -m http.server 8000
 ```
 
 **Opción C — Node.js**
+
 ```bash
 npx serve .
 # Abre http://localhost:3000
@@ -356,18 +402,22 @@ npx serve .
 ## 10. Cómo subir a Hostinger
 
 ### Primera vez
+
 1. Panel Hostinger (hPanel) → **File Manager** → carpeta `public_html`
 2. Selecciona todos los archivos del proyecto → Upload
 3. O usa FTP con **FileZilla**: host, usuario y contraseña en hPanel → FTP Accounts
 
 ### Actualizaciones posteriores
+
 Solo sube los archivos modificados. Si añadiste un miembro:
+
 - `data/team.json`
 - `equipo/[nuevo-id].html`
 - `assets/equipo/[foto].webp`
 
 ### Estructura en el servidor
-```
+
+```cmd
 public_html/          ← raíz del hosting
   ├── index.html
   ├── css/
@@ -384,12 +434,14 @@ public_html/          ← raíz del hosting
 ## 11. Escalabilidad y futuros pasos
 
 ### Cuándo NO necesitas cambiar nada
+
 - Añadir miembros al equipo → solo `team.json` + `generate-pages.js`
 - Añadir proyectos → solo `portfolio.json` + `generate-pages.js`
 - Añadir material en alquiler → solo `equipment.json`
 - Cambiar colores, logo, textos → variables CSS / config.json / index.html
 
 ### Cuándo sí hay que evolucionar
+
 | Situación | Solución |
 |---|---|
 | Alejandro quiere editar solo sin tocar código | Añadir **Netlify CMS** o **TinaCMS** (gratis, encima del HTML estático) |
@@ -399,7 +451,9 @@ public_html/          ← raíz del hosting
 | Tráfico supera 50k visitas/mes | Poner **Cloudflare** (gratuito) delante de Hostinger |
 
 ### Migración a React (cuando llegue)
+
 La estructura ya está pensada para ello:
+
 - Cada sección HTML → un componente React
 - `data/*.json` → se importan directamente como módulos
 - `css/style.css` → se mantiene como CSS global o se migra a Tailwind
