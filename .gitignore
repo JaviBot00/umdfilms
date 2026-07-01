@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Generated files (regenerate with: node generate-pages.js)
+equipo/*.html
+!equipo/plantilla.html
+portafolio/*.html
+!portafolio/plantilla.html
+sitemap.xml
+
+# Archives
+files.zip
+
+# Env
+.env
+.env.*
