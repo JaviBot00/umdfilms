@@ -8,8 +8,8 @@
     "quantity": 1,
     "description": "Cámara de cine full-frame. Ideal para videoclips, publicidad y ficción.",
     "specs": ["Full-frame", "4K 120fps", "S-Cinetone"],
-    "photo": "assets/material/sony-fx3.webp",
-    "price_day": 0,
+    "photo": "assets/logo/logo-umd-films.svg",
+    "price_day": 32,
     "available": true
   },
   {
