@@ -67,6 +67,44 @@ document.addEventListener('DOMContentLoaded', async () => {
   setMeta('og:image',       `${config.brand.site_url}/${member.photo_cover}`);
   setMeta('og:type',        'profile');
   setMeta('og:url',         `${config.brand.site_url}/equipo/${member.id}.html`);
+  setMeta('og:site_name',   'UMD Films');
+
+  // Twitter Card
+  const setTwitter = (name, content) => {
+    let el = document.querySelector(`meta[name="${name}"]`);
+    if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el); }
+    el.setAttribute('content', content);
+  };
+  setTwitter('twitter:card',        'summary_large_image');
+  setTwitter('twitter:title',       document.title);
+  setTwitter('twitter:description', `Conoce a ${member.name}, ${member.role} en UMD Films Málaga.`);
+  setTwitter('twitter:image',       `${config.brand.site_url}/${member.photo_cover}`);
+
+  // Schema Person para rich results
+  const fullName = member.name + (member.surname ? ' ' + member.surname : '');
+  const sameAs = [];
+  if (member.social?.instagram) sameAs.push(member.social.instagram);
+  if (member.social?.youtube)   sameAs.push(member.social.youtube);
+
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": fullName,
+    "jobTitle": member.role,
+    "worksFor": {
+      "@type": "Organization",
+      "name": "UMD Films",
+      "url": config.brand.site_url
+    },
+    "url": `${config.brand.site_url}/equipo/${member.id}.html`,
+    "image": `${config.brand.site_url}/${member.photo_cover}`
+  };
+  if (sameAs.length) personSchema.sameAs = sameAs;
+
+  const schemaTag = document.createElement('script');
+  schemaTag.type = 'application/ld+json';
+  schemaTag.textContent = JSON.stringify(personSchema);
+  document.head.appendChild(schemaTag);
 
 
   /* ---- HERO DEL PERFIL ---- */

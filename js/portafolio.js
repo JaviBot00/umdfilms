@@ -73,6 +73,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   setMeta('og:image',       `${config.brand.site_url}/${project.thumb}`);
   setMeta('og:type',        'video.other');
   setMeta('og:url',         `${config.brand.site_url}/portafolio/${project.id}.html`);
+  setMeta('og:site_name',   'UMD Films');
+
+  // Twitter Card
+  const setTwitter = (name, content) => {
+    let el = document.querySelector(`meta[name="${name}"]`);
+    if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el); }
+    el.setAttribute('content', content);
+  };
+  setTwitter('twitter:card',        'summary_large_image');
+  setTwitter('twitter:title',       document.title);
+  setTwitter('twitter:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
+  setTwitter('twitter:image',       `${config.brand.site_url}/${project.thumb}`);
 
   // Schema VideoObject para proyectos con vídeo
   if (project.trailer_youtube && !project.trailer_youtube.includes('PLACEHOLDER')) {
@@ -81,7 +93,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       "@type": "VideoObject",
       "name": project.title,
       "description": project.synopsis || `${project.title} por UMD Films`,
-      "thumbnailUrl": project.thumb,
+      "thumbnailUrl": `${config.brand.site_url}/${project.thumb}`,
       "uploadDate": `${project.year}-01-01`,
       "director": { "@type": "Person", "name": project.director },
       "productionCompany": { "@type": "Organization", "name": "UMD Films" },

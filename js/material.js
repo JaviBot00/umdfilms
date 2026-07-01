@@ -32,6 +32,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelector('meta[name="description"]')
     ?.setAttribute('content', 'Alquila material de cine profesional en Málaga. Cámaras, iluminación, sonido y más. UMD Films Málaga.');
 
+  // Canonical dinámico
+  const canonical = document.querySelector('link[rel="canonical"]')
+    || Object.assign(document.createElement('link'), { rel: 'canonical' });
+  canonical.href = `${config.brand.site_url}/material/`;
+  if (!canonical.parentNode) document.head.appendChild(canonical);
+
+  // Open Graph
+  const setMeta = (prop, content) => {
+    let el = document.querySelector(`meta[property="${prop}"]`);
+    if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
+    el.setAttribute('content', content);
+  };
+  setMeta('og:title',       document.title);
+  setMeta('og:description', 'Alquila material de cine profesional en Málaga. Cámaras, iluminación, sonido y más.');
+  setMeta('og:url',         `${config.brand.site_url}/material/`);
+  setMeta('og:site_name',   'UMD Films');
+
+  // Twitter Card
+  const setTwitter = (name, content) => {
+    let el = document.querySelector(`meta[name="${name}"]`);
+    if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el); }
+    el.setAttribute('content', content);
+  };
+  setTwitter('twitter:card',        'summary_large_image');
+  setTwitter('twitter:title',       document.title);
+  setTwitter('twitter:description', 'Alquila material de cine profesional en Málaga. Cámaras, iluminación, sonido y más.');
+
   /* ---- FILTROS: generados dinámicamente desde las categorías existentes ---- */
   const filtersEl = document.getElementById('materialFilters');
   const categories = ['all', ...new Set(equipment.map(e => e.category))];
