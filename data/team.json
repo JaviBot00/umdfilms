@@ -3,7 +3,7 @@
     "_comment": "Founder — datos reales, fotos pendientes de activos locales",
     "id": "alejandro",
     "name": "Alejandro",
-    "surname": "",
+    "surname": "Luque",
     "role": "Director creativo y ejecutivo",
     "bio": "Placeholder — descripción de Alejandro pendiente.",
     "photo_cover": "assets/equipo/alejandro-cover.webp",
@@ -14,7 +14,7 @@
       "assets/equipo/alejandro-5.jpg"
     ],
     "social": {
-      "instagram": "https://www.instagram.com/",
+      "instagram": "https://www.instagram.com/alejandroluque.film/",
       "youtube": ""
     },
     "projects": ["cautivo-malaga", "cervezas-victoria"],
@@ -24,12 +24,12 @@
   {
     "id": "adrian",
     "name": "Adrián",
-    "surname": "",
-    "role": "Co-fundador · Producción Audiovisual & Eventos",
+    "surname": "Román",
+    "role": "Productor general y director de contenidos tradicional",
     "bio": "Placeholder — descripción de Adrián pendiente.",
     "photo_cover": "assets/equipo/adrian-cover.webp",
     "photos_extra": [],
-    "social": { "instagram": "", "youtube": "" },
+    "social": { "instagram": "https://www.instagram.com/adrianroman18/", "youtube": "" },
     "projects": [],
     "specialties": ["Producción", "Eventos", "Corporativo"],
     "featured": true
