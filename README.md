@@ -15,10 +15,11 @@
 6. [Generar páginas nuevas](#6-generar-páginas-nuevas)
 7. [Estadísticas automáticas](#7-estadísticas-automáticas)
 8. [SEO implementado](#8-seo-implementado)
-9. [Cómo visualizar en local](#9-cómo-visualizar-en-local)
-10. [Cómo subir a Hostinger](#10-cómo-subir-a-hostinger)
-11. [Escalabilidad y futuros pasos](#11-escalabilidad-y-futuros-pasos)
-12. [Referencia de archivos](#12-referencia-de-archivos)
+9. [Accesibilidad (a11y)](#9-accesibilidad-a11y)
+10. [Cómo visualizar en local](#10-cómo-visualizar-en-local)
+11. [Cómo subir a Hostinger](#11-cómo-subir-a-hostinger)
+12. [Escalabilidad y futuros pasos](#12-escalabilidad-y-futuros-pasos)
+13. [Referencia de archivos](#13-referencia-de-archivos)
 
 ---
 
@@ -372,7 +373,48 @@ Si las URLs cambian respecto a las del WordPress actual, hay que añadir en Host
 
 ---
 
-## 9. Cómo visualizar en local
+## 9. Accesibilidad (a11y)
+
+Cumplimiento WCAG 2.2 AA. Todos los elementos interactivos deben permanecer accesibles por teclado.
+
+### Características implementadas
+
+| Característica | Ubicación |
+|---|---|
+| **Skip link** | `<a href="#contenido" class="skip-link">` en todas las páginas — oculto visualmente, aparece con Tab |
+| **`<main id="contenido">`** | Landmark en todas las páginas (index.html envuelve hero a contacto; plantillas de subpáginas ya tenían `<main>`) |
+| **`:focus-visible`** | Outline rojo en todos los elementos interactivos; box-shadow en botones, filtros, theme toggle, FAB |
+| **Navegación por teclado** | Tarjetas de equipo, portafolio y servicios enlazados tienen `role="link"`, `tabindex="0"` y handlers Enter/Space |
+| **`aria-pressed`** | Botones de filtro (portafolio + material) anuncian el estado activo |
+| **`aria-label`** | Navs del footer diferenciadas ("Navegación del sitio" / "Redes sociales"); secciones, redes, burger, theme toggle, FAB etiquetados |
+| **`aria-hidden="true"`** | SVGs decorativos, vídeo hero, overlay/redline, marquee del trust bar, preview de vídeo de servicios |
+| **Formularios** | Todos los inputs con `<label for>`, `autocomplete`, `aria-invalid` en errores, focus ring visible via `box-shadow` |
+| **`prefers-reduced-motion`** | Desactiva todas las animaciones, transiciones, scroll-behavior y el marquee del trust bar |
+| **`prefers-color-scheme`** | Tema claro/oscuro con persistencia en localStorage; hero/CTA/nav siempre oscuros |
+| **Enlaces externos** | `rel="noopener"` en todos los links con `target="_blank"` |
+| **Lightbox** | Escape cierra, botón de cerrar recibe foco al abrir |
+| **HTML semántico** | `<header>`, `<nav>`, `<main>`, `<footer>`, `<section>` con `aria-label`; `<aside>` para sidebars |
+
+### Al añadir elementos interactivos nuevos
+
+1. **Divs/cards clickeables**: deben tener `role="link"`, `tabindex="0"`, `aria-label` y handler keydown para Enter/Space
+2. **Botones**: preferir `<button>` nativo; si se usa div, añadir `role="button"` + handler de teclado
+3. **Imágenes**: imágenes significativas con `alt` descriptivo; decorativas con `alt=""` + `aria-hidden="true"`
+4. **Filtros/toggles**: añadir `aria-pressed="true|false"` y actualizar en click
+5. **Secciones nuevas**: envolver en `<section aria-label="...">` o usar `<main>` para contenido principal
+6. **Inputs de formulario**: siempre asociar con `<label for="id">`, añadir `autocomplete` donde aplique
+7. **Animaciones**: respetar `prefers-reduced-motion` — desactivar o acortar duración
+
+### Testing
+
+- Tab por toda la página — cada elemento interactivo debe recibir foco visible
+- Enter/Space debe activar todas las cards y botones clickeables
+- Screen reader: todas las imágenes con alt, todos los botones/enlaces con nombre accesible, landmarks anunciados
+- Zoom al 200% — el layout no debe romperse ni solaparse
+
+---
+
+## 10. Cómo visualizar en local
 
 Los navegadores modernos bloquean `fetch()` con `file://`. Necesitas un servidor local.
 
@@ -399,7 +441,7 @@ npx serve .
 
 ---
 
-## 10. Cómo subir a Hostinger
+## 11. Cómo subir a Hostinger
 
 ### Primera vez
 
@@ -431,7 +473,7 @@ public_html/          ← raíz del hosting
 
 ---
 
-## 11. Escalabilidad y futuros pasos
+## 12. Escalabilidad y futuros pasos
 
 ### Cuándo NO necesitas cambiar nada
 
@@ -462,7 +504,7 @@ La estructura ya está pensada para ello:
 
 ---
 
-## 12. Referencia de archivos
+## 13. Referencia de archivos
 
 | Archivo | Tocar para... | Frecuencia |
 |---|---|---|

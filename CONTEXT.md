@@ -171,6 +171,7 @@ stats.sede      = config.schema.address_locality               // "Málaga"
 - ✅ Hero: texto más visible con overlay multicapa y text-shadow
 - ✅ Logo más prominente en nav
 - ✅ Años se calculan automáticamente cada año
+- ✅ Accesibilidad WCAG 2.2 AA: skip link, `:focus-visible`, `aria-pressed`, `aria-label`, `prefers-reduced-motion`, teclado en todas las cards
 
 ---
 
@@ -185,10 +186,12 @@ stats.sede      = config.schema.address_locality               // "Málaga"
 - `<link rel="canonical">` en home y material
 - Alt descriptivos con "UMD Films" y "Málaga"
 - HTML semántico: `<header>`, `<main>`, `<section>`, `<footer>`, `<article>`
+- `<main id="contenido">` landmark en todas las páginas
 - Un solo `<h1>` por página
 - "Málaga" en `<h1>` de la home
 - `loading="lazy"` + `preload="none"` en vídeo hero
 - Open Graph + Twitter Card en home
+- Accesibilidad WCAG 2.2 AA: skip link, `:focus-visible`, `aria-pressed`, `aria-label`, `prefers-reduced-motion`, teclado en todas las cards
 
 **Pendiente (acción de Alejandro, no de código):**
 

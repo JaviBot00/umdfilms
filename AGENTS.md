@@ -64,3 +64,40 @@ Edit the relevant JS file (e.g., `equipo.js` for Person). Create a JSON-LD objec
 | `css/style.css` | Changing colors (CSS variables at top), typography, global layout |
 | `generate-pages.js` | Only if HTML template structure changes |
 | `index.html` | Editing home page text (hero, about, contact) |
+
+## Accessibility (a11y)
+
+WCAG 2.2 AA baseline. All interactive elements must remain keyboard accessible.
+
+### What's in place
+
+- **Skip link**: `<a href="#contenido" class="skip-link">` on all pages — visually hidden, appears on Tab focus
+- **`<main id="contenido">`**: landmark on all pages (index.html wraps hero through contact; subpage templates already had `<main>`)
+- **`:focus-visible` styles**: red outline on all interactive elements; box-shadow ring on buttons, filters, theme toggle, FAB
+- **Keyboard navigation**: team cards, portfolio cards, and linked service cards all have `role="link"`, `tabindex="0"`, and Enter/Space handlers
+- **`aria-pressed`**: filter buttons (portfolio + material) announce active state
+- **`aria-label`**: footer navs distinguished ("Navegación del sitio" / "Redes sociales"); sections, social links, burger, theme toggle, WhatsApp FAB all labeled
+- **`aria-hidden="true"`**: decorative SVGs, hero video, hero overlay/redline, trust bar marquee track, service video preview
+- **Form accessibility**: all inputs have `<label for>` association, `autocomplete` attributes, `aria-invalid` on validation errors, visible focus ring via `box-shadow`
+- **`prefers-reduced-motion`**: disables all animations, transitions, scroll-behavior, and the trust bar marquee
+- **`prefers-color-scheme`**: light/dark theme with localStorage persistence; hero/CTA/nav always dark
+- **External links**: `rel="noopener"` on all `target="_blank"` links
+- **Lightbox**: Escape key closes, close button receives focus on open
+- **Semantic HTML**: `<header>`, `<nav>`, `<main>`, `<footer>`, `<section>` with `aria-label`; `<aside>` for sidebars
+
+### When adding new interactive elements
+
+1. **Clickable divs/cards**: must have `role="link"`, `tabindex="0"`, `aria-label`, and keydown handler for Enter/Space
+2. **Buttons**: native `<button>` preferred; if using divs, add `role="button"` + keyboard handler
+3. **Images**: meaningful images get descriptive `alt`; decorative images get `alt=""` + `aria-hidden="true"`
+4. **Filter/toggle buttons**: add `aria-pressed="true|false"` and update on click
+5. **New sections**: wrap in `<section aria-label="...">` or use `<main>` for primary content
+6. **Form inputs**: always pair with `<label for="id">`, add `autocomplete` where applicable
+7. **Animations**: respect `prefers-reduced-motion` — either disable or shorten duration
+
+### Testing
+
+- Tab through entire page — every interactive element must receive visible focus
+- Enter/Space must activate all clickable cards and buttons
+- Screen reader: all images have alt text, all buttons/links have accessible names, landmarks are announced
+- Zoom to 200% — layout must not break or overlap
