@@ -75,16 +75,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (filtersEl) {
     categories.forEach(cat => {
       const btn = document.createElement('button');
-      btn.className   = `filter${cat === 'all' ? ' active' : ''}`;
+      const isActive = cat === 'all';
+      btn.className   = `filter${isActive ? ' active' : ''}`;
       btn.dataset.filter = cat;
       btn.textContent = CATEGORY_LABELS[cat] || cat;
+      btn.setAttribute('aria-pressed', String(isActive));
       filtersEl.appendChild(btn);
     });
 
     filtersEl.querySelectorAll('.filter').forEach(btn => {
       btn.addEventListener('click', () => {
-        filtersEl.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+        filtersEl.querySelectorAll('.filter').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         renderGear(btn.dataset.filter);
       });
     });

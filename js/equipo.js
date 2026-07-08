@@ -221,6 +221,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       memberProjects.forEach(proj => {
         const card = document.createElement('div');
         card.className = 'portfolio-card reveal';
+        card.setAttribute('role', 'link');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Ver proyecto: ${proj.title}`);
         card.innerHTML = `
           <img src="${proj.thumb}" alt="${proj.title} — UMD Films Málaga" loading="lazy" />
           <div class="portfolio-card__overlay">
@@ -231,8 +234,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             <svg width="16" height="16" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
           </div>
         `;
-        card.addEventListener('click', () => {
+        const goToProject = () => {
           window.location.href = UMD.rootPath(`portafolio/${proj.id}.html`);
+        };
+        card.addEventListener('click', goToProject);
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            goToProject();
+          }
         });
         projectsGrid.appendChild(card);
       });

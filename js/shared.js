@@ -217,7 +217,7 @@ async function renderFooter(config) {
           </a>` : ''}
         </div>
       </div>
-      <nav class="footer__nav">
+      <nav class="footer__nav" aria-label="Navegación del sitio">
         <strong>Navegar</strong>
         <a href="${rootPath('index.html')}#nosotros">Quiénes somos</a>
         <a href="${rootPath('index.html')}#servicios">Servicios</a>
@@ -226,7 +226,7 @@ async function renderFooter(config) {
         <a href="${rootPath('material/index.html')}">Alquiler de material</a>
         <a href="${rootPath('index.html')}#contacto">Contacto</a>
       </nav>
-      <nav class="footer__nav">
+      <nav class="footer__nav" aria-label="Redes sociales">
         <strong>Redes</strong>
         ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener">Instagram</a>` : ''}
         ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener">YouTube</a>` : ''}

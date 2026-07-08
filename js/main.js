@@ -136,7 +136,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       `;
 
       if (svc.link) {
-        card.addEventListener('click', () => { window.location.href = svc.link; });
+        card.setAttribute('role', 'link');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', `Ir a: ${svc.title}`);
+        const goToService = () => { window.location.href = svc.link; };
+        card.addEventListener('click', goToService);
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            goToService();
+          }
+        });
       }
 
       servicesGrid.appendChild(card);
@@ -192,6 +202,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     items.forEach((proj, i) => {
       const card = document.createElement('div');
       card.className = 'portfolio-card';
+      card.setAttribute('role', 'link');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', `Ver proyecto: ${proj.title}`);
       card.style.transitionDelay = `${i * 0.06}s`;
       card.innerHTML = `
         <img src="${proj.thumb}" alt="${proj.title} — UMD Films" loading="lazy" />
@@ -203,8 +216,13 @@ document.addEventListener('DOMContentLoaded', async () => {
           <svg width="16" height="16" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
         </div>
       `;
-      card.addEventListener('click', () => {
-        window.location.href = `portafolio/${proj.id}.html`;
+      const goToProject = () => { window.location.href = `portafolio/${proj.id}.html`; };
+      card.addEventListener('click', goToProject);
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          goToProject();
+        }
       });
       portfolioGrid.appendChild(card);
 
@@ -223,15 +241,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (portfolioFilters) {
     categories.forEach(cat => {
       const btn = document.createElement('button');
-      btn.className = `filter${cat === 'all' ? ' active' : ''}`;
+      const isActive = cat === 'all';
+      btn.className = `filter${isActive ? ' active' : ''}`;
       btn.dataset.filter = cat;
       btn.textContent = FILTER_LABELS[cat] || cat;
+      btn.setAttribute('aria-pressed', String(isActive));
       portfolioFilters.appendChild(btn);
     });
     portfolioFilters.querySelectorAll('.filter').forEach(btn => {
       btn.addEventListener('click', () => {
-        portfolioFilters.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+        portfolioFilters.querySelectorAll('.filter').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
         renderPortfolio(btn.dataset.filter);
       });
     });
