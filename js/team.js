@@ -1,25 +1,25 @@
 /**
  * =====================================================
- * equipo.js — Página individual de miembro del equipo
+ * team.js — Individual team member page
  *
- * Cómo funciona:
- *  - Lee el ?id= de la URL o el nombre del archivo
- *  - Carga team.json y portfolio.json
- *  - Rellena toda la página dinámicamente
- *  - Una sola plantilla HTML sirve para los 13 miembros
+ * How it works:
+ *  - Reads the ?id= from URL or filename
+ *  - Loads team.json and portfolio.json
+ *  - Fills the entire page dynamically
+ *  - One HTML template serves all 13 members
  * =====================================================
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-  /* ---- Obtener el ID del miembro desde la URL ---- */
-  // La URL es: equipo/alejandro.html → id = "alejandro"
+  /* ---- Get member ID from URL ---- */
+  // URL is: team/alejandro.html → id = "alejandro"
   const memberId = window.location.pathname
     .split('/')
     .pop()
     .replace('.html', '');
 
-  /* ---- Cargar datos ---- */
+  /* ---- Load data ---- */
   const [config, team, portfolio] = await Promise.all([
     UMD.fetchJSON(UMD.rootPath('data/config.json')),
     UMD.fetchJSON(UMD.rootPath('data/team.json')),
@@ -33,14 +33,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   await UMD.renderFooter(config);
   UMD.renderFAB(config);
 
-  /* ---- Si no existe el miembro ---- */
+  /* ---- If member doesn't exist ---- */
   if (!member) {
     document.title = 'Perfil no encontrado — UMD Films Málaga';
     document.querySelector('main').innerHTML = `
       <div class="container" style="padding-block:8rem;text-align:center">
         <p class="eyebrow">Error 404</p>
         <h1 class="section-title">Perfil no encontrado</h1>
-        <a href="${UMD.rootPath('index.html')}#equipo" class="btn btn-primary" style="margin-top:2rem">Volver al equipo</a>
+        <a href="${UMD.rootPath('index.html')}#team" class="btn btn-primary" style="margin-top:2rem">Back to team</a>
       </div>`;
     return;
   }
@@ -50,10 +50,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelector('meta[name="description"]')
     ?.setAttribute('content', `Conoce a ${member.name}, ${member.role} en ${config.seo.site_suffix}.`);
 
-  // Canonical dinámico
+  // Dynamic canonical
   const canonical = document.querySelector('link[rel="canonical"]') 
     || Object.assign(document.createElement('link'), { rel: 'canonical' });
-  canonical.href = `${config.brand.site_url}/equipo/${member.id}.html`;
+  canonical.href = `${config.brand.site_url}/team/${member.id}.html`;
   if (!canonical.parentNode) document.head.appendChild(canonical);
 
   // Open Graph
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setMeta('og:description', `Conoce a ${member.name}, ${member.role} en UMD Films Málaga.`);
   setMeta('og:image',       `${config.brand.site_url}/${member.photo_cover}`);
   setMeta('og:type',        'profile');
-  setMeta('og:url',         `${config.brand.site_url}/equipo/${member.id}.html`);
+  setMeta('og:url',         `${config.brand.site_url}/team/${member.id}.html`);
   setMeta('og:site_name',   'UMD Films');
 
   // Twitter Card
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setTwitter('twitter:description', `Conoce a ${member.name}, ${member.role} en UMD Films Málaga.`);
   setTwitter('twitter:image',       `${config.brand.site_url}/${member.photo_cover}`);
 
-  // Schema Person para rich results
+  // Schema Person for rich results
   const fullName = member.name + (member.surname ? ' ' + member.surname : '');
   const sameAs = [];
   if (member.social?.instagram) sameAs.push(member.social.instagram);
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       "name": "UMD Films",
       "url": config.brand.site_url
     },
-    "url": `${config.brand.site_url}/equipo/${member.id}.html`,
+    "url": `${config.brand.site_url}/team/${member.id}.html`,
     "image": `${config.brand.site_url}/${member.photo_cover}`
   };
   if (sameAs.length) personSchema.sameAs = sameAs;
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.head.appendChild(schemaTag);
 
 
-  /* ---- HERO DEL PERFIL ---- */
+  /* ---- PROFILE HERO ---- */
   const heroSection = document.getElementById('profileHero');
   if (heroSection) {
     heroSection.innerHTML = `
@@ -117,9 +117,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
       <div class="profile-hero__overlay"></div>
       <div class="profile-hero__content container">
-        <a href="${UMD.rootPath('index.html')}#equipo" class="profile-hero__back reveal">
+        <a href="${UMD.rootPath('index.html')}#team" class="profile-hero__back reveal">
           <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-          Volver al equipo
+          Back to team
         </a>
         <!-- <p class="eyebrow profile-hero__eyebrow reveal">UMD Films Málaga · Equipo</p> -->
         <h1 class="profile-hero__name reveal d1">${member.name}${member.surname ? ' ' + member.surname : ''}</h1>
@@ -132,12 +132,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     `;
   }
 
-  /* ---- BIO + FICHA ---- */
+  /* ---- BIO + SHEET ---- */
   const bioEl = document.getElementById('profileBio');
   if (bioEl) {
     bioEl.innerHTML = member.bio
       ? `<p class="profile-bio reveal">${member.bio}</p>`
-      : `<p class="profile-bio reveal" style="color:var(--muted);font-style:italic">Descripción pendiente de rellenar en team.json.</p>`;
+      : `<p class="profile-bio reveal" style="color:var(--muted);font-style:italic">Description pending in team.json.</p>`;
   }
 
   /* Social links */
@@ -157,32 +157,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     socialsEl.innerHTML = links.join('');
   }
 
-  /* Ficha lateral */
+  /* Side sheet */
   const fichaEl = document.getElementById('profileFicha');
   if (fichaEl) {
     fichaEl.innerHTML = `
       <div class="profile-info-card">
-        <div class="profile-info-card__header">Ficha</div>
+        <div class="profile-info-card__header">Sheet</div>
         <div class="profile-info-card__body">
           <div class="profile-info-row">
-            <span class="profile-info-label">Nombre</span>
+            <span class="profile-info-label">Name</span>
             <span class="profile-info-value">${member.name}${member.surname ? ' ' + member.surname : ''}</span>
           </div>
           <div class="profile-info-row">
-            <span class="profile-info-label">Rol</span>
+            <span class="profile-info-label">Role</span>
             <span class="profile-info-value">${member.role}</span>
           </div>
           ${member.specialties?.length ? `
           <div class="profile-info-row">
-            <span class="profile-info-label">Especialidades</span>
+            <span class="profile-info-label">Specialties</span>
             <span class="profile-info-value">${member.specialties.join(', ')}</span>
           </div>` : ''}
           <div class="profile-info-row">
-            <span class="profile-info-label">Empresa</span>
+            <span class="profile-info-label">Company</span>
             <span class="profile-info-value">UMD Films</span>
           </div>
           <div class="profile-info-row">
-            <span class="profile-info-label">Sede</span>
+            <span class="profile-info-label">Location</span>
             <span class="profile-info-value">Málaga</span>
           </div>
         </div>
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     `;
   }
 
-  /* ---- FOTOS EXTRA ---- */
+  /* ---- EXTRA PHOTOS ---- */
   const photosSection = document.getElementById('profilePhotos');
   const photosGrid    = document.getElementById('profilePhotosGrid');
   if (photosSection && photosGrid) {
@@ -206,11 +206,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       photosSection.style.display = 'none';
     }
-    /* ---- Lightbox de la galería ---- */
+    /* ---- Gallery lightbox ---- */
     UMD.initLightbox('.profile-photos__img');
   }
 
-  /* ---- PROYECTOS EN LOS QUE PARTICIPA ---- */
+  /* ---- PROJECTS THEY PARTICIPATED IN ---- */
   const projectsGrid = document.getElementById('profileProjectsGrid');
   if (projectsGrid) {
     const memberProjects = portfolio.filter(p =>
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         card.className = 'portfolio-card reveal';
         card.setAttribute('role', 'link');
         card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `Ver proyecto: ${proj.title}`);
+        card.setAttribute('aria-label', `View project: ${proj.title}`);
         card.innerHTML = `
           <img src="${proj.thumb}" alt="${proj.title} — UMD Films Málaga" loading="lazy" />
           <div class="portfolio-card__overlay">
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
         `;
         const goToProject = () => {
-          window.location.href = UMD.rootPath(`portafolio/${proj.id}.html`);
+          window.location.href = UMD.rootPath(`portfolio/${proj.id}.html`);
         };
         card.addEventListener('click', goToProject);
         card.addEventListener('keydown', e => {

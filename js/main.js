@@ -1,17 +1,17 @@
 /**
  * =====================================================
- * main.js — Lógica de la página principal (index.html)
- * Estadísticas calculadas dinámicamente:
- *   - personas  = team.json.length
- *   - proyectos = portfolio.json.length
- *   - años      = año actual - config.founded_year
- *   - sede      = config.schema.address_locality
+ * main.js — Home page logic (index.html)
+ * Stats calculated dynamically:
+ *   - people    = team.json.length
+ *   - projects  = portfolio.json.length
+ *   - years     = current year - config.founded_year
+ *   - location  = config.schema.address_locality
  * =====================================================
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-  /* ---- Carga de datos ---- */
+  /* ---- Data loading ---- */
   const [config, team, portfolio, services, partners] = await Promise.all([
     UMD.fetchJSON(UMD.rootPath('data/config.json')),
     UMD.fetchJSON(UMD.rootPath('data/team.json')),
@@ -26,24 +26,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   UMD.renderFAB(config);
   UMD.injectLocalBusinessSchema(config);
 
-  /* ---- Hero: reveal inicial ---- */
+  /* ---- Hero: initial reveal ---- */
   setTimeout(() => {
     document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
   }, 120);
 
-/* ---- Trust bar: logos duplicados para marquee infinito ----
-     Repetimos el set de logos hasta que sea más ancho que la pantalla
-     (con margen), y luego lo duplicamos una vez más: el bucle necesita
-     dos mitades idénticas para que translateX(-50%) sea perfecto.
+/* ---- Trust bar: duplicated logos for infinite marquee ----
+     We repeat the logo set until it's wider than the screen
+     (with margin), then duplicate it once more: the loop needs
+     two identical halves for translateX(-50%) to work perfectly.
   ---- */
   const trustInner = document.getElementById('trustInner');
   if (trustInner) {
-    // Renderizar logos desde el JSON
+    // Render logos from JSON
     trustInner.innerHTML = partners.map(p =>
       `<img src="${UMD.rootPath(p.logo)}" alt="${p.name}" loading="lazy" />`
     ).join('');
 
-    // Duplicar para el marquee (misma lógica que antes)
+    // Duplicate for marquee (same logic as before)
     let set = trustInner.innerHTML;
     let safety = 0;
     while (trustInner.scrollWidth < window.innerWidth * 2 && safety < 10) {
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   /* =====================================================
-     ESTADÍSTICAS — calculadas desde los datos
+     STATS — calculated from data
      ===================================================== */
   const currentYear = new Date().getFullYear();
   const statsData = [
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     },
     {
       id:     'stat-sede',
-      value:  null,   // no numérico
+      value:  null,   // non-numeric
       text:   config.schema.address_locality,
       label:  `Alcance ${config.schema.address_country === 'ES' ? 'nacional' : 'internacional'}`
     }
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       statsContainer.appendChild(div);
     });
 
-    /* Animar contadores al entrar en viewport */
+    /* Animate counters when entering viewport */
     const statObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   /* =====================================================
-     SERVICIOS
+     SERVICES
      ===================================================== */
   const servicesGrid   = document.getElementById('servicesGrid');
   const svcPreview     = document.getElementById('svcPreview');
@@ -132,13 +132,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="service-card__icon">${svc.icon}</div>
         <h3 class="service-card__title">${svc.title}</h3>
         <p class="service-card__desc">${svc.description}</p>
-        ${svc.core ? '<span class="service-card__tag">Servicio core</span>' : ''}
+        ${svc.core ? '<span class="service-card__tag">Core service</span>' : ''}
       `;
 
       if (svc.link) {
         card.setAttribute('role', 'link');
         card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `Ir a: ${svc.title}`);
+        card.setAttribute('aria-label', `Go to: ${svc.title}`);
         const goToService = () => { window.location.href = svc.link; };
         card.addEventListener('click', goToService);
         card.addEventListener('keydown', e => {
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       servicesGrid.appendChild(card);
     });
 
-    /* Video preview hover (solo desktop) */
+    /* Video preview hover (desktop only) */
     if (isDesktop && svcPreview && svcPreviewVid) {
       let previewTimer;
 
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   /* =====================================================
-     PORTAFOLIO — filtros + cards
+     PORTFOLIO — filters + cards
      ===================================================== */
   const portfolioGrid    = document.getElementById('portfolioGrid');
   const portfolioFilters = document.getElementById('portfolioFilters');
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       card.className = 'portfolio-card';
       card.setAttribute('role', 'link');
       card.setAttribute('tabindex', '0');
-      card.setAttribute('aria-label', `Ver proyecto: ${proj.title}`);
+      card.setAttribute('aria-label', `View project: ${proj.title}`);
       card.style.transitionDelay = `${i * 0.06}s`;
       card.innerHTML = `
         <img src="${proj.thumb}" alt="${proj.title} — UMD Films" loading="lazy" />
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <svg width="16" height="16" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
         </div>
       `;
-      const goToProject = () => { window.location.href = `portafolio/${proj.id}.html`; };
+      const goToProject = () => { window.location.href = `portfolio/${proj.id}.html`; };
       card.addEventListener('click', goToProject);
       card.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Generar filtros dinámicamente desde el JSON
+  // Generate filters dynamically from JSON
   const categories = ['all', ...new Set(portfolio.map(p => p.category))];
   const FILTER_LABELS = {
     all: 'Todo', videoclip: 'Videoclips', publicidad: 'Publicidad',
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderPortfolio('all');
 
   /* =====================================================
-     EQUIPO
+     TEAM
      ===================================================== */
   const teamGrid = document.getElementById('teamGrid');
   if (teamGrid) {
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       card.style.transitionDelay = `${i * 0.07}s`;
       card.setAttribute('role', 'link');
       card.setAttribute('tabindex', '0');
-      card.setAttribute('aria-label', `Ver perfil de ${member.name}`);
+      card.setAttribute('aria-label', `View profile of ${member.name}`);
 
       card.innerHTML = `
         <div class="team-card__img-wrap">
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
       `;
 
-      const goToProfile = () => { window.location.href = `equipo/${member.id}.html`; };
+      const goToProfile = () => { window.location.href = `team/${member.id}.html`; };
       card.addEventListener('click', goToProfile);
       card.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   /* =====================================================
-     FORMULARIO DE CONTACTO → WhatsApp
+     CONTACT FORM → WhatsApp
      ===================================================== */
   const form = document.getElementById('contactForm');
   if (form) {
@@ -351,8 +351,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   
-      /* ---- Reveal: al final, para detectar también los elementos
-     .reveal creados dinámicamente (servicios, etc.) ---- */
+  /* ---- Reveal: at the end, to also detect dynamically created
+     .reveal elements (services, etc.) ---- */
   UMD.initReveal();
 
 });

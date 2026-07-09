@@ -1,22 +1,22 @@
 /**
  * =====================================================
- * material.js — Catálogo de material en alquiler
+ * material.js — Equipment rental catalog
  *
- * Cómo funciona:
- *   - Carga equipment.json
- *   - Renderiza las tarjetas de equipos con cantidad, categoría y specs
- *   - Filtros por categoría (calculados dinámicamente desde los datos)
- *   - CTA de contacto por WhatsApp para cada equipo
+ * How it works:
+ *   - Loads equipment.json
+ *   - Renders equipment cards with quantity, category and specs
+ *   - Category filters (dynamically calculated from data)
+ *   - WhatsApp contact CTA for each item
  *
- * Para añadir un equipo:
- *   Editar data/equipment.json y añadir una entrada al array.
- *   La página se actualiza sola.
+ * To add equipment:
+ *   Edit data/equipment.json and add an entry to the array.
+ *   The page updates automatically.
  * =====================================================
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-  /* ---- Carga de datos ---- */
+  /* ---- Load data ---- */
   const [config, equipment] = await Promise.all([
     UMD.fetchJSON(UMD.rootPath('data/config.json')),
     UMD.fetchJSON(UMD.rootPath('data/equipment.json'))
@@ -28,11 +28,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   UMD.renderFAB(config);
 
   /* ---- SEO ---- */
-  document.title = 'Alquiler de Material | UMD Films Málaga';
+  document.title = 'Equipment Rental | UMD Films Málaga';
   document.querySelector('meta[name="description"]')
-    ?.setAttribute('content', 'Alquila material de cine profesional en Málaga. Cámaras, iluminación, sonido y más. UMD Films Málaga.');
+    ?.setAttribute('content', 'Rent professional film equipment in Málaga. Cameras, lighting, sound and more. UMD Films Málaga.');
 
-  // Canonical dinámico
+  // Dynamic canonical
   const canonical = document.querySelector('link[rel="canonical"]')
     || Object.assign(document.createElement('link'), { rel: 'canonical' });
   canonical.href = `${config.brand.site_url}/material/`;
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     el.setAttribute('content', content);
   };
   setMeta('og:title',       document.title);
-  setMeta('og:description', 'Alquila material de cine profesional en Málaga. Cámaras, iluminación, sonido y más.');
+  setMeta('og:description', 'Rent professional film equipment in Málaga. Cameras, lighting, sound and more.');
   setMeta('og:url',         `${config.brand.site_url}/material/`);
   setMeta('og:site_name',   'UMD Films');
 
@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
   setTwitter('twitter:card',        'summary_large_image');
   setTwitter('twitter:title',       document.title);
-  setTwitter('twitter:description', 'Alquila material de cine profesional en Málaga. Cámaras, iluminación, sonido y más.');
+  setTwitter('twitter:description', 'Rent professional film equipment in Málaga. Cameras, lighting, sound and more.');
 
-  /* ---- FILTROS: generados dinámicamente desde las categorías existentes ---- */
+  /* ---- FILTERS: dynamically generated from existing categories ---- */
   const filtersEl = document.getElementById('materialFilters');
   const categories = ['all', ...new Set(equipment.map(e => e.category))];
 
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  /* ---- GRID DE EQUIPOS ---- */
+  /* ---- EQUIPMENT GRID ---- */
   const grid = document.getElementById('materialGrid');
 
   function renderGear(filter) {
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     grid.innerHTML = '';
 
-    // Filtrar placeholders marcados como no disponibles sin foto real
+    // Filter out placeholders marked as unavailable without real photo
     const visible = items.filter(e => e.name !== 'Nombre del equipo');
 
     visible.forEach((gear, i) => {
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       grid.appendChild(card);
     });
 
-    /* Reveal con IntersectionObserver */
+    /* Reveal with IntersectionObserver */
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
