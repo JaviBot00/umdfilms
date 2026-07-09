@@ -1,40 +1,43 @@
 # SEO
 
-¡Qué gran proyecto! Al ser [UMD Films](https://umdfilms.com/) una productora audiovisual basada en Málaga, pasar de WordPress a código puro (HTML, CSS y JavaScript) es una decisión excelente para potenciar el SEO visual. Te dará un control absoluto sobre la velocidad de carga, permitiendo que tus vídeos, trailers y portfolios carguen instantáneamente sin el código pesado de los plugins. [1, 2, 3]
-Sin embargo, hacer este cambio tiene un riesgo: si no se gestiona bien, puedes perder el posicionamiento que ya tienes. [4, 5]
-Para conseguir el mejor posicionamiento SEO con tu nueva web en código puro, debes estructurar tu estrategia en tres fases:
+What a great project! Since [UMD Films](https://umdfilms.com/) is an audiovisual production company based in Málaga, moving from WordPress to pure code (HTML, CSS, and JavaScript) is an excellent decision to boost visual SEO. It will give you absolute control over loading speed, allowing your videos, trailers, and portfolios to load instantly without the heavy plugin code. [1, 2, 3]
 
-## 1. El Escudo de Migración (Para no perder lo ganado)
+However, this change carries a risk: if not managed well, you can lose the rankings you've already built. [4, 5]
 
-Antes de apagar tu WordPress, necesitas asegurar la transición:
+To achieve the best SEO positioning with your new pure-code website, you should structure your strategy in three phases:
 
-* Mapa de redirecciones 301: Si cambias las direcciones de tus páginas (por ejemplo, de umdfilms.es/contacto/ a umdfilms.es/contacto.html), debes usar redirecciones 301 permanentes en tu servidor. Esto le dice a Google: "Esta página ahora vive aquí, no me quites los puntos acumulados". [6, 7, 8]
-* Calca las Meta Etiquetas: Copia exactamente los títulos SEO (<title>) y las meta descripciones (<meta name="description">) que ya tenías configurados en WordPress hacia tus nuevos archivos HTML. [9, 10]
+## 1. Migration Shield (To Keep What You've Earned)
 
-## 2. SEO Técnico en Código Puro (Tu gran ventaja competitiva)
+Before turning off your WordPress, you need to secure the transition:
 
-Al escribir código desde cero, tienes la oportunidad de crear una estructura perfecta para los robots de Google:
+* **301 redirect map:** If you change your page addresses (e.g., from umdfilms.es/contacto/ to umdfilms.es/contacto.html), you must use permanent 301 redirects on your server. This tells Google: "This page now lives here, don't take away my accumulated authority." [6, 7, 8]
+* **Copy Meta Tags:** Exactly replicate the SEO titles (`<title>`) and meta descriptions (`<meta name="description">`) you had configured in WordPress to your new HTML files. [9, 10]
 
-* Etiquetado Semántico: No abuses de los <div>. Usa etiquetas nativas de HTML5 como <header>, <nav>, <main>, <section>, <article> y <footer>. Esto ayuda a Google a entender qué parte de tu web es el menú, qué es el contenido y qué es el pie de página.
-* Jerarquía Hx impecable: Usa un solo <h1> por página (el título principal). Continúa con <h2> para los subtítulos y <h3> para secciones internas. [9]
-* Optimización de Contenido Audiovisual: Al ser una productora, tus vídeos son vitales. No los subas directamente a tu servidor; usa plataformas optimizadas (como YouTube o Vimeo) e incrústalos. Si usas la etiqueta nativa <video>, asegúrate de añadir siempre el atributo preload="none" o poster para que no ralentice la carga inicial de la página. [11]
-* Datos Estructurados (Schema Markup): Añade código JSON-LD en tu cabecera para decirle explícitamente a Google que eres una organización local. Usa el esquema tipo [Schema LocalBusiness](https://schema.org/LocalBusiness) o Movie / CreativeWork para tus proyectos cinematográficos. [6]
+## 2. Technical SEO in Pure Code (Your Great Competitive Advantage)
 
-## 3. SEO Local y de Contenidos (Para dominar Málaga y el sector)
+When writing code from scratch, you have the opportunity to create a perfect structure for Google's robots:
 
-El posicionamiento no solo ocurre dentro de tu código, sino también en cómo te muestras al mundo:
+* **Semantic Labeling:** Don't overuse `<div>`. Use native HTML5 tags like `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, and `<footer>`. This helps Google understand which part of your site is the menu, which is content, and which is the footer.
+* **Impeccable Hx Hierarchy:** Use a single `<h1>` per page (the main title). Follow with `<h2>` for subtitles and `<h3>` for internal sections. [9]
+* **Audiovisual Content Optimization:** As a production company, your videos are vital. Don't upload them directly to your server; use optimized platforms (like YouTube or Vimeo) and embed them. If you use the native `<video>` tag, always add the `preload="none"` attribute or poster so it doesn't slow down the initial page load. [11]
+* **Structured Data (Schema Markup):** Add JSON-LD code in your header to explicitly tell Google you're a local organization. Use [Schema LocalBusiness](https://schema.org/LocalBusiness) type or Movie / CreativeWork for your cinematic projects. [6]
 
-* Google Business Profile: Al estar en Málaga, optimiza al máximo tu ficha de Google. Consigue reseñas de clientes de tus rodajes y eventos. Esto te hará aparecer en el mapa de Google cuando alguien busque "Productora audiovisual en Málaga". [1, 2]
-* Atributo ALT en imágenes: Cada fotograma, póster de cortometraje o fotografía de equipo que subas a la web debe llevar su etiqueta alt="descripción de la imagen con palabras clave" (por ejemplo: alt="Rodaje de cortometraje El Cautivo en Málaga por UMD Films"). [12, 13]
+## 3. Local & Content SEO (To Dominate Málaga and the Industry)
 
-------------------------------
-Para asegurar que tu nueva web en código puro esté perfectamente optimizada desde el primer día, podemos avanzar con lo siguiente:
+Positioning doesn't only happen within your code, but also in how you present yourself to the world:
 
-* Si quieres, compárteme la lista de páginas actuales que tienes en tu WordPress y te ayudo a plantear el mapa de redirecciones.
-* Te puedo redactar el código HTML base (plantilla SEO) con las etiquetas meta y de datos estructurados listas para que solo tengas que rellenar tus textos.
-* O si lo prefieres, te puedo ayudar a definir las palabras clave principales por las que deberías competir en el sector audiovisual. [6, 7]
+* **Google Business Profile:** Since you're in Málaga, optimize your Google listing to the max. Get client reviews from your shoots and events. This will make you appear on Google Maps when someone searches for "audiovisual production company in Málaga." [1, 2]
+* **ALT Attribute on Images:** Every frame, short film poster, or team photo you upload to the site must have an `alt="image description with keywords"` tag (e.g., alt="UMD Films shooting of short film El Cautivo in Málaga"). [12, 13]
 
-¿Por cuál de estos puntos te gustaría que empecemos a trabajar?
+---
+
+To ensure your new pure-code website is perfectly optimized from day one, we can proceed with the following:
+
+* If you want, share the list of current pages you have on your WordPress and I'll help you plan the redirect map.
+* I can draft the base HTML template (SEO template) with the meta tags and structured data ready so you only need to fill in your texts.
+* Or if you prefer, I can help you define the main keywords you should compete for in the audiovisual industry. [6, 7]
+
+Which of these points would you like us to start working on?
 
 [1] [https://www.sortlist.es](https://www.sortlist.es/agency/umd-films)
 [2] [https://umdfilms.es](https://umdfilms.es)
