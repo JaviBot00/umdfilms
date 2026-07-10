@@ -18,7 +18,12 @@
       "youtube": ""
     },
     "projects": ["cautivo-malaga", "cervezas-victoria"],
-    "specialties": ["Dirección", "Producción ejecutiva", "Concepto creativo", "Eventos"],
+    "specialties": [
+      "Dirección",
+      "Producción ejecutiva",
+      "Concepto creativo",
+      "Eventos"
+    ],
     "featured": true
   },
   {
@@ -29,7 +34,10 @@
     "bio": "Encargado de la supervisión general y dirección estratégica de la línea de contenido tradicional y documental.",
     "photo_cover": "assets/equipo/adrian-cover.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/adrianroman18/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/adrianroman18/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": ["Producción", "Corporativo", "Documentales"],
     "featured": true
@@ -42,7 +50,10 @@
     "bio": "El responsable de traducir las emociones del guion en imágenes. Diseña la iluminación, la composición y el movimiento de cámara, trabajando estrechamente con dirección para crear la atmósfera visual, la textura y la identidad cromática de cada producción.",
     "photo_cover": "assets/equipo/ivan-cover.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/ivanpg_dop/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/ivanpg_dop/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": ["Fotografía", "Iluminación", "Cine"],
     "featured": false
@@ -55,7 +66,10 @@
     "bio": "El responsable de gestionar y ejecutar todos los aspectos técnicos del audio.",
     "photo_cover": "assets/equipo/javi-sonido-cover.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/javicostoya__/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/javicostoya__/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": ["Sonido directo", "Mezcla", "Masterización"],
     "featured": false
@@ -68,7 +82,10 @@
     "bio": "Según el encargo, editar los proyectos de UMD Films.",
     "photo_cover": "assets/equipo/ivan-ambrosio-cover.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/celvlec/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/celvlec/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": ["Edición", "VFX", "Motion Graphics"],
     "featured": false
@@ -81,7 +98,10 @@
     "bio": "Encargado de realizar todos los trabajos musicales de UMD Films.",
     "photo_cover": "assets/equipo/sergio-pastor-cover.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/sergiopastormusic/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/sergiopastormusic/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": ["Composición", "Diseño de sonido", "Bandas sonoras"],
     "featured": false
@@ -94,7 +114,10 @@
     "bio": "Encargado de realizar todos los trabajos informáticos y gestionar la página web.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/javibot00/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/javibot00/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
@@ -107,7 +130,10 @@
     "bio": "Director de teatro junto a Alejandro y director de actores en cada proyecto audiovisual que realicemos.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/javiabelaira/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/javiabelaira/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
@@ -120,7 +146,10 @@
     "bio": "Control parcial de la productora y toma de decisión junto con los directores en cada movimiento. Toma total de decisiones respecto a la imagen de UMD Films en redes sociales y creación de contenido.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/pabloojea_/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/pabloojea_/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
@@ -146,12 +175,15 @@
     "bio": "Su función exclusiva es auditar, justificar y vigilar el gasto diario de cada departamento para no superar el presupuesto asignado.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/eviita_cano/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/eviita_cano/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
   },
-{
+  {
     "id": "maria-arnes",
     "name": "María",
     "surname": "Arnés",
@@ -159,7 +191,10 @@
     "bio": "Encargada de realizar efectos especiales (heridas, prótesis, criaturas, envejecimiento), maquillaje profesional y peluquería.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/mariaarness/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/mariaarness/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
@@ -172,7 +207,10 @@
     "bio": "Se encarga de construir la identidad visual de cada proyecto, definiendo la estética, el color y la línea gráfica desde la fase de desarrollo hasta el cartel final. Su objetivo es asegurar que la propuesta visual potencie la narrativa de cada producción con coherencia, fuerza y estilo propio. Además, forma parte de nuestro equipo creativo.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/carretedekris/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/carretedekris/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
@@ -185,7 +223,10 @@
     "bio": "Rol clave para preproducción y día a día en la productora. Realización y revisión de documentos, organización previo a rodajes y mano derecha de los directores. Además, forma parte de nuestro equipo creativo.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/juliiaa_3605/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/juliiaa_3605/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
@@ -198,7 +239,10 @@
     "bio": "Rol de soporte clave en la logística diaria de los rodajes, gestión de órdenes de trabajo en set y asistencia directa a la Jefa de Producción en el día a día.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/dariogonrz/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/dariogonrz/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
@@ -211,12 +255,15 @@
     "bio": "La mente detrás de las historias que contamos. Traduce conceptos abstractos en narrativas cinematográficas potentes, diseñando la estructura dramática y el ritmo visual del guion. Trabaja en la base del desarrollo para asegurar que cada proyecto tenga un mensaje claro y enganche desde la primera página. Además, forma parte de nuestro equipo creativo.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/_elviraa_ojm_/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/_elviraa_ojm_/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
   },
-   {
+  {
     "id": "marta-guerra",
     "name": "Marta",
     "surname": "Guerra",
@@ -224,12 +271,15 @@
     "bio": "La responsable de traducir las emociones del guion en imágenes. Diseña la iluminación, la composición y el movimiento de cámara, trabajando estrechamente con dirección para crear la atmósfera visual, la textura y la identidad cromática de cada producción.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/martaagueerra/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/martaagueerra/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
   },
-   {
+  {
     "id": "pau-soles",
     "name": "Pau",
     "surname": "Solés",
@@ -237,12 +287,15 @@
     "bio": "Co-responsable de la estrategia comercial de la productora, enfocado en el cierre de contratos publicitarios o cinematográficos y la optimización de recursos para los proyectos de línea de la productora. ",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/pau.soles/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/pau.soles/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
   },
-    {
+  {
     "id": "sofia-garcia",
     "name": "Sofía",
     "surname": "García",
@@ -250,12 +303,15 @@
     "bio": "Es el nexo visual y la representación de la productora ante el público y los clientes. Integrada en el equipo creativo, se encarga de proyectar la identidad, el estilo y los valores de la marca en eventos, campañas y activaciones, asegurando que nuestra presencia pública sea siempre impecable, coherente y magnética.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/sofia_garcia119/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/sofia_garcia119/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
   },
-    {
+  {
     "id": "sandra-jimenez",
     "name": "Sandra",
     "surname": "Jiménez",
@@ -263,12 +319,15 @@
     "bio": "Encargada de capturar la esencia de la productora tanto dentro como fuera del set. Su rol abarca desde la foto fija en rodajes (inmortalizando el detrás de cámaras y la fuerza visual de cada producción) hasta la cobertura de eventos, sesiones editoriales con modelos y proyectos comerciales, aportando siempre una mirada estética e identidad propia a cada captura.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/sandra_pht_cosp/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/sandra_pht_cosp/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
   },
-      {
+  {
     "id": "alicia-caro",
     "name": "Alicia",
     "surname": "Caro",
@@ -276,12 +335,15 @@
     "bio": "Encargada de capturar la esencia de la productora tanto dentro como fuera del set. Su rol abarca desde la foto fija en rodajes (inmortalizando el detrás de cámaras y la fuerza visual de cada producción) hasta la cobertura de eventos, sesiones editoriales con modelos y proyectos comerciales, aportando siempre una mirada estética e identidad propia a cada captura.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/aliciacarofotografias/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/aliciacarofotografias/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
   },
-    {
+  {
     "id": "miguel-matarin",
     "name": "Miguel",
     "surname": "Matarín",
@@ -289,9 +351,12 @@
     "bio": "Se encarga de conceptualizar y construir el universo visual y espacial de cada producción. Desde la paleta de colores y la selección de localizaciones hasta el diseño de los decorados, transforma los espacios físicos para que respiren la misma atmósfera que dicta la historia, asegurando una identidad visual única en cada plano.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
-    "social": { "instagram": "https://www.instagram.com/miguelmatariin/", "youtube": "" },
+    "social": {
+      "instagram": "https://www.instagram.com/miguelmatariin/",
+      "youtube": ""
+    },
     "projects": [],
     "specialties": [],
     "featured": false
-  },
-
+  }
+]
