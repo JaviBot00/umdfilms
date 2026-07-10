@@ -56,7 +56,7 @@
     },
     "projects": [],
     "specialties": ["Fotografía", "Iluminación", "Cine"],
-    "featured": false
+    "featured": true
   },
   {
     "id": "javi-costoya",
@@ -104,7 +104,7 @@
     },
     "projects": [],
     "specialties": ["Composición", "Diseño de sonido", "Bandas sonoras"],
-    "featured": false
+    "featured": true
   },
   {
     "id": "javier-botella",
@@ -120,7 +120,7 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": true
   },
   {
     "id": "javier-abelaira",
@@ -136,7 +136,7 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": true
   },
   {
     "id": "pol-ojea",
@@ -152,7 +152,7 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": true
   },
   {
     "id": "loreto-navas",

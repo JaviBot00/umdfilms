@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (ytId) {
         trailerEl.innerHTML = `
           <iframe
-            src="https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1"
+            src="https://www.youtube.com/embed/${ytId}?rel=0"
             title="${project.title} — Tráiler | UMD Films"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const sheetEl = document.getElementById('filmSheet');
   if (sheetEl) {
     const rows = [
-      { label: 'Título',     value: project.title },
+      { label: 'Título',    value: project.title },
       { label: 'Categoría', value: project.category },
       { label: 'Año',       value: project.year },
       { label: 'Duración',  value: project.duration_min ? `${project.duration_min} min` : '—' },

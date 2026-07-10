@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const categories = ['all', ...new Set(portfolio.map(p => p.category))];
   const FILTER_LABELS = {
     all: 'Todo', videoclip: 'Videoclips', publicidad: 'Publicidad',
-    cine: 'Cine', corporativo: 'Corporativo'
+    cine: 'Cine', corporativo: 'Corporativo', musical: 'Musical', cortometraje: 'Cortometraje'
   };
   if (portfolioFilters) {
     categories.forEach(cat => {
@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  
+
   /* ---- Reveal: at the end, to also detect dynamically created
      .reveal elements (services, etc.) ---- */
   UMD.initReveal();
