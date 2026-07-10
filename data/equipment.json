@@ -3,11 +3,11 @@
     "_comment": "Formato nombre: 'Nombre del producto xN' donde N es la cantidad. Fotos en assets/material/",
 
     "id": "sony-fx3",
-    "name": "Sony FX3",
+    "name": "Sony FX30",
     "category": "camara",
     "quantity": 1,
-    "description": "Cámara de cine full-frame. Ideal para videoclips, publicidad y ficción.",
-    "specs": ["Full-frame", "4K 120fps", "S-Cinetone"],
+    "description": "La Sony FX30 es una cámara de cine digital compacta con sensor Super 35 (APS-C) de 26 MP. Diseñada para creadores exigentes, destaca por grabar en 4K hasta 120 fps, perfiles de color S-Cinetone y S-Log3, ISO base dual y ventilador interno para evitar sobrecalentamiento.",
+    "specs": ["APS-C", "4K 120fps", "S-Cinetone"],
     "photo": "assets/logo/logo-umd-films.svg",
     "price_day": 32,
     "available": true
