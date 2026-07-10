@@ -3,7 +3,7 @@
     "id": "produccion-audiovisual",
     "icon": "🎬",
     "title": "Producción Audiovisual",
-    "description": "La magia del cine aplicada a tu historia. Producción completa con material y equipo profesional.",
+    "description": "La magia del cine aplicada a tu historia. Producción completa con material y equipo profesional propio.",
     "core": true,
     "video_preview": "assets/servicios/video-produccion.mp4"
   },
