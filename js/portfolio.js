@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="container" style="padding-block:8rem;text-align:center">
         <p class="eyebrow">Error 404</p>
         <h1 class="section-title">Proyecto no encontrado</h1>
-        <a href="${UMD.rootPath('index.html')}#portfolio" class="btn btn-primary" style="margin-top:2rem">Back to portfolio</a>
+        <a href="${UMD.rootPath('index.html')}#portafolio" class="btn btn-primary" style="margin-top:2rem">Volver al portafolio</a>
       </div>`;
     return;
   }
@@ -116,9 +116,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
       <div class="film-hero__overlay"></div>
       <div class="film-hero__content">
-        <a href="${UMD.rootPath('index.html')}#portfolio" class="film-hero__back reveal">
+        <a href="${UMD.rootPath('index.html')}#portafolio" class="film-hero__back reveal">
           <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-          Back to portfolio
+          Volver al portafolio
         </a>
         <div class="film-hero__meta reveal d1">
           <span class="film-badge film-badge--cat">${project.category}</span>
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       trailerEl.innerHTML = `
         <div class="film-trailer__placeholder">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
-          <p>Video pending in portfolio.json</p>
+          <p>Vídeo pendiente de enlazar en portfolio.json</p>
         </div>`;
     }
   }
@@ -163,24 +163,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (synopsisEl) {
     synopsisEl.innerHTML = project.synopsis
       ? `<p>${project.synopsis}</p>`
-      : `<p style="color:var(--muted);font-style:italic">Synopsis pending in portfolio.json.</p>`;
+      : `<p style="color:var(--muted);font-style:italic">Sinopsis pendiente de rellenar en portfolio.json.</p>`;
   }
 
   /* ---- TECHNICAL SHEET ---- */
   const sheetEl = document.getElementById('filmSheet');
   if (sheetEl) {
     const rows = [
-      { label: 'Title',     value: project.title },
-      { label: 'Category', value: project.category },
-      { label: 'Year',       value: project.year },
-      { label: 'Duration',  value: project.duration_min ? `${project.duration_min} min` : '—' },
+      { label: 'Título',     value: project.title },
+      { label: 'Categoría', value: project.category },
+      { label: 'Año',       value: project.year },
+      { label: 'Duración',  value: project.duration_min ? `${project.duration_min} min` : '—' },
       { label: 'Director',  value: project.director || '—' },
-      { label: 'Client',   value: project.client || '—' },
+      { label: 'Cliente',   value: project.client || '—' },
     ];
 
     sheetEl.innerHTML = `
       <div class="film-sheet">
-        <div class="film-sheet__header">Technical sheet</div>
+        <div class="film-sheet__header">Ficha técnica</div>
         <div class="film-sheet__body">
           ${rows.map(r => `
             <div class="film-row">
@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     project.photos_extra.forEach((src, i) => {
       const img = document.createElement('img');
       img.src       = UMD.rootPath(src);
-      img.alt       = `${project.title} — Photo ${i + 1} — UMD Films`;
+      img.alt       = `${project.title} — Foto ${i + 1} — UMD Films`;
       img.loading   = 'lazy';
       img.className = 'film-gallery__img reveal';
       galleryGrid.appendChild(img);

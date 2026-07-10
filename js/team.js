@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="container" style="padding-block:8rem;text-align:center">
         <p class="eyebrow">Error 404</p>
         <h1 class="section-title">Perfil no encontrado</h1>
-        <a href="${UMD.rootPath('index.html')}#team" class="btn btn-primary" style="margin-top:2rem">Back to team</a>
+        <a href="${UMD.rootPath('index.html')}#equipo" class="btn btn-primary" style="margin-top:2rem">Volver al equipo</a>
       </div>`;
     return;
   }
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     ?.setAttribute('content', `Conoce a ${member.name}, ${member.role} en ${config.seo.site_suffix}.`);
 
   // Dynamic canonical
-  const canonical = document.querySelector('link[rel="canonical"]') 
+  const canonical = document.querySelector('link[rel="canonical"]')
     || Object.assign(document.createElement('link'), { rel: 'canonical' });
   canonical.href = `${config.brand.site_url}/team/${member.id}.html`;
   if (!canonical.parentNode) document.head.appendChild(canonical);
@@ -117,9 +117,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
       <div class="profile-hero__overlay"></div>
       <div class="profile-hero__content container">
-        <a href="${UMD.rootPath('index.html')}#team" class="profile-hero__back reveal">
+        <a href="${UMD.rootPath('index.html')}#equipo" class="profile-hero__back reveal">
           <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-          Back to team
+          Volver al equipo
         </a>
         <!-- <p class="eyebrow profile-hero__eyebrow reveal">UMD Films Málaga · Equipo</p> -->
         <h1 class="profile-hero__name reveal d1">${member.name}${member.surname ? ' ' + member.surname : ''}</h1>
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (bioEl) {
     bioEl.innerHTML = member.bio
       ? `<p class="profile-bio reveal">${member.bio}</p>`
-      : `<p class="profile-bio reveal" style="color:var(--muted);font-style:italic">Description pending in team.json.</p>`;
+      : `<p class="profile-bio reveal" style="color:var(--muted);font-style:italic">Descripción pendiente de rellenar en team.json.</p>`;
   }
 
   /* Social links */
@@ -162,27 +162,27 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (fichaEl) {
     fichaEl.innerHTML = `
       <div class="profile-info-card">
-        <div class="profile-info-card__header">Sheet</div>
+        <div class="profile-info-card__header">Ficha</div>
         <div class="profile-info-card__body">
           <div class="profile-info-row">
-            <span class="profile-info-label">Name</span>
+            <span class="profile-info-label">Nombre</span>
             <span class="profile-info-value">${member.name}${member.surname ? ' ' + member.surname : ''}</span>
           </div>
           <div class="profile-info-row">
-            <span class="profile-info-label">Role</span>
+            <span class="profile-info-label">Rol</span>
             <span class="profile-info-value">${member.role}</span>
           </div>
           ${member.specialties?.length ? `
           <div class="profile-info-row">
-            <span class="profile-info-label">Specialties</span>
+            <span class="profile-info-label">Especialidades</span>
             <span class="profile-info-value">${member.specialties.join(', ')}</span>
           </div>` : ''}
           <div class="profile-info-row">
-            <span class="profile-info-label">Company</span>
+            <span class="profile-info-label">Empresa</span>
             <span class="profile-info-value">UMD Films</span>
           </div>
           <div class="profile-info-row">
-            <span class="profile-info-label">Location</span>
+            <span class="profile-info-label">Sede</span>
             <span class="profile-info-value">Málaga</span>
           </div>
         </div>

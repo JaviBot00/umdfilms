@@ -1,14 +1,14 @@
 /**
  * =====================================================
- * shared.js — Common utilities for all pages
- * Load: before the page-specific JS
+ * shared.js — Utilidades comunes a todas las páginas
+ * Carga: antes del JS específico de cada página
  * =====================================================
  */
 
 /* ---- JSON loading ---- */
 async function fetchJSON(path) {
   const res = await fetch(path);
-  if (!res.ok) throw new Error(`Could not load ${path}`);
+  if (!res.ok) throw new Error(`No se pudo cargar ${path}`);
   return res.json();
 }
 
