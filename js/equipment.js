@@ -1,6 +1,6 @@
 /**
  * =====================================================
- * material.js — Equipment rental catalog
+ * equipment.js — Equipment rental catalog
  *
  * How it works:
  *   - Loads equipment.json
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Dynamic canonical
   const canonical = document.querySelector('link[rel="canonical"]')
     || Object.assign(document.createElement('link'), { rel: 'canonical' });
-  canonical.href = `${config.brand.site_url}/material/`;
+  canonical.href = `${config.brand.site_url}/equipment/`;
   if (!canonical.parentNode) document.head.appendChild(canonical);
 
   // Open Graph
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
   setMeta('og:title',       document.title);
   setMeta('og:description', 'Rent professional film equipment in Málaga. Cameras, lighting, sound and more.');
-  setMeta('og:url',         `${config.brand.site_url}/material/`);
+  setMeta('og:url',         `${config.brand.site_url}/equipment/`);
   setMeta('og:site_name',   'UMD Films');
 
   // Twitter Card
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setTwitter('twitter:description', 'Rent professional film equipment in Málaga. Cameras, lighting, sound and more.');
 
   /* ---- FILTERS: dynamically generated from existing categories ---- */
-  const filtersEl = document.getElementById('materialFilters');
+  const filtersEl = document.getElementById('equipmentFilters');
   const categories = ['all', ...new Set(equipment.map(e => e.category))];
 
   const CATEGORY_LABELS = {
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   /* ---- EQUIPMENT GRID ---- */
-  const grid = document.getElementById('materialGrid');
+  const grid = document.getElementById('equipmentGrid');
 
   function renderGear(filter) {
     const items = filter === 'all'
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                src="${UMD.rootPath(gear.photo)}"
                alt="${gear.name} — UMD Films Málaga alquiler material"
                loading="lazy"
-               onerror="this.onerror=null; this.src='${UMD.rootPath('assets/material/placeholder-gear.webp')}'" />
+               onerror="this.onerror=null; this.src='${UMD.rootPath('assets/equipment/placeholder-gear.webp')}'" />
           <span class="gear-card__qty">×${gear.quantity}</span>
           ${!gear.available ? '<span class="gear-card__unavailable-badge">No disponible</span>' : ''}
         </div>

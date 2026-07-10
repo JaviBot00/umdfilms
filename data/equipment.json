@@ -1,6 +1,6 @@
 [
   {
-    "_comment": "Formato nombre: 'Nombre del producto xN' donde N es la cantidad. Fotos en assets/material/",
+    "_comment": "Formato nombre: 'Nombre del producto xN' donde N es la cantidad. Fotos en assets/equipment/",
 
     "id": "sony-fx3",
     "name": "Sony FX30",
@@ -19,7 +19,7 @@
     "quantity": 1,
     "description": "Placeholder — descripción pendiente.",
     "specs": [],
-    "photo": "assets/material/placeholder-gear.webp",
+    "photo": "assets/equipment/placeholder-gear.webp",
     "price_day": 0,
     "available": true
   },
@@ -30,7 +30,7 @@
     "quantity": 2,
     "description": "Micrófono de cañón ultraligero para producción de campo.",
     "specs": ["Shotgun", "Phantom 48V", "Ultra-lightweight"],
-    "photo": "assets/material/rode-ntg5.webp",
+    "photo": "assets/equipment/rode-ntg5.webp",
     "price_day": 0,
     "available": true
   },
@@ -41,7 +41,7 @@
     "quantity": 2,
     "description": "Luz LED de alta potencia para cine y vídeo.",
     "specs": ["300W", "5500K", "Bowens mount"],
-    "photo": "assets/material/aputure-300d.webp",
+    "photo": "assets/equipment/aputure-300d.webp",
     "price_day": 0,
     "available": true
   },
@@ -52,19 +52,19 @@
     "quantity": 1,
     "description": "Estabilizador gimbal de 3 ejes para cámaras profesionales.",
     "specs": ["3 ejes", "Hasta 4.5kg", "Bluetooth"],
-    "photo": "assets/material/dji-rs3-pro.webp",
+    "photo": "assets/equipment/dji-rs3-pro.webp",
     "price_day": 0,
     "available": true
   },
   {
-    "_comment": "Añade más equipos aquí. La página de material se actualiza sola.",
+    "_comment": "Añade más equipos aquí. La página de equipment se actualiza sola.",
     "id": "equipo-placeholder",
     "name": "Nombre del equipo",
     "category": "otro",
     "quantity": 1,
     "description": "Placeholder — pendiente de rellenar.",
     "specs": [],
-    "photo": "assets/material/placeholder-gear.webp",
+    "photo": "assets/equipment/placeholder-gear.webp",
     "price_day": 0,
     "available": false
   }
