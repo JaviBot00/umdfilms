@@ -5,26 +5,26 @@
  * =====================================================
  */
 
-/* ---- Carga de JSON ---- */
+/* ---- JSON loading ---- */
 async function fetchJSON(path) {
   const res = await fetch(path);
   if (!res.ok) throw new Error(`No se pudo cargar ${path}`);
   return res.json();
 }
 
-/* ---- Rutas relativas a la raíz desde cualquier subcarpeta ---- */
+/* ---- Relative paths to root from any subfolder ---- */
 function rootPath(path) {
-  // Calcula el prefijo de la "raíz del sitio" de forma robusta.
-  // Funciona en local (sin subfolder) y en GitHub Pages (/umdfilms/).
+  // Calculate the "site root" prefix robustly.
+  // Works locally (no subfolder) and on GitHub Pages (/umdfilms/).
   const parts = window.location.pathname.split('/').filter(Boolean);
   const isFile = parts.length > 0 && parts[parts.length - 1].includes('.');
   const folders = isFile ? parts.slice(0, -1) : parts;
 
-  // Subir tantos niveles como carpetas haya sobre la raíz del proyecto
-  // En local: /index.html → folders=[] → prefix=''
-  // En GH Pages: /umdfilms/index.html → folders=['umdfilms'] → prefix='../'  ← PROBLEMA
-  // Solución: detectar el repo name y excluirlo del conteo
-  const knownSubfolders = ['equipo', 'portafolio', 'material'];
+  // Go up as many levels as there are folders above the project root
+  // Local: /index.html → folders=[] → prefix=''
+  // GH Pages: /umdfilms/index.html → folders=['umdfilms'] → prefix='../'  ← PROBLEM
+  // Solution: detect repo name and exclude it from the count
+  const knownSubfolders = ['team', 'portfolio', 'material'];
   const depth = folders.filter(f => knownSubfolders.includes(f)).length;
 
   return depth > 0 ? '../'.repeat(depth) + path : path;
@@ -53,7 +53,7 @@ function initNav() {
     const open = burger.classList.toggle('open');
     links.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', String(open));
-    burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     document.body.style.overflow = open ? 'hidden' : '';
   });
 
@@ -66,7 +66,7 @@ function initNav() {
   });
 }
 
-/* ---- Tema claro / oscuro ---- */
+/* ---- Light / dark theme ---- */
 function getStoredTheme() {
   return localStorage.getItem('umd-theme');
 }
@@ -81,7 +81,7 @@ function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   const btn = document.getElementById('themeToggle');
   if (btn) {
-    btn.setAttribute('aria-label', theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
   }
 }
 
@@ -98,7 +98,7 @@ function initTheme() {
   const btn = document.getElementById('themeToggle');
   if (btn) btn.addEventListener('click', toggleTheme);
 
-  // Si el usuario no eligió manualmente, sigue los cambios del sistema
+  // If user hasn't manually chosen, follow system changes
   if (!getStoredTheme()) {
     window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
       if (!getStoredTheme()) applyTheme(e.matches ? 'light' : 'dark');
@@ -106,7 +106,7 @@ function initTheme() {
   }
 }
 
-/* ---- Lightbox de imágenes ---- */
+/* ---- Image lightbox ---- */
 function initLightbox(selector) {
   const images = document.querySelectorAll(selector);
   if (!images.length) return;
@@ -117,7 +117,7 @@ function initLightbox(selector) {
     lightbox.className = 'lightbox';
     lightbox.id = 'umdLightbox';
     lightbox.innerHTML = `
-      <button class="lightbox__close" type="button" aria-label="Cerrar">
+      <button class="lightbox__close" type="button" aria-label="Close">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
       <img src="" alt="" />
@@ -149,7 +149,7 @@ function initLightbox(selector) {
   });
 }
 
-/* ---- Nav HTML compartido ---- */
+/* ---- Shared nav HTML ---- */
 async function renderNav(config) {
   const cfg = config || await fetchJSON(rootPath('data/config.json'));
   const logoSrc  = rootPath(cfg.brand.logo);
@@ -162,7 +162,7 @@ async function renderNav(config) {
     <a href="${rootPath('index.html')}#hero" class="nav__logo" aria-label="${cfg.brand.name}">
       <img src="${logoSrc}" alt="${cfg.brand.logo_alt}" />
     </a>
-    <button class="nav__burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+    <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <nav class="nav__links" id="navLinks" role="navigation">
@@ -172,7 +172,7 @@ async function renderNav(config) {
       <a href="${rootPath('index.html')}#equipo">Equipo</a>
       <a href="${rootPath('material/index.html')}">Material</a>
       <a href="${waHref}" class="nav__cta btn-outline" target="_blank" rel="noopener">Hablemos</a>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="12" cy="12" r="4"></circle>
           <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
@@ -188,7 +188,7 @@ async function renderNav(config) {
   initTheme();
 }
 
-/* ---- Footer HTML compartido ---- */
+/* ---- Shared footer HTML ---- */
 async function renderFooter(config) {
   const cfg = config || await fetchJSON(rootPath('data/config.json'));
   const footer = document.getElementById('footer');
@@ -217,26 +217,26 @@ async function renderFooter(config) {
           </a>` : ''}
         </div>
       </div>
-      <nav class="footer__nav">
+      <nav class="footer__nav" aria-label="Site navigation">
         <strong>Navegar</strong>
-        <a href="${rootPath('index.html')}#nosotros">Quiénes somos</a>
-        <a href="${rootPath('index.html')}#servicios">Servicios</a>
-        <a href="${rootPath('index.html')}#portafolio">Portafolio</a>
-        <a href="${rootPath('index.html')}#equipo">Equipo</a>
-        <a href="${rootPath('material/index.html')}">Alquiler de material</a>
-        <a href="${rootPath('index.html')}#contacto">Contacto</a>
+        <a href="${rootPath('index.html')}#nosotros"><span>Quiénes somos</span></a>
+        <a href="${rootPath('index.html')}#servicios"><span>Servicios</span></a>
+        <a href="${rootPath('index.html')}#portafolio"><span>Portafolio</span></a>
+        <a href="${rootPath('index.html')}#equipo"><span>Equipo</span></a>
+        <a href="${rootPath('material/index.html')}"><span>Alquiler de material</span></a>
+        <a href="${rootPath('index.html')}#contacto"><span>Contacto</span></a>
       </nav>
-      <nav class="footer__nav">
+      <nav class="footer__nav" aria-label="Social media">
         <strong>Redes</strong>
-        ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener">Instagram</a>` : ''}
-        ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener">YouTube</a>` : ''}
-        ${cfg.social.tiktok    ? `<a href="${cfg.social.tiktok}"    target="_blank" rel="noopener">TikTok</a>`  : ''}
+        ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener"><span>Instagram</span></a>` : ''}
+        ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener"><span>YouTube</span></a>` : ''}
+        ${cfg.social.tiktok    ? `<a href="${cfg.social.tiktok}"    target="_blank" rel="noopener"><span>TikTok</span></a>`  : ''}
         <a href="https://wa.me/${cfg.contact.whatsapp}" target="_blank" rel="noopener">WhatsApp</a>
       </nav>
     </div>
     <div class="footer__bottom">
       <p>© ${year} ${cfg.footer.copyright_owner}. Todos los derechos reservados.</p>
-      <p>Desarrollado por <a href="${cfg.footer.dev_url || '#'}" rel="noopener">${cfg.footer.dev_name}</a> con ayuda de <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></p>
+      <p>Desarrollado por <a href="${cfg.footer.dev_url || '#'}" rel="noopener">${cfg.footer.dev_name}</a></p>
     </div>
   `;
 }
@@ -284,7 +284,7 @@ function injectLocalBusinessSchema(config) {
   document.head.appendChild(tag);
 }
 
-/* ---- Contador animado ---- */
+/* ---- Animated counter ---- */
 function animateCounter(el, target, duration = 1800) {
   const start = performance.now();
   const tick = (now) => {
@@ -296,7 +296,7 @@ function animateCounter(el, target, duration = 1800) {
   requestAnimationFrame(tick);
 }
 
-/* ---- Exportar para uso global ---- */
+/* ---- Export for global use ---- */
 window.UMD = {
   fetchJSON,
   rootPath,

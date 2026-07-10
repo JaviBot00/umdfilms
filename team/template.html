@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
 
-  <!-- Tema: light / dark
-      Se aplica al <html> para que CSS pueda usarlo con [data-theme="light"] o [data-theme="dark"]
-      Se rellena dinámicamente desde localStorage o media query (prefers-color-scheme)
+  <!-- Theme: light / dark
+      Applied to <html> so CSS can use it with [data-theme="light"] or [data-theme="dark"]
+      Populated dynamically from localStorage or media query (prefers-color-scheme)
   -->
   <script>
   (function () {
@@ -19,20 +19,20 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO: título, description y canonical se sobrescriben dinámicamente por equipo.js -->
-  <title>Iván — Director de Fotografía & Gaffer · Cine & Teatro | UMD Films Málaga</title>
-  <meta name="description" content="Iván, Director de Fotografía & Gaffer · Cine & Teatro en UMD Films Málaga. Conoce a nuestro equipo." />
+  <!-- SEO: title, description and canonical are dynamically overwritten by team.js -->
+  <title>Equipo | UMD Films — Productora Audiovisual Málaga</title>
+  <meta name="description" content="Perfil de miembro del equipo UMD Films Málaga." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://umdfilms.com/equipo/" />
+  <link rel="canonical" href="https://umdfilms.com/team/" />
 
-  <!-- Open Graph (equipo.js sobrescribe title, description, image, url) -->
+  <!-- Open Graph (team.js overwrites title, description, image, url) -->
   <meta property="og:type"      content="profile" />
   <meta property="og:locale"    content="es_ES" />
   <meta property="og:site_name" content="UMD Films" />
   <meta property="og:title"     content="Equipo | UMD Films Málaga" />
   <meta property="og:description" content="Conoce al equipo de UMD Films, productora audiovisual en Málaga." />
   <meta property="og:image"     content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />
-  <meta property="og:url"       content="https://umdfilms.com/equipo/" />
+  <meta property="og:url"       content="https://umdfilms.com/team/" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
@@ -45,7 +45,7 @@
   <link rel="icon"             href="../assets/logo/favicon.svg"  type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../assets/logo/apple-touch-icon.png" />
 
-  <!-- Fuentes -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
@@ -54,50 +54,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
   </noscript>
 
-  <!-- CSS: global + específico de esta sección -->
+  <!-- CSS: global + section-specific -->
   <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/equipo.css" />
+  <link rel="stylesheet" href="../css/team.css" />
 </head>
 <body>
 
-  <!-- Nav: renderizado por shared.js > renderNav() -->
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <!-- Nav: rendered by shared.js > renderNav() -->
   <header class="nav" id="nav" role="banner"></header>
 
-  <main>
+  <main id="contenido">
 
-    <!-- ======= HERO DEL PERFIL =======
-         Relleno por equipo.js con:
-           - Foto de portada del miembro
-           - Nombre, rol, especialidades
-           - Botón volver al equipo
+    <!-- ======= PROFILE HERO =======
+         Populated by team.js with:
+           - Member cover photo
+           - Name, role, specialties
+           - Back to team button
     ======= -->
     <section class="profile-hero" id="profileHero" aria-label="Perfil de miembro"></section>
 
 
-    <!-- ======= BIO + FICHA TÉCNICA =======
-         Grid: bio + socials (izquierda) · ficha sticky (derecha)
-         Relleno por equipo.js
+    <!-- ======= BIO + TECHNICAL SHEET =======
+         Grid: bio + socials (left) · sticky sheet (right)
+         Populated by team.js
     ======= -->
     <section class="profile-body" id="profileBody">
       <div class="container profile-body__grid">
 
-        <!-- Bio y redes sociales -->
+        <!-- Bio and social links -->
         <div>
           <p class="eyebrow">Sobre mí</p>
           <div id="profileBio"></div>
           <div class="profile-socials" id="profileSocials"></div>
         </div>
 
-        <!-- Ficha lateral (sticky en desktop) -->
+        <!-- Side sheet (sticky on desktop) -->
         <aside class="profile-sidebar" id="profileFicha" aria-label="Ficha del miembro"></aside>
 
       </div>
     </section>
 
 
-    <!-- ======= FOTOS EXTRA =======
-         Galería de fotos adicionales del miembro.
-         Si photos_extra está vacío en team.json, esta sección se oculta.
+    <!-- ======= EXTRA PHOTOS =======
+         Additional member photo gallery.
+         If photos_extra is empty in team.json, this section is hidden.
     ======= -->
     <section class="profile-photos section" id="profilePhotos">
       <div class="container">
@@ -108,10 +110,10 @@
     </section>
 
 
-    <!-- ======= PROYECTOS =======
-         Proyectos en los que ha participado el miembro.
-         Se cruzan member.projects[] y portfolio.team_ids[] en equipo.js.
-         Si no hay proyectos, esta sección se oculta.
+    <!-- ======= PROJECTS =======
+         Projects the member has participated in.
+         Cross-referenced: member.projects[] and portfolio.team_ids[] in team.js.
+         If no projects, this section is hidden.
     ======= -->
     <section class="profile-projects section" id="profileProjects">
       <div class="container">
@@ -123,7 +125,7 @@
 
   </main>
 
-  <!-- Footer: renderizado por shared.js > renderFooter() -->
+  <!-- Footer: rendered by shared.js > renderFooter() -->
   <footer class="footer" id="footer" role="contentinfo"></footer>
 
   <!-- FAB WhatsApp -->
@@ -134,13 +136,13 @@
   </a>
 
   <!--
-    SCRIPTS — ORDEN OBLIGATORIO:
-      1. shared.js  (utilidades + window.UMD)
-      2. equipo.js  (lógica de esta página)
-    Las rutas son relativas a la subcarpeta equipo/
+    SCRIPTS — REQUIRED ORDER:
+      1. shared.js  (utilities + window.UMD)
+      2. team.js    (page logic)
+    Paths are relative to the team/ subfolder
   -->
   <script src="../js/shared.js"></script>
-  <script src="../js/equipo.js"></script>
+  <script src="../js/team.js"></script>
 
 </body>
 </html>

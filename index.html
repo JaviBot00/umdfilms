@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
 
-  <!-- Tema: light / dark
-      Se aplica al <html> para que CSS pueda usarlo con [data-theme="light"] o [data-theme="dark"]
-      Se rellena dinámicamente desde localStorage o media query (prefers-color-scheme)
+  <!-- Theme: light / dark
+      Applied to <html> so CSS can use it with [data-theme="light"] or [data-theme="dark"]
+      Populated dynamically from localStorage or media query (prefers-color-scheme)
   -->
   <script>
   (function () {
@@ -19,7 +19,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO básico (los valores dinámicos los rellena main.js desde config.json) -->
+  <!-- Basic SEO (dynamic values are populated by main.js from config.json) -->
   <title>UMD Films | Productora Audiovisual en Málaga</title>
   <meta name="description" content="UMD Films: productora audiovisual en Málaga. Videoclips, publicidad, cine, producción musical y más. Con alma malagueña y alcance nacional." />
   <meta name="robots" content="index, follow" />
@@ -30,21 +30,21 @@
   <meta property="og:url"         content="https://umdfilms.com/" />
   <meta property="og:title"       content="UMD Films | Productora Audiovisual en Málaga" />
   <meta property="og:description" content="Videoclips, publicidad, cine y producción musical con alma malagueña y alcance nacional." />
-  <meta property="og:image"       content="https://umdfilms.com/assets/portafolio/og-cover.png" />
+  <meta property="og:image"       content="https://umdfilms.com/assets/portfolio/og-cover.png" />
   <meta property="og:locale"      content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="UMD Films | Productora Audiovisual en Málaga" />
   <meta name="twitter:description" content="Videoclips, publicidad, cine y producción musical." />
-  <meta name="twitter:image"       content="https://umdfilms.com/assets/portafolio/og-cover.png" />
+  <meta name="twitter:image"       content="https://umdfilms.com/assets/portfolio/og-cover.png" />
 
-  <!-- Favicon (sustituir por el real cuando esté disponible) -->
+  <!-- Favicon (replace with real one when available) -->
   <link rel="icon"             href="assets/logo/favicon.svg"   type="image/svg+xml"/>
   <link rel="icon"             href="assets/logo/favicon.ico"   type="image/x-icon" sizes="any"/>
   <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png" sizes="180x180" />
 
-  <!-- Fuentes: preconnect primero para reducir latencia -->
+  <!-- Fonts: preconnect first to reduce latency -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
@@ -53,41 +53,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
   </noscript>
 
-  <!-- CSS global -->
+  <!-- Global CSS -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
   <!-- ======= NAV =======
-       Renderizado dinámicamente por shared.js > renderNav()
-       desde data/config.json
+       Dynamically rendered by shared.js > renderNav()
+       from data/config.json
   ======= -->
   <header class="nav" id="nav" role="banner"></header>
 
+  <main id="contenido">
 
   <!-- ======= HERO =======
-       Vídeo de fondo + overlay multicapa para legibilidad
-       Contenido: eyebrow, título, subtítulo, CTAs, scroll indicator
+       Background video + multi-layer overlay for readability
+       Content: eyebrow, title, subtitle, CTAs, scroll indicator
   ======= -->
   <section class="hero" id="hero" aria-label="Portada UMD Films">
-    <!-- Vídeo de fondo. poster: imagen estática mientras carga -->
+    <!-- Background video. poster: static image while loading -->
     <video class="hero__video"
            width="1920" height="1080"
            autoplay muted loop playsinline
            preload="metadata"
-           poster="assets/portafolio/hero-poster.jpg"
+           poster="assets/portfolio/hero-poster.jpg"
            aria-hidden="true">
       <source src="assets/video/hero.webm" type="video/webm" />
       <source src="assets/video/hero.mp4"  type="video/mp4" />
     </video>
 
-    <!-- Overlay: gradiente multicapa. Ver css/style.css > .hero__overlay -->
+    <!-- Overlay: multi-layer gradient. See css/style.css > .hero__overlay -->
     <div class="hero__overlay" aria-hidden="true"></div>
 
-    <!-- Línea roja decorativa lateral -->
+    <!-- Decorative red side line -->
     <div class="hero__redline" aria-hidden="true"></div>
 
-    <!-- Contenido principal -->
+    <!-- Main content -->
     <div class="hero__content">
       <p class="hero__eyebrow reveal">Productora audiovisual · Málaga · Alcance nacional</p>
       <h1 class="hero__title reveal d1">
@@ -103,7 +106,7 @@
       </div>
     </div>
 
-    <!-- Indicador de scroll animado -->
+    <!-- Animated scroll indicator -->
     <div class="hero__scroll" aria-hidden="true">
       <span>Scroll</span>
       <div class="hero__scroll-line"></div>
@@ -112,28 +115,28 @@
 
 
   <!-- ======= TRUST BAR =======
-       Logos de clientes en marquee infinito
-       Duplicados por JS (shared.js) para el loop continuo
+       Client logos in infinite marquee
+       Duplicated by JS (shared.js) for continuous loop
   ======= -->
   <section class="trust" aria-label="Clientes">
     <p class="trust__label">Han confiado en nosotros</p>
     <div class="trust__track" aria-hidden="true">
       <div class="trust__inner" id="trustInner">
-        <!-- Relleno por main.js desde data/partners.json -->
+        <!-- Populated by main.js from data/partners.json -->
       </div>
     </div>
   </section>
 
 
-  <!-- ======= NOSOTROS =======
-       Grid: texto izquierda + stats derecha
-       "Málaga" en rojo (ver <em> en el h2)
-       Stats calculadas desde JSON en main.js > statsData
+  <!-- ======= ABOUT =======
+       Grid: text left + stats right
+       "Málaga" in red (see <em> in h2)
+       Stats calculated from JSON in main.js > statsData
   ======= -->
   <section class="about section" id="nosotros">
     <div class="container about__grid">
 
-      <!-- Texto -->
+      <!-- Text -->
       <div class="about__text">
         <p class="eyebrow reveal">Quiénes somos</p>
         <h2 class="section-title reveal">
@@ -156,12 +159,12 @@
         </div>
       </div>
 
-      <!-- Stats: generadas en main.js desde los JSON.
-           statsGrid se rellena dinámicamente con:
-             - portfolio.length  → Trabajos realizados
-             - team.length       → Profesionales
-             - año actual - founded_year → Años
-             - config.sede       → Sede
+      <!-- Stats: generated in main.js from JSON.
+           statsGrid is populated dynamically with:
+             - portfolio.length  → Completed projects
+             - team.length       → Professionals
+             - current year - founded_year → Years
+             - config.location   → Location
       -->
       <div class="stats reveal" id="statsGrid" role="list" aria-label="Estadísticas UMD Films">
         <!-- Relleno por main.js -->
@@ -171,43 +174,43 @@
   </section>
 
 
-  <!-- ======= SERVICIOS =======
-       Grid generado desde data/services.json por main.js
-       En desktop: hover sobre tarjeta muestra preview de vídeo
-       El servicio "Alquiler de material" enlaza a material/index.html
+  <!-- ======= SERVICES =======
+       Grid generated from data/services.json by main.js
+       On desktop: hover on card shows video preview
+       "Equipment rental" service links to material/index.html
   ======= -->
   <section class="services section" id="servicios">
     <div class="container">
       <p class="eyebrow reveal">Lo que hacemos</p>
       <h2 class="section-title reveal">Servicios</h2>
 
-      <!-- Grid generado por main.js desde services.json -->
+      <!-- Grid generated by main.js from services.json -->
       <div class="services__grid reveal" id="servicesGrid" role="list"></div>
     </div>
 
-    <!-- Preview flotante de vídeo al hacer hover (solo desktop, ver main.js) -->
+    <!-- Floating video preview on hover (desktop only, see main.js) -->
     <div class="svc-preview" id="svcPreview" aria-hidden="true">
       <video id="svcPreviewVid" muted loop playsinline></video>
     </div>
   </section>
 
 
-  <!-- ======= PORTAFOLIO =======
-       Filtros generados desde las categorías únicas del JSON
-       Cards: click → portafolio/[id].html
-       CTA: enlace al canal de YouTube
+  <!-- ======= PORTFOLIO =======
+       Filters generated from unique categories in JSON
+       Cards: click → portfolio/[id].html
+       CTA: link to YouTube channel
   ======= -->
   <section class="portfolio section" id="portafolio">
     <div class="container">
       <p class="eyebrow reveal">Nuestro trabajo</p>
       <h2 class="section-title reveal">Portafolio</h2>
 
-      <!-- Filtros (all, videoclip, publicidad, cine, corporativo) -->
+      <!-- Filters (all, videoclip, publicidad, cine, corporativo) -->
       <div class="portfolio__filters reveal" id="portfolioFilters"
             role="group" aria-label="Filtrar por categoría">
       </div>
 
-      <!-- Grid de proyectos, generado por main.js -->
+      <!-- Project grid, generated by main.js -->
       <div class="portfolio__grid" id="portfolioGrid"></div>
 
       <div class="portfolio__cta reveal">
@@ -221,25 +224,25 @@
   </section>
 
 
-  <!-- ======= EQUIPO =======
-       Cards generadas desde data/team.json por main.js
-       Click en tarjeta → equipo/[id].html
-       Estadísticas: team.length calculado automáticamente
+  <!-- ======= TEAM =======
+       Cards generated from data/team.json by main.js
+       Click card → team/[id].html
+       Stats: team.length calculated automatically
   ======= -->
   <section class="team section" id="equipo">
     <div class="container">
       <p class="eyebrow reveal">Las personas detrás</p>
       <h2 class="section-title reveal">El equipo</h2>
 
-      <!-- Grid generado por main.js -->
+      <!-- Grid generated by main.js -->
       <div class="team__grid" id="teamGrid" role="list"></div>
     </div>
   </section>
 
 
   <!-- ======= CTA BAND =======
-       Franja de conversión central
-       Enlaza a la sección de contacto
+       Central conversion strip
+       Links to contact section
   ======= -->
   <section class="cta-band" aria-label="Llamada a la acción">
     <div class="container">
@@ -250,16 +253,16 @@
   </section>
 
 
-  <!-- ======= CONTACTO =======
-       Grid: info izquierda + formulario derecha
-       El formulario NO envía email (requeriría backend).
-       Al hacer submit redirige a WhatsApp con el mensaje formateado.
-       Para conectar un backend real: editar la función en main.js > contactForm
+  <!-- ======= CONTACT =======
+       Grid: info left + form right
+       The form does NOT send email (would require backend).
+       On submit it redirects to WhatsApp with the formatted message.
+       To connect a real backend: edit the function in main.js > contactForm
   ======= -->
   <section class="contact section" id="contacto">
     <div class="container contact__grid">
 
-      <!-- Info de contacto -->
+      <!-- Contact info -->
       <div class="contact__info">
         <p class="eyebrow reveal">Contacto</p>
         <h2 class="section-title reveal">
@@ -273,7 +276,7 @@
           <!-- WhatsApp directo -->
           <a href="https://wa.me/34675185198?text=Hola%2C%20me%20interesa%20contratar%20vuestros%20servicios."
              class="contact__wa" target="_blank" rel="noopener">
-            <!-- SVG WhatsApp inline para no depender de iconos externos -->
+            <!-- Inline WhatsApp SVG to avoid external icon dependencies -->
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
             </svg>
@@ -284,7 +287,7 @@
         </div>
       </div>
 
-      <!-- Formulario -->
+      <!-- Form -->
       <form class="contact__form reveal" id="contactForm" novalidate aria-label="Formulario de contacto">
         <div class="form-group">
           <label for="name">Nombre</label>
@@ -321,20 +324,22 @@
     </div>
   </section>
 
+  </main>
+
 
   <!-- ======= FOOTER =======
-       Renderizado dinámicamente por shared.js > renderFooter()
-       Incluye: logo, redes sociales (SVG inline), navegación, copyright
-       Copyright: © año UMD Films · Desarrollado por Javier + Claude
+       Dynamically rendered by shared.js > renderFooter()
+       Includes: logo, social media (inline SVG), navigation, copyright
+       Copyright: © year UMD Films · Developed by Javier + Claude
   ======= -->
   <footer class="footer" id="footer" role="contentinfo"></footer>
 
 
   <!-- ======= FAB WHATSAPP =======
-       Botón flotante siempre visible.
-       href: rellenado dinámicamente desde config.json por shared.js > renderFAB()
+       Always-visible floating button.
+       href: dynamically populated from config.json by shared.js > renderFAB()
   ======= -->
-  <a href="#" class="fab-wa" id="fabWa" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <a href="#" class="fab-wa" id="fabWa" target="_blank" rel="noopener" aria-label="Contact via WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
     </svg>
@@ -342,10 +347,10 @@
 
 
   <!-- ======= SCRIPTS =======
-       Orden de carga obligatorio:
-         1. shared.js  → expone window.UMD (utilidades comunes)
-         2. main.js    → lógica específica de la home
-       NO cambiar el orden.
+       Required load order:
+         1. shared.js  → exposes window.UMD (common utilities)
+         2. main.js    → home page specific logic
+       Do not change the order.
   ======= -->
   <script src="js/shared.js"></script>
   <script src="js/main.js"></script>

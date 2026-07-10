@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
 
-  <!-- Tema: light / dark
-      Se aplica al <html> para que CSS pueda usarlo con [data-theme="light"] o [data-theme="dark"]
-      Se rellena dinámicamente desde localStorage o media query (prefers-color-scheme)
+  <!-- Theme: light / dark
+      Applied to <html> so CSS can use it with [data-theme="light"] or [data-theme="dark"]
+      Populated dynamically from localStorage or media query (prefers-color-scheme)
   -->
   <script>
   (function () {
@@ -16,23 +16,23 @@
     document.documentElement.setAttribute('data-theme', theme);
   })();
   </script>
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO: título, description y canonical se sobrescriben dinámicamente por portafolio.js -->
-  <title>Cortometraje — Proyecto Málaga | UMD Films Málaga</title>
-  <meta name="description" content="Cortometraje — Proyecto Málaga — cine producido por UMD Films en 2023. Descubre este proyecto." />
+  <!-- SEO: title, description and canonical are dynamically overwritten by portfolio.js -->
+  <title>Proyecto | UMD Films — Productora Audiovisual Málaga</title>
+  <meta name="description" content="Proyecto de UMD Films, productora audiovisual en Málaga." />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://umdfilms.com/portafolio/" />
+  <link rel="canonical" href="https://umdfilms.com/portfolio/" />
 
-  <!-- Open Graph (portafolio.js sobrescribe title, description, image, url) -->
+  <!-- Open Graph (portfolio.js overwrites title, description, image, url) -->
   <meta property="og:type"      content="video.other" />
   <meta property="og:locale"    content="es_ES" />
   <meta property="og:site_name" content="UMD Films" />
   <meta property="og:title"     content="Proyecto | UMD Films Málaga" />
   <meta property="og:description" content="Descubre nuestros proyectos de producción audiovisual en Málaga." />
   <meta property="og:image"     content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />
-  <meta property="og:url"       content="https://umdfilms.com/portafolio/" />
+  <meta property="og:url"       content="https://umdfilms.com/portfolio/" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
@@ -45,7 +45,7 @@
   <link rel="icon"             href="../assets/logo/favicon.svg"  type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../assets/logo/apple-touch-icon.png" />
 
-  <!-- Fuentes -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
@@ -56,50 +56,52 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/portafolio.css" />
+  <link rel="stylesheet" href="../css/portfolio.css" />
 </head>
 <body>
+
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
 
   <!-- Nav -->
   <header class="nav" id="nav" role="banner"></header>
 
-  <main>
+  <main id="contenido">
 
-    <!-- ======= HERO DEL PROYECTO =======
-         Relleno por portafolio.js con:
-           - Imagen de portada
-           - Título, categoría (badge), año, cliente
-           - Botón volver al portafolio
+    <!-- ======= PROJECT HERO =======
+         Populated by portfolio.js with:
+           - Cover image
+           - Title, category (badge), year, client
+           - Back to portfolio button
     ======= -->
     <section class="film-hero" id="filmHero" aria-label="Proyecto"></section>
 
 
-    <!-- ======= CUERPO DEL PROYECTO =======
-         Grid: tráiler + sinopsis (izquierda) · ficha técnica sticky (derecha)
+    <!-- ======= PROJECT BODY =======
+         Grid: trailer + synopsis (left) · sticky technical sheet (right)
     ======= -->
     <section class="film-body section">
       <div class="container film-body__grid">
 
-        <!-- Columna principal: tráiler + sinopsis -->
+        <!-- Main column: trailer + synopsis -->
         <div>
-          <!-- Tráiler: iframe de YouTube si hay URL, placeholder si no -->
+          <!-- Trailer: YouTube iframe if URL exists, placeholder otherwise -->
           <div class="film-trailer reveal" id="filmTrailer"></div>
 
           <p class="film-synopsis-title">Sinopsis</p>
           <div class="film-synopsis reveal" id="filmSynopsis"></div>
         </div>
 
-        <!-- Ficha técnica (sticky en desktop, estilo cartelera de cine) -->
+        <!-- Technical sheet (sticky on desktop, movie poster style) -->
         <aside id="filmSheet" aria-label="Ficha técnica"></aside>
 
       </div>
     </section>
 
 
-    <!-- ======= EQUIPO DEL PROYECTO =======
-         Miembros que participaron (cruzado desde portfolio.team_ids y team.json)
-         Click en miembro → equipo/[id].html
-         Se oculta si no hay team_ids
+    <!-- ======= PROJECT TEAM =======
+         Members who participated (cross-referenced from portfolio.team_ids and team.json)
+         Click member → team/[id].html
+         Hidden if no team_ids
     ======= -->
     <section class="film-team section" id="filmTeam">
       <div class="container">
@@ -110,9 +112,9 @@
     </section>
 
 
-    <!-- ======= GALERÍA =======
-         Fotos del rodaje desde portfolio.photos_extra[]
-         Se oculta si el array está vacío
+    <!-- ======= GALLERY =======
+         Behind-the-scenes photos from portfolio.photos_extra[]
+         Hidden if array is empty
     ======= -->
     <section class="film-gallery section" id="filmGallery">
       <div class="container">
@@ -135,12 +137,12 @@
   </a>
 
   <!--
-    SCRIPTS — ORDEN OBLIGATORIO:
-      1. shared.js  (utilidades + window.UMD)
-      2. portafolio.js
+    SCRIPTS — REQUIRED ORDER:
+      1. shared.js    (utilities + window.UMD)
+      2. portfolio.js
   -->
   <script src="../js/shared.js"></script>
-  <script src="../js/portafolio.js"></script>
+  <script src="../js/portfolio.js"></script>
 
 </body>
 </html>

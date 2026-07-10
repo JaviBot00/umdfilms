@@ -10,8 +10,8 @@
     "synopsis": "José Antonio lucha contra el cáncer, y su nieta le pide al Cautivo de Málaga un pacto donde la fe, la familia y el destino se ponen a prueba. Una historia basada en hechos reales llevada al límite entre el amor, el sacrificio y la fuerza de una promesa.",
     "thumb": "https://img.youtube.com/vi/UWEjMHWISyc/maxresdefault.jpg",
     "photos_extra": [
-      "assets/portafolio/cautivo-malaga-2.webp",
-      "assets/portafolio/cautivo-malaga-3.webp"
+      "assets/portfolio/cautivo-malaga-2.webp",
+      "assets/portfolio/cautivo-malaga-3.webp"
     ],
     "trailer_youtube": "https://youtu.be/UWEjMHWISyc",
     "full_video_youtube": "",
@@ -111,12 +111,12 @@
     "year": 2023,
     "duration_min": 18,
     "director": "Alejandro",
-    "client": "Producción propia",
-    "synopsis": "Placeholder — sinopsis del cortometraje pendiente.",
-    "thumb": "assets/portafolio/corto-malaga-thumb.webp",
+    "client": "Self-produced",
+    "synopsis": "Placeholder — short film synopsis pending.",
+    "thumb": "assets/portfolio/corto-malaga-thumb.webp",
     "photos_extra": [
-      "assets/portafolio/corto-malaga-2.webp",
-      "assets/portafolio/corto-malaga-3.webp"
+      "assets/portfolio/corto-malaga-2.webp",
+      "assets/portfolio/corto-malaga-3.webp"
     ],
     "trailer_youtube": "https://www.youtube.com/watch?v=PLACEHOLDER",
     "full_video_youtube": "",
