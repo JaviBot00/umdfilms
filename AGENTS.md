@@ -101,7 +101,7 @@ WCAG 2.2 AA baseline. All interactive elements must remain keyboard accessible.
 - **`<main id="contenido">`**: landmark on all pages (index.html wraps hero through contact; subpage templates already had `<main>`)
 - **`:focus-visible` styles**: red outline on all interactive elements; box-shadow ring on buttons, filters, theme toggle, FAB
 - **Keyboard navigation**: team cards, portfolio cards, and linked service cards all have `role="link"`, `tabindex="0"`, and Enter/Space handlers
-- **`aria-pressed`**: filter buttons (portfolio + material) announce active state
+- **`aria-pressed`**: filter buttons (portfolio + equipment) announce active state
 - **`aria-label`**: footer navs distinguished ("Site navigation" / "Social media"); sections, social links, burger, theme toggle, WhatsApp FAB all labeled
 - **`aria-hidden="true"`**: decorative SVGs, hero video, hero overlay/redline, trust bar marquee track, service video preview
 - **Form accessibility**: all inputs have `<label for>` association, `autocomplete` attributes, `aria-invalid` on validation errors, visible focus ring via `box-shadow`
