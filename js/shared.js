@@ -236,7 +236,7 @@ async function renderFooter(config) {
     </div>
     <div class="footer__bottom">
       <p>© ${year} ${cfg.footer.copyright_owner}. Todos los derechos reservados.</p>
-      <p>Desarrollado por <a href="${cfg.footer.dev_url || '#'}" rel="noopener">${cfg.footer.dev_name}</a> con ayuda de <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a></p>
+      <p>Desarrollado por <a href="${cfg.footer.dev_url || '#'}" rel="noopener">${cfg.footer.dev_name}</a></p>
     </div>
   `;
 }
