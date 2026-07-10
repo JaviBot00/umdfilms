@@ -70,7 +70,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
   setMeta('og:title',       document.title);
   setMeta('og:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
-  setMeta('og:image',       `${config.brand.site_url}/${project.thumb}`);
+  // setMeta('og:image',       `${config.brand.site_url}/${project.thumb}`);
+  setMeta('og:image',       `${project.thumb}`);
   setMeta('og:type',        'video.other');
   setMeta('og:url',         `${config.brand.site_url}/portfolio/${project.id}.html`);
   setMeta('og:site_name',   'UMD Films');

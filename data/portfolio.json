@@ -15,7 +15,7 @@
     ],
     "trailer_youtube": "https://youtu.be/UWEjMHWISyc",
     "full_video_youtube": "",
-    "team_ids": ["alejandro", "ivan", "ivan-ambrosio"],
+    "team_ids": ["alejandro-luque", "ivan-pascual", "ivan-ambrosio"],
     "tags": ["Cortometraje", "Cautivo", "Málaga"],
     "featured": true
   },
@@ -32,7 +32,7 @@
     "photos_extra": [],
     "trailer_youtube": "https://www.youtube.com/watch?v=xXTXpkVaHmg",
     "full_video_youtube": "https://youtu.be/zyRMvWVLUiY",
-    "team_ids": ["alejandro", "adrian"],
+    "team_ids": ["alejandro-luque", "adrian-roman"],
     "tags": ["Cine", "Bullying", "Educación"],
     "featured": true
   },
@@ -49,7 +49,7 @@
     "photos_extra": [],
     "trailer_youtube": "https://www.youtube.com/watch?v=FtjIAztekkw",
     "full_video_youtube": "",
-    "team_ids": ["alejandro"],
+    "team_ids": ["alejandro-luque"],
     "tags": ["Videoclip", "Deporte", "Málaga"],
     "featured": true
   },
@@ -66,7 +66,7 @@
     "photos_extra": [],
     "trailer_youtube": "https://www.youtube.com/watch?v=bJnOzGw8RCU",
     "full_video_youtube": "https://youtu.be/VPC95rFQ9Os",
-    "team_ids": ["alejandro"],
+    "team_ids": ["alejandro-luque"],
     "tags": ["Cine", "Salud mental"],
     "featured": true
   },
