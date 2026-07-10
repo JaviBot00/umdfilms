@@ -3,30 +3,30 @@
  * =====================================================
  * generate-pages.js
  * =====================================================
- * Genera automáticamente los archivos HTML individuales
- * para cada miembro del equipo y cada proyecto del portafolio.
+ * Automatically generates individual HTML files
+ * for each team member and each portfolio project.
  *
- * CUÁNDO EJECUTARLO:
- *   - Cuando añades un nuevo miembro en data/team.json
- *   - Cuando añades un nuevo proyecto en data/portfolio.json
- *   - Antes de subir a Hostinger
+ * WHEN TO RUN:
+ *   - When you add a new member in data/team.json
+ *   - When you add a new project in data/portfolio.json
+ *   - Before uploading to Hostinger
  *
- * USO:
+ * USAGE:
  *   node generate-pages.js
  *
- * REQUISITOS:
- *   - Node.js instalado (cualquier versión moderna)
- *   - Ejecutar desde la raíz del proyecto umdfilms/
+ * REQUIREMENTS:
+ *   - Node.js installed (any modern version)
+ *   - Run from the project root umdfilms/
  *
- * QUÉ HACE:
- *   - Lee data/team.json → genera equipo/[id].html para cada miembro
- *   - Lee data/portfolio.json → genera portafolio/[id].html para cada proyecto
- *   - Genera sitemap.xml con todas las URLs
- *   - Cada HTML generado es una copia de la plantilla correspondiente
- *   - El JS de la página (equipo.js / portafolio.js) se encarga
- *     de leer el id desde la URL y rellenar el contenido.
+ * WHAT IT DOES:
+ *   - Reads data/team.json → generates team/[id].html for each member
+ *   - Reads data/portfolio.json → generates portfolio/[id].html for each project
+ *   - Generates sitemap.xml with all URLs
+ *   - Each generated HTML is a copy of the corresponding template
+ *   - The page JS (team.js / portfolio.js) handles
+ *     reading the ID from the URL and filling in the content.
  *
- * NO necesitas tocar este script salvo que cambies la estructura HTML.
+ * You don't need to touch this script unless you change the HTML structure.
  * =====================================================
  */
 
@@ -35,17 +35,17 @@ const path = require('path');
 
 const ROOT = __dirname;
 
-/* ---- Leer JSON ---- */
+/* ---- Read JSON ---- */
 function readJSON(relPath) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, relPath), 'utf8'));
 }
 
-/* ---- Leer plantilla ---- */
+/* ---- Read template ---- */
 function readTemplate(relPath) {
   return fs.readFileSync(path.join(ROOT, relPath), 'utf8');
 }
 
-/* ---- Escribir archivo ---- */
+/* ---- Write file ---- */
 function writeFile(relPath, content) {
   const fullPath = path.join(ROOT, relPath);
   fs.mkdirSync(path.dirname(fullPath), { recursive: true });
@@ -53,18 +53,18 @@ function writeFile(relPath, content) {
   console.log(`  ✓ ${relPath}`);
 }
 
-/* ---- Leer datos una sola vez (reutilizados por page gen y sitemap) ---- */
+/* ---- Read data once (reused by page gen and sitemap) ---- */
 const team      = readJSON('data/team.json');
 const portfolio = readJSON('data/portfolio.json');
 const config    = readJSON('data/config.json');
 
 /* =====================================================
-   GENERAR PÁGINAS DE EQUIPO
+   GENERATE TEAM PAGES
    ===================================================== */
 function generateTeamPages() {
-  const template = readTemplate('equipo/plantilla.html');
+  const template = readTemplate('team/template.html');
 
-  console.log(`\n👤 Generando ${team.length} páginas de equipo...`);
+  console.log(`\n👤 Generating ${team.length} team pages...`);
 
   team.forEach(member => {
     const fullName = member.name + (member.surname ? ' ' + member.surname : '');
@@ -78,17 +78,17 @@ function generateTeamPages() {
         `<meta name="description" content="${fullName}, ${member.role} en UMD Films Málaga. Conoce a nuestro equipo." />`
       );
 
-    writeFile(`equipo/${member.id}.html`, html);
+    writeFile(`team/${member.id}.html`, html);
   });
 }
 
 /* =====================================================
-   GENERAR PÁGINAS DE PORTAFOLIO
+   GENERATE PORTFOLIO PAGES
    ===================================================== */
 function generatePortfolioPages() {
-  const template = readTemplate('portafolio/plantilla.html');
+  const template = readTemplate('portfolio/template.html');
 
-  console.log(`\n🎬 Generando ${portfolio.length} páginas de portafolio...`);
+  console.log(`\n🎬 Generating ${portfolio.length} portfolio pages...`);
 
   portfolio.forEach(project => {
     const html = template
@@ -101,23 +101,23 @@ function generatePortfolioPages() {
         `<meta name="description" content="${project.title} — ${project.category} producido por UMD Films en ${project.year}. Descubre este proyecto." />`
       );
 
-    writeFile(`portafolio/${project.id}.html`, html);
+    writeFile(`portfolio/${project.id}.html`, html);
   });
 }
 
 /* =====================================================
-   GENERAR SITEMAP.XML
+   GENERATE SITEMAP.XML
    ===================================================== */
 function generateSitemap() {
   const BASE_URL = config.brand.site_url;
   const today    = new Date().toISOString().split('T')[0];
 
   const teamUrls = team.map(m =>
-    `  <url><loc>${BASE_URL}/equipo/${m.id}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`
+    `  <url><loc>${BASE_URL}/team/${m.id}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`
   ).join('\n');
 
   const portfolioUrls = portfolio.map(p =>
-    `  <url><loc>${BASE_URL}/portafolio/${p.id}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`
+    `  <url><loc>${BASE_URL}/portfolio/${p.id}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`
   ).join('\n');
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -132,13 +132,13 @@ ${portfolioUrls}
 }
 
 /* ---- Main ---- */
-console.log('🚀 UMD Films — Generador de páginas\n' + '='.repeat(40));
+console.log('🚀 UMD Films — Page Generator\n' + '='.repeat(40));
 
 try {
   generateTeamPages();
   generatePortfolioPages();
   generateSitemap();
-  console.log('\n✅ Listo. Sube la carpeta completa a Hostinger.\n');
+  console.log('\n✅ Done. Upload the entire folder to Hostinger.\n');
 } catch (err) {
   console.error('\n❌ Error:', err.message);
   process.exit(1);
