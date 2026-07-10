@@ -1007,7 +1007,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 }
 .footer__social-icon svg { width: 16px; height: 16px; fill: currentColor; }
 
-.footer__nav { display: flex; flex-direction: column; gap: 0.7rem; }
+.footer__nav { display: flex; flex-direction: column; gap: 0.7rem; align-items: flex-start; }
 .footer__nav strong {
   font-size: 0.62rem;
   letter-spacing: 0.22em;
@@ -1017,7 +1017,8 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   display: block;
 }
 .footer__nav a { font-size: 0.875rem; color: var(--muted); transition: color 0.22s; }
-.footer__nav a:hover { color: var(--cream); }
+.footer__nav a span { transition: color 0.22s; }
+.footer__nav a:hover span { color: var(--cream); text-decoration: underline; text-underline-offset: 3px; }
 
 .footer__bottom {
   border-top: 1px solid var(--line);

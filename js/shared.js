@@ -219,18 +219,18 @@ async function renderFooter(config) {
       </div>
       <nav class="footer__nav" aria-label="Site navigation">
         <strong>Navegar</strong>
-        <a href="${rootPath('index.html')}#nosotros">Quiénes somos</a>
-        <a href="${rootPath('index.html')}#servicios">Servicios</a>
-        <a href="${rootPath('index.html')}#portafolio">Portafolio</a>
-        <a href="${rootPath('index.html')}#equipo">Equipo</a>
-        <a href="${rootPath('material/index.html')}">Alquiler de material</a>
-        <a href="${rootPath('index.html')}#contacto">Contacto</a>
+        <a href="${rootPath('index.html')}#nosotros"><span>Quiénes somos</span></a>
+        <a href="${rootPath('index.html')}#servicios"><span>Servicios</span></a>
+        <a href="${rootPath('index.html')}#portafolio"><span>Portafolio</span></a>
+        <a href="${rootPath('index.html')}#equipo"><span>Equipo</span></a>
+        <a href="${rootPath('material/index.html')}"><span>Alquiler de material</span></a>
+        <a href="${rootPath('index.html')}#contacto"><span>Contacto</span></a>
       </nav>
       <nav class="footer__nav" aria-label="Social media">
         <strong>Redes</strong>
-        ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener">Instagram</a>` : ''}
-        ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener">YouTube</a>` : ''}
-        ${cfg.social.tiktok    ? `<a href="${cfg.social.tiktok}"    target="_blank" rel="noopener">TikTok</a>`  : ''}
+        ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener"><span>Instagram</span></a>` : ''}
+        ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener"><span>YouTube</span></a>` : ''}
+        ${cfg.social.tiktok    ? `<a href="${cfg.social.tiktok}"    target="_blank" rel="noopener"><span>TikTok</span></a>`  : ''}
         <a href="https://wa.me/${cfg.contact.whatsapp}" target="_blank" rel="noopener">WhatsApp</a>
       </nav>
     </div>
