@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Theme: light / dark
+      Applied to <html> so CSS can use it with [data-theme="light"] or [data-theme="dark"]
+      Populated dynamically from localStorage or media query (prefers-color-scheme)
+  -->
+  <script>
+  (function () {
+    var stored = localStorage.getItem('umd-theme');
+    var theme = (stored === 'light' || stored === 'dark')
+      ? stored
+      : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO: title, description and canonical are dynamically overwritten by portfolio.js -->
+  <title>Cortometraje — Proyecto Málaga | UMD Films Málaga</title>
+  <meta name="description" content="Cortometraje — Proyecto Málaga — cine producido por UMD Films en 2023. Descubre este proyecto." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://umdfilms.com/portfolio/" />
+
+  <!-- Open Graph (portfolio.js overwrites title, description, image, url) -->
+  <meta property="og:type"      content="video.other" />
+  <meta property="og:locale"    content="es_ES" />
+  <meta property="og:site_name" content="UMD Films" />
+  <meta property="og:title"     content="Proyecto | UMD Films Málaga" />
+  <meta property="og:description" content="Descubre nuestros proyectos de producción audiovisual en Málaga." />
+  <meta property="og:image"     content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />
+  <meta property="og:url"       content="https://umdfilms.com/portfolio/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Proyecto | UMD Films Málaga" />
+  <meta name="twitter:description" content="Descubre nuestros proyectos de producción audiovisual en Málaga." />
+  <meta name="twitter:image"       content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />
+
+  <!-- Favicon -->
+  <link rel="icon"             href="../assets/logo/favicon.ico" />
+  <link rel="icon"             href="../assets/logo/favicon.svg"  type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/logo/apple-touch-icon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  </noscript>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/portfolio.css" />
+</head>
+<body>
+
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <!-- Nav -->
+  <header class="nav" id="nav" role="banner"></header>
+
+  <main id="contenido">
+
+    <!-- ======= PROJECT HERO =======
+         Populated by portfolio.js with:
+           - Cover image
+           - Title, category (badge), year, client
+           - Back to portfolio button
+    ======= -->
+    <section class="film-hero" id="filmHero" aria-label="Proyecto"></section>
+
+
+    <!-- ======= PROJECT BODY =======
+         Grid: trailer + synopsis (left) · sticky technical sheet (right)
+    ======= -->
+    <section class="film-body section">
+      <div class="container film-body__grid">
+
+        <!-- Main column: trailer + synopsis -->
+        <div>
+          <!-- Trailer: YouTube iframe if URL exists, placeholder otherwise -->
+          <div class="film-trailer reveal" id="filmTrailer"></div>
+
+          <p class="film-synopsis-title">Sinopsis</p>
+          <div class="film-synopsis reveal" id="filmSynopsis"></div>
+        </div>
+
+        <!-- Technical sheet (sticky on desktop, movie poster style) -->
+        <aside id="filmSheet" aria-label="Ficha técnica"></aside>
+
+      </div>
+    </section>
+
+
+    <!-- ======= PROJECT TEAM =======
+         Members who participated (cross-referenced from portfolio.team_ids and team.json)
+         Click member → team/[id].html
+         Hidden if no team_ids
+    ======= -->
+    <section class="film-team section" id="filmTeam">
+      <div class="container">
+        <p class="eyebrow reveal">Créditos</p>
+        <h2 class="section-title reveal">Equipo del proyecto</h2>
+        <div class="film-team__grid" id="filmTeamGrid"></div>
+      </div>
+    </section>
+
+
+    <!-- ======= GALLERY =======
+         Behind-the-scenes photos from portfolio.photos_extra[]
+         Hidden if array is empty
+    ======= -->
+    <section class="film-gallery section" id="filmGallery">
+      <div class="container">
+        <p class="eyebrow reveal">Detrás de las cámaras</p>
+        <h2 class="section-title reveal">Galería</h2>
+        <div class="film-gallery__grid" id="filmGalleryGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="footer" role="contentinfo"></footer>
+
+  <!-- FAB WhatsApp -->
+  <a href="#" class="fab-wa" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+  <!--
+    SCRIPTS — REQUIRED ORDER:
+      1. shared.js    (utilities + window.UMD)
+      2. portfolio.js
+  -->
+  <script src="../js/shared.js"></script>
+  <script src="../js/portfolio.js"></script>
+
+</body>
+</html>
