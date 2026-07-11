@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setTwitter('twitter:card',        'summary_large_image');
   setTwitter('twitter:title',       document.title);
   setTwitter('twitter:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
-  setTwitter('twitter:image',       `${config.brand.site_url}/${project.thumb}`);
+  setTwitter('twitter:image',       `${project.thumb}`);
 
   // Schema VideoObject for projects with video
   if (project.trailer_youtube && !project.trailer_youtube.includes('PLACEHOLDER')) {
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       "@type": "VideoObject",
       "name": project.title,
       "description": project.synopsis || `${project.title} por UMD Films`,
-      "thumbnailUrl": `${config.brand.site_url}/${project.thumb}`,
+      "thumbnailUrl": `${project.thumb}`,
       "uploadDate": `${project.year}-01-01`,
       "director": { "@type": "Person", "name": project.director },
       "productionCompany": { "@type": "Organization", "name": "UMD Films" },
