@@ -4,7 +4,7 @@
   "brand": {
     "name": "UMD Films",
     "tagline": "Convertimos tu historia en cine",
-    "tagline_sub": "Videoclips, publicidad, cine y producción musical con alma malagueña y visión internacional.",
+    "tagline_sub": "Cine, publicidad, videoclips y producción musical con alma malagueña y visión internacional.",
     "founded_year": 2019,
     "sede": "Málaga",
     "alcance": "Nacional",
@@ -17,7 +17,7 @@
   "contact": {
     "whatsapp": "34675185198",
     "whatsapp_msg": "Hola, me interesa contratar vuestros servicios.",
-    "email": "info@umdfilms.com"
+    "email": "contancto@umdfilms.com"
   },
 
   "social": {
@@ -31,7 +31,7 @@
     "site_name": "UMD Films",
     "site_suffix": "UMD Films Málaga",
     "title_home": "UMD Films | Productora Audiovisual en Málaga",
-    "description_home": "UMD Films: productora audiovisual en Málaga. Videoclips, publicidad, cine, producción musical y más. Con alma malagueña y alcance nacional.",
+    "description_home": "UMD Films: productora audiovisual en Málaga. Cine, publicidad, videoclips, producción musical y mucho más. Con alma malagueña y alcance nacional.",
     "keywords": "productora audiovisual Málaga, videoclips Málaga, producción audiovisual Andalucía, cine Málaga, publicidad audiovisual",
     "og_image": "assets/portfolio/og-cover.png"
   },

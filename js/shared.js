@@ -24,7 +24,7 @@ function rootPath(path) {
   // Local: /index.html → folders=[] → prefix=''
   // GH Pages: /umdfilms/index.html → folders=['umdfilms'] → prefix='../'  ← PROBLEM
   // Solution: detect repo name and exclude it from the count
-  const knownSubfolders = ['team', 'portfolio', 'material'];
+  const knownSubfolders = ['team', 'portfolio', 'equipment'];
   const depth = folders.filter(f => knownSubfolders.includes(f)).length;
 
   return depth > 0 ? '../'.repeat(depth) + path : path;
@@ -170,7 +170,7 @@ async function renderNav(config) {
       <a href="${rootPath('index.html')}#servicios">Servicios</a>
       <a href="${rootPath('index.html')}#portafolio">Portafolio</a>
       <a href="${rootPath('index.html')}#equipo">Equipo</a>
-      <a href="${rootPath('material/index.html')}">Material</a>
+      <a href="${rootPath('equipment/index.html')}">Material</a>
       <a href="${waHref}" class="nav__cta btn-outline" target="_blank" rel="noopener">Hablemos</a>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
@@ -223,7 +223,7 @@ async function renderFooter(config) {
         <a href="${rootPath('index.html')}#servicios"><span>Servicios</span></a>
         <a href="${rootPath('index.html')}#portafolio"><span>Portafolio</span></a>
         <a href="${rootPath('index.html')}#equipo"><span>Equipo</span></a>
-        <a href="${rootPath('material/index.html')}"><span>Alquiler de material</span></a>
+        <a href="${rootPath('equipment/index.html')}"><span>Alquiler de material</span></a>
         <a href="${rootPath('index.html')}#contacto"><span>Contacto</span></a>
       </nav>
       <nav class="footer__nav" aria-label="Social media">

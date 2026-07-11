@@ -256,6 +256,7 @@ The hero, "About Us" section, and contact form texts are directly in `index.html
 ### 🎨 Change Colors
 
 Open `css/style.css`. All CSS variables are at the top of the file:
+
 ```css
 :root {
   --red:        #c0202a;   ← Main accent color

@@ -70,7 +70,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
   setMeta('og:title',       document.title);
   setMeta('og:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
-  setMeta('og:image',       `${config.brand.site_url}/${project.thumb}`);
+  // setMeta('og:image',       `${config.brand.site_url}/${project.thumb}`);
+  setMeta('og:image',       `${project.thumb}`);
   setMeta('og:type',        'video.other');
   setMeta('og:url',         `${config.brand.site_url}/portfolio/${project.id}.html`);
   setMeta('og:site_name',   'UMD Films');
@@ -84,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setTwitter('twitter:card',        'summary_large_image');
   setTwitter('twitter:title',       document.title);
   setTwitter('twitter:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
-  setTwitter('twitter:image',       `${config.brand.site_url}/${project.thumb}`);
+  setTwitter('twitter:image',       `${project.thumb}`);
 
   // Schema VideoObject for projects with video
   if (project.trailer_youtube && !project.trailer_youtube.includes('PLACEHOLDER')) {
@@ -93,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       "@type": "VideoObject",
       "name": project.title,
       "description": project.synopsis || `${project.title} por UMD Films`,
-      "thumbnailUrl": `${config.brand.site_url}/${project.thumb}`,
+      "thumbnailUrl": `${project.thumb}`,
       "uploadDate": `${project.year}-01-01`,
       "director": { "@type": "Person", "name": project.director },
       "productionCompany": { "@type": "Organization", "name": "UMD Films" },
@@ -142,7 +143,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (ytId) {
         trailerEl.innerHTML = `
           <iframe
-            src="https://www.youtube.com/embed/${ytId}?rel=0&modestbranding=1"
+            src="https://www.youtube.com/embed/${ytId}?rel=0"
             title="${project.title} — Tráiler | UMD Films"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
@@ -170,7 +171,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const sheetEl = document.getElementById('filmSheet');
   if (sheetEl) {
     const rows = [
-      { label: 'Título',     value: project.title },
+      { label: 'Título',    value: project.title },
       { label: 'Categoría', value: project.category },
       { label: 'Año',       value: project.year },
       { label: 'Duración',  value: project.duration_min ? `${project.duration_min} min` : '—' },
