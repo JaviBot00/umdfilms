@@ -3,7 +3,7 @@
     "id": "produccion-audiovisual",
     "icon": "🎬",
     "title": "Producción Audiovisual",
-    "description": "La magia del cine aplicada a tu historia. Producción completa con material y equipo profesional.",
+    "description": "La magia del cine aplicada a tu historia. Producción completa con material y equipo profesional propio.",
     "core": true,
     "video_preview": "assets/servicios/video-produccion.mp4"
   },
@@ -66,10 +66,10 @@
   {
     "id": "alquiler-material",
     "icon": "🎥",
-    "title": "Alquiler de Material",
+    "title": "Alquiler de Material ↗",
     "description": "Cámara, sonido, iluminación y soporte profesional. Disponible para producciones externas.",
     "core": false,
     "video_preview": "",
-    "link": "material/index.html"
+    "link": "equipment/index.html"
   }
 ]
