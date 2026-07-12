@@ -296,6 +296,43 @@ function animateCounter(el, target, duration = 1800) {
   requestAnimationFrame(tick);
 }
 
+/* ---- YouTube thumbnail fallback chain ---- */
+const YT_THUMB_CHAIN = ['maxresdefault', 'hq720', 'sddefault', 'hqdefault'];
+const YT_PLACEHOLDER_MAX_WIDTH = 120; // if the thumbnail is smaller than this, it is likely a placeholder
+
+function ytThumbUrl(ytId, level = 0) {
+  return `https://img.youtube.com/vi/${ytId}/${YT_THUMB_CHAIN[level]}.jpg`;
+}
+
+function ytThumbAdvance(imgEl) {
+  const next = parseInt(imgEl.dataset.ytFallback || '0', 10) + 1;
+  if (next < YT_THUMB_CHAIN.length) {
+    imgEl.dataset.ytFallback = next;
+    imgEl.src = ytThumbUrl(imgEl.dataset.ytId, next);
+  }
+}
+
+// Check if the loaded thumbnail is a placeholder (small width) and advance to the next fallback if so
+function ytThumbCheck(imgEl) {
+  if (imgEl.naturalWidth <= YT_PLACEHOLDER_MAX_WIDTH) {
+    ytThumbAdvance(imgEl);
+  }
+}
+
+/* ---- Helper: extract YouTube ID from any URL format ---- */
+function extractYouTubeId(url) {
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+    /youtube\.com\/shorts\/([^&\n?#]+)/
+  ];
+  for (const re of patterns) {
+    const match = url.match(re);
+    if (match) return match[1];
+  }
+  return null;
+}
+
+
 /* ---- Export for global use ---- */
 window.UMD = {
   fetchJSON,
@@ -310,5 +347,9 @@ window.UMD = {
   initTheme,
   applyTheme,
   toggleTheme,
-  initLightbox
+  initLightbox,
+  ytThumbUrl,
+  ytThumbAdvance,
+  ytThumbCheck,
+  extractYouTubeId
 };
