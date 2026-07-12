@@ -454,6 +454,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   display: flex;
   align-items: flex-end;
   overflow: hidden;
+  background: var(--dark-mid);
 }
 
 .hero__video {
