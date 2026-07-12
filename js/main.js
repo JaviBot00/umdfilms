@@ -200,6 +200,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     portfolioGrid.innerHTML = '';
 
     items.forEach((proj, i) => {
+      const ytId = UMD.extractYouTubeId(proj.trailer_youtube || proj.full_video_youtube);
+      const thumbSrc = ytId ? UMD.ytThumbUrl(ytId) : (proj.thumb);
       const card = document.createElement('div');
       card.className = 'portfolio-card';
       card.setAttribute('role', 'link');
@@ -207,7 +209,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       card.setAttribute('aria-label', `View project: ${proj.title}`);
       card.style.transitionDelay = `${i * 0.06}s`;
       card.innerHTML = `
-        <img src="${proj.thumb}" alt="${proj.title} — UMD Films" loading="lazy" />
+        <img src="${thumbSrc}" data-yt-id="${ytId}" onload="UMD.ytThumbCheck(this)"
+          onerror="UMD.ytThumbAdvance(this)" alt="${proj.title} — UMD Films" loading="lazy" />
         <div class="portfolio-card__overlay">
           <p class="portfolio-card__cat">${proj.category} · ${proj.year}</p>
           <p class="portfolio-card__title">${proj.title}</p>
