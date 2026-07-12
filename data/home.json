@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "eyebrow": "Productora audiovisual · Málaga · Alcance nacional",
+    "title_pre": "Convertimos tu ",
+    "title_highlight": "historia",
+    "title_post": " en cine",
+    "subtitle": "Videoclips, publicidad, cine y producción musical.\nCon alma malagueña y alcance nacional.",
+    "cta_primary": { "label": "Ver servicios", "href": "#servicios" },
+    "cta_secondary": { "label": "Ver portafolio", "href": "#portafolio" }
+  },
+  "about": {
+    "eyebrow": "Quiénes somos",
+    "title_pre": "Productora audiovisual en ",
+    "title_highlight": "Málaga",
+    "title_post": ".",
+    "title_line2": "Cine que llega a cualquier parte.",
+    "paragraphs": [
+      "Somos UMD Films, una productora fundada en 2019 por Alejandro y Adrián...",
+      "Nos mueve la creatividad, la versatilidad y el coraje..."
+    ]
+  },
+  "cta_band": {
+    "title": "¿Tienes un proyecto en mente?",
+    "subtitle": "Cuéntanoslo. Convertimos ideas en imágenes que impactan."
+  },
+  "contact": {
+    "eyebrow": "Contacto",
+    "title_pre": "Hablemos de",
+    "title_highlight": "tu proyecto",
+    "body": "Estamos en Málaga pero trabajamos en toda España..."
+  }
+}
