@@ -37,8 +37,8 @@
     "featured": true
   },
   {
-    "id": "malaga-cf",
-    "title": "Videoclip oficial Memoria, Compromiso y Fe",
+    "id": "memoria-compromiso-y-fe",
+    "title": "Memoria, Compromiso y Fe | Videoclip oficial",
     "category": "Videoclip",
     "year": 2026,
     "duration_min": 4,
@@ -103,25 +103,5 @@
     "team_ids": ["alejandro", "sergio-pastor", "ivan-ambrosio"],
     "tags": ["Musical"],
     "featured": false
-  },
-  {
-    "id": "cortometraje-malaga",
-    "title": "Cortometraje — Proyecto Málaga",
-    "category": "cine",
-    "year": 2023,
-    "duration_min": 18,
-    "director": "Alejandro",
-    "client": "Self-produced",
-    "synopsis": "Placeholder — short film synopsis pending.",
-    "thumb": "assets/portfolio/corto-malaga-thumb.webp",
-    "photos_extra": [
-      "assets/portfolio/corto-malaga-2.webp",
-      "assets/portfolio/corto-malaga-3.webp"
-    ],
-    "trailer_youtube": "https://www.youtube.com/watch?v=PLACEHOLDER",
-    "full_video_youtube": "",
-    "team_ids": ["alejandro", "adrian", "ivan", "javi-sonido", "ivan-ambrosio"],
-    "tags": ["Cine", "Cortometraje", "Málaga"],
-    "featured": true
   }
 ]
