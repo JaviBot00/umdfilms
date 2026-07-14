@@ -39,11 +39,15 @@ Run after editing `data/team.json` or `data/portfolio.json`. Generates individua
 
 ## How content works
 
-- All editable content lives in `data/*.json` — never edit generated HTML in `team/` or `portfolio/`
-- Templates (`team/template.html`, `portfolio/template.html`) are copied by the generator; JS fills content at runtime
-- `team.js` / `portfolio.js` read the page's own filename to find the matching JSON entry
-- Nav, footer, and WhatsApp FAB are rendered dynamically from `config.json` by `shared.js`
-- Home text edits go in `data/home.json` — rendered dynamically by `main.js`
+- Home editorial text (hero, about, cta-band, contact) lives in `data/home.json`, rendered by `renderHomeContent()` in `main.js` — do not hardcode text back into `index.html`
+- `team/index.html` and `portfolio/index.html` are full listing pages (all members / all projects), separate from the individual `team/[id].html` / `portfolio/[id].html` pages. Home only shows `featured: true` items from each.
+- Artists page (`artists/index.html`) merges `team.json` entries with `represented_artist: true` and all of `data/artists.json` (external collaborators, no individual page)
+
+## Shared grid/filter logic (avoid re-duplicating)
+
+`shared.js` exports `renderFilterableGrid()`, `buildTeamCard()`, `buildPortfolioCard()` — used by home, `team/index.html`, `portfolio/index.html`, and `artists.js`. Before writing a new filtered grid anywhere, use these instead of copying the filter-button loop again.
+
+`shared.js` also exports the YouTube thumbnail fallback chain: `ytThumbUrl()`, `ytThumbCheck()`, `ytThumbAdvance()`, `extractYouTubeId()`. Always validate a YouTube URL with a real ID check before deriving a thumbnail from it — do not assume any `trailer_youtube`/`full_video_youtube` string is non-empty and non-placeholder.
 
 ## Development
 
@@ -86,10 +90,17 @@ Edit the relevant JS file (e.g., `team.js` for Person). Create a JSON-LD object,
 | `data/portfolio.json` | Adding or editing projects |
 | `data/equipment.json` | Adding or editing rental equipment |
 | `data/services.json` | Adding or editing services |
+| `data/artists.json` | Adding/editing external represented artists |
+| `js/artists.js` | Changing the represented-artists listing page |
 | `js/shared.js` | Changing nav, footer, FAB, or common utilities |
 | `css/style.css` | Changing colors (CSS variables at top), typography, global layout |
 | `generate-pages.js` | Only if HTML template structure changes |
 | `index.html` | Editing home page text (hero, about, contact) |
+
+## Known pending work (Bloque G — not started)
+
+- `css/style.css` is still monolithic. Home-only rules (hero, trust marquee, about/stats, services, cta-band, contact) should move to `css/home.css`, loaded only by `index.html`.
+- Hardcoded UI strings in `.js` files (category filter labels, 404 messages, placeholder texts) have not been audited or centralized. `config.json` was the proposed destination (`ui_strings`) — not yet created.
 
 ## Accessibility (a11y)
 

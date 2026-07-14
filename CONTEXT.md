@@ -135,21 +135,20 @@ stats.location = config.schema.address_locality               // "Málaga"
 
 ## Pending (Assets Alejandro Needs to Provide)
 
-- [ ] **New logo** (SVG or PNG) → replaces `assets/logo/logo-umd-films.svg`
-- [ ] **Favicon** → `assets/logo/favicon.ico` and `assets/logo/favicon.svg`
 - [ ] **Team photos** (13 people) → `assets/team/[id]-cover.webp` (ratio 3:4)
-- [ ] **Project thumbnails** → `assets/portfolio/[id]-thumb.webp` (ratio 16:9)
-- [ ] **Rental equipment photos** → `assets/equipment/[id].webp` (ratio 4:3)
-- [ ] **Team bios** → `bio` field in `data/team.json`
-- [ ] **Real YouTube URLs** → `trailer_youtube` field in `data/portfolio.json`
-- [ ] **Project synopses** → `synopsis` field in `data/portfolio.json`
 - [ ] **Rental equipment info** (names, quantity, description) → `data/equipment.json`
-- [ ] **Each member's Instagram** → `social.instagram` field in `data/team.json`
 
 ---
 
 ## What's Already Resolved
 
+- ✅ **New logo** (SVG or PNG) → replaces `assets/logo/logo-umd-films.svg`
+- ✅ **Favicon** → `assets/logo/favicon.ico` and `assets/logo/favicon.svg`
+- ✅ **Rental equipment photos** → `assets/equipment/[id].webp` (ratio 4:3)
+- ✅ **Team bios** → `bio` field in `data/team.json`
+- ✅ **Real YouTube URLs** → `trailer_youtube` field in `data/portfolio.json`
+- ✅ **Project synopses** → `synopsis` field in `data/portfolio.json`
+- ✅ **Each member's Instagram** → `social.instagram` field in `data/team.json`
 - ✅ Mobile hamburger bug (menu was cut off) — rewritten with `transform: translateX` instead of `display:none`
 - ✅ Red palette (red `#c0202a`, was previously gold)
 - ✅ "Málaga" in red in the About Us section
@@ -172,6 +171,13 @@ stats.location = config.schema.address_locality               // "Málaga"
 - ✅ More prominent logo in nav
 - ✅ Years auto-calculate each year
 - ✅ WCAG 2.2 AA accessibility: skip link, `:focus-visible`, `aria-pressed`, `aria-label`, `prefers-reduced-motion`, keyboard on all cards
+- ✅ Home text (hero/about/cta/contact) moved to data/home.json, no longer hardcoded
+- ✅ Full listing pages for team and portfolio (featured-only grids on home)
+- ✅ Shared renderFilterableGrid/buildTeamCard/buildPortfolioCard in shared.js
+- ✅ YouTube thumbnail fallback chain (hq720 → sddefault → hqdefault) with real dimension-based detection, not onerror alone
+- ✅ Video facade pattern for trailer/full-video (iframe loads on click, persistent "Ver en YouTube" link)
+- ✅ Social/WhatsApp icons migrated to CSS mask-image from assets/icon/, no more inline SVG duplicated across 7 files
+- ✅ Representación de Artistas page (team + external artists merged)
 
 ---
 
@@ -206,7 +212,7 @@ stats.location = config.schema.address_locality               // "Málaga"
 
 In order of priority:
 
-1. **Fill in assets** — Alejandro provides photos, videos, texts. Javier adds them to the JSON files and runs `generate-pages.js`.
+1. **Bloque G pendiente** — split de style.css en home.css, y auditoría de strings hardcodeados en .js
 2. **Local preview** — Javier verifies with Live Server before uploading
 3. **Upload to Hostinger** — File Manager or FTP
 4. **301 redirects** — If WordPress URLs change
