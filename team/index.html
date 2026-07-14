@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Theme: light / dark
+      Applied to <html> so CSS can use it with [data-theme="light"] or [data-theme="dark"]
+      Populated dynamically from localStorage or media query (prefers-color-scheme)
+  -->
+  <script>
+  (function () {
+    var stored = localStorage.getItem('umd-theme');
+    var theme = (stored === 'light' || stored === 'dark')
+      ? stored
+      : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equipo | UMD Films Málaga</title>
+  <meta name="description" content="Conoce al equipo completo de UMD Films, productora audiovisual en Málaga." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://umdfilms.com/team/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"      content="website" />
+  <meta property="og:locale"    content="es_ES" />
+  <meta property="og:site_name" content="UMD Films" />
+  <meta property="og:title"     content="Equipo | UMD Films Málaga" />
+  <meta property="og:description" content="Conoce al equipo completo de UMD Films, productora audiovisual en Málaga." />
+  <meta property="og:image"     content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />
+  <meta property="og:url"       content="https://umdfilms.com/team/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Equipo | UMD Films Málaga" />
+  <meta name="twitter:description" content="Conoce al equipo completo de UMD Films, productora audiovisual en Málaga." />
+  <meta name="twitter:image"       content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />
+
+  <!-- Favicon -->
+  <link rel="icon"             href="../assets/logo/favicon.ico" />
+  <link rel="icon"             href="../assets/logo/favicon.svg"  type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/logo/apple-touch-icon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  </noscript>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+  <header class="nav" id="nav" role="banner"></header>
+  <main id="contenido">
+    <section class="page-hero" aria-label="Equipo completo">
+      <div class="container">
+        <p class="eyebrow reveal">UMD Films</p>
+        <h1 class="section-title reveal">El equipo<br /><em>completo</em></h1>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="team__grid" id="teamGrid" role="list"></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer" id="footer" role="contentinfo"></footer>
+  <!-- FAB igual que las demás páginas -->
+  <a href="#" class="fab-wa" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"></a>
+  <script src="../js/shared.js"></script>
+  <script src="../js/team-index.js"></script>
+</body>
+</html>
