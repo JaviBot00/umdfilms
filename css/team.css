@@ -17,7 +17,7 @@
   position: absolute;
   inset: 0;
   /* Fondo negro en la cabecera */
-  /* background: var(--dark-mid); */
+  background: var(--dark-mid);
 }
 .profile-hero__bg img {
   width: 100%; height: 100%;

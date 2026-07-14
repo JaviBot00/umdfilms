@@ -2,21 +2,6 @@
    equipment.css — Catálogo de equipment en alquiler
    ===================================================== */
 
-.equipment-hero {
-  padding-top: 10rem;
-  padding-bottom: clamp(3rem, 6vw, 5rem);
-  background: var(--black);
-  position: relative;
-}
-.equipment-hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--red), transparent);
-  opacity: 0.3;
-}
-
 .equipment-note {
   background: var(--dark-mid);
   border: 1px solid rgba(192,32,42,0.2);

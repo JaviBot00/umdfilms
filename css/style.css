@@ -454,6 +454,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   display: flex;
   align-items: flex-end;
   overflow: hidden;
+  background: var(--dark-mid);
 }
 
 .hero__video {
@@ -556,6 +557,20 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 @keyframes scrollDown {
   0%   { transform: translateY(-100%); }
   100% { transform: translateY(100%); }
+}
+.page-hero {
+  padding-top: 10rem;
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+  background: var(--black);
+  position: relative;
+}
+.page-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--red), transparent);
+  opacity: 0.3;
 }
 
 /* =====================================================
@@ -880,6 +895,12 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 }
 .team-card__role { font-size: 0.73rem; color: var(--muted); line-height: 1.4; }
 
+/* Team card static (no hover) */
+.team-card--static { cursor: default; }
+.team-card--static:hover { transform: none; }
+.team-card--static .team-card__img-wrap::after { display: none; }
+.team-card--static:hover .team-card__img { filter: grayscale(40%); transform: none; }
+
 /* =====================================================
    CTA BAND
    ===================================================== */
@@ -1005,7 +1026,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   color: var(--white);
   background: var(--red-dim);
 }
-.footer__social-icon svg { width: 16px; height: 16px; fill: currentColor; }
+.footer__social-icon .icon { width: 16px; height: 16px; }
 
 .footer__nav { display: flex; flex-direction: column; gap: 0.7rem; align-items: flex-start; }
 .footer__nav strong {
@@ -1051,7 +1072,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   transition: transform 0.3s var(--ease-expo), box-shadow 0.3s;
 }
 .fab-wa:hover { transform: scale(1.1); box-shadow: 0 8px 36px rgba(37,211,102,0.55); }
-.fab-wa svg { width: 26px; height: 26px; fill: white; }
+.fab-wa .icon { width: 26px; height: 26px; }
 
 /* =====================================================
    LIGHTBOX (galería de fotos)
@@ -1105,6 +1126,25 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   stroke: currentColor;
   stroke-width: 2;
 }
+
+/* ---- Iconos de marca (mask-image, respeta currentColor y tema) ---- */
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+.icon-whatsapp  { mask-image: url('../assets/icon/whatsapp.svg');  -webkit-mask-image: url('../assets/icon/whatsapp.svg'); }
+.icon-instagram { mask-image: url('../assets/icon/instagram.svg'); -webkit-mask-image: url('../assets/icon/instagram.svg'); }
+.icon-youtube   { mask-image: url('../assets/icon/youtube.svg');   -webkit-mask-image: url('../assets/icon/youtube.svg'); }
+.icon-tiktok    { mask-image: url('../assets/icon/tiktok.svg');    -webkit-mask-image: url('../assets/icon/tiktok.svg'); }
+
+.contact__wa .icon { width: 22px; height: 22px; }
 
 /* =====================================================
    RESPONSIVE GENERAL

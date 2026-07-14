@@ -216,36 +216,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const memberProjects = portfolio.filter(p =>
       member.projects?.includes(p.id) || p.team_ids?.includes(member.id)
     );
-
     if (memberProjects.length) {
-      memberProjects.forEach(proj => {
-        const card = document.createElement('div');
-        card.className = 'portfolio-card reveal';
-        card.setAttribute('role', 'link');
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `View project: ${proj.title}`);
-        card.innerHTML = `
-          <img src="${proj.thumb}" alt="${proj.title} — UMD Films Málaga" loading="lazy" />
-          <div class="portfolio-card__overlay">
-            <p class="portfolio-card__cat">${proj.category} · ${proj.year}</p>
-            <p class="portfolio-card__title">${proj.title}</p>
-          </div>
-          <div class="portfolio-card__play" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-          </div>
-        `;
-        const goToProject = () => {
-          window.location.href = UMD.rootPath(`portfolio/${proj.id}.html`);
-        };
-        card.addEventListener('click', goToProject);
-        card.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            goToProject();
-          }
-        });
-        projectsGrid.appendChild(card);
-      });
+      memberProjects.forEach(proj => projectsGrid.appendChild(UMD.buildPortfolioCard(proj, UMD.rootPath)));
     } else {
       document.getElementById('profileProjects')?.style.setProperty('display', 'none');
     }

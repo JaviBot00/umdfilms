@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   ]);
 
   const project = portfolio.find(p => p.id === projectId);
+  const trailerId = validYtUrl(project.trailer_youtube) ? UMD.extractYouTubeId(project.trailer_youtube) : null;
+  const fullId    = validYtUrl(project.full_video_youtube) ? UMD.extractYouTubeId(project.full_video_youtube) : null;
+  const heroId = trailerId || fullId;
+  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (project.thumb || 'assets/portfolio/placeholder.webp');
 
   /* ---- Nav + Footer + FAB ---- */
   await UMD.renderNav(config);
@@ -70,8 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
   setMeta('og:title',       document.title);
   setMeta('og:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
-  // setMeta('og:image',       `${config.brand.site_url}/${project.thumb}`);
-  setMeta('og:image',       `${project.thumb}`);
+  setMeta('og:image',       `${thumbSrc}`);
   setMeta('og:type',        'video.other');
   setMeta('og:url',         `${config.brand.site_url}/portfolio/${project.id}.html`);
   setMeta('og:site_name',   'UMD Films');
@@ -85,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setTwitter('twitter:card',        'summary_large_image');
   setTwitter('twitter:title',       document.title);
   setTwitter('twitter:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
-  setTwitter('twitter:image',       `${project.thumb}`);
+  setTwitter('twitter:image',       `${thumbSrc}`);
 
   // Schema VideoObject for projects with video
   if (project.trailer_youtube && !project.trailer_youtube.includes('PLACEHOLDER')) {
@@ -94,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       "@type": "VideoObject",
       "name": project.title,
       "description": project.synopsis || `${project.title} por UMD Films`,
-      "thumbnailUrl": `${project.thumb}`,
+      "thumbnailUrl": thumbSrc,
       "uploadDate": `${project.year}-01-01`,
       "director": { "@type": "Person", "name": project.director },
       "productionCompany": { "@type": "Organization", "name": "UMD Films" },
@@ -111,9 +114,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (filmHero) {
     filmHero.innerHTML = `
       <div class="film-hero__bg">
-        <img src="${project.thumb}"
-             alt="${project.title} — UMD Films"
-             fetchpriority="high" />
+        <img src="${thumbSrc}" data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)"
+          onerror="UMD.ytThumbAdvance(this)"
+          alt="${project.title}">
       </div>
       <div class="film-hero__overlay"></div>
       <div class="film-hero__content">
@@ -132,31 +135,71 @@ document.addEventListener('DOMContentLoaded', async () => {
     `;
   }
 
-  /* ---- TRAILER ---- */
+  /* ---- TRAILER / FULL VIDEO ---- */
   const trailerEl = document.getElementById('filmTrailer');
-  if (trailerEl) {
-    const hasTrailer = project.trailer_youtube && !project.trailer_youtube.includes('PLACEHOLDER');
 
-    if (hasTrailer) {
-      // Extract YouTube ID from URL
-      const ytId = extractYouTubeId(project.trailer_youtube);
-      if (ytId) {
-        trailerEl.innerHTML = `
-          <iframe
-            src="https://www.youtube.com/embed/${ytId}?rel=0"
-            title="${project.title} — Tráiler | UMD Films"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="lazy">
-          </iframe>`;
-      }
-    } else {
+  function validYtUrl(url) {
+    return url && !url.includes('PLACEHOLDER') && UMD.extractYouTubeId(url);
+  }
+
+  if (trailerEl) {
+    if (!trailerId && !fullId) {
       trailerEl.innerHTML = `
         <div class="film-trailer__placeholder">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
           <p>Vídeo pendiente de enlazar en portfolio.json</p>
         </div>`;
+    } else if (trailerId && fullId) {
+      // Ambos existen -> tabs
+      trailerEl.innerHTML = `
+        <div class="video-tabs" role="tablist" aria-label="Vídeo del proyecto">
+          <button role="tab" id="tab-trailer" aria-selected="true" aria-controls="videoPanel">Tráiler</button>
+          <button role="tab" id="tab-full" aria-selected="false" tabindex="-1" aria-controls="videoPanel">Corto completo</button>
+        </div>
+        <div class="video-panel" role="tabpanel" id="videoPanel" aria-labelledby="tab-trailer"></div>
+      `;
+      const panel = trailerEl.querySelector('#videoPanel');
+      const tabTrailer = trailerEl.querySelector('#tab-trailer');
+      const tabFull     = trailerEl.querySelector('#tab-full');
+
+      renderVideoTab(panel, trailerId, project.title + ' — Tráiler');
+
+      function activateTab(tab, other, ytId, label) {
+        tab.setAttribute('aria-selected', 'true');
+        tab.removeAttribute('tabindex');
+        other.setAttribute('aria-selected', 'false');
+        other.setAttribute('tabindex', '-1');
+        panel.setAttribute('aria-labelledby', tab.id);
+        renderVideoTab(panel, ytId, label);
+      }
+      tabTrailer.addEventListener('click', () => activateTab(tabTrailer, tabFull, trailerId, project.title + ' — Tráiler'));
+      tabFull.addEventListener('click',    () => activateTab(tabFull, tabTrailer, fullId, project.title + ' — Corto completo'));
+    } else {
+      // Solo uno de los dos -> sin tabs, directo
+      trailerEl.innerHTML = `<div class="video-panel" id="videoPanel"></div>`;
+      renderVideoTab(trailerEl.querySelector('#videoPanel'), trailerId || fullId, project.title);
     }
+  }
+
+  function renderVideoTab(container, ytId, title) {
+    container.innerHTML = `
+      <button class="video-facade" aria-label="Reproducir: ${title}">
+        <img src="${heroId}" data-yt-id="${ytId}" onload="UMD.ytThumbCheck(this)"
+            onerror="UMD.ytThumbAdvance(this)" alt="${title}">
+        <span class="video-facade__play" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        </span>
+      </button>
+      <a class="video-facade__yt-link" href="https://youtube.com/watch?v=${ytId}"
+        target="_blank" rel="noopener">Ver en YouTube ↗</a>
+    `;
+    container.querySelector('.video-facade').addEventListener('click', function () {
+      this.outerHTML = `
+        <iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0"
+                title="${title}"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen loading="lazy"></iframe>`;
+    }, { once: true });
   }
 
   /* ---- SYNOPSIS ---- */
@@ -257,16 +300,3 @@ document.addEventListener('DOMContentLoaded', async () => {
   }, 100);
 
 });
-
-/* ---- Helper: extract YouTube ID from any URL format ---- */
-function extractYouTubeId(url) {
-  const patterns = [
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
-    /youtube\.com\/shorts\/([^&\n?#]+)/
-  ];
-  for (const re of patterns) {
-    const match = url.match(re);
-    if (match) return match[1];
-  }
-  return null;
-}
