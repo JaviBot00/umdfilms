@@ -1,13 +1,24 @@
 {
+  "_comment": "Textos editoriales de index.html. NO incluye datos que ya viven en config.json (contacto, redes sociales) ni services.json (opciones del select) — esos se generan en main.js a partir de esos ficheros para no duplicar la misma información en dos sitios.",
+
   "hero": {
     "eyebrow": "Productora audiovisual · Málaga · Alcance nacional",
     "title_pre": "Convertimos tu ",
     "title_highlight": "historia",
     "title_post": " en cine",
-    "subtitle": "Videoclips, publicidad, cine y producción musical.\nCon alma malagueña y alcance nacional.",
+    "subtitle_lines": [
+      "Videoclips, publicidad, cine y producción musical.",
+      "Con alma malagueña y alcance nacional."
+    ],
     "cta_primary": { "label": "Ver servicios", "href": "#servicios" },
-    "cta_secondary": { "label": "Ver portafolio", "href": "#portafolio" }
+    "cta_secondary": { "label": "Ver portafolio", "href": "#portafolio" },
+    "scroll_label": "Scroll"
   },
+
+  "trust": {
+    "label": "Han confiado en nosotros"
+  },
+
   "about": {
     "eyebrow": "Quiénes somos",
     "title_pre": "Productora audiovisual en ",
@@ -15,18 +26,52 @@
     "title_post": ".",
     "title_line2": "Cine que llega a cualquier parte.",
     "paragraphs": [
-      "Somos UMD Films, una productora fundada en 2019 por Alejandro y Adrián...",
-      "Nos mueve la creatividad, la versatilidad y el coraje..."
-    ]
+      "Somos UMD Films, una productora fundada en 2019 por Alejandro y Adrián con un propósito claro: convertir Málaga en referente cinematográfico. Hoy somos un equipo de jóvenes talentos y profesionales con trayectoria real en el sector.",
+      "Nos mueve la creatividad, la versatilidad y el coraje de contar historias que dejan huella. Cada proyecto es una aventura donde conviven técnica, emoción y mirada artística."
+    ],
+    "cta_primary": { "label": "Conoce al equipo", "href": "#equipo" },
+    "cta_secondary": { "label": "Hablemos de tu proyecto", "href": "#contacto" }
   },
+
+  "services": {
+    "eyebrow": "Lo que hacemos",
+    "title": "Servicios"
+  },
+
+  "portfolio": {
+    "eyebrow": "Nuestro trabajo",
+    "title": "Portafolio"
+  },
+
+  "team": {
+    "eyebrow": "Las personas detrás",
+    "title": "El equipo"
+  },
+
   "cta_band": {
     "title": "¿Tienes un proyecto en mente?",
-    "subtitle": "Cuéntanoslo. Convertimos ideas en imágenes que impactan."
+    "subtitle": "Cuéntanoslo. Convertimos ideas en imágenes que impactan.",
+    "cta": { "label": "Empezar ahora", "href": "#contacto" }
   },
+
   "contact": {
     "eyebrow": "Contacto",
     "title_pre": "Hablemos de",
     "title_highlight": "tu proyecto",
-    "body": "Estamos en Málaga pero trabajamos en toda España..."
+    "body": "Estamos en Málaga pero trabajamos en toda España. Escríbenos por WhatsApp o rellena el formulario y te respondemos en menos de 24h.",
+    "wa_label": "WhatsApp directo",
+    "form": {
+      "name_label": "Nombre",
+      "name_placeholder": "Tu nombre",
+      "email_label": "Email",
+      "email_placeholder": "tu@email.com",
+      "service_label": "¿Qué necesitas?",
+      "service_placeholder": "Selecciona un servicio",
+      "service_extra_options": ["Videoclip", "Publicidad", "Otro"],
+      "message_label": "Cuéntanos tu proyecto",
+      "message_placeholder": "Describe tu idea...",
+      "submit_label": "Enviar mensaje",
+      "note": "Te respondemos en menos de 24h por WhatsApp."
+    }
   }
 }

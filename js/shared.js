@@ -24,7 +24,7 @@ function rootPath(path) {
   // Local: /index.html → folders=[] → prefix=''
   // GH Pages: /umdfilms/index.html → folders=['umdfilms'] → prefix='../'  ← PROBLEM
   // Solution: detect repo name and exclude it from the count
-  const knownSubfolders = ['team', 'portfolio', 'equipment'];
+  const knownSubfolders = ['team', 'portfolio', 'equipment', 'artists'];
   const depth = folders.filter(f => knownSubfolders.includes(f)).length;
 
   return depth > 0 ? '../'.repeat(depth) + path : path;
@@ -205,15 +205,15 @@ async function renderFooter(config) {
         <div class="footer__socials">
           ${cfg.social.instagram ? `
           <a href="${cfg.social.instagram}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            <span class="icon icon-instagram" aria-hidden="true"></span>
           </a>` : ''}
           ${cfg.social.youtube ? `
           <a href="${cfg.social.youtube}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <span class="icon icon-youtube" aria-hidden="true"></span>
           </a>` : ''}
           ${cfg.social.tiktok ? `
           <a href="${cfg.social.tiktok}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="TikTok">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            <span class="icon icon-tiktok" aria-hidden="true"></span>
           </a>` : ''}
         </div>
       </div>
@@ -248,6 +248,7 @@ function renderFAB(config) {
   const fab  = document.querySelector('.fab-wa');
   if (fab) {
     fab.href = `https://wa.me/${wa}?text=${msg}`;
+    fab.innerHTML = `<span class="icon icon-whatsapp" aria-hidden="true"></span>`;
   }
 }
 
@@ -332,6 +333,103 @@ function extractYouTubeId(url) {
   return null;
 }
 
+function validYtUrl(url) {
+  return url && !url.includes('PLACEHOLDER') && UMD.extractYouTubeId(url);
+}
+
+/* ---- Grid genérico con filtros opcionales ---- */
+function renderFilterableGrid({ items, filterEl, gridEl, categoryField, labels = {}, allLabel = 'Todo', cardBuilder }) {
+  function paint(filter) {
+    const filtered = (!categoryField || filter === 'all')
+      ? items
+      : items.filter(i => i[categoryField] === filter);
+
+    gridEl.innerHTML = '';
+    filtered.forEach((item, i) => gridEl.appendChild(cardBuilder(item, i)));
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    gridEl.querySelectorAll('.reveal, .gear-card, .team-card', '.portfolio-card').forEach(c => obs.observe(c));
+  }
+
+  if (filterEl && categoryField) {
+    const categories = ['all', ...new Set(items.map(i => i[categoryField]))];
+    filterEl.innerHTML = '';
+    categories.forEach(cat => {
+      const btn = document.createElement('button');
+      const isActive = cat === 'all';
+      btn.className = `filter${isActive ? ' active' : ''}`;
+      btn.dataset.filter = cat;
+      btn.textContent = cat === 'all' ? allLabel : (labels[cat] || cat);
+      btn.setAttribute('aria-pressed', String(isActive));
+      filterEl.appendChild(btn);
+    });
+    filterEl.querySelectorAll('.filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterEl.querySelectorAll('.filter').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        paint(btn.dataset.filter);
+      });
+    });
+  }
+
+  paint('all');
+}
+
+/* ---- Card builders reutilizables ---- */
+function buildTeamCard(member, rootPathFn) {
+  const card = document.createElement('div');
+  card.className = 'team-card';
+  card.setAttribute('role', 'link');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-label', `Ver perfil de ${member.name}`);
+  card.innerHTML = `
+    <div class="team-card__img-wrap">
+      <img class="team-card__img" src="${rootPathFn(member.photo_cover)}"
+           alt="${member.name} — ${member.role} — UMD Films" loading="lazy" />
+      <span class="team-card__badge">Ver perfil ↗</span>
+    </div>
+    <div class="team-card__info">
+      <p class="team-card__name">${member.name}</p>
+      <p class="team-card__role">${member.role}</p>
+    </div>`;
+  const go = () => { window.location.href = rootPathFn(`team/${member.id}.html`); };
+  card.addEventListener('click', go);
+  card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  return card;
+}
+
+function buildPortfolioCard(proj, rootPathFn) {
+  const card = document.createElement('div');
+  const trailerId = validYtUrl(proj.trailer_youtube) ? UMD.extractYouTubeId(proj.trailer_youtube) : null;
+  const fullId    = validYtUrl(proj.full_video_youtube) ? UMD.extractYouTubeId(proj.full_video_youtube) : null;
+  const heroId = trailerId || fullId;
+  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (proj.thumb || 'assets/portfolio/placeholder.webp');
+
+  card.className = 'portfolio-card';
+  card.setAttribute('role', 'link');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-label', `Ver proyecto: ${proj.title}`);
+  card.innerHTML = `
+    <img src="${thumbSrc}" data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)"
+        onerror="UMD.ytThumbAdvance(this)" alt="${proj.title} — UMD Films" loading="lazy" />
+    <div class="portfolio-card__overlay">
+      <p class="portfolio-card__cat">${proj.category} · ${proj.year}</p>
+      <p class="portfolio-card__title">${proj.title}</p>
+    </div>
+    <div class="portfolio-card__play" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+    </div>`;
+  const go = () => { window.location.href = rootPathFn(`portfolio/${proj.id}.html`); };
+  card.addEventListener('click', go);
+  card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  return card;
+}
 
 /* ---- Export for global use ---- */
 window.UMD = {
@@ -351,5 +449,8 @@ window.UMD = {
   ytThumbUrl,
   ytThumbAdvance,
   ytThumbCheck,
-  extractYouTubeId
+  extractYouTubeId,
+  renderFilterableGrid,
+  buildTeamCard,
+  buildPortfolioCard
 };
