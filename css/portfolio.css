@@ -16,7 +16,7 @@
   position: absolute;
   inset: 0;
   /* Fondo negro en la cabecera */
-  /* background: var(--dark-mid); */
+  background: var(--dark-mid);
 }
 .film-hero__bg img {
   width: 100%; height: 100%;
@@ -100,35 +100,111 @@
   align-items: start;
 }
 
-/* Trailer embed */
+/* Trailer / full-video container (sin aspect-ratio propio: lo llevan los hijos) */
 .film-trailer {
-  aspect-ratio: 16/9;
   border-radius: var(--radius-card);
   overflow: hidden;
   background: var(--dark-mid);
   border: 1px solid var(--red-dim);
   margin-bottom: 2rem;
 }
-.film-trailer iframe {
+
+/* Tabs (tráiler / corto completo) — solo aparecen si hay ambos vídeos */
+.video-tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--black);
+}
+.video-tabs button {
+  flex: 1;
+  padding: 0.85em 1em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--dark-mid);
+  transition: color 0.25s, background 0.25s;
+}
+.video-tabs button:hover { color: var(--cream); }
+.video-tabs button[aria-selected="true"] {
+  background: var(--red);
+  color: var(--white);
+}
+
+/* Panel: aquí vive el facade o el iframe, con el aspect-ratio real */
+.video-panel {
+  position: relative;
+  aspect-ratio: 16/9;
+}
+.video-panel iframe {
   width: 100%; height: 100%;
   border: none;
+  display: block;
 }
-.film-trailer__placeholder {
+
+/* Facade: miniatura clicable antes de montar el iframe */
+.video-facade {
+  position: relative;
   width: 100%; height: 100%;
+  display: block;
+  cursor: pointer;
+  background: var(--dark-soft);
+}
+.video-facade img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-expo), filter 0.4s;
+  filter: brightness(0.75);
+}
+.video-facade:hover img,
+.video-facade:focus-visible img {
+  transform: scale(1.03);
+  filter: brightness(0.55);
+}
+.video-facade__play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px; height: 68px;
+  border-radius: 50%;
+  background: var(--red);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  color: var(--muted);
-  font-size: 0.85rem;
+  fill: var(--white);
+  margin-left: 4px;
+  color: var(--white);
+  transition: transform 0.3s var(--ease-expo), background 0.3s;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
 }
-.film-trailer__placeholder svg {
-  width: 48px; height: 48px;
-  fill: none;
-  stroke: var(--red);
-  stroke-width: 1.5;
-  opacity: 0.6;
+.video-facade:hover .video-facade__play,
+.video-facade:focus-visible .video-facade__play {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: var(--red-light);
+}
+
+/* Enlace "Ver en YouTube" — siempre visible, sobre el facade */
+.video-facade__yt-link {
+  position: absolute;
+  bottom: 0.85rem;
+  right: 0.85rem;
+  z-index: 2;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream);
+  /* intentional: overlay on photo, not theme border */
+  background: rgba(8,8,8,0.6);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.4em 0.9em;
+  border-radius: 100px;
+  backdrop-filter: blur(6px);
+  transition: background 0.25s, border-color 0.25s;
+}
+.video-facade__yt-link:hover {
+  background: var(--red);
+  border-color: var(--red);
 }
 
 /* Synopsis */

@@ -2,8 +2,8 @@
   {
     "_comment": "Founder — datos reales, fotos pendientes de activos locales",
     "id": "alejandro-luque",
-    "name": "Alejandro",
-    "surname": "Luque",
+    "name": "Alejandro Luque",
+    "surname": "",
     "role": "Director creativo y ejecutivo",
     "bio": "Control total de la productora y última palabra en todo movimiento en nombre de UMD Films.",
     "photo_cover": "assets/equipo/alejandro-cover.webp",
@@ -17,19 +17,20 @@
       "instagram": "https://www.instagram.com/alejandroluque.film/",
       "youtube": ""
     },
-    "projects": ["cautivo-malaga", "sin-paz-no-hay-descanso", "malaga-cf", "interludio", "boda-ester-y-juan"],
+    "projects": ["cautivo-malaga", "sin-paz-no-hay-descanso", "memoria-compromiso-y-fe", "interludio", "boda-ester-y-juan"],
     "specialties": [
       "Dirección",
       "Producción ejecutiva",
       "Concepto creativo",
       "Eventos"
     ],
-    "featured": true
+    "featured": true,
+    "represented_artist": false
   },
   {
     "id": "adrian-roman",
-    "name": "Adrián",
-    "surname": "Román",
+    "name": "Adrián Román",
+    "surname": "",
     "role": "Productor general y director de contenidos tradicional",
     "bio": "Encargado de la supervisión general y dirección estratégica de la línea de contenido tradicional y documental.",
     "photo_cover": "assets/equipo/adrian-cover.webp",
@@ -40,12 +41,13 @@
     },
     "projects": [],
     "specialties": ["Producción", "Corporativo", "Documentales"],
-    "featured": true
+    "featured": true,
+    "represented_artist": false
   },
   {
     "id": "ivan-pascual",
-    "name": "Iván",
-    "surname": "Pascual",
+    "name": "Iván Pascual",
+    "surname": "",
     "role": "Director de Fotografía",
     "bio": "El responsable de traducir las emociones del guion en imágenes. Diseña la iluminación, la composición y el movimiento de cámara, trabajando estrechamente con dirección para crear la atmósfera visual, la textura y la identidad cromática de cada producción.",
     "photo_cover": "assets/equipo/ivan-cover.webp",
@@ -56,12 +58,13 @@
     },
     "projects": [],
     "specialties": ["Fotografía", "Iluminación", "Cine"],
-    "featured": true
+    "featured": true,
+    "represented_artist": false
   },
   {
     "id": "javi-costoya",
-    "name": "Javi",
-    "surname": "Costoya",
+    "name": "Javi Costoya",
+    "surname": "",
     "role": "Ingeniero de Sonido",
     "bio": "El responsable de gestionar y ejecutar todos los aspectos técnicos del audio.",
     "photo_cover": "assets/equipo/javi-sonido-cover.webp",
@@ -72,12 +75,13 @@
     },
     "projects": [],
     "specialties": ["Sonido directo", "Mezcla", "Masterización"],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "ivan-ambrosio",
-    "name": "Iván",
-    "surname": "Ambrosio",
+    "name": "Iván Ambrosio",
+    "surname": "",
     "role": "Editor y VFX Artist",
     "bio": "Según el encargo, editar los proyectos de UMD Films.",
     "photo_cover": "assets/equipo/ivan-ambrosio-cover.webp",
@@ -88,12 +92,13 @@
     },
     "projects": [],
     "specialties": ["Edición", "VFX", "Motion Graphics"],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "sergio-pastor",
-    "name": "Sergio",
-    "surname": "Pastor",
+    "name": "Sergio Pastor",
+    "surname": "",
     "role": "Compositor musical y diseñador de sonido",
     "bio": "Encargado de realizar todos los trabajos musicales de UMD Films.",
     "photo_cover": "assets/equipo/sergio-pastor-cover.webp",
@@ -104,12 +109,13 @@
     },
     "projects": [],
     "specialties": ["Composición", "Diseño de sonido", "Bandas sonoras"],
-    "featured": true
+    "featured": true,
+    "represented_artist": true
   },
   {
     "id": "javier-botella",
-    "name": "Javier",
-    "surname": "Botella",
+    "name": "Javier Botella",
+    "surname": "",
     "role": "Informático, programador y desarrollador SEO",
     "bio": "Encargado de realizar todos los trabajos informáticos y gestionar la página web.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -120,12 +126,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": true
+    "featured": true,
+    "represented_artist": false
   },
   {
     "id": "javier-abelaira",
-    "name": "Javier",
-    "surname": "Abelaira",
+    "name": "Javier Abelaira",
+    "surname": "",
     "role": "Jefe de teatro y director de actores",
     "bio": "Director de teatro junto a Alejandro y director de actores en cada proyecto audiovisual que realicemos.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -136,12 +143,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": true
+    "featured": true,
+    "represented_artist": false
   },
   {
     "id": "pol-ojea",
-    "name": "Pol",
-    "surname": "Ojea",
+    "name": "Pol Ojea",
+    "surname": "",
     "role": "Subdirector y director de contenidos en redes sociales",
     "bio": "Control parcial de la productora y toma de decisión junto con los directores en cada movimiento. Toma total de decisiones respecto a la imagen de UMD Films en redes sociales y creación de contenido.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -152,20 +160,22 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": true
+    "featured": true,
+    "represented_artist": false
   },
   {
     "id": "loreto-navas",
-    "name": "Loreto",
-    "surname": "Navas",
+    "name": "Loreto Navas",
+    "surname": "",
     "role": "Directora de contenidos de Episodio Cero y Málaga Coronada, chica de imagen y equipo creativo",
-    "bio": "Encargada de dirigir cada vídeo de Episodio Cero y crear contenido para `Málaga Coronada´ en redes sociales y su creación de contenido. Además, forma parte de nuestro equipo creativo.",
+    "bio": "Encargada de dirigir cada vídeo de Episodio Cero y crear contenido para `Málaga Coronada` en redes sociales y su creación de contenido. Además, forma parte de nuestro equipo creativo.",
     "photo_cover": "assets/equipo/placeholder.webp",
     "photos_extra": [],
     "social": { "instagram": "", "youtube": "" },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "eva-cano",
@@ -181,12 +191,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "maria-arnes",
-    "name": "María",
-    "surname": "Arnés",
+    "name": "María Arnés",
+    "surname": "",
     "role": "Caracterización y maquillaje profesional",
     "bio": "Encargada de realizar efectos especiales (heridas, prótesis, criaturas, envejecimiento), maquillaje profesional y peluquería.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -197,12 +208,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "cristina-rivas",
-    "name": "Cristina",
-    "surname": "Rivas",
+    "name": "Cristina Rivas",
+    "surname": "",
     "role": "Directora de arte y diseño gráfico",
     "bio": "Se encarga de construir la identidad visual de cada proyecto, definiendo la estética, el color y la línea gráfica desde la fase de desarrollo hasta el cartel final. Su objetivo es asegurar que la propuesta visual potencie la narrativa de cada producción con coherencia, fuerza y estilo propio. Además, forma parte de nuestro equipo creativo.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -213,12 +225,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "julia-flores",
-    "name": "Julia",
-    "surname": "Flores",
+    "name": "Julia Flores",
+    "surname": "",
     "role": "Jefa de producción",
     "bio": "Rol clave para preproducción y día a día en la productora. Realización y revisión de documentos, organización previo a rodajes y mano derecha de los directores. Además, forma parte de nuestro equipo creativo.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -229,12 +242,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "dario-gonzalez",
-    "name": "Darío",
-    "surname": "González",
+    "name": "Darío González",
+    "surname": "",
     "role": "Ayudante de producción",
     "bio": "Rol de soporte clave en la logística diaria de los rodajes, gestión de órdenes de trabajo en set y asistencia directa a la Jefa de Producción en el día a día.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -245,12 +259,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "elvira-ojea",
-    "name": "Elvira",
-    "surname": "Ojea",
+    "name": "Elvira Ojea",
+    "surname": "",
     "role": "Guionista",
     "bio": "La mente detrás de las historias que contamos. Traduce conceptos abstractos en narrativas cinematográficas potentes, diseñando la estructura dramática y el ritmo visual del guion. Trabaja en la base del desarrollo para asegurar que cada proyecto tenga un mensaje claro y enganche desde la primera página. Además, forma parte de nuestro equipo creativo.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -261,12 +276,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "marta-guerra",
-    "name": "Marta",
-    "surname": "Guerra",
+    "name": "Marta Guerra",
+    "surname": "",
     "role": "Directora de fotografía",
     "bio": "La responsable de traducir las emociones del guion en imágenes. Diseña la iluminación, la composición y el movimiento de cámara, trabajando estrechamente con dirección para crear la atmósfera visual, la textura y la identidad cromática de cada producción.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -277,12 +293,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "pau-soles",
-    "name": "Pau",
-    "surname": "Solés",
+    "name": "Pau Solés",
+    "surname": "",
     "role": "Productor ejecutivo asociado",
     "bio": "Co-responsable de la estrategia comercial de la productora, enfocado en el cierre de contratos publicitarios o cinematográficos y la optimización de recursos para los proyectos de línea de la productora. ",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -293,12 +310,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "sofia-garcia",
-    "name": "Sofía",
-    "surname": "García",
+    "name": "Sofía García",
+    "surname": "",
     "role": "Equipo creativo",
     "bio": "Es el nexo visual y la representación de la productora ante el público y los clientes. Integrada en el equipo creativo, se encarga de proyectar la identidad, el estilo y los valores de la marca en eventos, campañas y activaciones, asegurando que nuestra presencia pública sea siempre impecable, coherente y magnética.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -309,12 +327,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "sandra-jimenez",
-    "name": "Sandra",
-    "surname": "Jiménez",
+    "name": "Sandra Jiménez",
+    "surname": "",
     "role": "Fotógrafa y foto fija",
     "bio": "Encargada de capturar la esencia de la productora tanto dentro como fuera del set. Su rol abarca desde la foto fija en rodajes (inmortalizando el detrás de cámaras y la fuerza visual de cada producción) hasta la cobertura de eventos, sesiones editoriales con modelos y proyectos comerciales, aportando siempre una mirada estética e identidad propia a cada captura.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -325,12 +344,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "alicia-caro",
-    "name": "Alicia",
-    "surname": "Caro",
+    "name": "Alicia Caro",
+    "surname": "",
     "role": "Fotógrafa y foto fija",
     "bio": "Encargada de capturar la esencia de la productora tanto dentro como fuera del set. Su rol abarca desde la foto fija en rodajes (inmortalizando el detrás de cámaras y la fuerza visual de cada producción) hasta la cobertura de eventos, sesiones editoriales con modelos y proyectos comerciales, aportando siempre una mirada estética e identidad propia a cada captura.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -341,12 +361,13 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   },
   {
     "id": "miguel-matarin",
-    "name": "Miguel",
-    "surname": "Matarín",
+    "name": "Miguel Matarín",
+    "surname": "",
     "role": "Director de arte",
     "bio": "Se encarga de conceptualizar y construir el universo visual y espacial de cada producción. Desde la paleta de colores y la selección de localizaciones hasta el diseño de los decorados, transforma los espacios físicos para que respiren la misma atmósfera que dicta la historia, asegurando una identidad visual única en cada plano.",
     "photo_cover": "assets/equipo/placeholder.webp",
@@ -357,6 +378,7 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false
+    "featured": false,
+    "represented_artist": false
   }
 ]

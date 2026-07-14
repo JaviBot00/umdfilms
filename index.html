@@ -30,14 +30,14 @@
   <meta property="og:url"         content="https://umdfilms.com/" />
   <meta property="og:title"       content="UMD Films | Productora Audiovisual en Málaga" />
   <meta property="og:description" content="Videoclips, publicidad, cine y producción musical con alma malagueña y alcance nacional." />
-  <meta property="og:image"       content="https://umdfilms.com/assets/portfolio/og-cover.png" />
+  <meta property="og:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />
   <meta property="og:locale"      content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="UMD Films | Productora Audiovisual en Málaga" />
   <meta name="twitter:description" content="Videoclips, publicidad, cine y producción musical." />
-  <meta name="twitter:image"       content="https://umdfilms.com/assets/portfolio/og-cover.png" />
+  <meta name="twitter:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />
 
   <!-- Favicon (replace with real one when available) -->
   <link rel="icon"             href="assets/logo/favicon.svg"   type="image/svg+xml"/>
@@ -92,41 +92,29 @@
 
     <!-- Main content -->
     <div class="hero__content">
-      <p class="hero__eyebrow reveal">Productora audiovisual · Málaga · Alcance nacional</p>
-      <h1 class="hero__title reveal d1">
-        Convertimos tu <em>historia</em> en cine
-      </h1>
-      <p class="hero__sub reveal d2">
-        Videoclips, publicidad, cine y producción musical.<br />
-        Con alma malagueña y alcance nacional.
-      </p>
-      <div class="hero__actions reveal d3">
-        <a href="#servicios" class="btn btn-primary btn-lg">Ver servicios</a>
-        <a href="#portafolio" class="btn btn-ghost btn-lg">Ver portafolio</a>
-      </div>
+      <p class="hero__eyebrow reveal" id="heroEyebrow"></p>
+      <h1 class="hero__title reveal d1" id="heroTitle"></h1>
+      <p class="hero__sub reveal d2" id="heroSub"></p>
+      <div class="hero__actions reveal d3" id="heroActions"></div>
     </div>
 
     <!-- Animated scroll indicator -->
     <div class="hero__scroll" aria-hidden="true">
-      <span>Scroll</span>
+      <span id="heroScrollLabel"></span>
       <div class="hero__scroll-line"></div>
     </div>
   </section>
-
 
   <!-- ======= TRUST BAR =======
        Client logos in infinite marquee
        Duplicated by JS (shared.js) for continuous loop
   ======= -->
   <section class="trust" aria-label="Clientes">
-    <p class="trust__label">Han confiado en nosotros</p>
+    <p class="trust__label" id="trustLabel"></p>
     <div class="trust__track" aria-hidden="true">
-      <div class="trust__inner" id="trustInner">
-        <!-- Populated by main.js from data/partners.json -->
-      </div>
+      <div class="trust__inner" id="trustInner"></div>
     </div>
   </section>
-
 
   <!-- ======= ABOUT =======
        Grid: text left + stats right
@@ -135,28 +123,11 @@
   ======= -->
   <section class="about section" id="nosotros">
     <div class="container about__grid">
-
-      <!-- Text -->
       <div class="about__text">
-        <p class="eyebrow reveal">Quiénes somos</p>
-        <h2 class="section-title reveal">
-          Productora audiovisual en <em>Málaga</em>.<br/>
-          Cine que llega a cualquier parte.
-        </h2>
-        <p class="about__body reveal">
-          Somos UMD Films, una productora fundada en 2019 por Alejandro y Adrián con
-          un propósito claro: convertir Málaga en referente cinematográfico. Hoy somos
-          un equipo de jóvenes talentos y profesionales con trayectoria real en el sector.
-        </p>
-        <p class="about__body reveal">
-          Nos mueve la creatividad, la versatilidad y el coraje de contar historias que
-          dejan huella. Cada proyecto es una aventura donde conviven técnica, emoción y
-          mirada artística.
-        </p>
-        <div class="about__actions reveal">
-          <a href="#equipo" class="btn btn-outline">Conoce al equipo</a>
-          <a href="#contacto" class="btn btn-ghost">Hablemos de tu proyecto</a>
-        </div>
+        <p class="eyebrow reveal" id="aboutEyebrow"></p>
+        <h2 class="section-title reveal" id="aboutTitle"></h2>
+        <div id="aboutParagraphs"></div>
+        <div class="about__actions reveal" id="aboutActions"></div>
       </div>
 
       <!-- Stats: generated in main.js from JSON.
@@ -166,13 +137,9 @@
              - current year - founded_year → Years
              - config.location   → Location
       -->
-      <div class="stats reveal" id="statsGrid" role="list" aria-label="Estadísticas UMD Films">
-        <!-- Relleno por main.js -->
-      </div>
-
+      <div class="stats reveal" id="statsGrid" role="list" aria-label="Estadísticas UMD Films"></div>
     </div>
   </section>
-
 
   <!-- ======= SERVICES =======
        Grid generated from data/services.json by main.js
@@ -181,8 +148,8 @@
   ======= -->
   <section class="services section" id="servicios">
     <div class="container">
-      <p class="eyebrow reveal">Lo que hacemos</p>
-      <h2 class="section-title reveal">Servicios</h2>
+      <p class="eyebrow reveal" id="servicesEyebrow"></p>
+      <h2 class="section-title reveal" id="servicesTitle"></h2>
 
       <!-- Grid generated by main.js from services.json -->
       <div class="services__grid reveal" id="servicesGrid" role="list"></div>
@@ -194,7 +161,6 @@
     </div>
   </section>
 
-
   <!-- ======= PORTFOLIO =======
        Filters generated from unique categories in JSON
        Cards: click → portfolio/[id].html
@@ -202,27 +168,16 @@
   ======= -->
   <section class="portfolio section" id="portafolio">
     <div class="container">
-      <p class="eyebrow reveal">Nuestro trabajo</p>
-      <h2 class="section-title reveal">Portafolio</h2>
-
-      <!-- Filters (all, videoclip, publicidad, cine, corporativo) -->
-      <div class="portfolio__filters reveal" id="portfolioFilters"
-            role="group" aria-label="Filtrar por categoría">
-      </div>
+      <p class="eyebrow reveal" id="portfolioEyebrow"></p>
+      <h2 class="section-title reveal" id="portfolioTitle"></h2>
 
       <!-- Project grid, generated by main.js -->
       <div class="portfolio__grid" id="portfolioGrid"></div>
 
-      <div class="portfolio__cta reveal">
-        <a href="https://www.youtube.com/@UMDFilmsoficial"
-           target="_blank" rel="noopener"
-           class="btn btn-primary">
-          Ver canal de YouTube ↗
-        </a>
-      </div>
+      <div class="portfolio__cta reveal" id="portfolioCta"></div>
+      <!-- <a href="portfolio/index.html" class="btn btn-outline">Ver todos los proyectos ↗</a> -->
     </div>
   </section>
-
 
   <!-- ======= TEAM =======
        Cards generated from data/team.json by main.js
@@ -231,14 +186,14 @@
   ======= -->
   <section class="team section" id="equipo">
     <div class="container">
-      <p class="eyebrow reveal">Las personas detrás</p>
-      <h2 class="section-title reveal">El equipo</h2>
+      <p class="eyebrow reveal" id="teamEyebrow"></p>
+      <h2 class="section-title reveal" id="teamTitle"></h2>
 
       <!-- Grid generated by main.js -->
       <div class="team__grid" id="teamGrid" role="list"></div>
+      <!-- <a href="team/index.html" class="btn btn-outline">Ver equipo completo ↗</a> -->
     </div>
   </section>
-
 
   <!-- ======= CTA BAND =======
        Central conversion strip
@@ -246,12 +201,11 @@
   ======= -->
   <section class="cta-band" aria-label="Llamada a la acción">
     <div class="container">
-      <h2 class="cta-band__title reveal">¿Tienes un proyecto en mente?</h2>
-      <p class="cta-band__sub reveal d1">Cuéntanoslo. Convertimos ideas en imágenes que impactan.</p>
-      <a href="#contacto" class="btn btn-primary btn-lg reveal d2">Empezar ahora</a>
+      <h2 class="cta-band__title reveal" id="ctaBandTitle"></h2>
+      <p class="cta-band__sub reveal d1" id="ctaBandSub"></p>
+      <a href="#" class="btn btn-primary btn-lg reveal d2" id="ctaBandBtn"></a>
     </div>
   </section>
-
 
   <!-- ======= CONTACT =======
        Grid: info left + form right
@@ -264,68 +218,38 @@
 
       <!-- Contact info -->
       <div class="contact__info">
-        <p class="eyebrow reveal">Contacto</p>
-        <h2 class="section-title reveal">
-          Hablemos de<br /><em>tu proyecto</em>
-        </h2>
-        <p class="contact__body reveal">
-          Estamos en Málaga pero trabajamos en toda España. Escríbenos por
-          WhatsApp o rellena el formulario y te respondemos en menos de 24h.
-        </p>
-        <div class="contact__links reveal">
-          <!-- WhatsApp directo -->
-          <a href="https://wa.me/34675185198?text=Hola%2C%20me%20interesa%20contratar%20vuestros%20servicios."
-             class="contact__wa" target="_blank" rel="noopener">
-            <!-- Inline WhatsApp SVG to avoid external icon dependencies -->
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-            </svg>
-            WhatsApp directo
-          </a>
-          <a href="https://www.instagram.com/umdfilms/"    class="contact__social-link" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://www.youtube.com/@UMDFilmsoficial" class="contact__social-link" target="_blank" rel="noopener">YouTube</a>
-        </div>
+        <p class="eyebrow reveal" id="contactEyebrow"></p>
+        <h2 class="section-title reveal" id="contactTitle"></h2>
+        <p class="contact__body reveal" id="contactBody"></p>
+        <div class="contact__links reveal" id="contactLinks"></div>
       </div>
 
       <!-- Form -->
       <form class="contact__form reveal" id="contactForm" novalidate aria-label="Formulario de contacto">
         <div class="form-group">
-          <label for="name">Nombre</label>
+          <label for="name"></label>
           <input type="text" id="name" name="name" placeholder="Tu nombre" required autocomplete="name" />
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email"></label>
           <input type="email" id="email" name="email" placeholder="tu@email.com" required autocomplete="email" />
         </div>
         <div class="form-group">
-          <label for="service">¿Qué necesitas?</label>
-          <select id="service" name="service">
-            <option value="">Selecciona un servicio</option>
-            <option>Producción Audiovisual</option>
-            <option>Videoclip</option>
-            <option>Publicidad</option>
-            <option>Producción Musical</option>
-            <option>VFX y Edición</option>
-            <option>Fotografía</option>
-            <option>Diseño Gráfico</option>
-            <option>Desarrollo Web & SEO</option>
-            <option>Alquiler de Material</option>
-            <option>Otro</option>
-          </select>
+          <label for="service"></label>
+          <select id="service" name="service"></select>
         </div>
         <div class="form-group">
-          <label for="message">Cuéntanos tu proyecto</label>
+          <label for="message"></label>
           <textarea id="message" name="message" rows="4" placeholder="Describe tu idea..."></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-full">Enviar mensaje</button>
-        <p class="form-note">Te respondemos en menos de 24h por WhatsApp.</p>
+        <button type="submit" class="btn btn-primary btn-full"></button>
+        <p class="form-note"></p>
       </form>
 
     </div>
   </section>
 
   </main>
-
 
   <!-- ======= FOOTER =======
        Dynamically rendered by shared.js > renderFooter()
@@ -334,17 +258,11 @@
   ======= -->
   <footer class="footer" id="footer" role="contentinfo"></footer>
 
-
   <!-- ======= FAB WHATSAPP =======
        Always-visible floating button.
        href: dynamically populated from config.json by shared.js > renderFAB()
   ======= -->
-  <a href="#" class="fab-wa" id="fabWa" target="_blank" rel="noopener" aria-label="Contact via WhatsApp">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-    </svg>
-  </a>
-
+  <a href="#" class="fab-wa" id="fabWa" target="_blank" rel="noopener" aria-label="Contact via WhatsApp"></a>
 
   <!-- ======= SCRIPTS =======
        Required load order:

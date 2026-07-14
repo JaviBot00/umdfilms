@@ -1,0 +1,25 @@
+[
+  {
+    "_comment": "Plantilla — solo artistas EXTERNOS al equipo. Para gente del equipo que también sea artista representado, usa el campo represented_artist:true en team.json en vez de duplicarla aquí.",
+    "id": "artista-externo-placeholder",
+    "name": "Nombre del artista",
+    "role": "Especialidad (cantante, DJ, banda...)",
+    "bio": "Bio corta pendiente de rellenar.",
+    "photo": "assets/artists/placeholder.webp",
+    "social": {
+      "instagram": "",
+      "youtube": ""
+    }
+  },
+  {
+    "id": "maria-hernandez",
+    "name": "María Hernández",
+    "role": "Cantante y compositora",
+    "bio": "Cantante y compositora con una voz única y un estilo que fusiona géneros. Su música transmite emociones profundas y conecta con el público de manera especial.",
+    "photo": "assets/artists/maria-hernandez.webp",
+    "social": {
+      "instagram": "https://www.instagram.com/mariahernandezmusic/",
+      "youtube": "https://www.youtube.com/channel/UCmariahernandez"
+    }
+  }
+]
