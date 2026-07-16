@@ -599,7 +599,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(192,32,42,0.55) 0%, transparent 50%);
+  background: linear-gradient(to top, var(--red-glow) 0%, transparent 50%);
   opacity: 0;
   transition: opacity 0.4s;
 }
@@ -767,8 +767,8 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--line);
+  background: var(--line);
   color: #fff;
   display: flex;
   align-items: center;
