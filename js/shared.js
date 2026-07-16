@@ -423,7 +423,7 @@ function buildPortfolioCard(proj, rootPathFn) {
       <p class="portfolio-card__title">${proj.title}</p>
     </div>
     <div class="portfolio-card__play" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24"><path d="m5 3 14 9-14 9z"/></svg>
     </div>`;
   const go = () => { window.location.href = rootPathFn(`portfolio/${proj.id}.html`); };
   card.addEventListener('click', go);

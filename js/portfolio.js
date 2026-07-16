@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="film-hero__overlay"></div>
       <div class="film-hero__content">
         <a href="${UMD.rootPath('index.html')}#portafolio" class="film-hero__back reveal">
-          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
           Volver al portafolio
         </a>
         <div class="film-hero__meta reveal d1">

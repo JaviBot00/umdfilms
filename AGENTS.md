@@ -94,13 +94,34 @@ Edit the relevant JS file (e.g., `team.js` for Person). Create a JSON-LD object,
 | `js/artists.js` | Changing the represented-artists listing page |
 | `js/shared.js` | Changing nav, footer, FAB, or common utilities |
 | `css/style.css` | Changing colors (CSS variables at top), typography, global layout |
+| `css/home.css` | Changing home-page-only sections (hero, trust, about/stats, services, cta-band, contact) |
 | `generate-pages.js` | Only if HTML template structure changes |
 | `index.html` | Editing home page text (hero, about, contact) |
 
-## Known pending work (Bloque G — not started)
+## Shared CSS classes — do not assume a parent section
 
-- `css/style.css` is still monolithic. Home-only rules (hero, trust marquee, about/stats, services, cta-band, contact) should move to `css/home.css`, loaded only by `index.html`.
-- Hardcoded UI strings in `.js` files (category filter labels, 404 messages, placeholder texts) have not been audited or centralized. `config.json` was the proposed destination (`ui_strings`) — not yet created.
+These live in `css/style.css` and are used across 2+ pages. Their names were
+deliberately chosen to not imply a section that isn't always present:
+
+| Class | Used by |
+|---|---|
+| `.lead-text` | home about intro, `equipment/index.html` hero, `artists/index.html` hero |
+| `.card-grid` | home `#teamGrid`, `team/index.html`, `artists/index.html` |
+| `.text-link` | home contact social links, `artists.js` external artist Instagram link |
+| `.team-card*` | home, `team/index.html`, `artists/index.html` |
+| `.portfolio-card*`, `.portfolio__grid` | home, `portfolio/index.html`, member profile projects (`team.js`) |
+| `.page-hero` | `team/`, `portfolio/`, `artists/`, `equipment/` index pages |
+
+Before adding a new home-only class to `css/home.css`, grep the class name
+across all `.js`/`.html` files first — this project has a history (Bloque G)
+of classes leaking into other pages via `cardBuilder()` functions in `shared.js`.
+
+## Known pending work (Bloque G — in progress)
+
+- ✅ `css/home.css` creado. Reglas exclusivas de home (hero, trust marquee, about/stats, services, cta-band, contact) movidas fuera de `style.css`. `index.html` carga `style.css` + `home.css` en ese orden — `home.css` depende de variables/clases de `style.css` (`.btn`, `.reveal`, `.eyebrow`, etc.), no es standalone.
+- ✅ Renombradas 3 clases que ataban su nombre a una sección que no siempre estaba presente: `.about__body`→`.lead-text`, `.team__grid`→`.card-grid`, `.contact__social-link`→`.text-link`. Las tres viven en `style.css` (compartidas). Ver `css/style.css` para comentarios inline de por qué se renombraron.
+- ⏳ Pendiente: auditoría de strings hardcodeados en `.js` (category filter labels, 404 messages, placeholder texts). `config.json` era el destino propuesto (`ui_strings`) — no creado aún. Esto es la segunda mitad del Bloque G, chat aparte.
+- ⏳ Pendiente: correr `design-system` skill (grep de colores hardcodeados) sobre `css/home.css` como fichero nuevo, no cubierto por ninguna pasada previa.
 
 ## Accessibility (a11y)
 
