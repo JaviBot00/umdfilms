@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   setHTML('aboutTitle',
     `${home.about.title_pre}<em>${home.about.title_highlight}</em>${home.about.title_post}<br/>${home.about.title_line2}`);
   setHTML('aboutParagraphs',
-    home.about.paragraphs.map(p => `<p class="about__body reveal">${p}</p>`).join(''));
+    home.about.paragraphs.map(p => `<p class="lead-text reveal">${p}</p>`).join(''));
   setHTML('aboutActions', `
     <a href="${home.about.cta_primary.href}" class="btn btn-outline">${home.about.cta_primary.label}</a>
     <a href="${home.about.cta_secondary.href}" class="btn btn-ghost">${home.about.cta_secondary.label}</a>
@@ -97,8 +97,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       <span class="icon icon-whatsapp" aria-hidden="true"></span>
       ${home.contact.wa_label}
     </a>
-    ${config.social.instagram ? `<a href="${config.social.instagram}" class="contact__social-link" target="_blank" rel="noopener">Instagram</a>` : ''}
-    ${config.social.youtube ? `<a href="${config.social.youtube}" class="contact__social-link" target="_blank" rel="noopener">YouTube</a>` : ''}
+    ${config.social.instagram ? `<a href="${config.social.instagram}" class="text-link" target="_blank" rel="noopener">Instagram</a>` : ''}
+    ${config.social.youtube ? `<a href="${config.social.youtube}" class="text-link" target="_blank" rel="noopener">YouTube</a>` : ''}
   `);
 
   /* Formulario: labels, placeholders, select dinámico */

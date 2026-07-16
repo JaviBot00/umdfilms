@@ -87,7 +87,7 @@ function buildArtistCard(artist, rootPathFn) {
       <p class="team-card__name">${artist.name}</p>
       <p class="team-card__role">${artist.role}</p>
       ${!clickable && artist.social?.instagram ? `
-        <a href="${artist.social.instagram}" class="contact__social-link" target="_blank" rel="noopener"
+        <a href="${artist.social.instagram}" class="text-link" target="_blank" rel="noopener"
            onclick="event.stopPropagation()">Instagram ↗</a>` : ''}
     </div>
   `;
