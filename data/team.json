@@ -4,7 +4,7 @@
     "name": "Alejandro Luque",
     "surname": "",
     "role": "Director creativo y ejecutivo",
-    "bio": "Control total de la productora y última palabra en todo movimiento en nombre de UMD Films.",
+    "bio": "(Málaga, 2002), es un joven director creativo y ejecutivo malagueño cuyas obras destacan por su sensibilidad visual y su profundo vínculo con las raíces y tradiciones de su tierra. Su cine se caracteriza por tener un enfoque humano, crítico y valiente. Gracias a su último proyecto fue seleccionado por el Festival de Málaga, convirtiéndose en el director de cine más joven en presentar su proyecto profesional.",
     "photo_cover": "assets/team/alejandro-luque/cover.avif",
     "photos_extra": [
       "assets/team/alejandro-luque/01.avif",
@@ -29,7 +29,9 @@
       "Dirección",
       "Producción ejecutiva",
       "Concepto creativo",
-      "Eventos"
+      "Eventos",
+      "Comunicación",
+      "Liderazgo"
     ],
     "featured": true,
     "represented_artist": false
@@ -54,7 +56,7 @@
       "instagram": "https://www.instagram.com/adrianroman18/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["sin-paz-no-hay-descanso", "interludio"],
     "specialties": ["Producción", "Corporativo", "Documentales"],
     "featured": true,
     "represented_artist": false
@@ -78,7 +80,7 @@
       "instagram": "https://www.instagram.com/ivanpg_dop/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": ["Fotografía", "Iluminación", "Cine"],
     "featured": true,
     "represented_artist": false
@@ -99,7 +101,7 @@
       "instagram": "https://www.instagram.com/javicostoya__/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["cautivo-malaga"],
     "specialties": ["Sonido directo", "Mezcla", "Masterización"],
     "featured": false,
     "represented_artist": false
@@ -116,7 +118,7 @@
       "instagram": "https://www.instagram.com/celvlec/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": ["Edición", "VFX", "Motion Graphics"],
     "featured": false,
     "represented_artist": false
@@ -138,7 +140,7 @@
       "instagram": "https://www.instagram.com/sergiopastormusic/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["interludio", "cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": ["Composición", "Diseño de sonido", "Bandas sonoras"],
     "featured": true,
     "represented_artist": true
@@ -177,7 +179,7 @@
       "instagram": "https://www.instagram.com/javiabelaira/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["memoria-compromiso-y-fe"],
     "specialties": [],
     "featured": true,
     "represented_artist": false
@@ -198,7 +200,7 @@
       "instagram": "https://www.instagram.com/pabloojea_/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": [],
     "featured": true,
     "represented_artist": false
@@ -212,7 +214,7 @@
     "photo_cover": "assets/team/loreto-navas/cover.avif",
     "photos_extra": [],
     "social": { "instagram": "", "youtube": "" },
-    "projects": [],
+    "projects": ["memoria-compromiso-y-fe"],
     "specialties": [],
     "featured": false,
     "represented_artist": false
@@ -233,7 +235,7 @@
       "instagram": "https://www.instagram.com/eviita_cano/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["memoria-compromiso-y-fe"],
     "specialties": [],
     "featured": false,
     "represented_artist": false
@@ -295,7 +297,7 @@
       "instagram": "https://www.instagram.com/juliiaa_3605/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["memoria-compromiso-y-fe"],
     "specialties": [],
     "featured": false,
     "represented_artist": false
@@ -317,7 +319,7 @@
       "instagram": "https://www.instagram.com/dariogonrz/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["memoria-compromiso-y-fe"],
     "specialties": [],
     "featured": false,
     "represented_artist": false
@@ -334,7 +336,7 @@
       "instagram": "https://www.instagram.com/_elviraa_ojm_/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["cautivo-malaga"],
     "specialties": [],
     "featured": false,
     "represented_artist": false
@@ -392,7 +394,7 @@
       "instagram": "https://www.instagram.com/sofia_garcia119/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": [],
     "featured": false,
     "represented_artist": false
@@ -430,7 +432,7 @@
       "instagram": "https://www.instagram.com/aliciacarofotografias/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["memoria-compromiso-y-fe"],
     "specialties": [],
     "featured": false,
     "represented_artist": false
@@ -449,7 +451,7 @@
       "instagram": "https://www.instagram.com/miguelmatariin/",
       "youtube": ""
     },
-    "projects": [],
+    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": [],
     "featured": false,
     "represented_artist": false

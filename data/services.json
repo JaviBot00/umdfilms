@@ -48,14 +48,6 @@
     "video_preview": ""
   },
   {
-    "id": "representacion-artistas",
-    "icon": "🤝",
-    "title": "Representación de Artistas",
-    "description": "Gestión de marca en redes y representación con estrategia creativa.",
-    "core": false,
-    "video_preview": ""
-  },
-  {
     "id": "maquillaje",
     "icon": "💄",
     "title": "Maquillaje y Peluquería",

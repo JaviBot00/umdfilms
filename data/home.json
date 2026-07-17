@@ -7,8 +7,8 @@
     "title_highlight": "historia",
     "title_post": " en cine",
     "subtitle_lines": [
-      "Videoclips, publicidad, cine y producción musical.",
-      "Con alma malagueña y alcance nacional."
+      "Cine, publicidad, videoclips y producción musical.",
+      "Creamos lo que otros no se atreven a imaginar."
     ],
     "cta_primary": { "label": "Ver servicios", "href": "#servicios" },
     "cta_secondary": { "label": "Ver portafolio", "href": "#portafolio" },
@@ -24,10 +24,10 @@
     "title_pre": "Productora audiovisual en ",
     "title_highlight": "Málaga",
     "title_post": ".",
-    "title_line2": "Cine que llega a cualquier parte.",
+    "title_line2": "Si buscas lo de siempre, te has equivocado de productora.",
     "paragraphs": [
       "Somos UMD Films, una productora fundada en 2019 por Alejandro y Adrián con un propósito claro: convertir Málaga en referente cinematográfico. Hoy somos un equipo de jóvenes talentos y profesionales con trayectoria real en el sector.",
-      "Nos mueve la creatividad, la versatilidad y el coraje de contar historias que dejan huella. Cada proyecto es una aventura donde conviven técnica, emoción y mirada artística."
+      "No solo capturamos imágenes; construimos realidades. Nos mueve el coraje de mirar donde otros no miran, fusionando rigor técnico, emoción pura y una mirada artística dispuesta a romper moldes."
     ],
     "cta_primary": { "label": "Conoce al equipo", "href": "#equipo" },
     "cta_secondary": { "label": "Hablemos de tu proyecto", "href": "#contacto" }
@@ -44,8 +44,8 @@
   },
 
   "team": {
-    "eyebrow": "Las personas detrás",
-    "title": "El equipo"
+    "eyebrow": "Las personas detrás de cámara",
+    "title": "Nuestro equipo"
   },
 
   "cta_band": {

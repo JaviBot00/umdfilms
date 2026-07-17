@@ -178,6 +178,8 @@ stats.location = config.schema.address_locality               // "Málaga"
 - ✅ Video facade pattern for trailer/full-video (iframe loads on click, persistent "Ver en YouTube" link)
 - ✅ Social/WhatsApp icons migrated to CSS mask-image from assets/icon/, no more inline SVG duplicated across 7 files
 - ✅ Representación de Artistas page (team + external artists merged)
+- ✅ `css/home.css` separado de `style.css` — home-only rules movidas, nav/footer/cards/filtros quedan compartidos en `style.css`
+- ✅ 3 clases CSS renombradas para eliminar nombres que ataban a una sección padre inexistente en algunos usos (`.about__body`→`.lead-text`, `.team__grid`→`.card-grid`, `.contact__social-link`→`.text-link`)
 
 ---
 
@@ -212,7 +214,7 @@ stats.location = config.schema.address_locality               // "Málaga"
 
 In order of priority:
 
-1. **Bloque G pendiente** — split de style.css en home.css, y auditoría de strings hardcodeados en .js
+1. 1. **Bloque G — mitad hecha**: `css/home.css` creado, 3 clases renombradas (`.lead-text`, `.card-grid`, `.text-link`). Falta: auditoría de strings hardcodeados en `.js` (chat aparte) + confirmar grep de colores hardcodeados sobre `home.css`.
 2. **Local preview** — Javier verifies with Live Server before uploading
 3. **Upload to Hostinger** — File Manager or FTP
 4. **301 redirects** — If WordPress URLs change

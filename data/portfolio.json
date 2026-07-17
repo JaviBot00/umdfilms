@@ -40,7 +40,7 @@
     ],
     "trailer_youtube": "https://youtu.be/UWEjMHWISyc",
     "full_video_youtube": "",
-    "team_ids": ["alejandro-luque", "ivan-pascual", "ivan-ambrosio"],
+    "team_ids": ["alejandro-luque", "adrian-roman", "sergio-pastor", "pol-ojea", "elvira-ojea", "ivan-ambrosio", "ivan-pascual", "javier-costoya", "sofia-garcia", "miguel-matarin"],
     "tags": ["Cortometraje", "Cautivo", "Málaga"],
     "featured": true
   },
@@ -94,7 +94,7 @@
     ],
     "trailer_youtube": "",
     "full_video_youtube": "https://youtu.be/FtjIAztekkw",
-    "team_ids": ["alejandro-luque"],
+    "team_ids": ["alejandro-luque", "sergio-pastor", "pol-ojea", "ivan-ambrosio", "ivan-pascual", "sofia-garcia", "miguel-matarin", "eva-cano", "javier-abelaira", "julia-flores", "loreto-navas", "dario-gonzalez", "alicia-caro"],
     "tags": ["Videoclip", "Deporte", "Málaga"],
     "featured": true
   },
@@ -116,7 +116,7 @@
     ],
     "trailer_youtube": "https://youtu.be/bJnOzGw8RCU",
     "full_video_youtube": "https://youtu.be/VPC95rFQ9Os",
-    "team_ids": ["alejandro-luque"],
+    "team_ids": ["alejandro-luque", "adrian-roman", "sergio-pastor"],
     "tags": ["Cine", "Salud mental"],
     "featured": true
   },
@@ -133,7 +133,7 @@
     "photos_extra": [],
     "trailer_youtube": "",
     "full_video_youtube": "https://www.youtube.com/watch?v=iWcRSWlyIWo",
-    "team_ids": ["alejandro-luque", "sergio-pastor", "ivan-ambrosio"],
+    "team_ids": ["alejandro-luque"],
     "tags": ["Boda"],
     "featured": false
   },
@@ -150,7 +150,7 @@
     "photos_extra": [],
     "trailer_youtube": "",
     "full_video_youtube": "https://www.youtube.com/watch?v=svH2GavHKR4",
-    "team_ids": ["alejandro", "sergio-pastor", "ivan-ambrosio"],
+    "team_ids": ["alejandro-luque"],
     "tags": ["Musical"],
     "featured": false
   }
