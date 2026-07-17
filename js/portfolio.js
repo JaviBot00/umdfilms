@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const gallerySection = document.getElementById('filmGallery');
 
   if (galleryGrid && project.photos_extra?.length) {
-    project.photos_extra.forEach((src, i) => {
+    project.photos_extra.forEach((num, i) => {
       const img = document.createElement('img');
       img.src       = UMD.rootPath(`assets/portfolio/${project.id}/${num}.avif`);
       img.alt       = `${project.title} — Foto ${i + 1} — UMD Films`;

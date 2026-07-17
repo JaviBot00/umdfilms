@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const photosGrid    = document.getElementById('profilePhotosGrid');
   if (photosSection && photosGrid) {
     if (member.photos_extra?.length) {
-      member.photos_extra.forEach(src => {
+      member.photos_extra.forEach(num => {
         const img = document.createElement('img');
         img.src     = UMD.rootPath(`assets/team/${member.id}/${num}.avif`);
         img.alt     = `${member.name} — UMD Films Málaga`;

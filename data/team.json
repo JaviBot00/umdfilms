@@ -6,20 +6,7 @@
     "role": "Director creativo y ejecutivo",
     "bio": "(Málaga, 2002), es un joven director creativo y ejecutivo malagueño cuyas obras destacan por su sensibilidad visual y su profundo vínculo con las raíces y tradiciones de su tierra. Su cine se caracteriza por tener un enfoque humano, crítico y valiente. Gracias a su último proyecto fue seleccionado por el Festival de Málaga, convirtiéndose en el director de cine más joven en presentar su proyecto profesional.",
     "photo_cover": "assets/team/alejandro-luque/cover.avif",
-    "photos_extra": [
-      "assets/team/alejandro-luque/01.avif",
-      "assets/team/alejandro-luque/02.avif",
-      "assets/team/alejandro-luque/03.avif",
-      "assets/team/alejandro-luque/04.avif",
-      "assets/team/alejandro-luque/05.avif",
-      "assets/team/alejandro-luque/06.avif",
-      "assets/team/alejandro-luque/07.avif",
-      "assets/team/alejandro-luque/08.avif",
-      "assets/team/alejandro-luque/09.avif",
-      "assets/team/alejandro-luque/10.avif",
-      "assets/team/alejandro-luque/11.avif",
-      "assets/team/alejandro-luque/12.avif"
-    ],
+    "photos_extra": ["01","02","03","04","05","06","07","08","09","10","11","12"],
     "social": {
       "instagram": "https://www.instagram.com/alejandroluque.film/",
       "youtube": ""
@@ -43,20 +30,12 @@
     "role": "Productor general y director de contenidos tradicional",
     "bio": "Encargado de la supervisión general y dirección estratégica de la línea de contenido tradicional y documental.",
     "photo_cover": "assets/team/adrian-roman/cover.avif",
-    "photos_extra": [
-      "assets/team/adrian-roman/01.avif",
-      "assets/team/adrian-roman/02.avif",
-      "assets/team/adrian-roman/03.avif",
-      "assets/team/adrian-roman/04.avif",
-      "assets/team/adrian-roman/05.avif",
-      "assets/team/adrian-roman/06.avif",
-      "assets/team/adrian-roman/07.avif"
-    ],
+    "photos_extra": ["01","02","03","04","05","06","07"],
     "social": {
       "instagram": "https://www.instagram.com/adrianroman18/",
       "youtube": ""
     },
-    "projects": ["sin-paz-no-hay-descanso", "interludio"],
+    "projects": ["sin-paz-no-hay-descanso", "interludio", "musical-charlie"],
     "specialties": ["Producción", "Corporativo", "Documentales"],
     "featured": true,
     "represented_artist": false
@@ -68,19 +47,12 @@
     "role": "Director de Fotografía",
     "bio": "El responsable de traducir las emociones del guion en imágenes. Diseña la iluminación, la composición y el movimiento de cámara, trabajando estrechamente con dirección para crear la atmósfera visual, la textura y la identidad cromática de cada producción.",
     "photo_cover": "assets/team/ivan-pascual/cover.avif",
-    "photos_extra": [
-      "assets/team/ivan-pascual/01.avif",
-      "assets/team/ivan-pascual/02.avif",
-      "assets/team/ivan-pascual/03.avif",
-      "assets/team/ivan-pascual/04.avif",
-      "assets/team/ivan-pascual/05.avif",
-      "assets/team/ivan-pascual/06.avif"
-    ],
+    "photos_extra": ["01","02","03","04","05","06"],
     "social": {
       "instagram": "https://www.instagram.com/ivanpg_dop/",
       "youtube": ""
     },
-    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
+    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe", "boda-ester-y-juan"],
     "specialties": ["Fotografía", "Iluminación", "Cine"],
     "featured": true,
     "represented_artist": false
@@ -92,11 +64,7 @@
     "role": "Ingeniero de Sonido",
     "bio": "El responsable de gestionar y ejecutar todos los aspectos técnicos del audio.",
     "photo_cover": "assets/team/javier-costoya/cover.avif",
-    "photos_extra": [
-      "assets/team/javier-costoya/01.avif",
-      "assets/team/javier-costoya/02.avif",
-      "assets/team/javier-costoya/03.avif"
-    ],
+    "photos_extra": ["01","02","03"],
     "social": {
       "instagram": "https://www.instagram.com/javicostoya__/",
       "youtube": ""
@@ -130,12 +98,7 @@
     "role": "Compositor musical y diseñador de sonido",
     "bio": "Encargado de realizar todos los trabajos musicales de UMD Films.",
     "photo_cover": "assets/team/sergio-pastor/cover.avif",
-    "photos_extra": [
-      "assets/team/sergio-pastor/01.avif",
-      "assets/team/sergio-pastor/02.avif",
-      "assets/team/sergio-pastor/03.avif",
-      "assets/team/sergio-pastor/04.avif"
-    ],
+    "photos_extra": ["01","02","03","04"],
     "social": {
       "instagram": "https://www.instagram.com/sergiopastormusic/",
       "youtube": ""
@@ -169,12 +132,7 @@
     "role": "Jefe de teatro y director de actores",
     "bio": "Director de teatro junto a Alejandro y director de actores en cada proyecto audiovisual que realicemos.",
     "photo_cover": "assets/team/javier-abelaira/cover.avif",
-    "photos_extra": [
-      "assets/team/javier-abelaira/01.avif",
-      "assets/team/javier-abelaira/02.avif",
-      "assets/team/javier-abelaira/03.avif",
-      "assets/team/javier-abelaira/04.avif"
-    ],
+    "photos_extra": ["01","02","03","04"],
     "social": {
       "instagram": "https://www.instagram.com/javiabelaira/",
       "youtube": ""
@@ -191,11 +149,7 @@
     "role": "Subdirector y director de contenidos en redes sociales",
     "bio": "Control parcial de la productora y toma de decisión junto con los directores en cada movimiento. Toma total de decisiones respecto a la imagen de UMD Films en redes sociales y creación de contenido.",
     "photo_cover": "assets/team/pol-ojea/cover.avif",
-    "photos_extra": [
-      "assets/team/pol-ojea/01.avif",
-      "assets/team/pol-ojea/02.avif",
-      "assets/team/pol-ojea/03.avif"
-    ],
+    "photos_extra": ["01","02","03"],
     "social": {
       "instagram": "https://www.instagram.com/pabloojea_/",
       "youtube": ""
@@ -226,11 +180,7 @@
     "role": "Cost controller y técnico audiovisual",
     "bio": "Su función exclusiva es auditar, justificar y vigilar el gasto diario de cada departamento para no superar el presupuesto asignado.",
     "photo_cover": "assets/team/eva-cano/cover.avif",
-    "photos_extra": [
-      "assets/team/eva-cano/01.avif",
-      "assets/team/eva-cano/02.avif",
-      "assets/team/eva-cano/03.avif"
-    ],
+    "photos_extra": ["01","02","03"],
     "social": {
       "instagram": "https://www.instagram.com/eviita_cano/",
       "youtube": ""
@@ -247,10 +197,7 @@
     "role": "Caracterización y maquillaje profesional",
     "bio": "Encargada de realizar efectos especiales (heridas, prótesis, criaturas, envejecimiento), maquillaje profesional y peluquería.",
     "photo_cover": "assets/team/maria-arnes/cover.avif",
-    "photos_extra": [
-      "assets/team/maria-arnes/01.avif",
-      "assets/team/maria-arnes/02.avif"
-    ],
+    "photos_extra": ["01","02"],
     "social": {
       "instagram": "https://www.instagram.com/mariaarness/",
       "youtube": ""
@@ -284,15 +231,7 @@
     "role": "Jefa de producción",
     "bio": "Rol clave para preproducción y día a día en la productora. Realización y revisión de documentos, organización previo a rodajes y mano derecha de los directores. Además, forma parte de nuestro equipo creativo.",
     "photo_cover": "assets/team/julia-flores/cover.avif",
-    "photos_extra": [
-      "assets/team/julia-flores/01.avif",
-      "assets/team/julia-flores/02.avif",
-      "assets/team/julia-flores/03.avif",
-      "assets/team/julia-flores/04.avif",
-      "assets/team/julia-flores/05.avif",
-      "assets/team/julia-flores/06.avif",
-      "assets/team/julia-flores/07.avif"
-    ],
+    "photos_extra": ["01","02","03","04","05","06","07"],
     "social": {
       "instagram": "https://www.instagram.com/juliiaa_3605/",
       "youtube": ""
@@ -309,12 +248,7 @@
     "role": "Ayudante de producción",
     "bio": "Rol de soporte clave en la logística diaria de los rodajes, gestión de órdenes de trabajo en set y asistencia directa a la Jefa de Producción en el día a día.",
     "photo_cover": "assets/team/dario-gonzalez/cover.avif",
-    "photos_extra": [
-      "assets/team/dario-gonzalez/01.avif",
-      "assets/team/dario-gonzalez/02.avif",
-      "assets/team/dario-gonzalez/03.avif",
-      "assets/team/dario-gonzalez/04.avif"
-    ],
+    "photos_extra": ["01","02","03","04"],
     "social": {
       "instagram": "https://www.instagram.com/dariogonrz/",
       "youtube": ""
@@ -382,14 +316,7 @@
     "role": "Equipo creativo",
     "bio": "Es el nexo visual y la representación de la productora ante el público y los clientes. Integrada en el equipo creativo, se encarga de proyectar la identidad, el estilo y los valores de la marca en eventos, campañas y activaciones, asegurando que nuestra presencia pública sea siempre impecable, coherente y magnética.",
     "photo_cover": "assets/team/sofia-garcia/cover.avif",
-    "photos_extra": [
-      "assets/team/sofia-garcia/01.avif",
-      "assets/team/sofia-garcia/02.avif",
-      "assets/team/sofia-garcia/03.avif",
-      "assets/team/sofia-garcia/04.avif",
-      "assets/team/sofia-garcia/05.avif",
-      "assets/team/sofia-garcia/06.avif"
-    ],
+    "photos_extra": ["01","02","03","04","05","06"],
     "social": {
       "instagram": "https://www.instagram.com/sofia_garcia119/",
       "youtube": ""
@@ -423,11 +350,7 @@
     "role": "Fotógrafa y foto fija",
     "bio": "Encargada de capturar la esencia de la productora tanto dentro como fuera del set. Su rol abarca desde la foto fija en rodajes (inmortalizando el detrás de cámaras y la fuerza visual de cada producción) hasta la cobertura de eventos, sesiones editoriales con modelos y proyectos comerciales, aportando siempre una mirada estética e identidad propia a cada captura.",
     "photo_cover": "assets/team/alicia-caro/cover.avif",
-    "photos_extra": [
-      "assets/team/alicia-caro/01.avif",
-      "assets/team/alicia-caro/02.avif",
-      "assets/team/alicia-caro/03.avif"
-    ],
+    "photos_extra": ["01","02","03"],
     "social": {
       "instagram": "https://www.instagram.com/aliciacarofotografias/",
       "youtube": ""
@@ -444,14 +367,12 @@
     "role": "Director de arte",
     "bio": "Se encarga de conceptualizar y construir el universo visual y espacial de cada producción. Desde la paleta de colores y la selección de localizaciones hasta el diseño de los decorados, transforma los espacios físicos para que respiren la misma atmósfera que dicta la historia, asegurando una identidad visual única en cada plano.",
     "photo_cover": "assets/team/miguel-matarin/cover.avif",
-    "photos_extra": [
-      "assets/team/miguel-matarin/01.avif"
-    ],
+    "photos_extra": ["01"],
     "social": {
       "instagram": "https://www.instagram.com/miguelmatariin/",
       "youtube": ""
     },
-    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
+    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe", "boda-ester-y-juan"],
     "specialties": [],
     "featured": false,
     "represented_artist": false
