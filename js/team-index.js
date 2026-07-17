@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   ]);
   await UMD.renderNav(config);
   await UMD.renderFooter(config);
-  UMD.renderFAB(config);
+  UMD.renderFAB();
 
   document.title = `Equipo | ${config.seo.site_suffix}`;
 

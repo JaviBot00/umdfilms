@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- Nav + Footer + FAB ---- */
   await UMD.renderNav(config);
   await UMD.renderFooter(config);
-  UMD.renderFAB(config);
+  UMD.renderFAB();
 
   document.title = 'Alquiler de Material | UMD Films Málaga';
   document.querySelector('meta[name="description"]')

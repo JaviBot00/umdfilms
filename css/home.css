@@ -276,11 +276,21 @@ html[data-theme="light"] .trust__inner img:hover {
    ===================================================== */
 .portfolio { background: var(--black); }
 .portfolio__cta { text-align: center; margin-top: 3rem; }
+.portfolio__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
 
 /* =====================================================
    TEAM (sección de home — el grid/cards son de style.css)
    ===================================================== */
 .team { background: var(--dark); }
+.team__actions {
+  text-align: center;
+  margin-top: 3rem;
+}
 
 /* =====================================================
    CTA BAND

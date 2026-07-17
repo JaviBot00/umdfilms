@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- Nav + Footer + FAB + Schema ---- */
   await UMD.renderNav(config);
   await UMD.renderFooter(config);
-  UMD.renderFAB(config);
+  UMD.renderFAB();
   renderHomeContent(config, home, services);
   UMD.injectLocalBusinessSchema(config);
 
@@ -71,9 +71,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* Portfolio CTA -> YouTube (dato de config, no de home.json) */
   setHTML('portfolioCta', `
-    <a href="${config.social.youtube}" target="_blank" rel="noopener" class="btn btn-primary">
-      Ver canal de YouTube ↗
-    </a>
+    <div class="portfolio__actions">
+      <a href="${UMD.rootPath('portfolio/index.html')}" class="btn btn-outline">Todos los proyectos ↗</a>
+      <a href="${config.social.youtube}" target="_blank" rel="noopener" class="btn btn-primary">Canal de YouTube ↗</a>
+    </div>
   `);
 
   /* CTA band */
@@ -289,11 +290,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     gridEl: portfolioGrid,
     cardBuilder: (p) => UMD.buildPortfolioCard(p, UMD.rootPath)
   });
-  document.getElementById('portfolioCta').insertAdjacentHTML('beforebegin',
-  `<div style="text-align:center;margin-bottom:2rem">
-     <a href="${UMD.rootPath('portfolio/index.html')}" class="btn btn-outline">Ver todos los proyectos ↗</a>
-   </div>`);
-
   /* =====================================================
      TEAM
      ===================================================== */
@@ -307,8 +303,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     cardBuilder: (m) => UMD.buildTeamCard(m, UMD.rootPath)
   });
   document.getElementById('teamGrid').insertAdjacentHTML('afterend',
-  `<div style="text-align:center;margin-top:2rem">
-     <a href="${UMD.rootPath('team/index.html')}" class="btn btn-outline">Ver equipo completo ↗</a>
+  `<div class="team__actions">
+     <a href="${UMD.rootPath('team/index.html')}" class="btn btn-outline">Equipo completo ↗</a>
    </div>`);
 
   /* =====================================================

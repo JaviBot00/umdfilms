@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- Nav + Footer + FAB ---- */
   await UMD.renderNav(config);
   await UMD.renderFooter(config);
-  UMD.renderFAB(config);
+  UMD.renderFAB();
 
   /* ---- Project not found ---- */
   if (!project) {

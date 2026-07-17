@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- Nav + Footer ---- */
   await UMD.renderNav(config);
   await UMD.renderFooter(config);
-  UMD.renderFAB(config);
+  UMD.renderFAB();
 
   /* ---- If member doesn't exist ---- */
   if (!member) {

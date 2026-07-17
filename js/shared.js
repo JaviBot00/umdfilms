@@ -116,6 +116,31 @@ function initTheme() {
   }
 }
 
+/* ---- Scroll-spy: highlight nav link when section is in view ---- */
+function initScrollSpy() {
+  const sections = document.querySelectorAll('main > section[id]');
+  const links = document.querySelectorAll('.nav__links a[href*="#"]');
+  if (!sections.length || !links.length) return;
+
+  const map = new Map();
+  links.forEach(link => {
+    const id = link.getAttribute('href')?.split('#')[1];
+    if (id) map.set(id, link);
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const link = map.get(entry.target.id);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => obs.observe(s));
+}
+
 /* ---- Image lightbox ---- */
 function initLightbox(selector) {
   const images = document.querySelectorAll(selector);
@@ -166,7 +191,6 @@ async function renderNav(config) {
   const nav_ = _ui.nav || {};
   const aria = _ui.aria || {};
   const logoSrc  = rootPath(cfg.brand.logo);
-  const waHref   = `https://wa.me/${cfg.contact.whatsapp}?text=${encodeURIComponent(cfg.contact.whatsapp_msg)}`;
 
   const nav = document.getElementById('nav');
   if (!nav) return;
@@ -183,8 +207,7 @@ async function renderNav(config) {
       <a href="${rootPath('index.html')}#servicios">${nav_.servicios}</a>
       <a href="${rootPath('index.html')}#portafolio">${nav_.portafolio}</a>
       <a href="${rootPath('index.html')}#equipo">${nav_.equipo}</a>
-      <a href="${rootPath('equipment/index.html')}">${nav_.material}</a>
-      <a href="${waHref}" class="nav__cta btn-outline" target="_blank" rel="noopener">${nav_.cta}</a>
+      <a href="${rootPath('index.html')}#contacto">${nav_.contacto || 'Contacto'}</a>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="${aria.modo_oscuro}">
         <svg aria-hidden="true" class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg aria-hidden="true" class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"/></svg>
@@ -194,6 +217,7 @@ async function renderNav(config) {
 
   initNav();
   initTheme();
+  initScrollSpy();
 }
 
 /* ---- Shared footer HTML ---- */
@@ -250,15 +274,17 @@ async function renderFooter(config) {
   `;
 }
 
-/* ---- FAB WhatsApp ---- */
-function renderFAB(config) {
-  const wa   = config.contact.whatsapp;
-  const msg  = encodeURIComponent(config.contact.whatsapp_msg);
-  const fab  = document.querySelector('.fab-wa');
-  if (fab) {
-    fab.href = `https://wa.me/${wa}?text=${msg}`;
-    fab.innerHTML = `<span class="icon icon-whatsapp" aria-hidden="true"></span>`;
-  }
+/* ---- FAB Scroll-to-top ---- */
+function renderFAB() {
+  const fab = document.querySelector('.fab-top');
+  if (!fab) return;
+  fab.removeAttribute('href');
+  fab.setAttribute('role', 'button');
+  fab.innerHTML = '<span class="icon icon-arrow-up" aria-hidden="true"></span>';
+  fab.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  const toggle = () => fab.classList.toggle('visible', window.scrollY > 400);
+  window.addEventListener('scroll', toggle, { passive: true });
+  toggle();
 }
 
 /* ---- Schema JSON-LD LocalBusiness ---- */
