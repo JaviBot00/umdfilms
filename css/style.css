@@ -58,12 +58,11 @@ html[data-theme="light"] {
   --line:       rgba(0, 0, 0, 0.1);
 }
 
-/* Hero, CTA band y Nav: siempre oscuros, da igual el tema activo.
-   NOTA: aunque .hero y .cta-band viven visualmente en home.css,
+/* Hero, Nav: siempre oscuros, da igual el tema activo.
+   NOTA: aunque .hero viven visualmente en home.css,
    este pin de variables se queda aquí porque es arquitectura de
    theming compartida (nav/profile-hero/film-hero también la usan). */
 .hero,
-.cta-band,
 .nav,
 .profile-hero,
 .film-hero {
@@ -217,7 +216,7 @@ em, i { font-style: italic; color: var(--red-light); }
 button:focus-visible,
 .filter:focus-visible,
 .theme-toggle:focus-visible,
-.fab-wa:focus-visible {
+.fab-top:focus-visible {
   box-shadow: 0 0 0 3px rgba(192, 32, 42, 0.5);
 }
 a:focus-visible {
@@ -333,12 +332,8 @@ body::before {
 }
 .nav__links a:hover { color: var(--white); }
 .nav__links a:hover::after { width: 100%; }
-
-.nav__cta.btn-outline {
-  font-size: 0.72rem;
-  padding: 0.5em 1.3em;
-}
-.nav__cta.btn-outline::after { display: none; }
+.nav__links a.active { color: var(--white); }
+.nav__links a.active::after { width: 100%; }
 
 .nav__burger {
   display: none;
@@ -390,12 +385,6 @@ body::before {
     color: var(--cream);
   }
   .nav__links a::after { display: none; }
-
-  .nav__cta.btn-outline {
-    font-size: 0.9rem;
-    padding: 0.75em 2em;
-    margin-top: 1rem;
-  }
 
   .nav__links::before {
     content: '';
@@ -692,12 +681,14 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   border-top: 1px solid var(--line);
   padding: 1.5rem clamp(1.5rem, 5vw, 4rem);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-size: 0.75rem;
   color: var(--muted);
   flex-wrap: wrap;
   gap: 0.75rem;
+  text-align: center;
 }
 .footer__bottom a { color: var(--red-light); transition: opacity 0.2s; }
 .footer__bottom a:hover { opacity: 0.75; }
@@ -716,23 +707,31 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 .text-link:hover { color: var(--red-light); }
 
 /* =====================================================
-   WhatsApp FAB (compartido)
+   Scroll-to-top FAB (compartido)
    ===================================================== */
-.fab-wa {
+.fab-top {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
   z-index: 400;
   width: 54px; height: 54px;
   border-radius: 50%;
-  background: #25D366;
+  background: var(--red);
   color: white;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 24px rgba(37,211,102,0.4);
-  transition: transform 0.3s var(--ease-expo), box-shadow 0.3s;
+  box-shadow: 0 4px 24px var(--red-glow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.3s, transform 0.3s var(--ease-expo), box-shadow 0.3s;
 }
-.fab-wa:hover { transform: scale(1.1); box-shadow: 0 8px 36px rgba(37,211,102,0.55); }
-.fab-wa .icon { width: 26px; height: 26px; }
+.fab-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.fab-top:hover { transform: scale(1.1); box-shadow: 0 8px 36px var(--red-glow); }
+.fab-top .icon { width: 26px; height: 26px; }
 
 /* =====================================================
    LIGHTBOX (compartido — team.js, portfolio.js)
@@ -803,6 +802,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 .icon-instagram { mask-image: url('../assets/icon/instagram.svg'); -webkit-mask-image: url('../assets/icon/instagram.svg'); }
 .icon-youtube   { mask-image: url('../assets/icon/youtube.svg');   -webkit-mask-image: url('../assets/icon/youtube.svg'); }
 .icon-tiktok    { mask-image: url('../assets/icon/tiktok.svg');    -webkit-mask-image: url('../assets/icon/tiktok.svg'); }
+.icon-arrow-up  { mask-image: url('../assets/icon/arrow-up.svg');  -webkit-mask-image: url('../assets/icon/arrow-up.svg'); }
 
 /* =====================================================
    RESPONSIVE GENERAL (compartido)

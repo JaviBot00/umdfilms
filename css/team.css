@@ -121,7 +121,7 @@
   border-color: var(--red);
   background: var(--red-dim);
 }
-.profile-social svg { width: 14px; height: 14px; fill: currentColor; }
+.profile-social .icon { width: 14px; height: 14px; fill: currentColor; }
 
 /* Sidebar info */
 .profile-sidebar { position: sticky; top: 7rem; }

@@ -22,15 +22,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     UMD.fetchJSON(UMD.rootPath('data/equipment.json'))
   ]);
 
+  const eqStrings = config.ui_strings?.equipment_extra || {};
+
   /* ---- Nav + Footer + FAB ---- */
   await UMD.renderNav(config);
   await UMD.renderFooter(config);
-  UMD.renderFAB(config);
+  UMD.renderFAB();
 
-  /* ---- SEO ---- */
-  document.title = 'Equipment Rental | UMD Films Málaga';
+  document.title = 'Alquiler de Material | UMD Films Málaga';
   document.querySelector('meta[name="description"]')
-    ?.setAttribute('content', 'Rent professional film equipment in Málaga. Cameras, lighting, sound and more. UMD Films Málaga.');
+    ?.setAttribute('content', 'Alquila material audiovisual profesional en Málaga. Cámaras, iluminación, sonido y estabilización.');
 
   // Dynamic canonical
   const canonical = document.querySelector('link[rel="canonical"]')
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     el.setAttribute('content', content);
   };
   setMeta('og:title',       document.title);
-  setMeta('og:description', 'Rent professional film equipment in Málaga. Cameras, lighting, sound and more.');
+  setMeta('og:description', 'Alquila material audiovisual profesional en Málaga. Cámaras, iluminación, sonido y estabilización.');
   setMeta('og:url',         `${config.brand.site_url}/equipment/`);
   setMeta('og:site_name',   'UMD Films');
 
@@ -57,20 +58,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   };
   setTwitter('twitter:card',        'summary_large_image');
   setTwitter('twitter:title',       document.title);
-  setTwitter('twitter:description', 'Rent professional film equipment in Málaga. Cameras, lighting, sound and more.');
+  setTwitter('twitter:description', 'Alquila material audiovisual profesional en Málaga. Cámaras, iluminación, sonido y estabilización.');
 
-  /* ---- FILTERS: dynamically generated from existing categories ---- */
+  /* ---- FILTERS: driven by categorias_equipo in config.json ---- */
   const filtersEl = document.getElementById('equipmentFilters');
-  const categories = ['all', ...new Set(equipment.map(e => e.category))];
-
-  const CATEGORY_LABELS = {
-    all:         'Todo',
-    camara:      'Cámara',
-    audio:       'Audio',
-    iluminacion: 'Iluminación',
-    soporte:     'Soporte',
-    otro:        'Otro'
-  };
+  const CATEGORY_LABELS = config.ui_strings?.categorias_equipo || {};
+  const usedCategories = new Set(equipment.map(e => e.category));
+  const categories = Object.keys(CATEGORY_LABELS).filter(k => k === 'all' || usedCategories.has(k));
 
   if (filtersEl) {
     categories.forEach(cat => {
@@ -78,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const isActive = cat === 'all';
       btn.className   = `filter${isActive ? ' active' : ''}`;
       btn.dataset.filter = cat;
-      btn.textContent = CATEGORY_LABELS[cat] || cat;
+      btn.textContent = CATEGORY_LABELS[cat];
       btn.setAttribute('aria-pressed', String(isActive));
       filtersEl.appendChild(btn);
     });
@@ -115,7 +109,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       card.style.transitionDelay = `${i * 0.06}s`;
 
       const waMsg = encodeURIComponent(
-        `Hola, me interesa alquilar: ${gear.name} (x${gear.quantity}). ¿Está disponible?`
+        (eqStrings.whatsapp_msg_template)
+          .replace('{name}', gear.name)
+          .replace('{qty}', gear.quantity)
       );
       const waHref = `https://wa.me/${config.contact.whatsapp}?text=${waMsg}`;
 
@@ -127,7 +123,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                loading="lazy"
                onerror="this.onerror=null; this.src='${UMD.rootPath('assets/equipment/placeholder-gear.webp')}'" />
           <span class="gear-card__qty">×${gear.quantity}</span>
-          ${!gear.available ? '<span class="gear-card__unavailable-badge">No disponible</span>' : ''}
+          ${!gear.available ? `<span class="gear-card__unavailable-badge">${eqStrings.no_disponible}</span>` : ''}
         </div>
         <div class="gear-card__body">
           <p class="gear-card__cat">${CATEGORY_LABELS[gear.category] || gear.category}</p>
@@ -140,10 +136,10 @@ document.addEventListener('DOMContentLoaded', async () => {
           ${gear.available ? `
           <a href="${waHref}" class="btn btn-outline" target="_blank" rel="noopener"
              style="font-size:0.75rem;padding:0.6em 1.4em">
-            Consultar disponibilidad
+            ${eqStrings.consultar_disponibilidad}
           </a>` : `
           <span class="btn btn-ghost" style="font-size:0.75rem;padding:0.6em 1.4em;opacity:0.4;cursor:not-allowed">
-            No disponible
+            ${eqStrings.no_disponible}
           </span>`}
         </div>
       `;

@@ -50,5 +50,88 @@
     "copyright_owner": "UMD Films",
     "dev_name": "Javier Botella",
     "dev_url": "https://www.linkedin.com/in/javier-botella-muñoz-a58928186/"
+  },
+
+  "ui_strings": {
+    "nav": {
+      "quienes_somos": "Quiénes somos",
+      "servicios": "Servicios",
+      "portafolio": "Portafolio",
+      "equipo": "Equipo",
+      "contacto": "Contacto"
+    },
+    "footer": {
+      "navegar": "Navegar",
+      "redes": "Redes",
+      "desarrollado_por": "Desarrollado por"
+    },
+    "aria": {
+      "abrir_menu": "Abrir menú",
+      "cerrar_menu": "Cerrar menú",
+      "modo_oscuro": "Cambiar a modo oscuro",
+      "modo_claro": "Cambiar a modo claro"
+    },
+    "categorias_equipo": {
+      "all": "Todo",
+      "camara": "Cámara",
+      "audio": "Audio",
+      "iluminacion": "Iluminación",
+      "soporte": "Soporte",
+      "otro": "Otro"
+    },
+    "categorias_portfolio": {
+      "Cortometraje": "Cortometraje",
+      "Videoclip": "Videoclips",
+      "Cine": "Cine",
+      "Musical": "Musical",
+      "Eventos": "Eventos",
+      "Publicidad": "Publicidad"
+    },
+    "tipos_artista": {
+      "team": "Equipo UMD",
+      "external": "Colaboradores externos"
+    },
+    "errores_404": {
+      "perfil_titulo": "Perfil no encontrado",
+      "perfil_volver": "Volver",
+      "proyecto_titulo": "Proyecto no encontrado",
+      "proyecto_volver": "Volver"
+    },
+    "placeholders": {
+      "bio_pendiente": "Descripción pendiente de rellenar en team.json.",
+      "sinopsis_pendiente": "Sinopsis pendiente de rellenar en portfolio.json.",
+      "video_pendiente": "Vídeo pendiente de enlazar en portfolio.json."
+    },
+
+    "equipment_extra": {
+      "consultar_disponibilidad": "Consultar disponibilidad",
+      "no_disponible": "No disponible",
+      "whatsapp_msg_template": "Hola, me interesa alquilar: {name} (x{qty}). ¿Está disponible?"
+    },
+    "ficha_tecnica": {
+      "header": "Ficha técnica",
+      "titulo": "Título",
+      "categoria": "Categoría",
+      "ano": "Año",
+      "duracion": "Duración",
+      "director": "Director",
+      "cliente": "Cliente",
+      "tags": "Tags"
+    },
+    "video": {
+      "trailer_tab": "Tráiler",
+      "completo_tab": "Corto completo",
+      "ver_youtube": "Ver en YouTube ↗"
+    },
+    "ficha_perfil": {
+      "header": "Ficha",
+      "nombre": "Nombre",
+      "rol": "Rol",
+      "especialidades": "Especialidades",
+      "empresa": "Empresa",
+      "sede": "Sede",
+      "empresa_valor": "UMD Films",
+      "sede_valor": "Málaga"
+    }
   }
 }

@@ -5,14 +5,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   ]);
   await UMD.renderNav(config);
   await UMD.renderFooter(config);
-  UMD.renderFAB(config);
+  UMD.renderFAB();
 
   document.title = `Portfolio | ${config.seo.site_suffix}`;
 
-  const FILTER_LABELS = {
-    videoclip: 'Videoclips', publicidad: 'Publicidad', cine: 'Cine',
-    corporativo: 'Corporativo', musical: 'Musical', cortometraje: 'Cortometraje'
-  };
+  const FILTER_LABELS = config.ui_strings?.categorias_portfolio
 
   UMD.renderFilterableGrid({
     items: portfolio,

@@ -5,6 +5,12 @@
  * =====================================================
  */
 
+/* ---- Cache de ui_strings, poblado por renderNav() ----
+   initNav/applyTheme/toggleTheme no reciben config directamente
+   (se llaman también desde el listener del botón), así que se
+   cachea aquí una vez que renderNav() lo recibe. */
+let _ui = null;
+
 /* ---- JSON loading ---- */
 async function fetchJSON(path) {
   const res = await fetch(path);
@@ -53,7 +59,9 @@ function initNav() {
     const open = burger.classList.toggle('open');
     links.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', String(open));
-    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    burger.setAttribute('aria-label', open
+      ? (_ui?.aria?.cerrar_menu)
+      : (_ui?.aria?.abrir_menu));
     document.body.style.overflow = open ? 'hidden' : '';
   });
 
@@ -81,7 +89,9 @@ function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   const btn = document.getElementById('themeToggle');
   if (btn) {
-    btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+    btn.setAttribute('aria-label', theme === 'light'
+      ? (_ui?.aria?.modo_oscuro)
+      : (_ui?.aria?.modo_claro));
   }
 }
 
@@ -106,6 +116,31 @@ function initTheme() {
   }
 }
 
+/* ---- Scroll-spy: highlight nav link when section is in view ---- */
+function initScrollSpy() {
+  const sections = document.querySelectorAll('main > section[id]');
+  const links = document.querySelectorAll('.nav__links a[href*="#"]');
+  if (!sections.length || !links.length) return;
+
+  const map = new Map();
+  links.forEach(link => {
+    const id = link.getAttribute('href')?.split('#')[1];
+    if (id) map.set(id, link);
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const link = map.get(entry.target.id);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => obs.observe(s));
+}
+
 /* ---- Image lightbox ---- */
 function initLightbox(selector) {
   const images = document.querySelectorAll(selector);
@@ -118,7 +153,7 @@ function initLightbox(selector) {
     lightbox.id = 'umdLightbox';
     lightbox.innerHTML = `
       <button class="lightbox__close" type="button" aria-label="Close">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
       <img src="" alt="" />
     `;
@@ -152,8 +187,10 @@ function initLightbox(selector) {
 /* ---- Shared nav HTML ---- */
 async function renderNav(config) {
   const cfg = config || await fetchJSON(rootPath('data/config.json'));
+  _ui = cfg.ui_strings || {};
+  const nav_ = _ui.nav || {};
+  const aria = _ui.aria || {};
   const logoSrc  = rootPath(cfg.brand.logo);
-  const waHref   = `https://wa.me/${cfg.contact.whatsapp}?text=${encodeURIComponent(cfg.contact.whatsapp_msg)}`;
 
   const nav = document.getElementById('nav');
   if (!nav) return;
@@ -162,35 +199,31 @@ async function renderNav(config) {
     <a href="${rootPath('index.html')}#hero" class="nav__logo" aria-label="${cfg.brand.name}">
       <img src="${logoSrc}" alt="${cfg.brand.logo_alt}" />
     </a>
-    <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false">
+    <button class="nav__burger" id="burger" aria-label="${aria.abrir_menu}" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <nav class="nav__links" id="navLinks" role="navigation">
-      <a href="${rootPath('index.html')}#nosotros">Quiénes somos</a>
-      <a href="${rootPath('index.html')}#servicios">Servicios</a>
-      <a href="${rootPath('index.html')}#portafolio">Portafolio</a>
-      <a href="${rootPath('index.html')}#equipo">Equipo</a>
-      <a href="${rootPath('equipment/index.html')}">Material</a>
-      <a href="${waHref}" class="nav__cta btn-outline" target="_blank" rel="noopener">Hablemos</a>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
-        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="4"></circle>
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
-        </svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-        </svg>
+      <a href="${rootPath('index.html')}#nosotros">${nav_.quienes_somos}</a>
+      <a href="${rootPath('index.html')}#servicios">${nav_.servicios}</a>
+      <a href="${rootPath('index.html')}#portafolio">${nav_.portafolio}</a>
+      <a href="${rootPath('index.html')}#equipo">${nav_.equipo}</a>
+      <a href="${rootPath('index.html')}#contacto">${nav_.contacto || 'Contacto'}</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="${aria.modo_oscuro}">
+        <svg aria-hidden="true" class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg aria-hidden="true" class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"/></svg>
       </button>
     </nav>
   `;
 
   initNav();
   initTheme();
+  initScrollSpy();
 }
 
 /* ---- Shared footer HTML ---- */
 async function renderFooter(config) {
   const cfg = config || await fetchJSON(rootPath('data/config.json'));
+  const ft = cfg.ui_strings?.footer || {};
   const footer = document.getElementById('footer');
   if (!footer) return;
 
@@ -218,16 +251,16 @@ async function renderFooter(config) {
         </div>
       </div>
       <nav class="footer__nav" aria-label="Site navigation">
-        <strong>Navegar</strong>
-        <a href="${rootPath('index.html')}#nosotros"><span>Quiénes somos</span></a>
-        <a href="${rootPath('index.html')}#servicios"><span>Servicios</span></a>
-        <a href="${rootPath('index.html')}#portafolio"><span>Portafolio</span></a>
-        <a href="${rootPath('index.html')}#equipo"><span>Equipo</span></a>
+        <strong>${ft.navegar || 'Navegar'}</strong>
+        <a href="${rootPath('index.html')}#nosotros"><span>${_ui?.nav?.quienes_somos || 'Quiénes somos'}</span></a>
+        <a href="${rootPath('index.html')}#servicios"><span>${_ui?.nav?.servicios || 'Servicios'}</span></a>
+        <a href="${rootPath('index.html')}#portafolio"><span>${_ui?.nav?.portafolio || 'Portafolio'}</span></a>
+        <a href="${rootPath('index.html')}#equipo"><span>${_ui?.nav?.equipo || 'Equipo'}</span></a>
         <a href="${rootPath('equipment/index.html')}"><span>Alquiler de material</span></a>
         <a href="${rootPath('index.html')}#contacto"><span>Contacto</span></a>
       </nav>
       <nav class="footer__nav" aria-label="Social media">
-        <strong>Redes</strong>
+        <strong>${ft.redes || 'Redes'}</strong>
         ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener"><span>Instagram</span></a>` : ''}
         ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener"><span>YouTube</span></a>` : ''}
         ${cfg.social.tiktok    ? `<a href="${cfg.social.tiktok}"    target="_blank" rel="noopener"><span>TikTok</span></a>`  : ''}
@@ -236,20 +269,22 @@ async function renderFooter(config) {
     </div>
     <div class="footer__bottom">
       <p>© ${year} ${cfg.footer.copyright_owner}. Todos los derechos reservados.</p>
-      <p>Desarrollado por <a href="${cfg.footer.dev_url || '#'}" rel="noopener">${cfg.footer.dev_name}</a></p>
+      <p>${ft.desarrollado_por || 'Desarrollado por'} <a href="${cfg.footer.dev_url || '#'}" rel="noopener">${cfg.footer.dev_name}</a></p>
     </div>
   `;
 }
 
-/* ---- FAB WhatsApp ---- */
-function renderFAB(config) {
-  const wa   = config.contact.whatsapp;
-  const msg  = encodeURIComponent(config.contact.whatsapp_msg);
-  const fab  = document.querySelector('.fab-wa');
-  if (fab) {
-    fab.href = `https://wa.me/${wa}?text=${msg}`;
-    fab.innerHTML = `<span class="icon icon-whatsapp" aria-hidden="true"></span>`;
-  }
+/* ---- FAB Scroll-to-top ---- */
+function renderFAB() {
+  const fab = document.querySelector('.fab-top');
+  if (!fab) return;
+  fab.removeAttribute('href');
+  fab.setAttribute('role', 'button');
+  fab.innerHTML = '<span class="icon icon-arrow-up" aria-hidden="true"></span>';
+  fab.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  const toggle = () => fab.classList.toggle('visible', window.scrollY > 400);
+  window.addEventListener('scroll', toggle, { passive: true });
+  toggle();
 }
 
 /* ---- Schema JSON-LD LocalBusiness ---- */
@@ -354,7 +389,10 @@ function renderFilterableGrid({ items, filterEl, gridEl, categoryField, labels =
   }
 
   if (filterEl && categoryField) {
-    const categories = ['all', ...new Set(items.map(i => i[categoryField]))];
+    const usedCategories = new Set(items.map(i => i[categoryField]));
+    const categories = labels && Object.keys(labels).length
+      ? ['all', ...Object.keys(labels).filter(k => usedCategories.has(k))]
+      : ['all', ...usedCategories];
     filterEl.innerHTML = '';
     categories.forEach(cat => {
       const btn = document.createElement('button');
