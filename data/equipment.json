@@ -58,11 +58,10 @@
   },
   {
     "id": "paneles-led-neewer",
-    "name": "Paneles LED Neewer",
+    "name": "Kit 3 Paneles LED Neewer NL660",
     "category": "iluminacion",
     "quantity": 1,
-    "description": "Panel de luz LED regulable para iluminación de relleno o clave en interiores. Modelo exacto pendiente de confirmar con Ale.",
-    "specs": [],
+    "description": "Kit de iluminación de 3 puntos con paneles LED Bi-Color regulables. Incluye viseras, trípodes, difusores y bolsas de transporte. Funciona mediante corriente AC o baterías tipo Sony NP-F.",
     "photo": "assets/equipment/ilumination/paneles-led-neewer.avif",
     "price_day": 0,
     "available": true
