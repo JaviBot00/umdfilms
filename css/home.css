@@ -276,36 +276,32 @@ html[data-theme="light"] .trust__inner img:hover {
    ===================================================== */
 .portfolio { background: var(--black); }
 .portfolio__cta { text-align: center; margin-top: 3rem; }
+.portfolio__actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
 
 /* =====================================================
    TEAM (sección de home — el grid/cards son de style.css)
    ===================================================== */
 .team { background: var(--dark); }
-
-/* =====================================================
-   CTA BAND
-   ===================================================== */
-.cta-band {
-  background: linear-gradient(135deg, var(--dark-mid), #1a0305);
-  border-block: 1px solid rgba(192,32,42,0.18);
-  padding: clamp(60px, 8vw, 110px) 0;
+.team__actions {
   text-align: center;
-}
-.cta-band__title {
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  color: var(--white);
-  margin-bottom: 1rem;
-}
-.cta-band__sub {
-  color: var(--cream-mid);
-  margin-bottom: 2.5rem;
-  font-size: 1.05rem;
+  margin-top: 3rem;
 }
 
 /* =====================================================
    CONTACT
    ===================================================== */
 .contact { background: var(--black); }
+.contact__info .section-title span {
+  display: block;
+  font-size: 0.65em;
+  color: var(--cream-mid);
+  margin-top: 0.3em;
+}
 .contact__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

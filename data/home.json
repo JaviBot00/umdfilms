@@ -48,17 +48,11 @@
     "title": "Nuestro equipo"
   },
 
-  "cta_band": {
-    "title": "¿Tienes un proyecto en mente?",
-    "subtitle": "Cuéntanoslo. Convertimos ideas en imágenes que impactan.",
-    "cta": { "label": "Empezar ahora", "href": "#contacto" }
-  },
-
   "contact": {
     "eyebrow": "Contacto",
-    "title_pre": "Hablemos de",
-    "title_highlight": "tu proyecto",
-    "body": "Estamos en Málaga pero trabajamos en toda España. Escríbenos por WhatsApp o rellena el formulario y te respondemos en menos de 24h.",
+    "title_pre": "¿Tienes un proyecto en mente?",
+    "title_line2": "Hablemos de ello.",
+    "body": "Convertimos ideas en imágenes que impactan. Estamos en Málaga pero trabajamos en toda España. Escríbenos por WhatsApp o rellena el formulario y te respondemos en menos de 24h.",
     "wa_label": "WhatsApp directo",
     "form": {
       "name_label": "Nombre",
