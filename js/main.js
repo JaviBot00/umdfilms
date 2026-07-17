@@ -77,18 +77,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
   `);
 
-  /* CTA band */
-  setText('ctaBandTitle', home.cta_band.title);
-  setText('ctaBandSub', home.cta_band.subtitle);
-  const ctaBandBtn = document.getElementById('ctaBandBtn');
-  if (ctaBandBtn) {
-    ctaBandBtn.textContent = home.cta_band.cta.label;
-    ctaBandBtn.href = home.cta_band.cta.href;
-  }
-
   /* Contact */
   setText('contactEyebrow', home.contact.eyebrow);
-  setHTML('contactTitle', `${home.contact.title_pre}<br /><em>${home.contact.title_highlight}</em>`);
+  setHTML('contactTitle', `${home.contact.title_pre}<br /><span>${home.contact.title_line2}</span>`);
   setText('contactBody', home.contact.body);
 
   /* Enlaces de contacto -> WhatsApp + redes, dato de config, no de home.json */

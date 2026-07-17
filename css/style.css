@@ -58,12 +58,11 @@ html[data-theme="light"] {
   --line:       rgba(0, 0, 0, 0.1);
 }
 
-/* Hero, CTA band y Nav: siempre oscuros, da igual el tema activo.
-   NOTA: aunque .hero y .cta-band viven visualmente en home.css,
+/* Hero, Nav: siempre oscuros, da igual el tema activo.
+   NOTA: aunque .hero viven visualmente en home.css,
    este pin de variables se queda aquí porque es arquitectura de
    theming compartida (nav/profile-hero/film-hero también la usan). */
 .hero,
-.cta-band,
 .nav,
 .profile-hero,
 .film-hero {
