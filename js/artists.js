@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   ];
 
   /* ---- Filtro: Equipo / Externos ---- */
-  const TYPE_LABELS = { team: 'Equipo UMD', external: 'Colaboradores externos' };
+  const TYPE_LABELS = config.ui_strings?.tipos_artista;
 
   UMD.renderFilterableGrid({
     items: artistList,
@@ -81,7 +81,7 @@ function buildArtistCard(artist, rootPathFn) {
   card.innerHTML = `
     <div class="team-card__img-wrap">
       <img class="team-card__img" src="${photoSrc}" alt="${artist.name} — UMD Films" loading="lazy" />
-      ${clickable ? '<span class="team-card__badge">↗ Ver perfil</span>' : ''}
+      ${clickable ? '<span class="team-card__badge">Ver perfil ↗</span>' : ''}
     </div>
     <div class="team-card__info">
       <p class="team-card__name">${artist.name}</p>

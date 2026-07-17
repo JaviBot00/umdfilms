@@ -32,6 +32,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     UMD.fetchJSON(UMD.rootPath('data/team.json'))
   ]);
 
+  const ui = config.ui_strings || {};
+  const err404 = ui.errores_404 || {};
+  const placeholders = ui.placeholders || {};
+  const fichaStrings = ui.ficha_tecnica || {};
+  const videoStrings = ui.video || {};
+
   const project = portfolio.find(p => p.id === projectId);
   const trailerId = validYtUrl(project.trailer_youtube) ? UMD.extractYouTubeId(project.trailer_youtube) : null;
   const fullId    = validYtUrl(project.full_video_youtube) ? UMD.extractYouTubeId(project.full_video_youtube) : null;
@@ -45,12 +51,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- Project not found ---- */
   if (!project) {
-    document.title = 'Proyecto no encontrado — UMD Films Málaga';
+    document.title = `${err404.proyecto_titulo || 'Proyecto no encontrado'} — UMD Films Málaga`;
     document.querySelector('main').innerHTML = `
       <div class="container" style="padding-block:8rem;text-align:center">
         <p class="eyebrow">Error 404</p>
-        <h1 class="section-title">Proyecto no encontrado</h1>
-        <a href="${UMD.rootPath('index.html')}#portafolio" class="btn btn-primary" style="margin-top:2rem">Volver al portafolio</a>
+        <h1 class="section-title">${err404.proyecto_titulo || 'Proyecto no encontrado'}</h1>
+        <a href="${UMD.rootPath('index.html')}#portafolio" class="btn btn-primary" style="margin-top:2rem">${err404.proyecto_volver}</a>
       </div>`;
     return;
   }
@@ -122,7 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="film-hero__content">
         <a href="${UMD.rootPath('index.html')}#portafolio" class="film-hero__back reveal">
           <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
-          Volver al portafolio
+          ${err404.proyecto_volver}
         </a>
         <div class="film-hero__meta reveal d1">
           <span class="film-badge film-badge--cat">${project.category}</span>
@@ -146,15 +152,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!trailerId && !fullId) {
       trailerEl.innerHTML = `
         <div class="film-trailer__placeholder">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
-          <p>Vídeo pendiente de enlazar en portfolio.json</p>
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></svg>
+          <p>${placeholders.video_pendiente}</p>
         </div>`;
     } else if (trailerId && fullId) {
       // Ambos existen -> tabs
       trailerEl.innerHTML = `
         <div class="video-tabs" role="tablist" aria-label="Vídeo del proyecto">
-          <button role="tab" id="tab-trailer" aria-selected="true" aria-controls="videoPanel">Tráiler</button>
-          <button role="tab" id="tab-full" aria-selected="false" tabindex="-1" aria-controls="videoPanel">Corto completo</button>
+          <button role="tab" id="tab-trailer" aria-selected="true" aria-controls="videoPanel">${videoStrings.trailer_tab}</button>
+          <button role="tab" id="tab-full" aria-selected="false" tabindex="-1" aria-controls="videoPanel">${videoStrings.completo_tab}</button>
         </div>
         <div class="video-panel" role="tabpanel" id="videoPanel" aria-labelledby="tab-trailer"></div>
       `;
@@ -162,7 +168,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const tabTrailer = trailerEl.querySelector('#tab-trailer');
       const tabFull     = trailerEl.querySelector('#tab-full');
 
-      renderVideoTab(panel, trailerId, project.title + ' — Tráiler');
+      renderVideoTab(panel, trailerId, project.title + ' — ' + (videoStrings.trailer_tab));
 
       function activateTab(tab, other, ytId, label) {
         tab.setAttribute('aria-selected', 'true');
@@ -172,8 +178,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         panel.setAttribute('aria-labelledby', tab.id);
         renderVideoTab(panel, ytId, label);
       }
-      tabTrailer.addEventListener('click', () => activateTab(tabTrailer, tabFull, trailerId, project.title + ' — Tráiler'));
-      tabFull.addEventListener('click',    () => activateTab(tabFull, tabTrailer, fullId, project.title + ' — Corto completo'));
+      tabTrailer.addEventListener('click', () => activateTab(tabTrailer, tabFull, trailerId, project.title + ' — ' + (videoStrings.trailer_tab)));
+      tabFull.addEventListener('click',    () => activateTab(tabFull, tabTrailer, fullId, project.title + ' — ' + (videoStrings.completo_tab)));
     } else {
       // Solo uno de los dos -> sin tabs, directo
       trailerEl.innerHTML = `<div class="video-panel" id="videoPanel"></div>`;
@@ -187,11 +193,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         <img src="${heroId}" data-yt-id="${ytId}" onload="UMD.ytThumbCheck(this)"
             onerror="UMD.ytThumbAdvance(this)" alt="${title}">
         <span class="video-facade__play" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          <svg width="22" height="22" viewBox="0 0 24 24"><path d="m5 3 14 9-14 9z"/></svg>
         </span>
       </button>
       <a class="video-facade__yt-link" href="https://youtube.com/watch?v=${ytId}"
-        target="_blank" rel="noopener">Ver en YouTube ↗</a>
+        target="_blank" rel="noopener">${videoStrings.ver_youtube}</a>
     `;
     container.querySelector('.video-facade').addEventListener('click', function () {
       this.outerHTML = `
@@ -207,24 +213,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (synopsisEl) {
     synopsisEl.innerHTML = project.synopsis
       ? `<p>${project.synopsis}</p>`
-      : `<p style="color:var(--muted);font-style:italic">Sinopsis pendiente de rellenar en portfolio.json.</p>`;
+      : `<p style="color:var(--muted);font-style:italic">${placeholders.sinopsis_pendiente}</p>`;
   }
 
   /* ---- TECHNICAL SHEET ---- */
   const sheetEl = document.getElementById('filmSheet');
   if (sheetEl) {
     const rows = [
-      { label: 'Título',    value: project.title },
-      { label: 'Categoría', value: project.category },
-      { label: 'Año',       value: project.year },
-      { label: 'Duración',  value: project.duration_min ? `${project.duration_min} min` : '—' },
-      { label: 'Director',  value: project.director || '—' },
-      { label: 'Cliente',   value: project.client || '—' },
+      { label: fichaStrings.titulo,    value: project.title },
+      { label: fichaStrings.categoria, value: project.category },
+      { label: fichaStrings.ano,       value: project.year },
+      { label: fichaStrings.duracion,  value: project.duration_min ? `${project.duration_min} min` : '—' },
+      { label: fichaStrings.director,  value: project.director || '—' },
+      { label: fichaStrings.cliente,   value: project.client || '—' },
     ];
 
     sheetEl.innerHTML = `
       <div class="film-sheet">
-        <div class="film-sheet__header">Ficha técnica</div>
+        <div class="film-sheet__header">${fichaStrings.header}</div>
         <div class="film-sheet__body">
           ${rows.map(r => `
             <div class="film-row">
@@ -233,7 +239,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>`).join('')}
           ${project.tags?.length ? `
             <div class="film-row">
-              <span class="film-label">Tags</span>
+              <span class="film-label">${fichaStrings.tags || 'Tags'}</span>
               <span class="film-value">${project.tags.join(', ')}</span>
             </div>` : ''}
         </div>
@@ -280,7 +286,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (galleryGrid && project.photos_extra?.length) {
     project.photos_extra.forEach((src, i) => {
       const img = document.createElement('img');
-      img.src       = UMD.rootPath(src);
+      img.src       = UMD.rootPath(`assets/portfolio/${project.id}/${num}.avif`);
       img.alt       = `${project.title} — Foto ${i + 1} — UMD Films`;
       img.loading   = 'lazy';
       img.className = 'film-gallery__img reveal';
