@@ -1,14 +1,6 @@
-/**
- * =====================================================
- * team.js — Individual team member page
- *
- * How it works:
- *  - Reads the ?id= from URL or filename
- *  - Loads team.json and portfolio.json
- *  - Fills the entire page dynamically
- *  - One HTML template serves all 13 members
- * =====================================================
- */
+// team.js — Individual team member page
+// Reads ID from URL filename, loads team.json, fills page dynamically.
+// One HTML template serves all members.
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -40,12 +32,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- If member doesn't exist ---- */
   if (!member) {
-    document.title = `${err404.perfil_titulo || 'Perfil no encontrado'} — UMD Films Málaga`;
+    document.title = `${err404.perfil_titulo} — ${config.seo.site_suffix}`;
     document.querySelector('main').innerHTML = `
       <div class="container" style="padding-block:8rem;text-align:center">
         <p class="eyebrow">Error 404</p>
-        <h1 class="section-title">${err404.perfil_titulo || 'Perfil no encontrado'}</h1>
-        <a href="${UMD.rootPath('index.html')}#equipo" class="btn btn-primary" style="margin-top:2rem">${err404.perfil_volver || 'Volver al equipo'}</a>
+        <h1 class="section-title">${err404.perfil_titulo}</h1>
+        <a href="${UMD.rootPath('index.html')}#equipo" class="btn btn-primary" style="margin-top:2rem">${err404.perfil_volver}</a>
       </div>`;
     return;
   }
@@ -55,35 +47,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelector('meta[name="description"]')
     ?.setAttribute('content', `Conoce a ${member.name}, ${member.role} en ${config.seo.site_suffix}.`);
 
-  // Dynamic canonical
-  const canonical = document.querySelector('link[rel="canonical"]')
-    || Object.assign(document.createElement('link'), { rel: 'canonical' });
-  canonical.href = `${config.brand.site_url}/team/${member.id}.html`;
-  if (!canonical.parentNode) document.head.appendChild(canonical);
+  UMD.setCanonical(`${config.brand.site_url}/team/${member.id}.html`);
 
-  // Open Graph
-  const setMeta = (prop, content) => {
-    let el = document.querySelector(`meta[property="${prop}"]`);
-    if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
-    el.setAttribute('content', content);
-  };
-  setMeta('og:title',       document.title);
-  setMeta('og:description', `Conoce a ${member.name}, ${member.role} en UMD Films Málaga.`);
-  setMeta('og:image',       `${config.brand.site_url}/${member.photo_cover}`);
-  setMeta('og:type',        'profile');
-  setMeta('og:url',         `${config.brand.site_url}/team/${member.id}.html`);
-  setMeta('og:site_name',   'UMD Films');
+  UMD.setOgMeta('og:title',       document.title);
+  UMD.setOgMeta('og:description', `Conoce a ${member.name}, ${member.role} en ${config.seo.site_suffix}.`);
+  UMD.setOgMeta('og:image',       `${config.brand.site_url}/${member.photo_cover}`);
+  UMD.setOgMeta('og:type',        'profile');
+  UMD.setOgMeta('og:url',         `${config.brand.site_url}/team/${member.id}.html`);
+  UMD.setOgMeta('og:site_name',   config.seo.site_name);
 
-  // Twitter Card
-  const setTwitter = (name, content) => {
-    let el = document.querySelector(`meta[name="${name}"]`);
-    if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el); }
-    el.setAttribute('content', content);
-  };
-  setTwitter('twitter:card',        'summary_large_image');
-  setTwitter('twitter:title',       document.title);
-  setTwitter('twitter:description', `Conoce a ${member.name}, ${member.role} en UMD Films Málaga.`);
-  setTwitter('twitter:image',       `${config.brand.site_url}/${member.photo_cover}`);
+  UMD.setTwitterMeta('twitter:card',        'summary_large_image');
+  UMD.setTwitterMeta('twitter:title',       document.title);
+  UMD.setTwitterMeta('twitter:description', `Conoce a ${member.name}, ${member.role} en ${config.seo.site_suffix}.`);
+  UMD.setTwitterMeta('twitter:image',       `${config.brand.site_url}/${member.photo_cover}`);
 
   // Schema Person for rich results
   const fullName = member.name + (member.surname ? ' ' + member.surname : '');
@@ -118,7 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     heroSection.innerHTML = `
       <div class="profile-hero__bg">
         <img src="${UMD.rootPath(member.photo_cover)}"
-             alt="${member.name} — ${member.role} — UMD Films Málaga" />
+             alt="${member.name} — ${member.role} — ${config.seo.site_suffix}" />
       </div>
       <div class="profile-hero__overlay"></div>
       <div class="profile-hero__content container">
@@ -126,7 +102,6 @@ document.addEventListener('DOMContentLoaded', async () => {
           <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
           ${err404.perfil_volver || 'Volver al equipo'}
         </a>
-        <!-- <p class="eyebrow profile-hero__eyebrow reveal">UMD Films Málaga · Equipo</p> -->
         <h1 class="profile-hero__name reveal d1">${member.name}${member.surname ? ' ' + member.surname : ''}</h1>
         <p class="profile-hero__role reveal d2">${member.role}</p>
         ${member.specialties?.length ? `
@@ -145,7 +120,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       : `<p class="profile-bio reveal" style="color:var(--muted);font-style:italic">${placeholders.bio_pendiente || 'Descripción pendiente de rellenar en team.json.'}</p>`;
   }
 
-  /* Social links */
+  /* ---- Social links ---- */
   const socialsEl = document.getElementById('profileSocials');
   if (socialsEl && member.social) {
     const links = [];
@@ -167,33 +142,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     socialsEl.innerHTML = links.join('');
   }
 
-  /* Side sheet */
+  /* ---- Side sheet ---- */
   const fichaEl = document.getElementById('profileFicha');
   if (fichaEl) {
     fichaEl.innerHTML = `
       <div class="profile-info-card">
-        <div class="profile-info-card__header">${fichaStrings.header || 'Ficha'}</div>
+        <div class="profile-info-card__header">${fichaStrings.header}</div>
         <div class="profile-info-card__body">
           <div class="profile-info-row">
-            <span class="profile-info-label">${fichaStrings.nombre || 'Nombre'}</span>
+            <span class="profile-info-label">${fichaStrings.nombre}</span>
             <span class="profile-info-value">${member.name}${member.surname ? ' ' + member.surname : ''}</span>
           </div>
           <div class="profile-info-row">
-            <span class="profile-info-label">${fichaStrings.rol || 'Rol'}</span>
+            <span class="profile-info-label">${fichaStrings.rol}</span>
             <span class="profile-info-value">${member.role}</span>
           </div>
           ${member.specialties?.length ? `
           <div class="profile-info-row">
-            <span class="profile-info-label">${fichaStrings.especialidades || 'Especialidades'}</span>
+            <span class="profile-info-label">${fichaStrings.especialidades}</span>
             <span class="profile-info-value">${member.specialties.join(', ')}</span>
           </div>` : ''}
           <div class="profile-info-row">
-            <span class="profile-info-label">${fichaStrings.empresa || 'Empresa'}</span>
-            <span class="profile-info-value">${fichaStrings.empresa_valor || 'UMD Films'}</span>
+            <span class="profile-info-label">${fichaStrings.empresa}</span>
+            <span class="profile-info-value">${fichaStrings.empresa_valor}</span>
           </div>
           <div class="profile-info-row">
-            <span class="profile-info-label">${fichaStrings.sede || 'Sede'}</span>
-            <span class="profile-info-value">${fichaStrings.sede_valor || 'Málaga'}</span>
+            <span class="profile-info-label">${fichaStrings.sede}</span>
+            <span class="profile-info-value">${fichaStrings.sede_valor}</span>
           </div>
         </div>
       </div>
@@ -208,7 +183,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       member.photos_extra.forEach(num => {
         const img = document.createElement('img');
         img.src     = UMD.rootPath(`assets/team/${member.id}/${num}.avif`);
-        img.alt     = `${member.name} — UMD Films Málaga`;
+        img.alt     = `${member.name} — ${config.seo.site_suffix}`;
         img.loading = 'lazy';
         img.className = 'profile-photos__img reveal';
         photosGrid.appendChild(img);

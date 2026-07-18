@@ -19,7 +19,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Basic SEO (dynamic values are populated by main.js from config.json) -->
+  <!-- SEO (fallback values; main.js overwrites dynamically from config.json) -->
   <title>UMD Films | Productora Audiovisual en Málaga</title>
   <meta name="description" content="UMD Films: productora audiovisual en Málaga. Videoclips, publicidad, cine, producción musical y más. Con alma malagueña y alcance nacional." />
   <meta name="robots" content="index, follow" />
@@ -61,18 +61,12 @@
 
   <a href="#contenido" class="skip-link">Saltar al contenido</a>
 
-  <!-- ======= NAV =======
-       Dynamically rendered by shared.js > renderNav()
-       from data/config.json
-  ======= -->
+  <!-- ---- NAV ---- -->
   <header class="nav" id="nav" role="banner"></header>
 
   <main id="contenido">
 
-  <!-- ======= HERO =======
-       Background video + multi-layer overlay for readability
-       Content: eyebrow, title, subtitle, CTAs, scroll indicator
-  ======= -->
+  <!-- ---- HERO ---- -->
   <section class="hero" id="hero" aria-label="Portada UMD Films">
     <!-- Background video. poster: static image while loading -->
     <video class="hero__video"
@@ -89,10 +83,10 @@
     <div class="hero__overlay" aria-hidden="true"></div>
 
     <!-- Decorative red side line -->
-    <div class="hero__redline" aria-hidden="true"></div>
 
     <!-- Main content -->
     <div class="hero__content">
+      <div class="hero__redline" aria-hidden="true"></div>
       <p class="hero__eyebrow reveal" id="heroEyebrow"></p>
       <h1 class="hero__title reveal d1" id="heroTitle"></h1>
       <p class="hero__sub reveal d2" id="heroSub"></p>
@@ -106,10 +100,7 @@
     </div>
   </section>
 
-  <!-- ======= TRUST BAR =======
-       Client logos in infinite marquee
-       Duplicated by JS (shared.js) for continuous loop
-  ======= -->
+  <!-- ---- TRUST BAR ---- -->
   <section class="trust" aria-label="Clientes">
     <p class="trust__label" id="trustLabel"></p>
     <div class="trust__track" aria-hidden="true">
@@ -117,11 +108,7 @@
     </div>
   </section>
 
-  <!-- ======= ABOUT =======
-       Grid: text left + stats right
-       "Málaga" in red (see <em> in h2)
-       Stats calculated from JSON in main.js > statsData
-  ======= -->
+  <!-- ---- ABOUT ---- -->
   <section class="about section" id="nosotros">
     <div class="container about__grid">
       <div class="about__text">
@@ -131,22 +118,11 @@
         <div class="about__actions reveal" id="aboutActions"></div>
       </div>
 
-      <!-- Stats: generated in main.js from JSON.
-           statsGrid is populated dynamically with:
-             - portfolio.length  → Completed projects
-             - team.length       → Professionals
-             - current year - founded_year → Years
-             - config.location   → Location
-      -->
       <div class="stats reveal" id="statsGrid" role="list" aria-label="Estadísticas UMD Films"></div>
     </div>
   </section>
 
-  <!-- ======= SERVICES =======
-       Grid generated from data/services.json by main.js
-       On desktop: hover on card shows video preview
-       "Equipment rental" service links to equipment/index.html
-  ======= -->
+  <!-- ---- SERVICES ---- -->
   <section class="services section" id="servicios">
     <div class="container">
       <p class="eyebrow reveal" id="servicesEyebrow"></p>
@@ -162,11 +138,7 @@
     </div>
   </section>
 
-  <!-- ======= PORTFOLIO =======
-       Filters generated from unique categories in JSON
-       Cards: click → portfolio/[id].html
-       CTA: link to YouTube channel
-  ======= -->
+  <!-- ---- PORTFOLIO ---- -->
   <section class="portfolio section" id="portafolio">
     <div class="container">
       <p class="eyebrow reveal" id="portfolioEyebrow"></p>
@@ -176,15 +148,10 @@
       <div class="portfolio__grid" id="portfolioGrid"></div>
 
       <div class="portfolio__cta reveal" id="portfolioCta"></div>
-      <!-- <a href="portfolio/index.html" class="btn btn-outline">Ver todos los proyectos ↗</a> -->
     </div>
   </section>
 
-  <!-- ======= TEAM =======
-       Cards generated from data/team.json by main.js
-       Click card → team/[id].html
-       Stats: team.length calculated automatically
-  ======= -->
+  <!-- ---- TEAM ---- -->
   <section class="team section" id="equipo">
     <div class="container">
       <p class="eyebrow reveal" id="teamEyebrow"></p>
@@ -196,12 +163,7 @@
     </div>
   </section>
 
-  <!-- ======= CONTACT =======
-       Grid: info left + form right
-       The form does NOT send email (would require backend).
-       On submit it redirects to WhatsApp with the formatted message.
-       To connect a real backend: edit the function in main.js > contactForm
-  ======= -->
+  <!-- ---- CONTACT ---- -->
   <section class="contact section" id="contacto">
     <div class="container contact__grid">
 
@@ -240,25 +202,13 @@
 
   </main>
 
-  <!-- ======= FOOTER =======
-       Dynamically rendered by shared.js > renderFooter()
-       Includes: logo, social media (inline SVG), navigation, copyright
-       Copyright: © year UMD Films · Developed by Javier + Claude
-  ======= -->
+  <!-- ---- FOOTER ---- -->
   <footer class="footer" id="footer" role="contentinfo"></footer>
 
-  <!-- ======= FAB WHATSAPP =======
-       Always-visible floating button.
-       href: dynamically populated from config.json by shared.js > renderFAB()
-  ======= -->
+  <!-- ---- FAB WHATSAPP ---- -->
   <a class="fab-top" aria-label="Volver arriba"></a>
 
-  <!-- ======= SCRIPTS =======
-       Required load order:
-         1. shared.js  → exposes window.UMD (common utilities)
-         2. main.js    → home page specific logic
-       Do not change the order.
-  ======= -->
+  <!-- ---- SCRIPTS ---- -->
   <script src="js/shared.js"></script>
   <script src="js/main.js"></script>
 

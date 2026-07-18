@@ -7,7 +7,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   await UMD.renderFooter(config);
   UMD.renderFAB();
 
-  document.title = `Portfolio | ${config.seo.site_suffix}`;
+  document.title = config.seo.title_portfolio_index;
+  document.querySelector('meta[name="description"]')
+    ?.setAttribute('content', config.seo.description_portfolio_index);
+
+  UMD.setCanonical(`${config.brand.site_url}/portfolio/`);
+  UMD.setOgMeta('og:title',       config.seo.title_portfolio_index);
+  UMD.setOgMeta('og:description', config.seo.description_portfolio_index);
+  UMD.setOgMeta('og:image',       `${config.brand.site_url}/${config.seo.og_image}`);
+  UMD.setOgMeta('og:url',         `${config.brand.site_url}/portfolio/`);
+  UMD.setOgMeta('og:type',        'website');
+  UMD.setOgMeta('og:site_name',   config.seo.site_name);
+  UMD.setTwitterMeta('twitter:card',        'summary_large_image');
+  UMD.setTwitterMeta('twitter:title',       config.seo.title_portfolio_index);
+  UMD.setTwitterMeta('twitter:description', config.seo.description_portfolio_index);
+  UMD.setTwitterMeta('twitter:image',       `${config.brand.site_url}/${config.seo.og_image}`);
 
   const FILTER_LABELS = config.ui_strings?.categorias_portfolio
 

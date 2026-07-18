@@ -1,21 +1,6 @@
-/**
- * =====================================================
- * portfolio.js — Individual project page
- *
- * Concept: "Movie poster"
- *   - Technical sheet (director, client, duration, year, category)
- *   - Embedded YouTube trailer
- *   - Synopsis
- *   - Behind-the-scenes photos
- *   - Team who participated (with photo and link to their profile)
- *
- * How it works:
- *   - Reads the HTML filename: portfolio/cautivo-malaga.html → id = "cautivo-malaga"
- *   - Finds that id in portfolio.json
- *   - Fills the entire page dynamically
- *   - One HTML template serves all projects
- * =====================================================
- */
+// portfolio.js — Individual project page
+// Reads ID from URL filename, loads portfolio.json, fills page dynamically.
+// One HTML template serves all projects.
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -39,8 +24,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const videoStrings = ui.video || {};
 
   const project = portfolio.find(p => p.id === projectId);
-  const trailerId = validYtUrl(project.trailer_youtube) ? UMD.extractYouTubeId(project.trailer_youtube) : null;
-  const fullId    = validYtUrl(project.full_video_youtube) ? UMD.extractYouTubeId(project.full_video_youtube) : null;
+  const trailerId = UMD.validYtUrl(project.trailer_youtube) ? UMD.extractYouTubeId(project.trailer_youtube) : null;
+  const fullId    = UMD.validYtUrl(project.full_video_youtube) ? UMD.extractYouTubeId(project.full_video_youtube) : null;
   const heroId = trailerId || fullId;
   const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (project.thumb || 'assets/portfolio/placeholder.webp');
 
@@ -51,11 +36,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- Project not found ---- */
   if (!project) {
-    document.title = `${err404.proyecto_titulo || 'Proyecto no encontrado'} — UMD Films Málaga`;
+    document.title = `${err404.proyecto_titulo} — ${config.seo.site_suffix}`;
     document.querySelector('main').innerHTML = `
       <div class="container" style="padding-block:8rem;text-align:center">
         <p class="eyebrow">Error 404</p>
-        <h1 class="section-title">${err404.proyecto_titulo || 'Proyecto no encontrado'}</h1>
+        <h1 class="section-title">${err404.proyecto_titulo}</h1>
         <a href="${UMD.rootPath('index.html')}#portafolio" class="btn btn-primary" style="margin-top:2rem">${err404.proyecto_volver}</a>
       </div>`;
     return;
@@ -66,35 +51,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelector('meta[name="description"]')
     ?.setAttribute('content', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
 
-    // Dynamic canonical
-  const canonical = document.querySelector('link[rel="canonical"]')
-    || Object.assign(document.createElement('link'), { rel: 'canonical' });
-  canonical.href = `${config.brand.site_url}/portfolio/${project.id}.html`;
-  if (!canonical.parentNode) document.head.appendChild(canonical);
+  UMD.setCanonical(`${config.brand.site_url}/portfolio/${project.id}.html`);
 
-  // Open Graph
-  const setMeta = (prop, content) => {
-    let el = document.querySelector(`meta[property="${prop}"]`);
-    if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
-    el.setAttribute('content', content);
-  };
-  setMeta('og:title',       document.title);
-  setMeta('og:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
-  setMeta('og:image',       `${thumbSrc}`);
-  setMeta('og:type',        'video.other');
-  setMeta('og:url',         `${config.brand.site_url}/portfolio/${project.id}.html`);
-  setMeta('og:site_name',   'UMD Films');
+  UMD.setOgMeta('og:title',       document.title);
+  UMD.setOgMeta('og:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
+  UMD.setOgMeta('og:image',       `${thumbSrc}`);
+  UMD.setOgMeta('og:type',        'video.other');
+  UMD.setOgMeta('og:url',         `${config.brand.site_url}/portfolio/${project.id}.html`);
+  UMD.setOgMeta('og:site_name',   config.seo.site_name);
 
-  // Twitter Card
-  const setTwitter = (name, content) => {
-    let el = document.querySelector(`meta[name="${name}"]`);
-    if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el); }
-    el.setAttribute('content', content);
-  };
-  setTwitter('twitter:card',        'summary_large_image');
-  setTwitter('twitter:title',       document.title);
-  setTwitter('twitter:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
-  setTwitter('twitter:image',       `${thumbSrc}`);
+  UMD.setTwitterMeta('twitter:card',        'summary_large_image');
+  UMD.setTwitterMeta('twitter:title',       document.title);
+  UMD.setTwitterMeta('twitter:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
+  UMD.setTwitterMeta('twitter:image',       `${thumbSrc}`);
 
   // Schema VideoObject for projects with video
   if (project.trailer_youtube && !project.trailer_youtube.includes('PLACEHOLDER')) {
@@ -144,10 +113,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- TRAILER / FULL VIDEO ---- */
   const trailerEl = document.getElementById('filmTrailer');
 
-  function validYtUrl(url) {
-    return url && !url.includes('PLACEHOLDER') && UMD.extractYouTubeId(url);
-  }
-
   if (trailerEl) {
     if (!trailerId && !fullId) {
       trailerEl.innerHTML = `
@@ -190,7 +155,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   function renderVideoTab(container, ytId, title) {
     container.innerHTML = `
       <button class="video-facade" aria-label="Reproducir: ${title}">
-        <img src="${heroId}" data-yt-id="${ytId}" onload="UMD.ytThumbCheck(this)"
+        <img src="${UMD.ytThumbUrl(ytId)}" data-yt-id="${ytId}" onload="UMD.ytThumbCheck(this)"
             onerror="UMD.ytThumbAdvance(this)" alt="${title}">
         <span class="video-facade__play" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24"><path d="m5 3 14 9-14 9z"/></svg>
@@ -239,7 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>`).join('')}
           ${project.tags?.length ? `
             <div class="film-row">
-              <span class="film-label">${fichaStrings.tags || 'Tags'}</span>
+              <span class="film-label">${fichaStrings.tags}</span>
               <span class="film-value">${project.tags.join(', ')}</span>
             </div>` : ''}
         </div>
