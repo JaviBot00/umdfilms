@@ -779,6 +779,48 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   stroke: currentColor;
   stroke-width: 2;
 }
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+}
+.lightbox__prev { left: 1.5rem; }
+.lightbox__next { right: 1.5rem; }
+.lightbox__prev:hover,
+.lightbox__next:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.4);
+}
+.lightbox__prev svg,
+.lightbox__next svg {
+  width: 18px; height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.lightbox__counter {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.7);
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
 
 /* ---- Iconos de marca (mask-image, respeta currentColor y tema) ---- */
 .icon {
@@ -827,4 +869,8 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   .footer__inner { grid-template-columns: 1fr; }
   .footer__bottom { flex-direction: column; text-align: center; }
   .portfolio__grid { grid-template-columns: 1fr; }
+  .lightbox__prev,
+  .lightbox__next { width: 36px; height: 36px; }
+  .lightbox__prev { left: 0.75rem; }
+  .lightbox__next { right: 0.75rem; }
 }

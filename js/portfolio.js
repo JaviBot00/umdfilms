@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="container" style="padding-block:8rem;text-align:center">
         <p class="eyebrow">Error 404</p>
         <h1 class="section-title">${err404.proyecto_titulo}</h1>
-        <a href="${UMD.rootPath('index.html')}#portafolio" class="btn btn-primary" style="margin-top:2rem">${err404.proyecto_volver}</a>
+        <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#portafolio')}" class="btn btn-primary" style="margin-top:2rem">${err404.proyecto_volver}</a>
       </div>`;
     return;
   }
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
       <div class="film-hero__overlay"></div>
       <div class="film-hero__content">
-        <a href="${UMD.rootPath('index.html')}#portafolio" class="film-hero__back reveal">
+        <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#portafolio')}" class="film-hero__back reveal">
           <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
           ${err404.proyecto_volver}
         </a>
