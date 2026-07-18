@@ -1,34 +1,6 @@
 #!/usr/bin/env node
-/**
- * =====================================================
- * generate-pages.js
- * =====================================================
- * Automatically generates individual HTML files
- * for each team member and each portfolio project.
- *
- * WHEN TO RUN:
- *   - When you add a new member in data/team.json
- *   - When you add a new project in data/portfolio.json
- *   - Before uploading to Hostinger
- *
- * USAGE:
- *   node generate-pages.js
- *
- * REQUIREMENTS:
- *   - Node.js installed (any modern version)
- *   - Run from the project root umdfilms/
- *
- * WHAT IT DOES:
- *   - Reads data/team.json → generates team/[id].html for each member
- *   - Reads data/portfolio.json → generates portfolio/[id].html for each project
- *   - Generates sitemap.xml with all URLs
- *   - Each generated HTML is a copy of the corresponding template
- *   - The page JS (team.js / portfolio.js) handles
- *     reading the ID from the URL and filling in the content.
- *
- * You don't need to touch this script unless you change the HTML structure.
- * =====================================================
- */
+// generate-pages.js — Genera HTML individuales para team/ y portfolio/,
+// más sitemap.xml. Ejecutar: node generate-pages.js
 
 const fs   = require('fs');
 const path = require('path');
@@ -58,9 +30,7 @@ const team      = readJSON('data/team.json');
 const portfolio = readJSON('data/portfolio.json');
 const config    = readJSON('data/config.json');
 
-/* =====================================================
-   GENERATE TEAM PAGES
-   ===================================================== */
+/* ---- GENERATE TEAM PAGES ---- */
 function generateTeamPages() {
   const template = readTemplate('team/template.html');
 
@@ -71,20 +41,18 @@ function generateTeamPages() {
     const html = template
       .replace(
         '<title>Equipo | UMD Films — Productora Audiovisual Málaga</title>',
-        `<title>${fullName} — ${member.role} | UMD Films Málaga</title>`
+        `<title>${fullName} — ${member.role} | ${config.seo.site_suffix}</title>`
       )
       .replace(
-        '<meta name="description" content="Perfil de miembro del equipo UMD Films Málaga." />',
-        `<meta name="description" content="${fullName}, ${member.role} en UMD Films Málaga. Conoce a nuestro equipo." />`
+        `<meta name="description" content="Perfil de miembro del equipo ${config.seo.site_suffix}." />`,
+        `<meta name="description" content="${fullName}, ${member.role} en ${config.seo.site_suffix}. Conoce a nuestro equipo." />`
       );
 
     writeFile(`team/${member.id}.html`, html);
   });
 }
 
-/* =====================================================
-   GENERATE PORTFOLIO PAGES
-   ===================================================== */
+/* ---- GENERATE PORTFOLIO PAGES ---- */
 function generatePortfolioPages() {
   const template = readTemplate('portfolio/template.html');
 
@@ -94,7 +62,7 @@ function generatePortfolioPages() {
     const html = template
       .replace(
         '<title>Proyecto | UMD Films — Productora Audiovisual Málaga</title>',
-        `<title>${project.title} | UMD Films Málaga</title>`
+        `<title>${project.title} | ${config.seo.site_suffix}</title>`
       )
       .replace(
         '<meta name="description" content="Proyecto de UMD Films, productora audiovisual en Málaga." />',
@@ -105,9 +73,7 @@ function generatePortfolioPages() {
   });
 }
 
-/* =====================================================
-   GENERATE SITEMAP.XML
-   ===================================================== */
+/* ---- GENERATE SITEMAP.XML ---- */
 function generateSitemap() {
   const BASE_URL = config.brand.site_url;
   const today    = new Date().toISOString().split('T')[0];
