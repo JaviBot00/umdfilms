@@ -146,28 +146,78 @@ function initLightbox(selector) {
       <button class="lightbox__close" type="button" aria-label="Close">
         <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
+      <button class="lightbox__prev" type="button" aria-label="Previous image">
+        <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button class="lightbox__next" type="button" aria-label="Next image">
+        <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
       <img src="" alt="" />
+      <span class="lightbox__counter"></span>
     `;
     document.body.appendChild(lightbox);
+
+    lightbox._images = [];
+    lightbox._index = 0;
+
+    lightbox._update = () => {
+      const { _images: imgs, _index: i } = lightbox;
+      if (!imgs.length) return;
+      lightbox.querySelector('img').src = imgs[i].src;
+      lightbox.querySelector('img').alt = imgs[i].alt;
+      lightbox.querySelector('.lightbox__counter').textContent = `${i + 1} / ${imgs.length}`;
+    };
+
+    lightbox._navigate = (i) => {
+      const len = lightbox._images.length;
+      lightbox._index = (i + len) % len;
+      lightbox._update();
+    };
 
     const closeLightbox = () => {
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
     };
+
     lightbox.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => {
       if (e.target === lightbox) closeLightbox();
     });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeLightbox();
+    lightbox.querySelector('.lightbox__prev').addEventListener('click', (e) => {
+      e.stopPropagation();
+      lightbox._navigate(lightbox._index - 1);
     });
+    lightbox.querySelector('.lightbox__next').addEventListener('click', (e) => {
+      e.stopPropagation();
+      lightbox._navigate(lightbox._index + 1);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') { closeLightbox(); return; }
+      if (e.key === 'ArrowLeft')  lightbox._navigate(lightbox._index - 1);
+      if (e.key === 'ArrowRight') lightbox._navigate(lightbox._index + 1);
+    });
+
+    let touchX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+      const delta = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(delta) > 50) {
+        lightbox._navigate(lightbox._index + (delta < 0 ? 1 : -1));
+      }
+    }, { passive: true });
   }
 
-  const imgEl = lightbox.querySelector('img');
-  images.forEach(img => {
+  const arr = Array.from(images);
+  lightbox._images = arr.map(img => ({ src: img.src, alt: img.alt }));
+  arr.forEach((img, i) => {
+    img.style.cursor = 'zoom-in';
     img.addEventListener('click', () => {
-      imgEl.src = img.src;
-      imgEl.alt = img.alt;
+      lightbox._index = i;
+      lightbox._update();
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
       lightbox.querySelector('.lightbox__close').focus();
