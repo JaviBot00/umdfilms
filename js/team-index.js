@@ -7,7 +7,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   await UMD.renderFooter(config);
   UMD.renderFAB();
 
-  document.title = `Equipo | ${config.seo.site_suffix}`;
+  document.title = config.seo.title_team_index;
+  document.querySelector('meta[name="description"]')
+    ?.setAttribute('content', config.seo.description_team_index);
+
+  UMD.setCanonical(`${config.brand.site_url}/team/`);
+  UMD.setOgMeta('og:title',       config.seo.title_team_index);
+  UMD.setOgMeta('og:description', config.seo.description_team_index);
+  UMD.setOgMeta('og:image',       `${config.brand.site_url}/${config.seo.og_image}`);
+  UMD.setOgMeta('og:url',         `${config.brand.site_url}/team/`);
+  UMD.setOgMeta('og:type',        'website');
+  UMD.setOgMeta('og:site_name',   config.seo.site_name);
+  UMD.setTwitterMeta('twitter:card',        'summary_large_image');
+  UMD.setTwitterMeta('twitter:title',       config.seo.title_team_index);
+  UMD.setTwitterMeta('twitter:description', config.seo.description_team_index);
+  UMD.setTwitterMeta('twitter:image',       `${config.brand.site_url}/${config.seo.og_image}`);
 
   UMD.renderFilterableGrid({
     items: team,
