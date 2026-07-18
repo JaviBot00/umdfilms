@@ -529,6 +529,15 @@ function buildPortfolioCard(proj, rootPathFn) {
   return card;
 }
 
+/* ---- Back URL based on referrer ---- */
+function getBackUrl(fallback) {
+  const ref = document.referrer;
+  if (ref && ref.startsWith(window.location.origin) && ref !== window.location.href) {
+    return ref;
+  }
+  return fallback;
+}
+
 /* ---- Export for global use ---- */
 window.UMD = {
   fetchJSON,
@@ -554,5 +563,6 @@ window.UMD = {
   setTwitterMeta,
   renderFilterableGrid,
   buildTeamCard,
-  buildPortfolioCard
+  buildPortfolioCard,
+  getBackUrl
 };

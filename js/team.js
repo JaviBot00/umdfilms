@@ -5,7 +5,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- Get member ID from URL ---- */
-  // URL is: team/alejandro.html → id = "alejandro"
   const memberId = window.location.pathname
     .split('/')
     .pop()
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="container" style="padding-block:8rem;text-align:center">
         <p class="eyebrow">Error 404</p>
         <h1 class="section-title">${err404.perfil_titulo}</h1>
-        <a href="${UMD.rootPath('index.html')}#equipo" class="btn btn-primary" style="margin-top:2rem">${err404.perfil_volver}</a>
+        <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#equipo')}" class="btn btn-primary" style="margin-top:2rem">${err404.perfil_volver}</a>
       </div>`;
     return;
   }
@@ -98,9 +97,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
       <div class="profile-hero__overlay"></div>
       <div class="profile-hero__content container">
-        <a href="${UMD.rootPath('index.html')}#equipo" class="profile-hero__back reveal">
+        <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#equipo')}" class="profile-hero__back reveal">
           <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
-          ${err404.perfil_volver || 'Volver al equipo'}
+          ${err404.perfil_volver}
         </a>
         <h1 class="profile-hero__name reveal d1">${member.name}${member.surname ? ' ' + member.surname : ''}</h1>
         <p class="profile-hero__role reveal d2">${member.role}</p>
