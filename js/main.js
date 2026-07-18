@@ -1,13 +1,6 @@
-/**
- * =====================================================
- * main.js — Home page logic (index.html)
- * Stats calculated dynamically:
- *   - people    = team.json.length
- *   - projects  = portfolio.json.length
- *   - years     = current year - config.founded_year
- *   - location  = config.schema.address_locality
- * =====================================================
- */
+// main.js — Home page logic
+// Stats: projects=portfolio.length, team=team.length,
+// years=currentYear−founded_year, location=config.schema.address_locality
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -28,97 +21,110 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderHomeContent(config, home, services);
   UMD.injectLocalBusinessSchema(config);
 
+  /* ---- SEO (overwrite HTML fallback) ---- */
+  document.title = config.seo.title_home;
+  document.querySelector('meta[name="description"]')
+    ?.setAttribute('content', config.seo.description_home);
+
+  UMD.setCanonical(`${config.brand.site_url}/`);
+  UMD.setOgMeta('og:title',       config.seo.title_home);
+  UMD.setOgMeta('og:description', config.seo.description_home);
+  UMD.setOgMeta('og:image',       `${config.brand.site_url}/${config.seo.og_image}`);
+  UMD.setOgMeta('og:url',         `${config.brand.site_url}/`);
+  UMD.setOgMeta('og:type',        'website');
+  UMD.setOgMeta('og:site_name',   config.seo.site_name);
+  UMD.setTwitterMeta('twitter:card',        'summary_large_image');
+  UMD.setTwitterMeta('twitter:title',       config.seo.title_home);
+  UMD.setTwitterMeta('twitter:description', config.seo.description_home);
+  UMD.setTwitterMeta('twitter:image',       `${config.brand.site_url}/${config.seo.og_image}`);
+
   /* ---- Hero: initial reveal ---- */
   setTimeout(() => {
     document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
   }, 120);
 
   function renderHomeContent(config, home, services) {
-  const setText = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
-  const setHTML = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
+    const setText = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
+    const setHTML = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
 
-  /* Hero */
-  setText('heroEyebrow', home.hero.eyebrow);
-  setHTML('heroTitle', `${home.hero.title_pre}<em>${home.hero.title_highlight}</em>${home.hero.title_post}`);
-  setHTML('heroSub', home.hero.subtitle_lines.join('<br />'));
-  setHTML('heroActions', `
-    <a href="${home.hero.cta_primary.href}" class="btn btn-primary btn-lg">${home.hero.cta_primary.label}</a>
-    <a href="${home.hero.cta_secondary.href}" class="btn btn-ghost btn-lg">${home.hero.cta_secondary.label}</a>
-  `);
-  setText('heroScrollLabel', home.hero.scroll_label);
+    /* Hero */
+    setText('heroEyebrow', home.hero.eyebrow);
+    setHTML('heroTitle', `${home.hero.title_pre}<em>${home.hero.title_highlight}</em>${home.hero.title_post}`);
+    setHTML('heroSub', home.hero.subtitle_lines.join('<br />'));
+    setHTML('heroActions', `
+      <a href="${home.hero.cta_primary.href}" class="btn btn-primary btn-lg">${home.hero.cta_primary.label}</a>
+      <a href="${home.hero.cta_secondary.href}" class="btn btn-ghost btn-lg">${home.hero.cta_secondary.label}</a>
+    `);
+    setText('heroScrollLabel', home.hero.scroll_label);
 
-  /* Trust */
-  setText('trustLabel', home.trust.label);
+    /* Trust bar */
+    setText('trustLabel', home.trust.label);
 
-  /* About */
-  setText('aboutEyebrow', home.about.eyebrow);
-  setHTML('aboutTitle',
-    `${home.about.title_pre}<em>${home.about.title_highlight}</em>${home.about.title_post}<br/>${home.about.title_line2}`);
-  setHTML('aboutParagraphs',
-    home.about.paragraphs.map(p => `<p class="lead-text reveal">${p}</p>`).join(''));
-  setHTML('aboutActions', `
-    <a href="${home.about.cta_primary.href}" class="btn btn-outline">${home.about.cta_primary.label}</a>
-    <a href="${home.about.cta_secondary.href}" class="btn btn-ghost">${home.about.cta_secondary.label}</a>
-  `);
+    /* About */
+    setText('aboutEyebrow', home.about.eyebrow);
+    setHTML('aboutTitle',
+      `${home.about.title_pre}<em>${home.about.title_highlight}</em>${home.about.title_post}<br/>${home.about.title_line2}`);
+    setHTML('aboutParagraphs',
+      home.about.paragraphs.map(p => `<p class="lead-text reveal">${p}</p>`).join(''));
+    setHTML('aboutActions', `
+      <a href="${home.about.cta_primary.href}" class="btn btn-outline">${home.about.cta_primary.label}</a>
+      <a href="${home.about.cta_secondary.href}" class="btn btn-ghost">${home.about.cta_secondary.label}</a>
+    `);
 
-  /* Cabeceras de sección */
-  setText('servicesEyebrow', home.services.eyebrow);
-  setText('servicesTitle', home.services.title);
-  setText('portfolioEyebrow', home.portfolio.eyebrow);
-  setText('portfolioTitle', home.portfolio.title);
-  setText('teamEyebrow', home.team.eyebrow);
-  setText('teamTitle', home.team.title);
+    /* Cabeceras de sección */
+    setText('servicesEyebrow', home.services.eyebrow);
+    setText('servicesTitle', home.services.title);
+    setText('portfolioEyebrow', home.portfolio.eyebrow);
+    setText('portfolioTitle', home.portfolio.title);
+    setText('teamEyebrow', home.team.eyebrow);
+    setText('teamTitle', home.team.title);
 
-  /* Portfolio CTA -> YouTube (dato de config, no de home.json) */
-  setHTML('portfolioCta', `
-    <div class="portfolio__actions">
-      <a href="${UMD.rootPath('portfolio/index.html')}" class="btn btn-outline">Todos los proyectos ↗</a>
-      <a href="${config.social.youtube}" target="_blank" rel="noopener" class="btn btn-primary">Canal de YouTube ↗</a>
-    </div>
-  `);
+    /* Portfolio CTA -> YouTube (dato de config, no de home.json) */
+    setHTML('portfolioCta', `
+      <div class="portfolio__actions">
+        <a href="${UMD.rootPath('portfolio/index.html')}" class="btn btn-outline">Todos los proyectos ↗</a>
+        <a href="${config.social.youtube}" target="_blank" rel="noopener" class="btn btn-primary">Canal de YouTube ↗</a>
+      </div>
+    `);
 
-  /* Contact */
-  setText('contactEyebrow', home.contact.eyebrow);
-  setHTML('contactTitle', `${home.contact.title_pre}<br /><span>${home.contact.title_line2}</span>`);
-  setText('contactBody', home.contact.body);
+    /* Contact */
+    setText('contactEyebrow', home.contact.eyebrow);
+    setHTML('contactTitle', `${home.contact.title_pre}<br /><span>${home.contact.title_line2}</span>`);
+    setText('contactBody', home.contact.body);
 
-  /* Enlaces de contacto -> WhatsApp + redes, dato de config, no de home.json */
-  const waHref = `https://wa.me/${config.contact.whatsapp}?text=${encodeURIComponent(config.contact.whatsapp_msg)}`;
-  setHTML('contactLinks', `
-    <a href="${waHref}" class="contact__wa" target="_blank" rel="noopener">
-      <span class="icon icon-whatsapp" aria-hidden="true"></span>
-      ${home.contact.wa_label}
-    </a>
-    ${config.social.instagram ? `<a href="${config.social.instagram}" class="text-link" target="_blank" rel="noopener">Instagram</a>` : ''}
-    ${config.social.youtube ? `<a href="${config.social.youtube}" class="text-link" target="_blank" rel="noopener">YouTube</a>` : ''}
-  `);
+    /* Enlaces de contacto -> WhatsApp + redes, dato de config, no de home.json */
+    const waHref = `https://wa.me/${config.contact.whatsapp}?text=${encodeURIComponent(config.contact.whatsapp_msg)}`;
+    setHTML('contactLinks', `
+      <a href="${waHref}" class="contact__wa" target="_blank" rel="noopener">
+        <span class="icon icon-whatsapp" aria-hidden="true"></span>
+        ${home.contact.wa_label}
+      </a>
+      ${config.social.instagram ? `<a href="${config.social.instagram}" class="text-link" target="_blank" rel="noopener">Instagram</a>` : ''}
+      ${config.social.youtube ? `<a href="${config.social.youtube}" class="text-link" target="_blank" rel="noopener">YouTube</a>` : ''}
+    `);
 
-  /* Formulario: labels, placeholders, select dinámico */
-  const f = home.contact.form;
-  document.querySelector('label[for="name"]').textContent = f.name_label;
-  document.getElementById('name').placeholder = f.name_placeholder;
-  document.querySelector('label[for="email"]').textContent = f.email_label;
-  document.getElementById('email').placeholder = f.email_placeholder;
-  document.querySelector('label[for="service"]').textContent = f.service_label;
-  document.querySelector('label[for="message"]').textContent = f.message_label;
-  document.getElementById('message').placeholder = f.message_placeholder;
-  document.querySelector('#contactForm button[type="submit"]').textContent = f.submit_label;
-  document.querySelector('.form-note').textContent = f.note;
+    /* Formulario: labels, placeholders, select dinámico */
+    const f = home.contact.form;
+    document.querySelector('label[for="name"]').textContent = f.name_label;
+    document.getElementById('name').placeholder = f.name_placeholder;
+    document.querySelector('label[for="email"]').textContent = f.email_label;
+    document.getElementById('email').placeholder = f.email_placeholder;
+    document.querySelector('label[for="service"]').textContent = f.service_label;
+    document.querySelector('label[for="message"]').textContent = f.message_label;
+    document.getElementById('message').placeholder = f.message_placeholder;
+    document.querySelector('#contactForm button[type="submit"]').textContent = f.submit_label;
+    document.querySelector('.form-note').textContent = f.note;
 
-  const serviceOptions = [
-    ...services.map(s => s.title.replace(' ↗', '')),
-    ...f.service_extra_options
-  ];
-  document.getElementById('service').innerHTML =
-    `<option value="">${f.service_placeholder}</option>` +
-    serviceOptions.map(o => `<option>${o}</option>`).join('');
-}
+    const serviceOptions = [
+      ...services.map(s => s.title.replace(' ↗', '')),
+      ...f.service_extra_options
+    ];
+    document.getElementById('service').innerHTML =
+      `<option value="">${f.service_placeholder}</option>` +
+      serviceOptions.map(o => `<option>${o}</option>`).join('');
+  }
 
-/* ---- Trust bar: duplicated logos for infinite marquee ----
-     We repeat the logo set until it's wider than the screen
-     (with margin), then duplicate it once more: the loop needs
-     two identical halves for translateX(-50%) to work perfectly.
-  ---- */
+  /* ---- Trust bar: duplicated logos for infinite marquee ---- */
   const trustInner = document.getElementById('trustInner');
   if (trustInner) {
     // Render logos from JSON
@@ -137,9 +143,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     trustInner.innerHTML = set + set;
   }
 
-  /* =====================================================
-     STATS — calculated from data
-     ===================================================== */
+  /* ---- STATS — calculated from data ---- */
   const currentYear = new Date().getFullYear();
   const statsData = [
     {
@@ -184,7 +188,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       statsContainer.appendChild(div);
     });
 
-    /* Animate counters when entering viewport */
+    /* ---- Animate counters when entering viewport ---- */
     const statObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
@@ -197,9 +201,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     statsContainer.querySelectorAll('.stat').forEach(s => statObs.observe(s));
   }
 
-  /* =====================================================
-     SERVICES
-     ===================================================== */
+  /* ---- SERVICES ---- */
   const servicesGrid   = document.getElementById('servicesGrid');
   const svcPreview     = document.getElementById('svcPreview');
   const svcPreviewVid  = document.getElementById('svcPreviewVid');
@@ -235,7 +237,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       servicesGrid.appendChild(card);
     });
 
-    /* Video preview hover (desktop only) */
+    /* ---- Video preview hover (desktop only) ---- */
     if (isDesktop && svcPreview && svcPreviewVid) {
       let previewTimer;
 
@@ -269,9 +271,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  /* =====================================================
-     PORTFOLIO — filters + cards
-     ===================================================== */
+  /* ---- PORTFOLIO ---- */
   const portfolioGrid    = document.getElementById('portfolioGrid');
   // Portfolio (home) — solo featured, sin filtros de categoría en home
   const featuredPortfolio = portfolio.filter(p => p.featured);
@@ -281,9 +281,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     gridEl: portfolioGrid,
     cardBuilder: (p) => UMD.buildPortfolioCard(p, UMD.rootPath)
   });
-  /* =====================================================
-     TEAM
-     ===================================================== */
+
+  /* ---- TEAM ---- */
   const teamGrid = document.getElementById('teamGrid');
   // Team (home)
   const featuredTeam = team.filter(m => m.featured);
@@ -298,9 +297,7 @@ document.addEventListener('DOMContentLoaded', async () => {
      <a href="${UMD.rootPath('team/index.html')}" class="btn btn-outline">Equipo completo ↗</a>
    </div>`);
 
-  /* =====================================================
-     CONTACT FORM → WhatsApp
-     ===================================================== */
+  /* ---- CONTACT FORM ---- */
   const form = document.getElementById('contactForm');
   if (form) {
     const wa  = config.contact.whatsapp;

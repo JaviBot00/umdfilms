@@ -14,15 +14,6 @@
   max-width: 600px;
 }
 
-/* ---- CATEGORÍAS ---- */
-.equipment-filters {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-block: 2.5rem;
-}
-
-/* ---- GRID DE EQUIPOS ---- */
 .equipment-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

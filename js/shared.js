@@ -1,14 +1,5 @@
-/**
- * =====================================================
- * shared.js — Utilidades comunes a todas las páginas
- * Carga: antes del JS específico de cada página
- * =====================================================
- */
+// shared.js — Utilidades comunes, carga antes del JS específico de cada página
 
-/* ---- Cache de ui_strings, poblado por renderNav() ----
-   initNav/applyTheme/toggleTheme no reciben config directamente
-   (se llaman también desde el listener del botón), así que se
-   cachea aquí una vez que renderNav() lo recibe. */
 let _ui = null;
 
 /* ---- JSON loading ---- */
@@ -252,12 +243,11 @@ async function renderFooter(config) {
       </div>
       <nav class="footer__nav" aria-label="Site navigation">
         <strong>${ft.navegar || 'Navegar'}</strong>
-        <a href="${rootPath('index.html')}#nosotros"><span>${_ui?.nav?.quienes_somos || 'Quiénes somos'}</span></a>
-        <a href="${rootPath('index.html')}#servicios"><span>${_ui?.nav?.servicios || 'Servicios'}</span></a>
-        <a href="${rootPath('index.html')}#portafolio"><span>${_ui?.nav?.portafolio || 'Portafolio'}</span></a>
-        <a href="${rootPath('index.html')}#equipo"><span>${_ui?.nav?.equipo || 'Equipo'}</span></a>
-        <a href="${rootPath('equipment/index.html')}"><span>Alquiler de material</span></a>
-        <a href="${rootPath('index.html')}#contacto"><span>Contacto</span></a>
+        <a href="${rootPath('index.html')}#nosotros"><span>${_ui?.nav?.quienes_somos}</span></a>
+        <a href="${rootPath('index.html')}#servicios"><span>${_ui?.nav?.servicios}</span></a>
+        <a href="${rootPath('index.html')}#portafolio"><span>${_ui?.nav?.portafolio}</span></a>
+        <a href="${rootPath('index.html')}#equipo"><span>${_ui?.nav?.equipo}</span></a>
+        <a href="${rootPath('index.html')}#contacto"><span>${_ui?.nav?.contacto}</span></a>
       </nav>
       <nav class="footer__nav" aria-label="Social media">
         <strong>${ft.redes || 'Redes'}</strong>
@@ -372,6 +362,26 @@ function validYtUrl(url) {
   return url && !url.includes('PLACEHOLDER') && UMD.extractYouTubeId(url);
 }
 
+/* ---- SEO helpers ---- */
+function setCanonical(url) {
+  const canonical = document.querySelector('link[rel="canonical"]')
+    || Object.assign(document.createElement('link'), { rel: 'canonical' });
+  canonical.href = url;
+  if (!canonical.parentNode) document.head.appendChild(canonical);
+}
+
+function setOgMeta(prop, content) {
+  let el = document.querySelector(`meta[property="${prop}"]`);
+  if (!el) { el = document.createElement('meta'); el.setAttribute('property', prop); document.head.appendChild(el); }
+  el.setAttribute('content', content);
+}
+
+function setTwitterMeta(name, content) {
+  let el = document.querySelector(`meta[name="${name}"]`);
+  if (!el) { el = document.createElement('meta'); el.setAttribute('name', name); document.head.appendChild(el); }
+  el.setAttribute('content', content);
+}
+
 /* ---- Grid genérico con filtros opcionales ---- */
 function renderFilterableGrid({ items, filterEl, gridEl, categoryField, labels = {}, allLabel = 'Todo', cardBuilder }) {
   function paint(filter) {
@@ -385,7 +395,7 @@ function renderFilterableGrid({ items, filterEl, gridEl, categoryField, labels =
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
-    gridEl.querySelectorAll('.reveal, .gear-card, .team-card', '.portfolio-card').forEach(c => obs.observe(c));
+    gridEl.querySelectorAll('.reveal, .gear-card, .team-card, .portfolio-card').forEach(c => obs.observe(c));
   }
 
   if (filterEl && categoryField) {
@@ -488,6 +498,10 @@ window.UMD = {
   ytThumbAdvance,
   ytThumbCheck,
   extractYouTubeId,
+  validYtUrl,
+  setCanonical,
+  setOgMeta,
+  setTwitterMeta,
   renderFilterableGrid,
   buildTeamCard,
   buildPortfolioCard
