@@ -60,7 +60,7 @@ umdfilms/
 ├── js/
 │   ├── shared.js                 ← Common utilities: fetchJSON, renderNav, renderFooter,
 │   │                                 FAB, YouTube thumbnail fallback chain, renderFilterableGrid,
-│   │                                 buildTeamCard, buildPortfolioCard
+│   │                                 buildTeamCard, buildPortfolioCard, getBackUrl
 │   ├── main.js                   ← Home page logic
 │   ├── team.js                   ← Member page logic
 │   ├── team-index.js             ← team/index.html logic
@@ -224,6 +224,8 @@ The JS:
 1. Reads the HTML filename to get the `id` (`alejandro-luque.html` → `"alejandro-luque"`)
 2. Looks up that ID in `team.json`
 3. Fills in hero, bio, social links, sidebar info card, extra photos, and projects
+4. Extra photos open in a lightbox with prev/next arrows, keyboard navigation (ArrowLeft/ArrowRight), and touch swipe
+5. Hero back button uses `document.referrer` to return to the previous page (falls back to `index.html#equipo`)
 
 ### Team Listing (`team/index.html`)
 
@@ -237,7 +239,9 @@ The JS:
 1. Reads the `id` from the URL
 2. Looks it up in `portfolio.json`
 3. Fills in hero, trailer (YouTube facade → iframe on click, with persistent "Ver en YouTube" fallback link; tabs if both `trailer_youtube` and `full_video_youtube` exist), synopsis, technical sheet, project team, gallery
-4. Injects `VideoObject` schema in `<head>` for SEO
+4. Gallery photos open in a lightbox with prev/next arrows, keyboard navigation (ArrowLeft/ArrowRight), and touch swipe
+5. Hero back button uses `document.referrer` to return to the previous page (falls back to `index.html#portafolio`)
+6. Injects `VideoObject` schema in `<head>` for SEO
 
 ### Portfolio Listing (`portfolio/index.html`)
 
@@ -473,7 +477,7 @@ WCAG 2.2 AA compliance. All interactive elements must remain keyboard accessible
 | **`prefers-reduced-motion`** | Disables all animations, transitions, scroll-behavior, and trust bar marquee |
 | **`prefers-color-scheme`** | Light/dark theme with localStorage persistence; hero/CTA/nav/lightbox/profile-hero/film-hero always dark |
 | **External links** | `rel="noopener"` on all `target="_blank"` links |
-| **Lightbox** | Escape key closes, close button receives focus on open |
+| **Lightbox** | Escape key closes, close button receives focus on open; prev/next arrow buttons, ArrowLeft/ArrowRight keyboard navigation, touch swipe (50px threshold), counter (`2 / 5`) |
 | **Semantic HTML** | `<header>`, `<nav>`, `<main>`, `<footer>`, `<section>` with `aria-label`; `<aside>` for sidebars |
 
 ### When Adding New Interactive Elements
@@ -630,7 +634,7 @@ The structure is already designed for it:
 | `css/team.css` | Changing member page design | Very rare |
 | `css/portfolio.css` | Changing project page design | Very rare |
 | `css/equipment.css` | Changing equipment catalog design | Very rare |
-| `js/shared.js` | Changing nav, footer, FAB, theme, or common utilities | Very rare |
+| `js/shared.js` | Changing nav, footer, FAB, theme, lightbox, or common utilities | Very rare |
 | `js/main.js` | Changing home page behavior | Rare |
 | `js/team.js` / `js/team-index.js` | Changing what's shown on member profiles / listing | Rare |
 | `js/portfolio.js` / `js/portfolio-index.js` | Changing what's shown on projects / listing | Rare |

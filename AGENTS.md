@@ -45,7 +45,7 @@ Run after editing `data/team.json` or `data/portfolio.json`. Generates individua
 
 ## Shared grid/filter logic (avoid re-duplicating)
 
-`shared.js` exports `renderFilterableGrid()`, `buildTeamCard()`, `buildPortfolioCard()`, `validYtUrl()`, `setCanonical()`, `setOgMeta()`, `setTwitterMeta()` — used by home, `team/index.html`, `portfolio/index.html`, `artists.js`, and `equipment.js`. Before writing a new filtered grid anywhere, use these instead of copying the filter-button loop again.
+`shared.js` exports `renderFilterableGrid()`, `buildTeamCard()`, `buildPortfolioCard()`, `validYtUrl()`, `setCanonical()`, `setOgMeta()`, `setTwitterMeta()`, `getBackUrl()` — used by home, `team/index.html`, `portfolio/index.html`, `artists.js`, and `equipment.js`. Before writing a new filtered grid anywhere, use these instead of copying the filter-button loop again.
 
 `shared.js` also exports the YouTube thumbnail fallback chain: `ytThumbUrl()`, `ytThumbCheck()`, `ytThumbAdvance()`, `extractYouTubeId()`. Always validate a YouTube URL with a real ID check before deriving a thumbnail from it — do not assume any `trailer_youtube`/`full_video_youtube` string is non-empty and non-placeholder.
 
@@ -92,7 +92,7 @@ Edit the relevant JS file (e.g., `team.js` for Person). Create a JSON-LD object,
 | `data/services.json` | Adding or editing services |
 | `data/artists.json` | Adding/editing external represented artists |
 | `js/artists.js` | Changing the represented-artists listing page |
-| `js/shared.js` | Changing nav, footer, FAB, or common utilities |
+| `js/shared.js` | Changing nav, footer, FAB, theme, lightbox, or common utilities |
 | `css/style.css` | Changing colors (CSS variables at top), typography, global layout |
 | `css/home.css` | Changing home-page-only sections (hero, trust, about/stats, services, cta-band, contact) |
 | `generate-pages.js` | Only if HTML template structure changes |
@@ -140,7 +140,7 @@ WCAG 2.2 AA baseline. All interactive elements must remain keyboard accessible.
 - **`prefers-reduced-motion`**: disables all animations, transitions, scroll-behavior, and the trust bar marquee
 - **`prefers-color-scheme`**: light/dark theme with localStorage persistence; hero/CTA/nav always dark
 - **External links**: `rel="noopener"` on all `target="_blank"` links
-- **Lightbox**: Escape key closes, close button receives focus on open
+- **Lightbox**: Escape key closes, close button receives focus on open; prev/next arrow buttons, ArrowLeft/ArrowRight keyboard navigation, touch swipe (50px threshold), counter (`2 / 5`)
 - **Semantic HTML**: `<header>`, `<nav>`, `<main>`, `<footer>`, `<section>` with `aria-label`; `<aside>` for sidebars
 
 ### When adding new interactive elements
