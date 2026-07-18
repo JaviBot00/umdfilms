@@ -448,10 +448,9 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 }
 
 /* =====================================================
-   FILTROS (compartido — portfolio/index.html, artists/index.html;
-   equipment.js reutiliza la clase .filter también)
+   FILTROS (compartido — portfolio, artists, equipment)
    ===================================================== */
-.portfolio__filters {
+.filter-bar {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
@@ -618,11 +617,6 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   margin-bottom: 0.2rem;
 }
 .team-card__role { font-size: 0.73rem; color: var(--muted); line-height: 1.4; }
-
-.team-card--static { cursor: default; }
-.team-card--static:hover { transform: none; }
-.team-card--static .team-card__img-wrap::after { display: none; }
-.team-card--static:hover .team-card__img { filter: grayscale(40%); transform: none; }
 
 /* =====================================================
    FOOTER (compartido — todas las páginas)
