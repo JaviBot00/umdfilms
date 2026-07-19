@@ -31,7 +31,7 @@
   transform: translateY(18px);
 }
 .gear-card.visible { opacity: 1; transform: none; }
-.gear-card:hover { border-color: rgba(192,32,42,0.35); transform: translateY(-4px); }
+.gear-card:hover { border-color: var(--red-glow); transform: translateY(-4px); }
 .gear-card--unavailable { opacity: 0.45 !important; }
 
 .gear-card__img-wrap {

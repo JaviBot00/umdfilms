@@ -18,10 +18,12 @@
   --red-light:  #e02d38;
   --red-dim:    rgba(192, 32, 42, 0.15);
   --red-glow:   rgba(192, 32, 42, 0.35);
+  --red-border: rgba(192, 32, 42, 0.12);
+  --red-hover:  rgba(192, 32, 42, 0.4);
   --white:      #ffffff;
   --cream:      #f0ece6;
   --cream-mid:  #b8b0a6;
-  --muted:      #666666;
+  --muted:      #888888;
 
   /* Tipografía */
   --ff-display: 'Cormorant Garamond', Georgia, serif;
@@ -51,10 +53,12 @@ html[data-theme="light"] {
   --red-light:  #a01620;
   --red-dim:    rgba(192, 32, 42, 0.08);
   --red-glow:   rgba(192, 32, 42, 0.22);
+  --red-border: rgba(192, 32, 42, 0.1);
+  --red-hover:  rgba(192, 32, 42, 0.35);
   --white:      #14110f;
   --cream:      #1b1816;
   --cream-mid:  #5c5650;
-  --muted:      #8d8780;
+  --muted:      #6d6760;
   --line:       rgba(0, 0, 0, 0.1);
 }
 
@@ -74,10 +78,12 @@ html[data-theme="light"] {
   --red-light:  #e02d38;
   --red-dim:    rgba(192, 32, 42, 0.15);
   --red-glow:   rgba(192, 32, 42, 0.35);
+  --red-border: rgba(192, 32, 42, 0.12);
+  --red-hover:  rgba(192, 32, 42, 0.4);
   --white:      #ffffff;
   --cream:      #f0ece6;
   --cream-mid:  #b8b0a6;
-  --muted:      #666666;
+  --muted:      #888888;
   --line:       rgba(255, 255, 255, 0.15);
 }
 
@@ -97,7 +103,7 @@ img, video { display: block; max-width: 100%; }
 button { font-family: var(--ff-body); cursor: pointer; border: none; background: none; }
 ul { list-style: none; }
 
-::selection { background: var(--red); color: #fff; }
+::selection { background: var(--red); color: var(--white); }
 
 /* Visually hidden (screen reader only) */
 .visually-hidden {
@@ -153,6 +159,7 @@ em, i { font-style: italic; color: var(--red-light); }
   margin-bottom: 1.4rem;
   line-height: 1.8;
 }
+.lead-text--narrow { max-width: 560px; }
 
 /* ---- BOTONES ---- */
 .btn {
@@ -173,7 +180,7 @@ em, i { font-style: italic; color: var(--red-light); }
 
 .btn-primary {
   background: var(--red);
-  color: #fff;
+  color: var(--white);
   border: 1px solid var(--red);
 }
 .btn-primary:hover {
@@ -201,7 +208,7 @@ em, i { font-style: italic; color: var(--red-light); }
 }
 .btn-outline:hover {
   background: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 .btn-lg  { padding: 1em 2.5em; font-size: 0.92rem; }
@@ -232,7 +239,7 @@ a:focus-visible {
   left: 1rem;
   z-index: 10000;
   background: var(--red);
-  color: #fff;
+  color: var(--white);
   padding: 0.75em 1.5em;
   font-size: 0.82rem;
   font-weight: 500;
@@ -244,7 +251,7 @@ a:focus-visible {
 }
 .skip-link:focus {
   top: 1rem;
-  outline: 2px solid #fff;
+  outline: 2px solid var(--white);
   outline-offset: 2px;
 }
 
@@ -519,7 +526,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 .portfolio-card__title {
   font-family: var(--ff-display);
   font-size: 1.15rem;
-  color: #fff;
+  color: var(--white);
 }
 
 .portfolio-card__play {
@@ -557,7 +564,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   border-radius: var(--radius-card);
   overflow: hidden;
   background: var(--dark-mid);
-  border: 1px solid rgba(192,32,42,0.07);
+  border: 1px solid var(--red-border);
   cursor: pointer;
   transition: border-color 0.3s, transform 0.35s var(--ease-expo);
   opacity: 0;
@@ -565,7 +572,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 }
 .team-card.visible { opacity: 1; transform: translateY(0); }
 .team-card:hover {
-  border-color: rgba(192,32,42,0.4);
+  border-color: var(--red-hover);
   transform: translateY(-5px);
 }
 
@@ -762,7 +769,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.2);
   background: rgba(255,255,255,0.05);
-  color: #fff;
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -789,7 +796,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,0.2);
   background: rgba(255,255,255,0.05);
-  color: #fff;
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;

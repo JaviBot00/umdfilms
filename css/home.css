@@ -120,7 +120,7 @@ html[data-theme="light"] .trust__inner img:hover {
 /* TRUST BAR*/
 .trust {
   background: var(--dark);
-  border-block: 1px solid rgba(192,32,42,0.12);
+  border-block: 1px solid var(--red-border);
   padding: 2rem 0;
   overflow: hidden;
 }
@@ -171,8 +171,8 @@ html[data-theme="light"] .trust__inner img:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2px;
-  background: rgba(192,32,42,0.1);
-  border: 1px solid rgba(192,32,42,0.18);
+  background: var(--red-dim);
+  border: 1px solid var(--red-border);
   border-radius: var(--radius-card);
   overflow: hidden;
 }
@@ -207,8 +207,8 @@ html[data-theme="light"] .trust__inner img:hover {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 2px;
-  background: rgba(192,32,42,0.08);
-  border: 1px solid rgba(192,32,42,0.12);
+  background: var(--red-dim);
+  border: 1px solid var(--red-border);
   border-radius: var(--radius-card);
   overflow: hidden;
   margin-top: 3rem;
@@ -339,11 +339,23 @@ html[data-theme="light"] .trust__inner img:hover {
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--red);
-  box-shadow: 0 0 0 3px rgba(192, 32, 42, 0.35);
+  box-shadow: 0 0 0 3px var(--red-glow);
 }
 .form-group input::placeholder,
-.form-group textarea::placeholder { color: #333; }
+.form-group textarea::placeholder { color: var(--cream-mid); }
 .form-note { font-size: 0.75rem; color: var(--muted); text-align: center; }
+
+.form-error {
+  font-size: 0.72rem;
+  color: var(--red-light);
+  min-height: 1em;
+  display: block;
+}
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea {
+  border-color: var(--red);
+}
 
 /* =====================================================
    RESPONSIVE (home-only)
