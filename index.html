@@ -31,10 +31,12 @@
   <meta property="og:title"       content="UMD Films | Productora Audiovisual en Málaga" />
   <meta property="og:description" content="Videoclips, publicidad, cine y producción musical con alma malagueña y alcance nacional." />
   <meta property="og:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />
+  <meta property="og:site_name"   content="UMD Films" />
   <meta property="og:locale"      content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@UMDFilmsoficial" />
   <meta name="twitter:title"       content="UMD Films | Productora Audiovisual en Málaga" />
   <meta name="twitter:description" content="Videoclips, publicidad, cine y producción musical." />
   <meta name="twitter:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />
@@ -176,14 +178,17 @@
       </div>
 
       <!-- Form -->
+      <div id="formStatus" role="alert" aria-live="assertive" class="visually-hidden"></div>
       <form class="contact__form reveal" id="contactForm" novalidate aria-label="Formulario de contacto">
         <div class="form-group">
           <label for="name"></label>
-          <input type="text" id="name" name="name" placeholder="Tu nombre" required autocomplete="name" />
+          <input type="text" id="name" name="name" placeholder="Tu nombre" required autocomplete="name" aria-describedby="name-error" />
+          <span id="name-error" class="form-error" role="alert"></span>
         </div>
         <div class="form-group">
           <label for="email"></label>
-          <input type="email" id="email" name="email" placeholder="tu@email.com" required autocomplete="email" />
+          <input type="email" id="email" name="email" placeholder="tu@email.com" required autocomplete="email" aria-describedby="email-error" />
+          <span id="email-error" class="form-error" role="alert"></span>
         </div>
         <div class="form-group">
           <label for="service"></label>
