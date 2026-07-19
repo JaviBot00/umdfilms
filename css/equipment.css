@@ -4,7 +4,7 @@
 
 .equipment-note {
   background: var(--dark-mid);
-  border: 1px solid rgba(192,32,42,0.2);
+  border: 1px solid var(--red-border-mid);
   border-left: 3px solid var(--red);
   border-radius: var(--radius-card);
   padding: 1rem 1.5rem;
@@ -52,8 +52,8 @@
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  background: rgba(8, 8, 8, 0.85);
-  border: 1px solid rgba(192, 32, 42, 0.4);
+  background: var(--black-overlay-heavy);
+  border: 1px solid var(--red-hover);
   color: var(--white);
   font-size: 0.75rem;
   letter-spacing: 0.15em;
@@ -73,7 +73,7 @@ html[data-theme="light"] .gear-card__qty {
   position: absolute;
   top: 0.75rem;
   left: 0.75rem;
-  background: rgba(8,8,8,0.85);
+  background: var(--black-overlay-heavy);
   border: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.75rem;
