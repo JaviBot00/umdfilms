@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <svg width="28" height="28" viewBox="0 0 24 24"><path d="m5 3 14 9-14 9z"/></svg>
           </span>
         </button>`;
+      showreelPlayer.classList.remove('skeleton', 'skeleton--16x9');
       showreelPlayer.querySelector('.showreel__facade').addEventListener('click', function () {
         this.outerHTML = `<iframe src="https://www.youtube.com/embed/${showreelId}?autoplay=1&rel=0"
           title="UMD Films Showreel"
@@ -201,6 +202,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const statsContainer = document.getElementById('statsGrid');
   if (statsContainer) {
+    statsContainer.innerHTML = '';
     statsData.forEach(s => {
       const div = document.createElement('div');
       div.className = 'stat';
@@ -238,6 +240,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const isDesktop      = window.matchMedia('(min-width: 860px)').matches;
 
   if (servicesGrid) {
+    servicesGrid.innerHTML = '';
     services.forEach(svc => {
       const card = document.createElement('article');
       card.className = `service-card reveal${svc.link ? ' service-card--link' : ''}`;

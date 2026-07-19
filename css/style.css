@@ -907,6 +907,40 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   animation: skeleton-pulse 1.5s ease-in-out infinite;
   border-radius: var(--radius-card);
 }
+.skeleton-text { height: 1em; border-radius: 4px; }
+.skeleton-text--sm { width: 55%; }
+.skeleton-text--md { width: 75%; }
+.skeleton-text--lg { width: 100%; }
+.skeleton-btn { width: 140px; height: 48px; border-radius: var(--radius); }
+.skeleton-avatar { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; }
+.skeleton--16x9 { aspect-ratio: 16/9; border-radius: var(--radius-card); }
+.skeleton--card { border-radius: var(--radius-card); overflow: hidden; }
+.skeleton--stat {
+  padding: 2.2rem 1.5rem;
+  border-radius: var(--radius-card);
+  background: var(--dark-mid);
+  border: 1px solid var(--red-border);
+}
+.skeleton--hero {
+  border-radius: 0;
+  min-height: 360px;
+}
+.skeleton--trust-logo {
+  width: 48px;
+  height: 28px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.skeleton--service-card {
+  padding: 2rem;
+  border-radius: var(--radius-card);
+  background: var(--dark-mid);
+  border: 1px solid var(--red-border);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
 
 /* ---- Iconos de marca (mask-image, respeta currentColor y tema) ---- */
 .icon {
@@ -944,6 +978,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
     opacity: 1 !important;
     transform: none !important;
   }
+  .skeleton { animation: none !important; opacity: 0.5; }
 }
 
 @media (max-width: 860px) {
