@@ -65,6 +65,65 @@ Run after editing `data/team.json` or `data/portfolio.json`. Generates individua
 
 Static upload to Hostinger via File Manager or FTP. No CI, no build step, no tests. Run `generate-pages.js` before uploading if JSON was edited.
 
+## Testing & Verification
+
+No test framework — run these commands after editing JSON, JS, or CSS:
+
+```bash
+# 1. JS syntax check (all 8 files)
+node -c js/shared.js && node -c js/main.js && node -c js/team.js && node -c js/team-index.js && node -c js/portfolio.js && node -c js/portfolio-index.js && node -c js/equipment.js && node -c js/artists.js
+
+# 2. Page generator (team + portfolio HTML + sitemap)
+node generate-pages.js
+
+# 3. Data contract check (team ↔ portfolio cross-references)
+node -e "
+const team = require('./data/team.json').map(m => m.id);
+const portfolio = require('./data/portfolio.json');
+const broken = [];
+portfolio.forEach(p => {
+  (p.team_ids || []).forEach(id => {
+    if (!team.includes(id)) broken.push(p.id + ' → team_id ' + id + ' not found');
+  });
+});
+const portIds = portfolio.map(p => p.id);
+require('./data/team.json').forEach(m => {
+  (m.projects || []).forEach(id => {
+    if (!portIds.includes(id)) broken.push(m.id + ' → project ' + id + ' not found');
+  });
+});
+if (broken.length) { console.log('BROKEN:', broken.join('\n')); process.exit(1); }
+else { console.log('✓ All cross-references valid'); }
+"
+
+# 4. Asset validation (covers, thumbs, equipment, partners, placeholders)
+node -e "
+const fs = require('fs');
+const issues = [];
+require('./data/team.json').forEach(m => {
+  if (!fs.existsSync('assets/team/' + m.id + '/cover.avif'))
+    issues.push('MISSING: assets/team/' + m.id + '/cover.avif');
+});
+require('./data/portfolio.json').forEach(p => {
+  if (p.thumb && !fs.existsSync(p.thumb))
+    issues.push('MISSING: ' + p.thumb);
+});
+require('./data/equipment.json').forEach(e => {
+  if (e.photo && !fs.existsSync(e.photo))
+    issues.push('MISSING: ' + e.photo);
+});
+['assets/portfolio/placeholder.svg','assets/equipment/placeholder-gear.svg','assets/logo/og-cover.png'].forEach(f => {
+  if (!fs.existsSync(f)) issues.push('MISSING: ' + f);
+});
+if (issues.length) { console.log(issues.join('\n')); process.exit(1); }
+else { console.log('✓ All referenced assets exist'); }
+"
+
+# 5. Generated HTML meta check (verify canonical, OG, twitter per page)
+grep -l 'og:image.*logo-umd-films.svg' team/*.html portfolio/*.html
+# Should return EMPTY — no generated page should still reference the SVG logo as OG image
+```
+
 ## SEO architecture
 
 - **Meta tags** have two layers: static placeholders in HTML templates, overwritten at runtime by JS
