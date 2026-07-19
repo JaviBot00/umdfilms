@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (svc.link) {
         card.setAttribute('role', 'link');
         card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `Go to: ${svc.title}`);
+        card.setAttribute('aria-label', `Ir a: ${svc.title}`);
         const goToService = () => { window.location.href = UMD.rootPath(svc.link); };
         card.addEventListener('click', goToService);
         card.addEventListener('keydown', e => {
@@ -301,8 +301,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   const form = document.getElementById('contactForm');
   if (form) {
     const wa  = config.contact.whatsapp;
+    const formStatus = document.getElementById('formStatus');
+
+    const clearErrors = () => {
+      form.querySelectorAll('.form-group').forEach(g => g.classList.remove('has-error'));
+      form.querySelectorAll('.form-error').forEach(e => { e.textContent = ''; });
+      if (formStatus) formStatus.textContent = '';
+    };
+
+    const showError = (input, errorEl, msg) => {
+      input.setAttribute('aria-invalid', 'true');
+      input.closest('.form-group').classList.add('has-error');
+      errorEl.textContent = msg;
+    };
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      clearErrors();
+
       const name    = form.querySelector('#name').value.trim();
       const email   = form.querySelector('#email').value.trim();
       const service = form.querySelector('#service').value;
@@ -310,21 +326,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const nameInput  = form.querySelector('#name');
       const emailInput = form.querySelector('#email');
+      const nameError  = form.querySelector('#name-error');
+      const emailError = form.querySelector('#email-error');
       let hasError = false;
+      let errorMessages = [];
 
-      [nameInput, emailInput].forEach(input => {
-        if (!input.value.trim()) {
-          input.setAttribute('aria-invalid', 'true');
-          input.style.borderColor = 'var(--red)';
-          hasError = true;
-        } else {
-          input.removeAttribute('aria-invalid');
-          input.style.borderColor = '';
-        }
-      });
+      if (!name) {
+        showError(nameInput, nameError, 'Por favor, introduce tu nombre.');
+        errorMessages.push('nombre');
+        hasError = true;
+      }
+      if (!email) {
+        showError(emailInput, emailError, 'Por favor, introduce tu email.');
+        errorMessages.push('email');
+        hasError = true;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError(emailInput, emailError, 'El formato del email no es válido.');
+        errorMessages.push('email');
+        hasError = true;
+      }
 
       if (hasError) {
-        nameInput.focus();
+        if (formStatus) formStatus.textContent = `Error: revisa los campos ${errorMessages.join(' y ')}.`;
+        form.querySelector('[aria-invalid="true"]').focus();
         return;
       }
 

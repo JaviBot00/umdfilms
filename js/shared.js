@@ -142,14 +142,17 @@ function initLightbox(selector) {
     lightbox = document.createElement('div');
     lightbox.className = 'lightbox';
     lightbox.id = 'umdLightbox';
+    lightbox.setAttribute('role', 'dialog');
+    lightbox.setAttribute('aria-modal', 'true');
+    lightbox.setAttribute('aria-label', 'Galería de imágenes');
     lightbox.innerHTML = `
-      <button class="lightbox__close" type="button" aria-label="Close">
+      <button class="lightbox__close" type="button" aria-label="Cerrar">
         <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
-      <button class="lightbox__prev" type="button" aria-label="Previous image">
+      <button class="lightbox__prev" type="button" aria-label="Imagen anterior">
         <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
       </button>
-      <button class="lightbox__next" type="button" aria-label="Next image">
+      <button class="lightbox__next" type="button" aria-label="Imagen siguiente">
         <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
       </button>
       <img src="" alt="" />
@@ -159,6 +162,7 @@ function initLightbox(selector) {
 
     lightbox._images = [];
     lightbox._index = 0;
+    lightbox._trigger = null;
 
     lightbox._update = () => {
       const { _images: imgs, _index: i } = lightbox;
@@ -174,9 +178,16 @@ function initLightbox(selector) {
       lightbox._update();
     };
 
+    const focusableSelector = 'button:not([disabled]), img[tabindex]';
+    const getFocusable = () => lightbox.querySelectorAll(focusableSelector);
+
     const closeLightbox = () => {
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
+      if (lightbox._trigger && lightbox._trigger.isConnected) {
+        lightbox._trigger.focus();
+      }
+      lightbox._trigger = null;
     };
 
     lightbox.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
@@ -197,6 +208,17 @@ function initLightbox(selector) {
       if (e.key === 'Escape') { closeLightbox(); return; }
       if (e.key === 'ArrowLeft')  lightbox._navigate(lightbox._index - 1);
       if (e.key === 'ArrowRight') lightbox._navigate(lightbox._index + 1);
+      if (e.key === 'Tab') {
+        const focusable = getFocusable();
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      }
     });
 
     let touchX = 0;
@@ -215,12 +237,27 @@ function initLightbox(selector) {
   lightbox._images = arr.map(img => ({ src: img.src, alt: img.alt }));
   arr.forEach((img, i) => {
     img.style.cursor = 'zoom-in';
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', 'Ampliar imagen');
     img.addEventListener('click', () => {
+      lightbox._trigger = img;
       lightbox._index = i;
       lightbox._update();
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
       lightbox.querySelector('.lightbox__close').focus();
+    });
+    img.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        lightbox._trigger = img;
+        lightbox._index = i;
+        lightbox._update();
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        lightbox.querySelector('.lightbox__close').focus();
+      }
     });
   });
 }
@@ -322,6 +359,12 @@ function renderFAB() {
   fab.setAttribute('role', 'button');
   fab.innerHTML = '<span class="icon icon-arrow-up" aria-hidden="true"></span>';
   fab.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  fab.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
   const toggle = () => fab.classList.toggle('visible', window.scrollY > 400);
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
@@ -337,6 +380,7 @@ function injectLocalBusinessSchema(config) {
     "name": b.name,
     "description": config.seo.description_home,
     "url": config.brand.site_url,
+    "image": `${config.brand.site_url}/${config.seo.og_image}`,
     "telephone": `+${config.contact.whatsapp}`,
     "email": config.contact.email,
     "address": {
@@ -489,6 +533,7 @@ function buildTeamCard(member, rootPathFn) {
   card.innerHTML = `
     <div class="team-card__img-wrap">
       <img class="team-card__img" src="${rootPathFn(member.photo_cover)}"
+          onerror="this.onerror=null; this.src='${rootPathFn('assets/team/placeholder-team.svg')}'"
            alt="${member.name} — ${member.role} — UMD Films" loading="lazy" />
       <span class="team-card__badge">Ver perfil ↗</span>
     </div>
@@ -503,29 +548,30 @@ function buildTeamCard(member, rootPathFn) {
 }
 
 function buildPortfolioCard(proj, rootPathFn) {
+  if (!proj || !proj.id) return document.createElement('div'); // skip empty or invalid entries
   const card = document.createElement('div');
   const trailerId = validYtUrl(proj.trailer_youtube) ? UMD.extractYouTubeId(proj.trailer_youtube) : null;
   const fullId    = validYtUrl(proj.full_video_youtube) ? UMD.extractYouTubeId(proj.full_video_youtube) : null;
   const heroId = trailerId || fullId;
-  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (proj.thumb || 'assets/portfolio/placeholder.webp');
+  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (proj.thumb || 'assets/portfolio/placeholder.svg');
 
   card.className = 'portfolio-card';
   card.setAttribute('role', 'link');
   card.setAttribute('tabindex', '0');
   card.setAttribute('aria-label', `Ver proyecto: ${proj.title}`);
   card.innerHTML = `
-    <img src="${thumbSrc}" data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)"
-        onerror="UMD.ytThumbAdvance(this)" alt="${proj.title} — UMD Films" loading="lazy" />
-    <div class="portfolio-card__overlay">
-      <p class="portfolio-card__cat">${proj.category} · ${proj.year}</p>
+  <img src="${thumbSrc}" data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)"
+  onerror="UMD.ytThumbAdvance(this)" alt="${proj.title} — UMD Films" loading="lazy" />
+  <div class="portfolio-card__overlay">
+  <p class="portfolio-card__cat">${proj.category} · ${proj.year}</p>
       <p class="portfolio-card__title">${proj.title}</p>
     </div>
     <div class="portfolio-card__play" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 24 24"><path d="m5 3 14 9-14 9z"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24"><path d="m5 3 14 9-14 9z"/></svg>
     </div>`;
-  const go = () => { window.location.href = rootPathFn(`portfolio/${proj.id}.html`); };
-  card.addEventListener('click', go);
-  card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    const go = () => { window.location.href = rootPathFn(`portfolio/${proj.id}.html`); };
+    card.addEventListener('click', go);
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
   return card;
 }
 

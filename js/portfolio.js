@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const trailerId = UMD.validYtUrl(project.trailer_youtube) ? UMD.extractYouTubeId(project.trailer_youtube) : null;
   const fullId    = UMD.validYtUrl(project.full_video_youtube) ? UMD.extractYouTubeId(project.full_video_youtube) : null;
   const heroId = trailerId || fullId;
-  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (project.thumb || 'assets/portfolio/placeholder.webp');
+  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (project.thumb || 'assets/portfolio/placeholder.svg');
 
   /* ---- Nav + Footer + FAB ---- */
   await UMD.renderNav(config);
@@ -74,10 +74,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       "description": project.synopsis || `${project.title} por ${config.brand.name}`,
       "thumbnailUrl": thumbSrc,
       "uploadDate": `${project.year}-01-01`,
+      "duration": project.duration_min ? `PT${project.duration_min}M` : undefined,
       "director": { "@type": "Person", "name": project.director },
       "productionCompany": { "@type": "Organization", "name": config.brand.name, "url": config.brand.site_url },
       "url": project.trailer_youtube
     };
+    if (!schema.duration) delete schema.duration;
     const tag = document.createElement('script');
     tag.type = 'application/ld+json';
     tag.textContent = JSON.stringify(schema);
@@ -145,6 +147,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
       tabTrailer.addEventListener('click', () => activateTab(tabTrailer, tabFull, trailerId, project.title + ' — ' + (videoStrings.trailer_tab)));
       tabFull.addEventListener('click',    () => activateTab(tabFull, tabTrailer, fullId, project.title + ' — ' + (videoStrings.completo_tab)));
+
+      // Arrow key navigation between tabs
+      trailerEl.querySelector('.video-tabs').addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          const isTrailer = e.key === 'ArrowLeft' ? tabTrailer : tabFull;
+          const isOther   = e.key === 'ArrowLeft' ? tabFull : tabTrailer;
+          const ytId      = e.key === 'ArrowLeft' ? trailerId : fullId;
+          const label     = e.key === 'ArrowLeft'
+            ? project.title + ' — ' + (videoStrings.trailer_tab)
+            : project.title + ' — ' + (videoStrings.completo_tab);
+          activateTab(isTrailer, isOther, ytId, label);
+          isTrailer.focus();
+        }
+        if (e.key === 'Home') { e.preventDefault(); activateTab(tabTrailer, tabFull, trailerId, project.title + ' — ' + (videoStrings.trailer_tab)); tabTrailer.focus(); }
+        if (e.key === 'End')  { e.preventDefault(); activateTab(tabFull, tabTrailer, fullId, project.title + ' — ' + (videoStrings.completo_tab)); tabFull.focus(); }
+      });
     } else {
       // Solo uno de los dos -> sin tabs, directo
       trailerEl.innerHTML = `<div class="video-panel" id="videoPanel"></div>`;
