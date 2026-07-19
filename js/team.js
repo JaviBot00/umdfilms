@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (bioEl) {
     bioEl.innerHTML = member.bio
       ? `<p class="profile-bio reveal">${member.bio}</p>`
-      : `<p class="profile-bio reveal" style="color:var(--muted);font-style:italic">${placeholders.bio_pendiente || 'Descripción pendiente de rellenar en team.json.'}</p>`;
+      : `<p class="profile-bio reveal" style="color:var(--muted);font-style:italic">${placeholders.bio_pendiente}</p>`;
   }
 
   /* ---- Social links ---- */

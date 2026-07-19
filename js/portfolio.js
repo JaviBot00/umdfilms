@@ -49,12 +49,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- SEO + Schema VideoObject ---- */
   document.title = `${project.title} | ${config.seo.site_suffix}`;
   document.querySelector('meta[name="description"]')
-    ?.setAttribute('content', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
+    ?.setAttribute('content', project.synopsis || `${project.title} — ${project.category} producido por ${config.brand.name} en ${project.year}.`);
 
   UMD.setCanonical(`${config.brand.site_url}/portfolio/${project.id}.html`);
 
   UMD.setOgMeta('og:title',       document.title);
-  UMD.setOgMeta('og:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
+  UMD.setOgMeta('og:description', project.synopsis || `${project.title} — ${project.category} producido por ${config.brand.name} en ${project.year}.`);
   UMD.setOgMeta('og:image',       `${thumbSrc}`);
   UMD.setOgMeta('og:type',        'video.other');
   UMD.setOgMeta('og:url',         `${config.brand.site_url}/portfolio/${project.id}.html`);
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   UMD.setTwitterMeta('twitter:card',        'summary_large_image');
   UMD.setTwitterMeta('twitter:title',       document.title);
-  UMD.setTwitterMeta('twitter:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
+  UMD.setTwitterMeta('twitter:description', project.synopsis || `${project.title} — ${project.category} producido por ${config.brand.name} en ${project.year}.`);
   UMD.setTwitterMeta('twitter:image',       `${thumbSrc}`);
 
   // Schema VideoObject for projects with video
@@ -71,11 +71,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       "@context": "https://schema.org",
       "@type": "VideoObject",
       "name": project.title,
-      "description": project.synopsis || `${project.title} por UMD Films`,
+      "description": project.synopsis || `${project.title} por ${config.brand.name}`,
       "thumbnailUrl": thumbSrc,
       "uploadDate": `${project.year}-01-01`,
       "director": { "@type": "Person", "name": project.director },
-      "productionCompany": { "@type": "Organization", "name": "UMD Films" },
+      "productionCompany": { "@type": "Organization", "name": config.brand.name, "url": config.brand.site_url },
       "url": project.trailer_youtube
     };
     const tag = document.createElement('script');
