@@ -24,10 +24,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const videoStrings = ui.video || {};
 
   const project = portfolio.find(p => p.id === projectId);
-  const trailerId = UMD.validYtUrl(project.trailer_youtube) ? UMD.extractYouTubeId(project.trailer_youtube) : null;
-  const fullId    = UMD.validYtUrl(project.full_video_youtube) ? UMD.extractYouTubeId(project.full_video_youtube) : null;
-  const heroId = trailerId || fullId;
-  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (project.thumb || 'assets/portfolio/placeholder.svg');
 
   /* ---- Nav + Footer + FAB ---- */
   await UMD.renderNav(config);
@@ -35,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   UMD.renderFAB();
 
   /* ---- Project not found ---- */
-  if (!project) {
+  if (!project || !project.id) {
     document.title = `${err404.proyecto_titulo} — ${config.seo.site_suffix}`;
     document.querySelector('main').innerHTML = `
       <div class="container" style="padding-block:8rem;text-align:center">
@@ -45,6 +41,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>`;
     return;
   }
+
+  const trailerId = UMD.validYtUrl(project.trailer_youtube) ? UMD.extractYouTubeId(project.trailer_youtube) : null;
+  const fullId    = UMD.validYtUrl(project.full_video_youtube) ? UMD.extractYouTubeId(project.full_video_youtube) : null;
+  const heroId = trailerId || fullId;
+  const thumbRaw = heroId ? UMD.ytThumbUrl(heroId) : (project.thumb || 'assets/portfolio/placeholder.svg');
+  const thumbSrc = thumbRaw.startsWith('http') ? thumbRaw : `${config.brand.site_url}/${thumbRaw}`;
 
   /* ---- SEO + Schema VideoObject ---- */
   document.title = `${project.title} | ${config.seo.site_suffix}`;
@@ -73,12 +75,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       "name": project.title,
       "description": project.synopsis || `${project.title} por ${config.brand.name}`,
       "thumbnailUrl": thumbSrc,
-      "uploadDate": `${project.year}-01-01`,
       "duration": project.duration_min ? `PT${project.duration_min}M` : undefined,
       "director": { "@type": "Person", "name": project.director },
       "productionCompany": { "@type": "Organization", "name": config.brand.name, "url": config.brand.site_url },
       "url": project.trailer_youtube
     };
+    if (trailerId) {
+      schema.embedUrl = `https://www.youtube.com/embed/${trailerId}`;
+    }
     if (!schema.duration) delete schema.duration;
     const tag = document.createElement('script');
     tag.type = 'application/ld+json';
@@ -95,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           onerror="UMD.ytThumbAdvance(this)"
           alt="${project.title}">
       </div>
-      <div class="film-hero__overlay"></div>
+      <div class="film-hero__overlay" aria-hidden="true"></div>
       <div class="film-hero__content">
         <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#portafolio')}" class="film-hero__back reveal">
           <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
@@ -187,8 +191,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       this.outerHTML = `
         <iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0"
                 title="${title}"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowfullscreen loading="lazy"></iframe>`;
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>`;
     }, { once: true });
   }
 

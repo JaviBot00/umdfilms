@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   UMD.setOgMeta('og:title',       config.seo.title_home);
   UMD.setOgMeta('og:description', config.seo.description_home);
   UMD.setOgMeta('og:image',       `${config.brand.site_url}/${config.seo.og_image}`);
+  UMD.setOgMeta('og:image:width',  '1200');
+  UMD.setOgMeta('og:image:height', '630');
   UMD.setOgMeta('og:url',         `${config.brand.site_url}/`);
   UMD.setOgMeta('og:type',        'website');
   UMD.setOgMeta('og:site_name',   config.seo.site_name);
@@ -37,11 +39,38 @@ document.addEventListener('DOMContentLoaded', async () => {
   UMD.setTwitterMeta('twitter:title',       config.seo.title_home);
   UMD.setTwitterMeta('twitter:description', config.seo.description_home);
   UMD.setTwitterMeta('twitter:image',       `${config.brand.site_url}/${config.seo.og_image}`);
+  UMD.setTwitterMeta('twitter:image:width',  '1200');
+  UMD.setTwitterMeta('twitter:image:height', '630');
 
   /* ---- Hero: initial reveal ---- */
   setTimeout(() => {
     document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
   }, 120);
+
+  /* ---- SHOWREEL ---- */
+  const showreelPlayer = document.getElementById('showreelPlayer');
+  if (showreelPlayer && config.brand.showreel_youtube) {
+    const showreelId = UMD.extractYouTubeId(config.brand.showreel_youtube);
+    if (showreelId) {
+      const thumbUrl = UMD.ytThumbUrl(showreelId);
+      showreelPlayer.innerHTML = `
+        <button class="showreel__facade" aria-label="Reproducir showreel">
+          <img src="${thumbUrl}" data-yt-id="${showreelId}" onload="UMD.ytThumbCheck(this)"
+              onerror="UMD.ytThumbAdvance(this)" alt="UMD Films Showreel" />
+          <span class="showreel__facade__play" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24"><path d="m5 3 14 9-14 9z"/></svg>
+          </span>
+        </button>`;
+      showreelPlayer.querySelector('.showreel__facade').addEventListener('click', function () {
+        this.outerHTML = `<iframe src="https://www.youtube.com/embed/${showreelId}?autoplay=1&rel=0"
+          title="UMD Films Showreel"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowfullscreen></iframe>`;
+      }, { once: true });
+    }
+  } else if (showreelPlayer) {
+    showreelPlayer.closest('.showreel')?.style.setProperty('display', 'none');
+  }
 
   function renderHomeContent(config, home, services) {
     const setText = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
@@ -129,7 +158,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (trustInner) {
     // Render logos from JSON
     trustInner.innerHTML = partners.map(p =>
-      `<img src="${UMD.rootPath(p.logo)}" alt="${p.name}" loading="lazy" />`
+      `<img src="${UMD.rootPath(p.logo)}" alt="${p.name}" />`
     ).join('');
 
     // Duplicate for marquee (same logic as before)
@@ -145,10 +174,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- STATS — calculated from data ---- */
   const currentYear = new Date().getFullYear();
+  const validPortfolio = portfolio.filter(p => p && p.id);
   const statsData = [
     {
       id:     'stat-proyectos',
-      value:  portfolio.length,
+      value:  validPortfolio.length,
       label:  'Trabajos realizados'
     },
     {
@@ -274,7 +304,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- PORTFOLIO ---- */
   const portfolioGrid    = document.getElementById('portfolioGrid');
   // Portfolio (home) — solo featured, sin filtros de categoría en home
-  const featuredPortfolio = portfolio.filter(p => p.featured);
+  const featuredPortfolio = validPortfolio.filter(p => p.featured);
   UMD.renderFilterableGrid({
     items: featuredPortfolio,
     filterEl: null,

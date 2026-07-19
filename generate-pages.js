@@ -74,7 +74,7 @@ function generateTeamPages() {
       )
       // OG image
       .replace(
-        '<meta property="og:image"       content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />',
+        '<meta property="og:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />',
         `<meta property="og:image"       content="${ogImage}" />`
       )
       // OG url
@@ -94,7 +94,7 @@ function generateTeamPages() {
       )
       // Twitter image
       .replace(
-        '<meta name="twitter:image"       content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />',
+        '<meta name="twitter:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />',
         `<meta name="twitter:image"       content="${ogImage}" />`
       );
 
@@ -109,6 +109,7 @@ function generatePortfolioPages() {
   console.log(`\n🎬 Generating ${portfolio.length} portfolio pages...`);
 
   portfolio.forEach(project => {
+    if (!project || !project.id) return;
     const pageUrl = `${SITE_URL}/portfolio/${project.id}.html`;
     const ogImage = project.thumb
       ? `${SITE_URL}/${project.thumb}`
@@ -142,7 +143,7 @@ function generatePortfolioPages() {
       )
       // OG image
       .replace(
-        '<meta property="og:image"       content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />',
+        '<meta property="og:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />',
         `<meta property="og:image"       content="${ogImage}" />`
       )
       // OG url
@@ -162,7 +163,7 @@ function generatePortfolioPages() {
       )
       // Twitter image
       .replace(
-        '<meta name="twitter:image"       content="https://umdfilms.com/assets/logo/logo-umd-films.svg" />',
+        '<meta name="twitter:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />',
         `<meta name="twitter:image"       content="${ogImage}" />`
       );
 
@@ -174,22 +175,34 @@ function generatePortfolioPages() {
 function generateSitemap() {
   const today = new Date().toISOString().split('T')[0];
 
-  const homeUrl = `  <url><loc>${SITE_URL}/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>`;
+  function getFileModDate(relPath) {
+    try {
+      const stat = fs.statSync(path.join(ROOT, relPath));
+      return stat.mtime.toISOString().split('T')[0];
+    } catch { return today; }
+  }
+
+  const homeUrl = `  <url><loc>${SITE_URL}/</loc><lastmod>${getFileModDate('index.html')}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>`;
 
   const listingUrls = [
-    `  <url><loc>${SITE_URL}/team/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`,
-    `  <url><loc>${SITE_URL}/portfolio/</loc><lastmod>${today}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`,
-    `  <url><loc>${SITE_URL}/equipment/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`,
-    `  <url><loc>${SITE_URL}/artists/</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`
+    `  <url><loc>${SITE_URL}/team/</loc><lastmod>${getFileModDate('team/index.html')}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`,
+    `  <url><loc>${SITE_URL}/portfolio/</loc><lastmod>${getFileModDate('portfolio/index.html')}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`,
+    `  <url><loc>${SITE_URL}/equipment/</loc><lastmod>${getFileModDate('equipment/index.html')}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`,
+    `  <url><loc>${SITE_URL}/artists/</loc><lastmod>${getFileModDate('artists/index.html')}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`
   ].join('\n');
 
-  const teamUrls = team.map(m =>
-    `  <url><loc>${SITE_URL}/team/${m.id}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`
-  ).join('\n');
+  const teamUrls = team.map(m => {
+    const modDate = getFileModDate(`team/${m.id}.html`);
+    return `  <url><loc>${SITE_URL}/team/${m.id}.html</loc><lastmod>${modDate}</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>`;
+  }).join('\n');
 
-  const portfolioUrls = portfolio.map(p =>
-    `  <url><loc>${SITE_URL}/portfolio/${p.id}.html</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`
-  ).join('\n');
+  const portfolioUrls = portfolio
+    .filter(p => p && p.id)
+    .map(p => {
+      const modDate = getFileModDate(`portfolio/${p.id}.html`);
+      return `  <url><loc>${SITE_URL}/portfolio/${p.id}.html</loc><lastmod>${modDate}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`;
+    })
+    .join('\n');
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
