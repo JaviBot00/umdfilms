@@ -83,9 +83,10 @@ function buildGearCard(gear, i, config, eqStrings, CATEGORY_LABELS) {
          style="font-size:0.75rem;padding:0.6em 1.4em">
         ${eqStrings.consultar_disponibilidad}
       </a>` : `
-      <span class="btn btn-ghost" style="font-size:0.75rem;padding:0.6em 1.4em;opacity:0.4;cursor:not-allowed">
+      <button class="btn btn-ghost" disabled aria-disabled="true"
+         style="font-size:0.75rem;padding:0.6em 1.4em;opacity:0.4;cursor:not-allowed">
         ${eqStrings.no_disponible}
-      </span>`}
+      </button>`}
     </div>
   `;
 

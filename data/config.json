@@ -11,7 +11,8 @@
     "logo": "assets/logo/logo-umd-films.svg",
     "logo_alt": "UMD Films — Productora Audiovisual Málaga",
     "favicon": "assets/logo/favicon.ico",
-    "site_url": "https://umdfilms.com"
+    "site_url": "https://umdfilms.com",
+    "showreel_youtube": ""
   },
 
   "contact": {
@@ -51,6 +52,8 @@
     "address_locality": "Málaga",
     "address_region": "Andalucía",
     "address_country": "ES",
+    "street_address": "",
+    "postal_code": "",
     "geo_lat": 36.7213,
     "geo_lng": -4.4213,
     "price_range": "€€"

@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <img src="${UMD.rootPath(member.photo_cover)}"
              alt="${member.name} — ${member.role} — ${config.seo.site_suffix}" />
       </div>
-      <div class="profile-hero__overlay"></div>
+      <div class="profile-hero__overlay" aria-hidden="true"></div>
       <div class="profile-hero__content container">
         <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#equipo')}" class="profile-hero__back reveal">
           <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>

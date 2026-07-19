@@ -54,6 +54,26 @@ function initNav() {
       ? (_ui?.aria?.cerrar_menu)
       : (_ui?.aria?.abrir_menu));
     document.body.style.overflow = open ? 'hidden' : '';
+
+    if (open) {
+      const firstLink = links.querySelector('a');
+      if (firstLink) firstLink.focus();
+      links._trapHandler = (e) => {
+        if (e.key !== 'Tab') return;
+        const focusable = links.querySelectorAll('a, button');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      };
+      document.addEventListener('keydown', links._trapHandler);
+    } else if (links._trapHandler) {
+      document.removeEventListener('keydown', links._trapHandler);
+      links._trapHandler = null;
+    }
   });
 
   links.querySelectorAll('a').forEach(a => {
@@ -122,9 +142,15 @@ function initScrollSpy() {
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
+        links.forEach(l => {
+          l.classList.remove('active');
+          l.removeAttribute('aria-current');
+        });
         const link = map.get(entry.target.id);
-        if (link) link.classList.add('active');
+        if (link) {
+          link.classList.add('active');
+          link.setAttribute('aria-current', 'section');
+        }
       }
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
@@ -280,7 +306,7 @@ async function renderNav(config) {
     <button class="nav__burger" id="burger" aria-label="${aria.abrir_menu}" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <nav class="nav__links" id="navLinks" role="navigation">
+    <nav class="nav__links" id="navLinks" aria-label="Navegación principal">
       <a href="${rootPath('index.html')}#nosotros">${nav_.quienes_somos}</a>
       <a href="${rootPath('index.html')}#servicios">${nav_.servicios}</a>
       <a href="${rootPath('index.html')}#portafolio">${nav_.portafolio}</a>
@@ -358,11 +384,13 @@ function renderFAB() {
   fab.removeAttribute('href');
   fab.setAttribute('role', 'button');
   fab.innerHTML = '<span class="icon icon-arrow-up" aria-hidden="true"></span>';
-  fab.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const scrollTo = () => window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+  fab.addEventListener('click', scrollTo);
   fab.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollTo();
     }
   });
   const toggle = () => fab.classList.toggle('visible', window.scrollY > 400);
@@ -387,7 +415,9 @@ function injectLocalBusinessSchema(config) {
       "@type": "PostalAddress",
       "addressLocality": s.address_locality,
       "addressRegion": s.address_region,
-      "addressCountry": s.address_country
+      "addressCountry": s.address_country,
+      "streetAddress": s.street_address || undefined,
+      "postalCode": s.postal_code || undefined
     },
     "geo": {
       "@type": "GeoCoordinates",
