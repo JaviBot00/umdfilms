@@ -66,7 +66,7 @@ function buildGearCard(gear, i, config, eqStrings, CATEGORY_LABELS) {
            src="${UMD.rootPath(gear.photo)}"
            alt="${gear.name} — ${config.seo.site_suffix} alquiler material"
            loading="lazy"
-           onerror="this.onerror=null; this.src='${UMD.rootPath('assets/equipment/placeholder-gear.webp')}'" />
+           onerror="this.onerror=null; this.src='${UMD.rootPath('assets/equipment/placeholder-gear.svg')}'" />
       <span class="gear-card__qty">×${gear.quantity}</span>
       ${!gear.available ? `<span class="gear-card__unavailable-badge">${eqStrings.no_disponible}</span>` : ''}
     </div>

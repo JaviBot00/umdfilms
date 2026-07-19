@@ -78,7 +78,9 @@ function buildArtistCard(artist, rootPathFn) {
 
   card.innerHTML = `
     <div class="team-card__img-wrap">
-      <img class="team-card__img" src="${photoSrc}" alt="${artist.name} — UMD Films" loading="lazy" />
+      <img class="team-card__img" src="${photoSrc}"
+      onerror="this.onerror=null; this.src='${rootPathFn('assets/artists/placeholder-artist.svg')}';"
+      alt="${artist.name} — UMD Films" loading="lazy" />
       ${clickable ? '<span class="team-card__badge">Ver perfil ↗</span>' : ''}
     </div>
     <div class="team-card__info">
