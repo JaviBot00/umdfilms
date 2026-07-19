@@ -18,6 +18,8 @@
   </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 
   <!-- SEO (fallback values; main.js overwrites dynamically from config.json) -->
   <title>UMD Films | Productora Audiovisual en Málaga</title>
@@ -31,6 +33,8 @@
   <meta property="og:title"       content="UMD Films | Productora Audiovisual en Málaga" />
   <meta property="og:description" content="Videoclips, publicidad, cine y producción musical con alma malagueña y alcance nacional." />
   <meta property="og:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:site_name"   content="UMD Films" />
   <meta property="og:locale"      content="es_ES" />
 
@@ -90,7 +94,7 @@
     <div class="hero__content">
       <div class="hero__redline" aria-hidden="true"></div>
       <p class="hero__eyebrow reveal" id="heroEyebrow"></p>
-      <h1 class="hero__title reveal d1" id="heroTitle"></h1>
+      <h1 class="hero__title reveal d1" id="heroTitle">UMD Films — Productora Audiovisual</h1>
       <p class="hero__sub reveal d2" id="heroSub"></p>
       <div class="hero__actions reveal d3" id="heroActions"></div>
     </div>
@@ -99,6 +103,17 @@
     <div class="hero__scroll" aria-hidden="true">
       <span id="heroScrollLabel"></span>
       <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ---- SHOWREEL ---- -->
+  <section class="showreel" id="showreel" aria-label="Showreel">
+    <div class="container">
+      <div class="showreel__inner reveal">
+        <p class="eyebrow">Showreel</p>
+        <h2 class="section-title">Nuestro trabajo en <em>acción</em></h2>
+        <div class="showreel__player" id="showreelPlayer"></div>
+      </div>
     </div>
   </section>
 
@@ -181,24 +196,26 @@
       <div id="formStatus" role="alert" aria-live="assertive" class="visually-hidden"></div>
       <form class="contact__form reveal" id="contactForm" novalidate aria-label="Formulario de contacto">
         <div class="form-group">
-          <label for="name"></label>
+          <label for="name">Nombre</label>
           <input type="text" id="name" name="name" placeholder="Tu nombre" required autocomplete="name" aria-describedby="name-error" />
           <span id="name-error" class="form-error" role="alert"></span>
         </div>
         <div class="form-group">
-          <label for="email"></label>
+          <label for="email">Email</label>
           <input type="email" id="email" name="email" placeholder="tu@email.com" required autocomplete="email" aria-describedby="email-error" />
           <span id="email-error" class="form-error" role="alert"></span>
         </div>
         <div class="form-group">
-          <label for="service"></label>
-          <select id="service" name="service"></select>
+          <label for="service">Servicio</label>
+          <select id="service" name="service">
+            <option value="">Selecciona un servicio</option>
+          </select>
         </div>
         <div class="form-group">
-          <label for="message"></label>
+          <label for="message">Mensaje</label>
           <textarea id="message" name="message" rows="4" placeholder="Describe tu idea..."></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-full"></button>
+        <button type="submit" class="btn btn-primary btn-full">Enviar</button>
         <p class="form-note"></p>
       </form>
 
