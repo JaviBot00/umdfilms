@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderHomeContent(config, home, services);
   UMD.injectLocalBusinessSchema(config);
 
+  const ui = config.ui_strings || {};
+
   /* ---- SEO (overwrite HTML fallback) ---- */
   document.title = config.seo.title_home;
   document.querySelector('meta[name="description"]')
@@ -54,9 +56,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (showreelId) {
       const thumbUrl = UMD.ytThumbUrl(showreelId);
       showreelPlayer.innerHTML = `
-        <button class="showreel__facade" aria-label="Reproducir showreel">
+        <button class="showreel__facade" aria-label="${ui.aria?.play_showreel}">
           <img src="${thumbUrl}" data-yt-id="${showreelId}" onload="UMD.ytThumbCheck(this)"
-              onerror="UMD.ytThumbAdvance(this)" alt="UMD Films Showreel" />
+              onerror="UMD.ytThumbAdvance(this)" alt="${ui.home?.showreel_title}" />
           <span class="showreel__facade__play" aria-hidden="true">
             <svg width="28" height="28" viewBox="0 0 24 24"><path d="m5 3 14 9-14 9z"/></svg>
           </span>
@@ -64,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       showreelPlayer.classList.remove('skeleton', 'skeleton--16x9');
       showreelPlayer.querySelector('.showreel__facade').addEventListener('click', function () {
         this.outerHTML = `<iframe src="https://www.youtube.com/embed/${showreelId}?autoplay=1&rel=0"
-          title="UMD Films Showreel"
+          title="${ui.home?.showreel_title}"
           allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
           allowfullscreen></iframe>`;
       }, { once: true });
@@ -112,8 +114,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     /* Portfolio CTA -> YouTube (dato de config, no de home.json) */
     setHTML('portfolioCta', `
       <div class="portfolio__actions">
-        <a href="${UMD.rootPath('portfolio/index.html')}" class="btn btn-outline">Todos los proyectos ↗</a>
-        <a href="${config.social.youtube}" target="_blank" rel="noopener" class="btn btn-primary">Canal de YouTube ↗</a>
+        <a href="${UMD.rootPath('portfolio/index.html')}" class="btn btn-outline">${ui.home?.all_projects_cta}</a>
+        <a href="${config.social.youtube}" target="_blank" rel="noopener" class="btn btn-primary">${ui.home?.youtube_cta}</a>
       </div>
     `);
 
@@ -129,8 +131,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         <span class="icon icon-whatsapp" aria-hidden="true"></span>
         ${home.contact.wa_label}
       </a>
-      ${config.social.instagram ? `<a href="${config.social.instagram}" class="text-link" target="_blank" rel="noopener">Instagram</a>` : ''}
-      ${config.social.youtube ? `<a href="${config.social.youtube}" class="text-link" target="_blank" rel="noopener">YouTube</a>` : ''}
+      ${config.social.instagram ? `<a href="${config.social.instagram}" class="text-link" target="_blank" rel="noopener">${ui.social?.instagram}</a>` : ''}
+      ${config.social.youtube ? `<a href="${config.social.youtube}" class="text-link" target="_blank" rel="noopener">${ui.social?.youtube}</a>` : ''}
     `);
 
     /* Formulario: labels, placeholders, select dinámico */
@@ -180,23 +182,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     {
       id:     'stat-proyectos',
       value:  validPortfolio.length,
-      label:  'Trabajos realizados'
+      label:  ui.stats?.trabajos
     },
     {
       id:     'stat-equipo',
       value:  team.length,
-      label:  'Profesionales en el equipo'
+      label:  ui.stats?.profesionales
     },
     {
       id:     'stat-anos',
       value:  currentYear - config.brand.founded_year,
-      label:  'Años de trayectoria'
+      label:  ui.stats?.anos
     },
     {
       id:     'stat-sede',
       value:  null,   // non-numeric
       text:   config.schema.address_locality,
-      label:  `Alcance ${config.schema.address_country === 'ES' ? 'nacional' : 'internacional'}`
+      label:  config.schema.address_country === 'ES' ? (ui.stats?.alcance_nacional) : (ui.stats?.alcance_internacional)
     }
   ];
 
@@ -235,9 +237,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- SERVICES ---- */
   const servicesGrid   = document.getElementById('servicesGrid');
-  const svcPreview     = document.getElementById('svcPreview');
-  const svcPreviewVid  = document.getElementById('svcPreviewVid');
-  const isDesktop      = window.matchMedia('(min-width: 860px)').matches;
 
   if (servicesGrid) {
     servicesGrid.innerHTML = '';
@@ -250,7 +249,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="service-card__icon">${svc.icon}</div>
         <h3 class="service-card__title">${svc.title}</h3>
         <p class="service-card__desc">${svc.description}</p>
-        ${svc.core ? '<span class="service-card__tag">Core service</span>' : ''}
+        ${svc.core ? `<span class="service-card__tag">${ui.home?.core_service_tag}</span>` : ''}
       `;
 
       if (svc.link) {
@@ -269,39 +268,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       servicesGrid.appendChild(card);
     });
-
-    /* ---- Video preview hover (desktop only) ---- */
-    if (isDesktop && svcPreview && svcPreviewVid) {
-      let previewTimer;
-
-      servicesGrid.querySelectorAll('.service-card[data-video]').forEach(card => {
-        card.addEventListener('mouseenter', (e) => {
-          clearTimeout(previewTimer);
-          const src = card.dataset.video;
-          if (svcPreviewVid.src !== location.origin + '/' + src) {
-            svcPreviewVid.src = src;
-            svcPreviewVid.load();
-          }
-          svcPreviewVid.play().catch(() => {});
-          svcPreview.classList.add('active');
-          positionPreview(e);
-        });
-        card.addEventListener('mousemove', positionPreview);
-        card.addEventListener('mouseleave', () => {
-          previewTimer = setTimeout(() => {
-            svcPreview.classList.remove('active');
-            svcPreviewVid.pause();
-          }, 120);
-        });
-      });
-
-      function positionPreview(e) {
-        const x = Math.min(e.clientX + 24, window.innerWidth - 320);
-        const y = Math.max(20, Math.min(e.clientY - 90, window.innerHeight - 185));
-        svcPreview.style.left = x + 'px';
-        svcPreview.style.top  = y + 'px';
-      }
-    }
   }
 
   /* ---- PORTFOLIO ---- */
@@ -325,9 +291,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     gridEl: teamGrid,
     cardBuilder: (m) => UMD.buildTeamCard(m, UMD.rootPath)
   });
-  document.getElementById('teamGrid').insertAdjacentHTML('afterend',
+  teamGrid.insertAdjacentHTML('afterend',
   `<div class="team__actions">
-     <a href="${UMD.rootPath('team/index.html')}" class="btn btn-outline">Equipo completo ↗</a>
+     <a href="${UMD.rootPath('team/index.html')}" class="btn btn-outline">${ui.home?.team_cta}</a>
    </div>`);
 
   /* ---- CONTACT FORM ---- */
@@ -365,22 +331,22 @@ document.addEventListener('DOMContentLoaded', async () => {
       let errorMessages = [];
 
       if (!name) {
-        showError(nameInput, nameError, 'Por favor, introduce tu nombre.');
+        showError(nameInput, nameError, ui.form?.error_nombre);
         errorMessages.push('nombre');
         hasError = true;
       }
       if (!email) {
-        showError(emailInput, emailError, 'Por favor, introduce tu email.');
+        showError(emailInput, emailError, ui.form?.error_email);
         errorMessages.push('email');
         hasError = true;
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        showError(emailInput, emailError, 'El formato del email no es válido.');
+        showError(emailInput, emailError, ui.form?.error_email_format);
         errorMessages.push('email');
         hasError = true;
       }
 
       if (hasError) {
-        if (formStatus) formStatus.textContent = `Error: revisa los campos ${errorMessages.join(' y ')}.`;
+        if (formStatus) formStatus.textContent = (ui.form?.error_summary).replace('{fields}', errorMessages.join(' y '));
         form.querySelector('[aria-invalid="true"]').focus();
         return;
       }

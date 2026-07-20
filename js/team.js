@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   ]);
 
   const ui = config.ui_strings || {};
+  const socialStrings = ui.social || {};
   const err404 = ui.errores_404 || {};
   const placeholders = ui.placeholders || {};
   const fichaStrings = ui.ficha_perfil || {};
@@ -124,19 +125,19 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (socialsEl && member.social) {
     const links = [];
     if (member.social.instagram) links.push(`
-      <a href="${member.social.instagram}" class="profile-social reveal" target="_blank" rel="noopener" aria-label="Instagram">
+      <a href="${member.social.instagram}" class="profile-social reveal" target="_blank" rel="noopener" aria-label="${socialStrings.instagram}">
         <span class="icon icon-instagram" aria-hidden="true"></span>
-        Instagram
+        ${socialStrings.instagram}
       </a>`);
     if (member.social.youtube) links.push(`
-      <a href="${member.social.youtube}" class="profile-social reveal" target="_blank" rel="noopener" aria-label="YouTube">
+      <a href="${member.social.youtube}" class="profile-social reveal" target="_blank" rel="noopener" aria-label="${socialStrings.youtube}">
         <span class="icon icon-youtube" aria-hidden="true"></span>
-        YouTube
+        ${socialStrings.youtube}
       </a>`);
     if (member.social.tiktok) links.push(`
-      <a href="${member.social.tiktok}" class="profile-social reveal" target="_blank" rel="noopener" aria-label="TikTok">
+      <a href="${member.social.tiktok}" class="profile-social reveal" target="_blank" rel="noopener" aria-label="${socialStrings.tiktok}">
         <span class="icon icon-tiktok" aria-hidden="true"></span>
-        TikTok
+        ${socialStrings.tiktok}
       </a>`);
     socialsEl.innerHTML = links.join('');
   }

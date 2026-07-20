@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else if (trailerId && fullId) {
       // Ambos existen -> tabs
       trailerEl.innerHTML = `
-        <div class="video-tabs" role="tablist" aria-label="Vídeo del proyecto">
+        <div class="video-tabs" role="tablist" aria-label="${ui.aria?.video_tabs}">
           <button role="tab" id="tab-trailer" aria-selected="true" aria-controls="videoPanel">${videoStrings.trailer_tab}</button>
           <button role="tab" id="tab-full" aria-selected="false" tabindex="-1" aria-controls="videoPanel">${videoStrings.completo_tab}</button>
         </div>
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function renderVideoTab(container, ytId, title) {
     container.innerHTML = `
-      <button class="video-facade" aria-label="Reproducir: ${title}">
+      <button class="video-facade" aria-label="${ui.video?.play_aria} ${title}">
         <img src="${UMD.ytThumbUrl(ytId)}" data-yt-id="${ytId}" onload="UMD.ytThumbCheck(this)"
             onerror="UMD.ytThumbAdvance(this)" alt="${title}">
         <span class="video-facade__play" aria-hidden="true">

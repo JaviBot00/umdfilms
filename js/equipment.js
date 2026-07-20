@@ -73,7 +73,7 @@ function buildGearCard(gear, i, config, eqStrings, CATEGORY_LABELS) {
     <div class="gear-card__body">
       <p class="gear-card__cat">${CATEGORY_LABELS[gear.category] || gear.category}</p>
       <h3 class="gear-card__name">${gear.name}</h3>
-      <p class="gear-card__desc">${gear.description || ''}</p>
+      <p class="gear-card__desc">${gear.description}</p>
       ${gear.specs?.length ? `
       <div class="gear-card__specs">
         ${gear.specs.map(s => `<span class="gear-spec">${s}</span>`).join('')}
