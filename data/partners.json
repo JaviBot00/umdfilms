@@ -1,17 +1,77 @@
 [
-  { "id": "banda-cautivo",       "name": "Banda Cautivo",        "logo": "assets/logo-partners/banda-cautivo.avif" },
-  { "id": "cafe-santa-cristina", "name": "Cafés Santa Cristina", "logo": "assets/logo-partners/cafe-santa-cristina.avif" },
-  { "id": "cautivo-malaga",      "name": "Cautivo Málaga",       "logo": "assets/logo-partners/cautivo-malaga.avif" },
-  { "id": "cerveza-san-miguel",  "name": "Cerveza San Miguel",   "logo": "assets/logo-partners/cerveza-san-miguel.avif" },
-  { "id": "cerveza-victoria",    "name": "Cervezas Victoria",    "logo": "assets/logo-partners/cerveza-victoria.avif" },
-  { "id": "copyrap",             "name": "Copyrap",              "logo": "assets/logo-partners/copyrap.avif" },
-  { "id": "delia-eventos",       "name": "Delia Eventos",        "logo": "assets/logo-partners/delia-eventos.avif" },
-  { "id": "diputacion-malaga",   "name": "Diputación de Málaga", "logo": "assets/logo-partners/diputacion-malaga.avif" },
-  { "id": "hla-el-angel",        "name": "HLA El Ángel",         "logo": "assets/logo-partners/hla-el-angel.avif" },
-  { "id": "holidays-for-u",      "name": "Holidays For U",       "logo": "assets/logo-partners/holidays-for-u.avif" },
-  { "id": "la-canasta",          "name": "La Canasta",           "logo": "assets/logo-partners/la-canasta.avif" },
-  { "id": "la-joya-music",       "name": "La Joya Music",        "logo": "assets/logo-partners/la-joya-music.avif" },
-  { "id": "malaga-cf",           "name": "Málaga C.F.",          "logo": "assets/logo-partners/malaga-cf.avif" },
-  { "id": "metro-malaga",        "name": "Metro Málaga",         "logo": "assets/logo-partners/metro-malaga.avif" },
-  { "id": "sergio-pastor",       "name": "Sergio Pastor",        "logo": "assets/logo-partners/sergio-pastor.avif" }
+  {
+    "id": "banda-cautivo",
+    "name": "Banda Cautivo",
+    "logo": "assets/logo-partners/banda-cautivo.avif"
+  },
+  {
+    "id": "cafe-santa-cristina",
+    "name": "Cafés Santa Cristina",
+    "logo": "assets/logo-partners/cafe-santa-cristina.avif"
+  },
+  {
+    "id": "cautivo-malaga",
+    "name": "Cautivo Málaga",
+    "logo": "assets/logo-partners/cautivo-malaga.avif"
+  },
+  {
+    "id": "cerveza-san-miguel",
+    "name": "Cerveza San Miguel",
+    "logo": "assets/logo-partners/cerveza-san-miguel.avif"
+  },
+  {
+    "id": "cerveza-victoria",
+    "name": "Cervezas Victoria",
+    "logo": "assets/logo-partners/cerveza-victoria.avif"
+  },
+  {
+    "id": "copyrap",
+    "name": "Copyrap",
+    "logo": "assets/logo-partners/copyrap.avif"
+  },
+  {
+    "id": "delia-eventos",
+    "name": "Delia Eventos",
+    "logo": "assets/logo-partners/delia-eventos.avif"
+  },
+  {
+    "id": "diputacion-malaga",
+    "name": "Diputación de Málaga",
+    "logo": "assets/logo-partners/diputacion-malaga.avif"
+  },
+  {
+    "id": "hla-el-angel",
+    "name": "HLA El Ángel",
+    "logo": "assets/logo-partners/hla-el-angel.avif"
+  },
+  {
+    "id": "holidays-for-u",
+    "name": "Holidays For U",
+    "logo": "assets/logo-partners/holidays-for-u.avif"
+  },
+  {
+    "id": "la-canasta",
+    "name": "La Canasta",
+    "logo": "assets/logo-partners/la-canasta.avif"
+  },
+  {
+    "id": "la-joya-music",
+    "name": "La Joya Music",
+    "logo": "assets/logo-partners/la-joya-music.avif"
+  },
+  {
+    "id": "malaga-cf",
+    "name": "Málaga C.F.",
+    "logo": "assets/logo-partners/malaga-cf.avif"
+  },
+  {
+    "id": "metro-malaga",
+    "name": "Metro Málaga",
+    "logo": "assets/logo-partners/metro-malaga.avif"
+  },
+  {
+    "id": "sergio-pastor",
+    "name": "Sergio Pastor",
+    "logo": "assets/logo-partners/sergio-pastor.avif"
+  }
 ]
