@@ -188,7 +188,7 @@ Array of equipment available for rental. Photos live in category subfolders unde
 {
   "id": "sony-fx30",
   "name": "Sony Cinema Line FX30",
-  "category": "camara",              // camara | audio | iluminacion | soporte | otro
+   "category": "camara",              // camara | audio | iluminacion | otro
   "quantity": 2,
   "description": "Text...",
   "specs": ["APS-C Super 35", "4K 120fps"],
@@ -267,7 +267,7 @@ Dynamically generates category filters from data and renders equipment cards.
 ```cmd
 User opens team/alejandro-luque.html
   ↓
-Browser loads HTML (empty structure)
+Browser loads HTML (skeleton placeholders visible immediately)
   ↓
 Browser loads shared.js → exposes window.UMD (utilities)
   ↓
@@ -289,11 +289,14 @@ DOMContentLoaded fires:
   Finds member = team.find(m => m.id === "alejandro-luque")
   ↓
   Fills: profileHero, profileBio, profileSocials, profileFicha
+  (skeleton placeholders are replaced by real content via innerHTML/textContent)
   Conditional: profilePhotos (if photos_extra.length > 0)
   Conditional: profileProjects (if there are cross-referenced projects)
   ↓
   initReveal() → IntersectionObserver activates entrance animations
 ```
+
+**Skeleton loading:** while JSON files are being fetched, skeleton placeholder elements (pulsing dark blocks) are visible in the hero, showreel, trust bar, stats, services, and card grids. When JS renders real content, it replaces the skeletons automatically via `innerHTML = ''` (grids) or `innerHTML`/`textContent` assignment (other containers). The skeleton CSS animation respects `prefers-reduced-motion`.
 
 ---
 
@@ -557,7 +560,7 @@ WCAG 2.2 AA compliance. All interactive elements must remain keyboard accessible
 | **Video tabs** | Left/Right/Home/End arrow navigation between tabs, `aria-pressed` state |
 | **Semantic HTML** | `<header>`, `<nav>`, `<main>`, `<footer>`, `<section>` with `aria-label`; `<aside>` for sidebars |
 | **WhatsApp FAB** | Keyboard Enter/Space handler for activation |
-| **Custom 404** | Dedicated `404.html` page with branded design |
+| **Custom 404** | Dedicated `404.html` page with branded design, nav, footer, skip-link, `<main>` landmark, and shared.js |
 
 ### When Adding New Interactive Elements
 
@@ -589,8 +592,8 @@ WCAG 2.2 AA compliance. All interactive elements must remain keyboard accessible
 | `nav` | `shared.js` (`renderNav`, `renderFooter`) | Nav links + footer nav link text |
 | `footer` | `shared.js` (`renderFooter`) | "Navegar" / "Redes" / "Desarrollado por" |
 | `aria` | `shared.js` (`initNav`, `applyTheme`) | Burger + theme-toggle aria-labels. Cached in a module-level `_ui` variable inside `shared.js`, populated by `renderNav(config)` — if a page never calls `renderNav()`, these fall back to hardcoded Spanish defaults inline in the code. |
-| `categorias_equipo` | `equipment.js` | Filter button labels |
-| `categorias_portfolio` | `portfolio-index.js` | Filter button labels |
+| `categorias_equipo` | `equipment.js` | Filter button labels (camara, audio, iluminacion, otro) |
+| `categorias_portfolio` | `portfolio-index.js` | Filter button labels (Cortometraje, Videoclips, Musical, Eventos) |
 | `tipos_artista` | `artists.js` | Filter button labels ("Equipo UMD" / "Colaboradores externos") |
 | `errores_404` | `team.js`, `portfolio.js` | 404 page titles + back-link text (also reused for the normal, non-404 hero back-link) |
 | `placeholders` | `team.js`, `portfolio.js` | "Bio/synopsis/video pendiente" empty states |

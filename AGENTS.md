@@ -170,6 +170,7 @@ deliberately chosen to not imply a section that isn't always present:
 | `.team-card*` | home, `team/index.html`, `artists/index.html` |
 | `.portfolio-card*`, `.portfolio__grid` | home, `portfolio/index.html`, member profile projects (`team.js`) |
 | `.page-hero` | `team/`, `portfolio/`, `artists/`, `equipment/` index pages |
+| `.skeleton*` | home (hero, showreel, trust, stats, services, grids), team/portfolio profile heroes, all listing page grids |
 
 Before adding a new home-only class to `css/home.css`, grep the class name
 across all `.js`/`.html` files first — this project has a history (Bloque G)
@@ -196,6 +197,9 @@ Subsections: `nav`, `footer`, `aria`, `social`, `home`, `stats`, `form`, `cards`
 - ✅ Strings hardcodeados migrados a `config.json → ui_strings`. Cubre: aria-labels (lightbox, footer, nav, FAB), social platform names, footer text, stat labels, form validation, card labels, home CTAs, showreel text. Todos los `.js` actualizados.
 - ✅ Auditoría design-system de `css/home.css`: 2 variables nuevas (`--black-overlay-trail`, `--black-overlay-faint`) creadas en `style.css` para el gradiente del hero overlay. Soporte light/dark + always-dark pin.
 - ✅ Limpieza general: eliminados `v1/`, assets sin usar, campos muertos en JSON, CSS muerto (`.reveal.d4`, `--ease-out`), bug `color: white` en `.fab-top`.
+- ✅ Skeleton loading: 12 clases CSS + placeholders inline en 8 archivos HTML + fixes JS para limpieza automática.
+- ✅ Dead config cleanup: eliminados `vimeo`, `seo.keywords`, filtro `soporte`, filtros `Cine`/`Publicidad` de config.json.
+- ✅ 404.html reescrito con nav, footer, skip-link, `<main>` landmark y shared.js.
 
 ## Accessibility (a11y)
 
@@ -204,17 +208,18 @@ WCAG 2.2 AA baseline. All interactive elements must remain keyboard accessible.
 ### What's in place
 
 - **Skip link**: `<a href="#contenido" class="skip-link">` on all pages — visually hidden, appears on Tab focus
-- **`<main id="contenido">`**: landmark on all pages (index.html wraps hero through contact; subpage templates already had `<main>`)
+- **`<main id="contenido">`**: landmark on all pages (index.html wraps hero through contact; subpage templates already had `<main>`; 404.html includes it too)
 - **`:focus-visible` styles**: red outline on all interactive elements; box-shadow ring on buttons, filters, theme toggle, FAB
 - **Keyboard navigation**: team cards, portfolio cards, and linked service cards all have `role="link"`, `tabindex="0"`, and Enter/Space handlers
 - **`aria-pressed`**: filter buttons (portfolio + equipment) announce active state
 - **`aria-label`**: footer navs distinguished via `ui_strings.aria.main_navigation`; sections, social links, burger, theme toggle, WhatsApp FAB all labeled from `ui_strings.aria.*`
 - **`aria-hidden="true"`**: decorative SVGs, hero video, hero overlay/redline, trust bar marquee track, service video preview
 - **Form accessibility**: all inputs have `<label for>` association, `autocomplete` attributes, `aria-invalid` on validation errors, visible focus ring via `box-shadow`
-- **`prefers-reduced-motion`**: disables all animations, transitions, scroll-behavior, and the trust bar marquee
+- **`prefers-reduced-motion`**: disables all animations, transitions, scroll-behavior, trust bar marquee, and skeleton pulse animation
 - **`prefers-color-scheme`**: light/dark theme with localStorage persistence; hero/CTA/nav always dark
 - **External links**: `rel="noopener"` on all `target="_blank"` links
 - **Lightbox**: Escape key closes, close button receives focus on open; prev/next arrow buttons, ArrowLeft/ArrowRight keyboard navigation, touch swipe (50px threshold), counter (`2 / 5`)
+- **Skeleton loading**: placeholder elements shown while JSON loads; auto-removed when content renders; respects `prefers-reduced-motion`
 - **Semantic HTML**: `<header>`, `<nav>`, `<main>`, `<footer>`, `<section>` with `aria-label`; `<aside>` for sidebars
 
 ### When adding new interactive elements

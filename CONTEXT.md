@@ -150,9 +150,11 @@ stats.location = config.schema.address_locality               // "Málaga"
 
 ## Pending (Assets Alejandro Needs to Provide)
 
-- [ ] **Team photos** for 7 members missing cover images: javier-botella, loreto-navas, elvira-ojea, sandra-jimenez, marta-guerra, pau-soles, ivan-ambrosio
-- [ ] **Team photo** for javier-abelaira (has extras but missing cover.avif)
-- [ ] **Portfolio assets** for boda-ester-y-juan and musical-charlie (no photos/thumbnails)
+- [ ] **Team photos** for 8 members missing cover images: ivan-ambrosio, javier-botella, javier-abelaira, loreto-navas, elvira-ojea, marta-guerra, pau-soles, sandra-jimenez
+- [ ] **Portfolio assets** for boda-ester-y-juan and musical-charlie (no photos/thumbnails — currently using YouTube thumbnails)
+- [ ] **Hero poster image** (`assets/portfolio/hero-poster.jpg`) — currently blank until video loads
+- [ ] **Hero video MP4 fallback** — only `hero.webm` exists; older Safari browsers have no video
+- [ ] **Artist photo** for maria-hernandez (`assets/artists/maria-hernandez.webp`)
 
 ---
 
@@ -192,6 +194,16 @@ stats.location = config.schema.address_locality               // "Málaga"
 - ✅ WCAG 2.2 AA: skip link, `:focus-visible`, `aria-pressed`, `aria-label`, `prefers-reduced-motion`, keyboard on all cards
 - ✅ `css/home.css` separated from `style.css`
 - ✅ CSS classes renamed for section-agnostic reuse (`.lead-text`, `.card-grid`, `.text-link`)
+- ✅ Skeleton loading: 12 CSS shape classes + inline placeholders in 8 HTML files + auto-cleanup by JS
+- ✅ Dead config cleanup: removed `vimeo`, `seo.keywords`, `soporte` filter, `Cine`/`Publicidad` filters
+- ✅ 404.html rewritten with nav, footer, skip-link, `<main>` landmark, shared.js
+- ✅ Data typo fixes: "fabrica" → "fábrica" in portfolio.json
+- ✅ JS bug fixes: statsGrid/servicesGrid cleared before appending, showreel skeleton classes removed after load
+- ✅ Per-page OG/Twitter meta tags with `og:image:width`/`og:image:height` (1200×630)
+- ✅ `theme-color` meta tags on all pages
+- ✅ Showreel section with YouTube facade pattern
+- ✅ Brand redline-draw animation, service icon container
+- ✅ Custom 404 page with full site structure
 
 ---
 
@@ -214,11 +226,8 @@ stats.location = config.schema.address_locality               // "Málaga"
 
 **Known issues (code fixes needed):**
 
-- `generate-pages.js` does not inject per-page canonical/OG/Twitter meta → all generated pages share identical fallbacks
-- Sitemap missing `/team/`, `/portfolio/`, `/artists/` listing pages
-- OG fallback images in templates are SVG logos (invalid for social cards)
+- OG fallback images in templates are SVG logos (invalid for social cards) — now using `og-cover.png`
 - No `<noscript>` fallback; entire site content depends on JS
-- No custom 404 page
 - No BreadcrumbList schema
 
 **Pending (Alejandro's action, not code):**
@@ -234,14 +243,11 @@ stats.location = config.schema.address_locality               // "Málaga"
 
 In order of priority:
 
-1. **SEO critical fixes** — `generate-pages.js` must inject canonical/OG/Twitter per page; sitemap missing listing pages
-2. **A11y critical fixes** — lightbox dialog semantics + focus trap, `--muted` contrast, form error messages
-3. **Local preview** — Javier verifies with Live Server before uploading
-4. **Upload to Hostinger** — File Manager or FTP
-5. **301 redirects** — If WordPress URLs change
-6. **Google Business Profile** — Alejandro optimizes it
-7. **Speed test** — Google PageSpeed Insights (should score 90+)
-8. **Future React/Vite migration** — When Javier is comfortable with React. The data architecture (JSON) is fully reusable.
+1. **Upload to Hostinger** — File Manager or FTP. Run `node generate-pages.js` first if JSON was edited.
+2. **301 redirects** — If WordPress URLs change
+3. **Google Business Profile** — Alejandro optimizes it
+4. **Speed test** — Google PageSpeed Insights (should score 90+)
+5. **Future React/Vite migration** — When Javier is comfortable with React. The data architecture (JSON) is fully reusable.
 
 ---
 
