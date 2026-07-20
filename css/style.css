@@ -36,6 +36,8 @@
   --black-overlay-mid:    rgba(8, 8, 8, 0.75);
   --black-overlay-heavy:  rgba(8, 8, 8, 0.92);
   --black-overlay-max:    rgba(8, 8, 8, 0.95);
+  --black-overlay-trail:  rgba(8, 8, 8, 0.3);
+  --black-overlay-faint:  rgba(8, 8, 8, 0.1);
 
   /* White semi-transparent */
   --white-faint:        rgba(255, 255, 255, 0.05);
@@ -56,7 +58,6 @@
 
   /* Animaciones */
   --ease-expo:  cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-out:   cubic-bezier(0.0, 0.0, 0.2, 1);
 
   /* Colores de línea decorativa */
   --line: rgba(255, 255, 255, 0.12);
@@ -88,6 +89,8 @@ html[data-theme="light"] {
   --black-overlay-mid:    rgba(250, 249, 247, 0.75);
   --black-overlay-heavy:  rgba(250, 249, 247, 0.92);
   --black-overlay-max:    rgba(250, 249, 247, 0.95);
+  --black-overlay-trail:  rgba(250, 249, 247, 0.3);
+  --black-overlay-faint:  rgba(250, 249, 247, 0.1);
   --white-faint:        rgba(0, 0, 0, 0.05);
   --white-border:       rgba(0, 0, 0, 0.1);
   --white-hover-bg:     rgba(0, 0, 0, 0.08);
@@ -128,6 +131,8 @@ html[data-theme="light"] {
   --black-overlay-mid:    rgba(8, 8, 8, 0.75);
   --black-overlay-heavy:  rgba(8, 8, 8, 0.92);
   --black-overlay-max:    rgba(8, 8, 8, 0.95);
+  --black-overlay-trail:  rgba(8, 8, 8, 0.3);
+  --black-overlay-faint:  rgba(8, 8, 8, 0.1);
   --white-faint:        rgba(255, 255, 255, 0.05);
   --white-border:       rgba(255, 255, 255, 0.2);
   --white-hover-bg:     rgba(255, 255, 255, 0.15);
@@ -333,7 +338,6 @@ a:focus-visible {
 .reveal.d1 { transition-delay: 0.12s; }
 .reveal.d2 { transition-delay: 0.24s; }
 .reveal.d3 { transition-delay: 0.36s; }
-.reveal.d4 { transition-delay: 0.48s; }
 
 /* ---- GRAIN OVERLAY (textura cinematográfica) ---- */
 body::before {
@@ -786,7 +790,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   width: 54px; height: 54px;
   border-radius: 50%;
   background: var(--red);
-  color: white;
+  color: var(--white);
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 24px var(--red-glow);
   opacity: 0;

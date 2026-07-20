@@ -31,7 +31,7 @@ html[data-theme="light"] .trust__inner img:hover {
   inset: 0;
   background:
     linear-gradient(to right, var(--black-overlay-mid) 0%, var(--black-overlay-light) 55%, var(--black-overlay-mid) 100%),
-    linear-gradient(to top, var(--black-overlay-max) 0%, rgba(8,8,8,0.3) 40%, rgba(8,8,8,0.1) 70%);
+    linear-gradient(to top, var(--black-overlay-max) 0%, var(--black-overlay-trail) 40%, var(--black-overlay-faint) 70%);
 }
 
 .hero__redline {
@@ -231,7 +231,7 @@ html[data-theme="light"] .trust__inner img:hover {
 }
 
 /* =====================================================
-   ABOUT / NOSOTROS
+   ABOUT
    ===================================================== */
 .about { background: var(--black); }
 .about__grid {
@@ -331,25 +331,8 @@ html[data-theme="light"] .trust__inner img:hover {
 .service-card--link { cursor: pointer; }
 .service-card--link:hover .service-card__title { color: var(--red-light); }
 
-.svc-preview {
-  position: fixed;
-  pointer-events: none;
-  z-index: 400;
-  width: 300px;
-  aspect-ratio: 16/9;
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  opacity: 0;
-  transform: scale(0.88);
-  transition: opacity 0.2s, transform 0.2s;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-  border: 1px solid var(--red-border-mid);
-}
-.svc-preview.active { opacity: 1; transform: scale(1); }
-.svc-preview video { width: 100%; height: 100%; object-fit: cover; }
-
 /* =====================================================
-   PORTFOLIO (sección de home — el grid/cards son de style.css)
+   PORTFOLIO
    ===================================================== */
 .portfolio { background: var(--black); }
 .portfolio__cta { text-align: center; margin-top: 3rem; }
