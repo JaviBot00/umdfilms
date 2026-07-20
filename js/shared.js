@@ -170,15 +170,15 @@ function initLightbox(selector) {
     lightbox.id = 'umdLightbox';
     lightbox.setAttribute('role', 'dialog');
     lightbox.setAttribute('aria-modal', 'true');
-    lightbox.setAttribute('aria-label', 'Galería de imágenes');
+    lightbox.setAttribute('aria-label', _ui?.aria?.lightbox_dialog);
     lightbox.innerHTML = `
-      <button class="lightbox__close" type="button" aria-label="Cerrar">
+      <button class="lightbox__close" type="button" aria-label="${_ui?.aria?.lightbox_close}">
         <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
-      <button class="lightbox__prev" type="button" aria-label="Imagen anterior">
+      <button class="lightbox__prev" type="button" aria-label="${_ui?.aria?.lightbox_prev}">
         <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
       </button>
-      <button class="lightbox__next" type="button" aria-label="Imagen siguiente">
+      <button class="lightbox__next" type="button" aria-label="${_ui?.aria?.lightbox_next}">
         <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
       </button>
       <img src="" alt="" />
@@ -265,7 +265,7 @@ function initLightbox(selector) {
     img.style.cursor = 'zoom-in';
     img.setAttribute('tabindex', '0');
     img.setAttribute('role', 'button');
-    img.setAttribute('aria-label', 'Ampliar imagen');
+    img.setAttribute('aria-label', _ui?.aria?.lightbox_zoom);
     img.addEventListener('click', () => {
       lightbox._trigger = img;
       lightbox._index = i;
@@ -306,7 +306,7 @@ async function renderNav(config) {
     <button class="nav__burger" id="burger" aria-label="${aria.abrir_menu}" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <nav class="nav__links" id="navLinks" aria-label="Navegación principal">
+    <nav class="nav__links" id="navLinks" aria-label="${aria.main_navigation}">
       <a href="${rootPath('index.html')}#nosotros">${nav_.quienes_somos}</a>
       <a href="${rootPath('index.html')}#servicios">${nav_.servicios}</a>
       <a href="${rootPath('index.html')}#portafolio">${nav_.portafolio}</a>
@@ -338,23 +338,23 @@ async function renderFooter(config) {
     <div class="container footer__inner">
       <div class="footer__brand">
         <img src="${logoSrc}" alt="${cfg.brand.logo_alt}" class="footer__logo" />
-        <p>${cfg.brand.tagline}.<br />Málaga · Alcance nacional.</p>
+        <p>${cfg.brand.tagline}.<br />${ft.location_line}</p>
         <div class="footer__socials">
           ${cfg.social.instagram ? `
-          <a href="${cfg.social.instagram}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="Instagram">
+          <a href="${cfg.social.instagram}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="${_ui?.social?.instagram}">
             <span class="icon icon-instagram" aria-hidden="true"></span>
           </a>` : ''}
           ${cfg.social.youtube ? `
-          <a href="${cfg.social.youtube}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="YouTube">
+          <a href="${cfg.social.youtube}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="${_ui?.social?.youtube}">
             <span class="icon icon-youtube" aria-hidden="true"></span>
           </a>` : ''}
           ${cfg.social.tiktok ? `
-          <a href="${cfg.social.tiktok}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="TikTok">
+          <a href="${cfg.social.tiktok}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="${_ui?.social?.tiktok}">
             <span class="icon icon-tiktok" aria-hidden="true"></span>
           </a>` : ''}
         </div>
       </div>
-      <nav class="footer__nav" aria-label="Site navigation">
+      <nav class="footer__nav" aria-label="${aria.main_navigation}">
         <strong>${ft.navegar || 'Navegar'}</strong>
         <a href="${rootPath('index.html')}#nosotros"><span>${_ui?.nav?.quienes_somos}</span></a>
         <a href="${rootPath('index.html')}#servicios"><span>${_ui?.nav?.servicios}</span></a>
@@ -362,17 +362,17 @@ async function renderFooter(config) {
         <a href="${rootPath('index.html')}#equipo"><span>${_ui?.nav?.equipo}</span></a>
         <a href="${rootPath('index.html')}#contacto"><span>${_ui?.nav?.contacto}</span></a>
       </nav>
-      <nav class="footer__nav" aria-label="Social media">
+      <nav class="footer__nav" aria-label="${_ui?.social?.instagram ? (_ui.social.instagram + ' · ' + (_ui.social.youtube)) : 'Social media'}">
         <strong>${ft.redes || 'Redes'}</strong>
-        ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener"><span>Instagram</span></a>` : ''}
-        ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener"><span>YouTube</span></a>` : ''}
-        ${cfg.social.tiktok    ? `<a href="${cfg.social.tiktok}"    target="_blank" rel="noopener"><span>TikTok</span></a>`  : ''}
-        <a href="https://wa.me/${cfg.contact.whatsapp}" target="_blank" rel="noopener">WhatsApp</a>
+        ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener"><span>${_ui?.social?.instagram}</span></a>` : ''}
+        ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener"><span>${_ui?.social?.youtube}</span></a>` : ''}
+        ${cfg.social.tiktok    ? `<a href="${cfg.social.tiktok}"    target="_blank" rel="noopener"><span>${_ui?.social?.tiktok}</span></a>`  : ''}
+        <a href="https://wa.me/${cfg.contact.whatsapp}" target="_blank" rel="noopener">${_ui?.social?.whatsapp}</a>
       </nav>
     </div>
     <div class="footer__bottom">
-      <p>© ${year} ${cfg.footer.copyright_owner}. Todos los derechos reservados.</p>
-      <p>${ft.desarrollado_por || 'Desarrollado por'} <a href="${cfg.footer.dev_url || '#'}" rel="noopener">${cfg.footer.dev_name}</a></p>
+      <p>© ${year} ${cfg.footer.copyright_owner}. ${ft.copyright_suffix}</p>
+      <p>${ft.desarrollado_por} <a href="${cfg.footer.dev_url || '#'}" rel="noopener">${cfg.footer.dev_name}</a></p>
     </div>
   `;
 }
@@ -401,11 +401,10 @@ function renderFAB() {
 /* ---- Schema JSON-LD LocalBusiness ---- */
 function injectLocalBusinessSchema(config) {
   const s = config.schema;
-  const b = config.brand;
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": b.name,
+    "name": config.brand.name,
     "description": config.seo.description_home,
     "url": config.brand.site_url,
     "image": `${config.brand.site_url}/${config.seo.og_image}`,
@@ -483,7 +482,7 @@ function extractYouTubeId(url) {
 }
 
 function validYtUrl(url) {
-  return url && !url.includes('PLACEHOLDER') && UMD.extractYouTubeId(url);
+  return url && !url.includes('PLACEHOLDER') && extractYouTubeId(url);
 }
 
 /* ---- SEO helpers ---- */
@@ -559,13 +558,13 @@ function buildTeamCard(member, rootPathFn) {
   card.className = 'team-card';
   card.setAttribute('role', 'link');
   card.setAttribute('tabindex', '0');
-  card.setAttribute('aria-label', `Ver perfil de ${member.name}`);
+  card.setAttribute('aria-label', (_ui?.cards?.ver_perfil_aria).replace('{name}', member.name));
   card.innerHTML = `
     <div class="team-card__img-wrap">
       <img class="team-card__img" src="${rootPathFn(member.photo_cover)}"
           onerror="this.onerror=null; this.src='${rootPathFn('assets/team/placeholder-team.svg')}'"
            alt="${member.name} — ${member.role} — UMD Films" loading="lazy" />
-      <span class="team-card__badge">Ver perfil ↗</span>
+      <span class="team-card__badge">${_ui?.cards?.ver_perfil}</span>
     </div>
     <div class="team-card__info">
       <p class="team-card__name">${member.name}</p>
@@ -588,7 +587,7 @@ function buildPortfolioCard(proj, rootPathFn) {
   card.className = 'portfolio-card';
   card.setAttribute('role', 'link');
   card.setAttribute('tabindex', '0');
-  card.setAttribute('aria-label', `Ver proyecto: ${proj.title}`);
+  card.setAttribute('aria-label', (_ui?.cards?.ver_proyecto_aria).replace('{title}', proj.title));
   card.innerHTML = `
   <img src="${thumbSrc}" data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)"
   onerror="UMD.ytThumbAdvance(this)" alt="${proj.title} — UMD Films" loading="lazy" />
@@ -619,15 +618,11 @@ window.UMD = {
   fetchJSON,
   rootPath,
   initReveal,
-  initNav,
   renderNav,
   renderFooter,
   renderFAB,
   injectLocalBusinessSchema,
   animateCounter,
-  initTheme,
-  applyTheme,
-  toggleTheme,
   initLightbox,
   ytThumbUrl,
   ytThumbAdvance,
