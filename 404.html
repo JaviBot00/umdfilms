@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Theme: light / dark -->
+  <script>
+  (function () {
+    var stored = localStorage.getItem('umd-theme');
+    var theme = (stored === 'light' || stored === 'dark')
+      ? stored
+      : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <title>Página no encontrada | UMD Films Málaga</title>
+  <meta name="description" content="La página que buscas no existe o ha sido movida. Vuelve al inicio de UMD Films." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" href="assets/logo/favicon.ico" />
+  <link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  </noscript>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .error-page {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .error-page__code {
+      font-family: var(--ff-display);
+      font-size: clamp(6rem, 15vw, 12rem);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--red);
+      opacity: 0.3;
+    }
+    .error-page__title {
+      font-family: var(--ff-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--white);
+      margin: 1rem 0 1.5rem;
+    }
+    .error-page__text {
+      color: var(--cream-mid);
+      font-size: 1rem;
+      max-width: 400px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+  <!-- Nav: rendered by shared.js > renderNav() -->
+  <header class="nav" id="nav" role="banner"></header>
+
+  <main id="contenido">
+    <div class="error-page">
+      <p class="error-page__code">404</p>
+      <h1 class="error-page__title">Página no encontrada</h1>
+      <p class="error-page__text">Lo sentimos, la página que buscas no existe o ha sido movida a otra ubicación.</p>
+      <a href="index.html" class="btn btn-primary">Volver al inicio</a>
+    </div>
+  </main>
+
+  <!-- Footer: rendered by shared.js > renderFooter() -->
+  <footer class="footer" id="footer" role="contentinfo"></footer>
+
+  <!-- FAB -->
+  <a class="fab-top" aria-label="Volver arriba"></a>
+
+  <script src="js/shared.js"></script>
+</body>
+</html>

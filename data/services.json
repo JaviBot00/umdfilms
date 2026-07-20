@@ -4,56 +4,49 @@
     "icon": "🎬",
     "title": "Producción Audiovisual",
     "description": "La magia del cine aplicada a tu historia. Producción completa con material y equipo profesional propio.",
-    "core": true,
-    "video_preview": ""
+    "core": true
   },
   {
     "id": "produccion-musical",
     "icon": "🎵",
     "title": "Producción Musical",
     "description": "Grabación, mezcla y masterización profesional. La misma calidad que una gran discográfica.",
-    "core": true,
-    "video_preview": ""
+    "core": true
   },
   {
     "id": "vfx-edicion",
     "icon": "✨",
     "title": "VFX y Edición",
     "description": "Del montaje al VFX. Calidad cinematográfica en cada fotograma.",
-    "core": true,
-    "video_preview": ""
+    "core": true
   },
   {
     "id": "fotografia",
     "icon": "📸",
     "title": "Fotografía",
     "description": "Imágenes que cuentan historias. Mirada artística y calidad profesional.",
-    "core": false,
-    "video_preview": ""
+    "core": false
   },
   {
     "id": "diseno-grafico",
     "icon": "🎨",
     "title": "Diseño Gráfico",
     "description": "Identidades visuales únicas que transmiten la esencia de tu marca.",
-    "core": false,
-    "video_preview": ""
+    "core": false
   },
   {
     "id": "web-seo",
     "icon": "💻",
     "title": "Desarrollo Web & SEO",
     "description": "Páginas web profesionales optimizadas para destacar en Google.",
-    "core": false,
-    "video_preview": ""
+    "core": false
   },
   {
     "id": "maquillaje",
     "icon": "💄",
     "title": "Maquillaje y Peluquería",
     "description": "Cuidamos cada detalle de imagen para cine, eventos y sesiones.",
-    "core": false,
-    "video_preview": ""
+    "core": false
   },
   {
     "id": "alquiler-material",
@@ -61,7 +54,6 @@
     "title": "Alquiler de Material ↗",
     "description": "Cámara, sonido, iluminación y soporte profesional. Disponible para producciones externas.",
     "core": false,
-    "video_preview": "",
     "link": "equipment/index.html"
   },
   {
@@ -70,7 +62,6 @@
     "title": "Representación de Artistas ↗",
     "description": "Gestión de marca en redes y representación con estrategia creativa.",
     "core": false,
-    "video_preview": "",
     "link": "artists/index.html"
   }
 ]

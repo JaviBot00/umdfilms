@@ -129,7 +129,7 @@
     "quantity": 1,
     "description": "Placeholder — pendiente de rellenar.",
     "specs": [],
-    "photo": "assets/equipment/placeholder-gear.webp",
+    "photo": "assets/equipment/placeholder-gear.svg",
     "price_day": 0,
     "available": false
   }

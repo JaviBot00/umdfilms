@@ -65,6 +65,65 @@ Run after editing `data/team.json` or `data/portfolio.json`. Generates individua
 
 Static upload to Hostinger via File Manager or FTP. No CI, no build step, no tests. Run `generate-pages.js` before uploading if JSON was edited.
 
+## Testing & Verification
+
+No test framework — run these commands after editing JSON, JS, or CSS:
+
+```bash
+# 1. JS syntax check (all 8 files)
+node -c js/shared.js && node -c js/main.js && node -c js/team.js && node -c js/team-index.js && node -c js/portfolio.js && node -c js/portfolio-index.js && node -c js/equipment.js && node -c js/artists.js
+
+# 2. Page generator (team + portfolio HTML + sitemap)
+node generate-pages.js
+
+# 3. Data contract check (team ↔ portfolio cross-references)
+node -e "
+const team = require('./data/team.json').map(m => m.id);
+const portfolio = require('./data/portfolio.json');
+const broken = [];
+portfolio.forEach(p => {
+  (p.team_ids || []).forEach(id => {
+    if (!team.includes(id)) broken.push(p.id + ' → team_id ' + id + ' not found');
+  });
+});
+const portIds = portfolio.map(p => p.id);
+require('./data/team.json').forEach(m => {
+  (m.projects || []).forEach(id => {
+    if (!portIds.includes(id)) broken.push(m.id + ' → project ' + id + ' not found');
+  });
+});
+if (broken.length) { console.log('BROKEN:', broken.join('\n')); process.exit(1); }
+else { console.log('✓ All cross-references valid'); }
+"
+
+# 4. Asset validation (covers, thumbs, equipment, partners, placeholders)
+node -e "
+const fs = require('fs');
+const issues = [];
+require('./data/team.json').forEach(m => {
+  if (!fs.existsSync('assets/team/' + m.id + '/cover.avif'))
+    issues.push('MISSING: assets/team/' + m.id + '/cover.avif');
+});
+require('./data/portfolio.json').forEach(p => {
+  if (p.thumb && !fs.existsSync(p.thumb))
+    issues.push('MISSING: ' + p.thumb);
+});
+require('./data/equipment.json').forEach(e => {
+  if (e.photo && !fs.existsSync(e.photo))
+    issues.push('MISSING: ' + e.photo);
+});
+['assets/portfolio/placeholder.svg','assets/equipment/placeholder-gear.svg','assets/logo/og-cover.png'].forEach(f => {
+  if (!fs.existsSync(f)) issues.push('MISSING: ' + f);
+});
+if (issues.length) { console.log(issues.join('\n')); process.exit(1); }
+else { console.log('✓ All referenced assets exist'); }
+"
+
+# 5. Generated HTML meta check (verify canonical, OG, twitter per page)
+grep -l 'og:image.*logo-umd-films.svg' team/*.html portfolio/*.html
+# Should return EMPTY — no generated page should still reference the SVG logo as OG image
+```
+
 ## SEO architecture
 
 - **Meta tags** have two layers: static placeholders in HTML templates, overwritten at runtime by JS
@@ -84,7 +143,7 @@ Edit the relevant JS file (e.g., `team.js` for Person). Create a JSON-LD object,
 
 | File | Edit when... |
 |---|---|
-| `data/config.json` | Changing logo, phone, social links, founding year |
+| `data/config.json` | Changing logo, phone, social links, founding year, **or adding UI strings** (`ui_strings` section) |
 | `data/home.json` | Changing home page text (hero, about, CTA, contact) |
 | `data/team.json` | Adding or editing team members |
 | `data/portfolio.json` | Adding or editing projects |
@@ -111,17 +170,36 @@ deliberately chosen to not imply a section that isn't always present:
 | `.team-card*` | home, `team/index.html`, `artists/index.html` |
 | `.portfolio-card*`, `.portfolio__grid` | home, `portfolio/index.html`, member profile projects (`team.js`) |
 | `.page-hero` | `team/`, `portfolio/`, `artists/`, `equipment/` index pages |
+| `.skeleton*` | home (hero, showreel, trust, stats, services, grids), team/portfolio profile heroes, all listing page grids |
 
 Before adding a new home-only class to `css/home.css`, grep the class name
 across all `.js`/`.html` files first — this project has a history (Bloque G)
 of classes leaking into other pages via `cardBuilder()` functions in `shared.js`.
 
-## Known pending work (Bloque G — in progress)
+## UI strings convention
+
+**All user-facing text lives in `data/config.json → ui_strings`.** Never hardcode
+a string in JS or HTML that the user will see. The rule:
+
+1. Add a new key to the appropriate `ui_strings` subsection in `config.json`.
+2. Reference it in JS via `config.ui_strings.section.key` (with `|| 'fallback'` for safety).
+3. HTML templates use static fallbacks for SEO/no-JS; JS overwrites them at runtime.
+
+Subsections: `nav`, `footer`, `aria`, `social`, `home`, `stats`, `form`, `cards`,
+`categorias_equipo`, `categorias_portfolio`, `tipos_artista`, `errores_404`,
+`placeholders`, `equipment_extra`, `ficha_tecnica`, `video`, `ficha_perfil`,
+`foto_counter`.
+
+## Known pending work (Bloque G — completed)
 
 - ✅ `css/home.css` creado. Reglas exclusivas de home (hero, trust marquee, about/stats, services, cta-band, contact) movidas fuera de `style.css`. `index.html` carga `style.css` + `home.css` en ese orden — `home.css` depende de variables/clases de `style.css` (`.btn`, `.reveal`, `.eyebrow`, etc.), no es standalone.
 - ✅ Renombradas 3 clases que ataban su nombre a una sección que no siempre estaba presente: `.about__body`→`.lead-text`, `.team__grid`→`.card-grid`, `.contact__social-link`→`.text-link`. Las tres viven en `style.css` (compartidas). Ver `css/style.css` para comentarios inline de por qué se renombraron.
-- ⏳ Pendiente: auditoría de strings hardcodeados en `.js` (category filter labels, 404 messages, placeholder texts). `config.json` era el destino propuesto (`ui_strings`) — no creado aún. Esto es la segunda mitad del Bloque G, chat aparte.
-- ⏳ Pendiente: correr `design-system` skill (grep de colores hardcodeados) sobre `css/home.css` como fichero nuevo, no cubierto por ninguna pasada previa.
+- ✅ Strings hardcodeados migrados a `config.json → ui_strings`. Cubre: aria-labels (lightbox, footer, nav, FAB), social platform names, footer text, stat labels, form validation, card labels, home CTAs, showreel text. Todos los `.js` actualizados.
+- ✅ Auditoría design-system de `css/home.css`: 2 variables nuevas (`--black-overlay-trail`, `--black-overlay-faint`) creadas en `style.css` para el gradiente del hero overlay. Soporte light/dark + always-dark pin.
+- ✅ Limpieza general: eliminados `v1/`, assets sin usar, campos muertos en JSON, CSS muerto (`.reveal.d4`, `--ease-out`), bug `color: white` en `.fab-top`.
+- ✅ Skeleton loading: 12 clases CSS + placeholders inline en 8 archivos HTML + fixes JS para limpieza automática.
+- ✅ Dead config cleanup: eliminados `vimeo`, `seo.keywords`, filtro `soporte`, filtros `Cine`/`Publicidad` de config.json.
+- ✅ 404.html reescrito con nav, footer, skip-link, `<main>` landmark y shared.js.
 
 ## Accessibility (a11y)
 
@@ -130,17 +208,18 @@ WCAG 2.2 AA baseline. All interactive elements must remain keyboard accessible.
 ### What's in place
 
 - **Skip link**: `<a href="#contenido" class="skip-link">` on all pages — visually hidden, appears on Tab focus
-- **`<main id="contenido">`**: landmark on all pages (index.html wraps hero through contact; subpage templates already had `<main>`)
+- **`<main id="contenido">`**: landmark on all pages (index.html wraps hero through contact; subpage templates already had `<main>`; 404.html includes it too)
 - **`:focus-visible` styles**: red outline on all interactive elements; box-shadow ring on buttons, filters, theme toggle, FAB
 - **Keyboard navigation**: team cards, portfolio cards, and linked service cards all have `role="link"`, `tabindex="0"`, and Enter/Space handlers
 - **`aria-pressed`**: filter buttons (portfolio + equipment) announce active state
-- **`aria-label`**: footer navs distinguished ("Site navigation" / "Social media"); sections, social links, burger, theme toggle, WhatsApp FAB all labeled
+- **`aria-label`**: footer navs distinguished via `ui_strings.aria.main_navigation`; sections, social links, burger, theme toggle, WhatsApp FAB all labeled from `ui_strings.aria.*`
 - **`aria-hidden="true"`**: decorative SVGs, hero video, hero overlay/redline, trust bar marquee track, service video preview
 - **Form accessibility**: all inputs have `<label for>` association, `autocomplete` attributes, `aria-invalid` on validation errors, visible focus ring via `box-shadow`
-- **`prefers-reduced-motion`**: disables all animations, transitions, scroll-behavior, and the trust bar marquee
+- **`prefers-reduced-motion`**: disables all animations, transitions, scroll-behavior, trust bar marquee, and skeleton pulse animation
 - **`prefers-color-scheme`**: light/dark theme with localStorage persistence; hero/CTA/nav always dark
 - **External links**: `rel="noopener"` on all `target="_blank"` links
 - **Lightbox**: Escape key closes, close button receives focus on open; prev/next arrow buttons, ArrowLeft/ArrowRight keyboard navigation, touch swipe (50px threshold), counter (`2 / 5`)
+- **Skeleton loading**: placeholder elements shown while JSON loads; auto-removed when content renders; respects `prefers-reduced-motion`
 - **Semantic HTML**: `<header>`, `<nav>`, `<main>`, `<footer>`, `<section>` with `aria-label`; `<aside>` for sidebars
 
 ### When adding new interactive elements

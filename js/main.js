@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderHomeContent(config, home, services);
   UMD.injectLocalBusinessSchema(config);
 
+  const ui = config.ui_strings || {};
+
   /* ---- SEO (overwrite HTML fallback) ---- */
   document.title = config.seo.title_home;
   document.querySelector('meta[name="description"]')
@@ -30,6 +32,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   UMD.setOgMeta('og:title',       config.seo.title_home);
   UMD.setOgMeta('og:description', config.seo.description_home);
   UMD.setOgMeta('og:image',       `${config.brand.site_url}/${config.seo.og_image}`);
+  UMD.setOgMeta('og:image:width',  '1200');
+  UMD.setOgMeta('og:image:height', '630');
   UMD.setOgMeta('og:url',         `${config.brand.site_url}/`);
   UMD.setOgMeta('og:type',        'website');
   UMD.setOgMeta('og:site_name',   config.seo.site_name);
@@ -37,11 +41,39 @@ document.addEventListener('DOMContentLoaded', async () => {
   UMD.setTwitterMeta('twitter:title',       config.seo.title_home);
   UMD.setTwitterMeta('twitter:description', config.seo.description_home);
   UMD.setTwitterMeta('twitter:image',       `${config.brand.site_url}/${config.seo.og_image}`);
+  UMD.setTwitterMeta('twitter:image:width',  '1200');
+  UMD.setTwitterMeta('twitter:image:height', '630');
 
   /* ---- Hero: initial reveal ---- */
   setTimeout(() => {
     document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
   }, 120);
+
+  /* ---- SHOWREEL ---- */
+  const showreelPlayer = document.getElementById('showreelPlayer');
+  if (showreelPlayer && config.brand.showreel_youtube) {
+    const showreelId = UMD.extractYouTubeId(config.brand.showreel_youtube);
+    if (showreelId) {
+      const thumbUrl = UMD.ytThumbUrl(showreelId);
+      showreelPlayer.innerHTML = `
+        <button class="showreel__facade" aria-label="${ui.aria?.play_showreel}">
+          <img src="${thumbUrl}" data-yt-id="${showreelId}" onload="UMD.ytThumbCheck(this)"
+              onerror="UMD.ytThumbAdvance(this)" alt="${ui.home?.showreel_title}" />
+          <span class="showreel__facade__play" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24"><path d="m5 3 14 9-14 9z"/></svg>
+          </span>
+        </button>`;
+      showreelPlayer.classList.remove('skeleton', 'skeleton--16x9');
+      showreelPlayer.querySelector('.showreel__facade').addEventListener('click', function () {
+        this.outerHTML = `<iframe src="https://www.youtube.com/embed/${showreelId}?autoplay=1&rel=0"
+          title="${ui.home?.showreel_title}"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowfullscreen></iframe>`;
+      }, { once: true });
+    }
+  } else if (showreelPlayer) {
+    showreelPlayer.closest('.showreel')?.style.setProperty('display', 'none');
+  }
 
   function renderHomeContent(config, home, services) {
     const setText = (id, text) => { const el = document.getElementById(id); if (el) el.textContent = text; };
@@ -82,8 +114,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     /* Portfolio CTA -> YouTube (dato de config, no de home.json) */
     setHTML('portfolioCta', `
       <div class="portfolio__actions">
-        <a href="${UMD.rootPath('portfolio/index.html')}" class="btn btn-outline">Todos los proyectos ↗</a>
-        <a href="${config.social.youtube}" target="_blank" rel="noopener" class="btn btn-primary">Canal de YouTube ↗</a>
+        <a href="${UMD.rootPath('portfolio/index.html')}" class="btn btn-outline">${ui.home?.all_projects_cta}</a>
+        <a href="${config.social.youtube}" target="_blank" rel="noopener" class="btn btn-primary">${ui.home?.youtube_cta}</a>
       </div>
     `);
 
@@ -99,8 +131,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         <span class="icon icon-whatsapp" aria-hidden="true"></span>
         ${home.contact.wa_label}
       </a>
-      ${config.social.instagram ? `<a href="${config.social.instagram}" class="text-link" target="_blank" rel="noopener">Instagram</a>` : ''}
-      ${config.social.youtube ? `<a href="${config.social.youtube}" class="text-link" target="_blank" rel="noopener">YouTube</a>` : ''}
+      ${config.social.instagram ? `<a href="${config.social.instagram}" class="text-link" target="_blank" rel="noopener">${ui.social?.instagram}</a>` : ''}
+      ${config.social.youtube ? `<a href="${config.social.youtube}" class="text-link" target="_blank" rel="noopener">${ui.social?.youtube}</a>` : ''}
     `);
 
     /* Formulario: labels, placeholders, select dinámico */
@@ -129,7 +161,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (trustInner) {
     // Render logos from JSON
     trustInner.innerHTML = partners.map(p =>
-      `<img src="${UMD.rootPath(p.logo)}" alt="${p.name}" loading="lazy" />`
+      `<img src="${UMD.rootPath(p.logo)}" alt="${p.name}" />`
     ).join('');
 
     // Duplicate for marquee (same logic as before)
@@ -145,32 +177,34 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- STATS — calculated from data ---- */
   const currentYear = new Date().getFullYear();
+  const validPortfolio = portfolio.filter(p => p && p.id);
   const statsData = [
     {
       id:     'stat-proyectos',
-      value:  portfolio.length,
-      label:  'Trabajos realizados'
+      value:  validPortfolio.length,
+      label:  ui.stats?.trabajos
     },
     {
       id:     'stat-equipo',
       value:  team.length,
-      label:  'Profesionales en el equipo'
+      label:  ui.stats?.profesionales
     },
     {
       id:     'stat-anos',
       value:  currentYear - config.brand.founded_year,
-      label:  'Años de trayectoria'
+      label:  ui.stats?.anos
     },
     {
       id:     'stat-sede',
       value:  null,   // non-numeric
       text:   config.schema.address_locality,
-      label:  `Alcance ${config.schema.address_country === 'ES' ? 'nacional' : 'internacional'}`
+      label:  config.schema.address_country === 'ES' ? (ui.stats?.alcance_nacional) : (ui.stats?.alcance_internacional)
     }
   ];
 
   const statsContainer = document.getElementById('statsGrid');
   if (statsContainer) {
+    statsContainer.innerHTML = '';
     statsData.forEach(s => {
       const div = document.createElement('div');
       div.className = 'stat';
@@ -203,11 +237,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- SERVICES ---- */
   const servicesGrid   = document.getElementById('servicesGrid');
-  const svcPreview     = document.getElementById('svcPreview');
-  const svcPreviewVid  = document.getElementById('svcPreviewVid');
-  const isDesktop      = window.matchMedia('(min-width: 860px)').matches;
 
   if (servicesGrid) {
+    servicesGrid.innerHTML = '';
     services.forEach(svc => {
       const card = document.createElement('article');
       card.className = `service-card reveal${svc.link ? ' service-card--link' : ''}`;
@@ -217,13 +249,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="service-card__icon">${svc.icon}</div>
         <h3 class="service-card__title">${svc.title}</h3>
         <p class="service-card__desc">${svc.description}</p>
-        ${svc.core ? '<span class="service-card__tag">Core service</span>' : ''}
+        ${svc.core ? `<span class="service-card__tag">${ui.home?.core_service_tag}</span>` : ''}
       `;
 
       if (svc.link) {
         card.setAttribute('role', 'link');
         card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', `Go to: ${svc.title}`);
+        card.setAttribute('aria-label', `Ir a: ${svc.title}`);
         const goToService = () => { window.location.href = UMD.rootPath(svc.link); };
         card.addEventListener('click', goToService);
         card.addEventListener('keydown', e => {
@@ -236,45 +268,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       servicesGrid.appendChild(card);
     });
-
-    /* ---- Video preview hover (desktop only) ---- */
-    if (isDesktop && svcPreview && svcPreviewVid) {
-      let previewTimer;
-
-      servicesGrid.querySelectorAll('.service-card[data-video]').forEach(card => {
-        card.addEventListener('mouseenter', (e) => {
-          clearTimeout(previewTimer);
-          const src = card.dataset.video;
-          if (svcPreviewVid.src !== location.origin + '/' + src) {
-            svcPreviewVid.src = src;
-            svcPreviewVid.load();
-          }
-          svcPreviewVid.play().catch(() => {});
-          svcPreview.classList.add('active');
-          positionPreview(e);
-        });
-        card.addEventListener('mousemove', positionPreview);
-        card.addEventListener('mouseleave', () => {
-          previewTimer = setTimeout(() => {
-            svcPreview.classList.remove('active');
-            svcPreviewVid.pause();
-          }, 120);
-        });
-      });
-
-      function positionPreview(e) {
-        const x = Math.min(e.clientX + 24, window.innerWidth - 320);
-        const y = Math.max(20, Math.min(e.clientY - 90, window.innerHeight - 185));
-        svcPreview.style.left = x + 'px';
-        svcPreview.style.top  = y + 'px';
-      }
-    }
   }
 
   /* ---- PORTFOLIO ---- */
   const portfolioGrid    = document.getElementById('portfolioGrid');
   // Portfolio (home) — solo featured, sin filtros de categoría en home
-  const featuredPortfolio = portfolio.filter(p => p.featured);
+  const featuredPortfolio = validPortfolio.filter(p => p.featured);
   UMD.renderFilterableGrid({
     items: featuredPortfolio,
     filterEl: null,
@@ -292,17 +291,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     gridEl: teamGrid,
     cardBuilder: (m) => UMD.buildTeamCard(m, UMD.rootPath)
   });
-  document.getElementById('teamGrid').insertAdjacentHTML('afterend',
+  teamGrid.insertAdjacentHTML('afterend',
   `<div class="team__actions">
-     <a href="${UMD.rootPath('team/index.html')}" class="btn btn-outline">Equipo completo ↗</a>
+     <a href="${UMD.rootPath('team/index.html')}" class="btn btn-outline">${ui.home?.team_cta}</a>
    </div>`);
 
   /* ---- CONTACT FORM ---- */
   const form = document.getElementById('contactForm');
   if (form) {
     const wa  = config.contact.whatsapp;
+    const formStatus = document.getElementById('formStatus');
+
+    const clearErrors = () => {
+      form.querySelectorAll('.form-group').forEach(g => g.classList.remove('has-error'));
+      form.querySelectorAll('.form-error').forEach(e => { e.textContent = ''; });
+      if (formStatus) formStatus.textContent = '';
+    };
+
+    const showError = (input, errorEl, msg) => {
+      input.setAttribute('aria-invalid', 'true');
+      input.closest('.form-group').classList.add('has-error');
+      errorEl.textContent = msg;
+    };
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      clearErrors();
+
       const name    = form.querySelector('#name').value.trim();
       const email   = form.querySelector('#email').value.trim();
       const service = form.querySelector('#service').value;
@@ -310,21 +325,29 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const nameInput  = form.querySelector('#name');
       const emailInput = form.querySelector('#email');
+      const nameError  = form.querySelector('#name-error');
+      const emailError = form.querySelector('#email-error');
       let hasError = false;
+      let errorMessages = [];
 
-      [nameInput, emailInput].forEach(input => {
-        if (!input.value.trim()) {
-          input.setAttribute('aria-invalid', 'true');
-          input.style.borderColor = 'var(--red)';
-          hasError = true;
-        } else {
-          input.removeAttribute('aria-invalid');
-          input.style.borderColor = '';
-        }
-      });
+      if (!name) {
+        showError(nameInput, nameError, ui.form?.error_nombre);
+        errorMessages.push('nombre');
+        hasError = true;
+      }
+      if (!email) {
+        showError(emailInput, emailError, ui.form?.error_email);
+        errorMessages.push('email');
+        hasError = true;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError(emailInput, emailError, ui.form?.error_email_format);
+        errorMessages.push('email');
+        hasError = true;
+      }
 
       if (hasError) {
-        nameInput.focus();
+        if (formStatus) formStatus.textContent = (ui.form?.error_summary).replace('{fields}', errorMessages.join(' y '));
+        form.querySelector('[aria-invalid="true"]').focus();
         return;
       }
 

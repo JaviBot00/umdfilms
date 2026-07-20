@@ -4,27 +4,23 @@
   "brand": {
     "name": "UMD Films",
     "tagline": "Convertimos tu historia en cine",
-    "tagline_sub": "Cine, publicidad, videoclips y producción musical con alma malagueña y visión internacional.",
     "founded_year": 2019,
-    "sede": "Málaga",
-    "alcance": "Nacional",
     "logo": "assets/logo/logo-umd-films.svg",
     "logo_alt": "UMD Films — Productora Audiovisual Málaga",
-    "favicon": "assets/logo/favicon.ico",
-    "site_url": "https://umdfilms.com"
+    "site_url": "https://umdfilms.com",
+    "showreel_youtube": ""
   },
 
   "contact": {
     "whatsapp": "34675185198",
     "whatsapp_msg": "Hola, me interesa contratar vuestros servicios.",
-    "email": "contancto@umdfilms.com"
+    "email": "contacto@umdfilms.com"
   },
 
   "social": {
     "instagram": "https://www.instagram.com/umdfilms/",
     "youtube": "https://www.youtube.com/@UMDFilmsoficial",
-    "tiktok": "https://www.tiktok.com/@umdfilms",
-    "vimeo": ""
+    "tiktok": "https://www.tiktok.com/@umdfilms"
   },
 
   "seo": {
@@ -32,7 +28,6 @@
     "site_suffix": "UMD Films Málaga",
     "title_home": "UMD Films | Productora Audiovisual en Málaga",
     "description_home": "UMD Films: productora audiovisual en Málaga. Cine, publicidad, videoclips, producción musical y mucho más. Con alma malagueña y alcance nacional.",
-    "keywords": "productora audiovisual Málaga, videoclips Málaga, producción audiovisual Andalucía, cine Málaga, publicidad audiovisual",
     "og_image": "assets/logo/og-cover.png",
 
     "title_team_index":       "Equipo | UMD Films Málaga",
@@ -47,10 +42,11 @@
   },
 
   "schema": {
-    "type": "LocalBusiness",
     "address_locality": "Málaga",
     "address_region": "Andalucía",
     "address_country": "ES",
+    "street_address": "",
+    "postal_code": "",
     "geo_lat": 36.7213,
     "geo_lng": -4.4213,
     "price_range": "€€"
@@ -63,6 +59,7 @@
   },
 
   "ui_strings": {
+    "_comment": "ALL user-facing strings live here. Never hardcode text in JS/HTML — add a key here instead and reference it via config.ui_strings.",
     "nav": {
       "quienes_somos": "Quiénes somos",
       "servicios": "Servicios",
@@ -73,29 +70,38 @@
     "footer": {
       "navegar": "Navegar",
       "redes": "Redes",
-      "desarrollado_por": "Desarrollado por"
+      "desarrollado_por": "Desarrollado por",
+      "copyright_suffix": "Todos los derechos reservados.",
+      "location_line": "Málaga · Alcance nacional."
     },
     "aria": {
       "abrir_menu": "Abrir menú",
       "cerrar_menu": "Cerrar menú",
       "modo_oscuro": "Cambiar a modo oscuro",
-      "modo_claro": "Cambiar a modo claro"
+      "modo_claro": "Cambiar a modo claro",
+      "skip_to_content": "Saltar al contenido",
+      "fab_top": "Volver arriba",
+      "lightbox_dialog": "Galería de imágenes",
+      "lightbox_close": "Cerrar",
+      "lightbox_prev": "Imagen anterior",
+      "lightbox_next": "Imagen siguiente",
+      "lightbox_zoom": "Ampliar imagen",
+      "main_navigation": "Navegación principal",
+      "play_showreel": "Reproducir showreel",
+      "video_tabs": "Vídeo del proyecto"
     },
     "categorias_equipo": {
       "all": "Todo",
       "camara": "Cámara",
       "audio": "Audio",
       "iluminacion": "Iluminación",
-      "soporte": "Soporte",
       "otro": "Otro"
     },
     "categorias_portfolio": {
       "Cortometraje": "Cortometraje",
       "Videoclip": "Videoclips",
-      "Cine": "Cine",
       "Musical": "Musical",
-      "Eventos": "Eventos",
-      "Publicidad": "Publicidad"
+      "Eventos": "Eventos"
     },
     "tipos_artista": {
       "team": "Equipo UMD",
@@ -131,7 +137,8 @@
     "video": {
       "trailer_tab": "Tráiler",
       "completo_tab": "Corto completo",
-      "ver_youtube": "Ver en YouTube ↗"
+      "ver_youtube": "Ver en YouTube ↗",
+      "play_aria": "Reproducir:"
     },
     "ficha_perfil": {
       "header": "Ficha",
@@ -142,6 +149,39 @@
       "sede": "Sede",
       "empresa_valor": "UMD Films",
       "sede_valor": "Málaga"
-    }
+    },
+    "social": {
+      "instagram": "Instagram",
+      "youtube": "YouTube",
+      "tiktok": "TikTok",
+      "whatsapp": "WhatsApp"
+    },
+    "home": {
+      "showreel_eyebrow": "Showreel",
+      "showreel_title": "Nuestro trabajo en acción",
+      "all_projects_cta": "Todos los proyectos ↗",
+      "youtube_cta": "Canal de YouTube ↗",
+      "team_cta": "Equipo completo ↗",
+      "core_service_tag": "Servicio principal"
+    },
+    "stats": {
+      "trabajos": "Trabajos realizados",
+      "profesionales": "Profesionales en el equipo",
+      "anos": "Años de trayectoria",
+      "alcance_nacional": "Alcance nacional",
+      "alcance_internacional": "Alcance internacional"
+    },
+    "form": {
+      "error_nombre": "Por favor, introduce tu nombre.",
+      "error_email": "Por favor, introduce tu email.",
+      "error_email_format": "El formato del email no es válido.",
+      "error_summary": "Error: revisa los campos {fields}."
+    },
+    "cards": {
+      "ver_perfil": "Ver perfil ↗",
+      "ver_perfil_aria": "Ver perfil de {name}",
+      "ver_proyecto_aria": "Ver proyecto: {title}"
+    },
+    "foto_counter": "Foto {n}"
   }
 }
