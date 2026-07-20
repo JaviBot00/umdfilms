@@ -327,6 +327,7 @@ async function renderNav(config) {
 /* ---- Shared footer HTML ---- */
 async function renderFooter(config) {
   const cfg = config || await fetchJSON(rootPath('data/config.json'));
+  const aria = cfg.ui_strings?.aria || {};
   const ft = cfg.ui_strings?.footer || {};
   const footer = document.getElementById('footer');
   if (!footer) return;
@@ -355,7 +356,7 @@ async function renderFooter(config) {
         </div>
       </div>
       <nav class="footer__nav" aria-label="${aria.main_navigation}">
-        <strong>${ft.navegar || 'Navegar'}</strong>
+        <strong>${ft.navegar}</strong>
         <a href="${rootPath('index.html')}#nosotros"><span>${_ui?.nav?.quienes_somos}</span></a>
         <a href="${rootPath('index.html')}#servicios"><span>${_ui?.nav?.servicios}</span></a>
         <a href="${rootPath('index.html')}#portafolio"><span>${_ui?.nav?.portafolio}</span></a>
@@ -363,7 +364,7 @@ async function renderFooter(config) {
         <a href="${rootPath('index.html')}#contacto"><span>${_ui?.nav?.contacto}</span></a>
       </nav>
       <nav class="footer__nav" aria-label="${_ui?.social?.instagram ? (_ui.social.instagram + ' · ' + (_ui.social.youtube)) : 'Social media'}">
-        <strong>${ft.redes || 'Redes'}</strong>
+        <strong>${ft.redes}</strong>
         ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener"><span>${_ui?.social?.instagram}</span></a>` : ''}
         ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener"><span>${_ui?.social?.youtube}</span></a>` : ''}
         ${cfg.social.tiktok    ? `<a href="${cfg.social.tiktok}"    target="_blank" rel="noopener"><span>${_ui?.social?.tiktok}</span></a>`  : ''}
