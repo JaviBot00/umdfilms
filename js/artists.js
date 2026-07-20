@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   await UMD.renderFooter(config);
   UMD.renderFAB();
 
+  const ui = config.ui_strings || {};
+
   /* ---- SEO ---- */
   document.title = config.seo.title_artists;
   document.querySelector('meta[name="description"]')
@@ -56,37 +58,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     gridEl: document.getElementById('artistsGrid'),
     categoryField: 'type',
     labels: TYPE_LABELS,
-    cardBuilder: (artist) => buildArtistCard(artist, UMD.rootPath)
+    cardBuilder: (artist) => buildArtistCard(artist, UMD.rootPath, ui)
   });
 
   UMD.initReveal();
 });
 
 /* ---- Card: solo los de type "team" son clicables (llevan a su perfil) ---- */
-function buildArtistCard(artist, rootPathFn) {
+function buildArtistCard(artist, rootPathFn, ui) {
   const card = document.createElement('div');
   card.className = 'team-card reveal';
   const clickable = artist.type === 'team';
+  const socialStrings = ui?.social || {};
+  const cardStrings = ui?.cards || {};
 
   if (clickable) {
     card.setAttribute('role', 'link');
     card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', `Ver perfil de ${artist.name}`);
+    card.setAttribute('aria-label', (cardStrings.ver_perfil_aria).replace('{name}', artist.name));
   }
 
   const photoSrc = artist.photo && artist.photo.startsWith('http') ? artist.photo : rootPathFn(artist.photo);
 
   card.innerHTML = `
     <div class="team-card__img-wrap">
-      <img class="team-card__img" src="${photoSrc}" alt="${artist.name} — UMD Films" loading="lazy" />
-      ${clickable ? '<span class="team-card__badge">Ver perfil ↗</span>' : ''}
+      <img class="team-card__img" src="${photoSrc}"
+      onerror="this.onerror=null; this.src='${rootPathFn('assets/artists/placeholder-artist.svg')}';"
+      alt="${artist.name} — UMD Films" loading="lazy" />
+      ${clickable ? `<span class="team-card__badge">${cardStrings.ver_perfil}</span>` : ''}
     </div>
     <div class="team-card__info">
       <p class="team-card__name">${artist.name}</p>
       <p class="team-card__role">${artist.role}</p>
       ${!clickable && artist.social?.instagram ? `
         <a href="${artist.social.instagram}" class="text-link" target="_blank" rel="noopener"
-           onclick="event.stopPropagation()">Instagram ↗</a>` : ''}
+           onclick="event.stopPropagation()">${socialStrings.instagram} ↗</a>` : ''}
     </div>
   `;
 

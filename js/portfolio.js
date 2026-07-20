@@ -24,10 +24,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const videoStrings = ui.video || {};
 
   const project = portfolio.find(p => p.id === projectId);
-  const trailerId = UMD.validYtUrl(project.trailer_youtube) ? UMD.extractYouTubeId(project.trailer_youtube) : null;
-  const fullId    = UMD.validYtUrl(project.full_video_youtube) ? UMD.extractYouTubeId(project.full_video_youtube) : null;
-  const heroId = trailerId || fullId;
-  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (project.thumb || 'assets/portfolio/placeholder.webp');
 
   /* ---- Nav + Footer + FAB ---- */
   await UMD.renderNav(config);
@@ -35,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   UMD.renderFAB();
 
   /* ---- Project not found ---- */
-  if (!project) {
+  if (!project || !project.id) {
     document.title = `${err404.proyecto_titulo} — ${config.seo.site_suffix}`;
     document.querySelector('main').innerHTML = `
       <div class="container" style="padding-block:8rem;text-align:center">
@@ -46,15 +42,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
+  const trailerId = UMD.validYtUrl(project.trailer_youtube) ? UMD.extractYouTubeId(project.trailer_youtube) : null;
+  const fullId    = UMD.validYtUrl(project.full_video_youtube) ? UMD.extractYouTubeId(project.full_video_youtube) : null;
+  const heroId = trailerId || fullId;
+  const thumbRaw = heroId ? UMD.ytThumbUrl(heroId) : (project.thumb || 'assets/portfolio/placeholder.svg');
+  const thumbSrc = thumbRaw.startsWith('http') ? thumbRaw : `${config.brand.site_url}/${thumbRaw}`;
+
   /* ---- SEO + Schema VideoObject ---- */
   document.title = `${project.title} | ${config.seo.site_suffix}`;
   document.querySelector('meta[name="description"]')
-    ?.setAttribute('content', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
+    ?.setAttribute('content', project.synopsis || `${project.title} — ${project.category} producido por ${config.brand.name} en ${project.year}.`);
 
   UMD.setCanonical(`${config.brand.site_url}/portfolio/${project.id}.html`);
 
   UMD.setOgMeta('og:title',       document.title);
-  UMD.setOgMeta('og:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
+  UMD.setOgMeta('og:description', project.synopsis || `${project.title} — ${project.category} producido por ${config.brand.name} en ${project.year}.`);
   UMD.setOgMeta('og:image',       `${thumbSrc}`);
   UMD.setOgMeta('og:type',        'video.other');
   UMD.setOgMeta('og:url',         `${config.brand.site_url}/portfolio/${project.id}.html`);
@@ -62,7 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   UMD.setTwitterMeta('twitter:card',        'summary_large_image');
   UMD.setTwitterMeta('twitter:title',       document.title);
-  UMD.setTwitterMeta('twitter:description', project.synopsis || `${project.title} — ${project.category} producido por UMD Films en ${project.year}.`);
+  UMD.setTwitterMeta('twitter:description', project.synopsis || `${project.title} — ${project.category} producido por ${config.brand.name} en ${project.year}.`);
   UMD.setTwitterMeta('twitter:image',       `${thumbSrc}`);
 
   // Schema VideoObject for projects with video
@@ -71,13 +73,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       "@context": "https://schema.org",
       "@type": "VideoObject",
       "name": project.title,
-      "description": project.synopsis || `${project.title} por UMD Films`,
+      "description": project.synopsis || `${project.title} por ${config.brand.name}`,
       "thumbnailUrl": thumbSrc,
-      "uploadDate": `${project.year}-01-01`,
+      "duration": project.duration_min ? `PT${project.duration_min}M` : undefined,
       "director": { "@type": "Person", "name": project.director },
-      "productionCompany": { "@type": "Organization", "name": "UMD Films" },
+      "productionCompany": { "@type": "Organization", "name": config.brand.name, "url": config.brand.site_url },
       "url": project.trailer_youtube
     };
+    if (trailerId) {
+      schema.embedUrl = `https://www.youtube.com/embed/${trailerId}`;
+    }
+    if (!schema.duration) delete schema.duration;
     const tag = document.createElement('script');
     tag.type = 'application/ld+json';
     tag.textContent = JSON.stringify(schema);
@@ -93,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           onerror="UMD.ytThumbAdvance(this)"
           alt="${project.title}">
       </div>
-      <div class="film-hero__overlay"></div>
+      <div class="film-hero__overlay" aria-hidden="true"></div>
       <div class="film-hero__content">
         <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#portafolio')}" class="film-hero__back reveal">
           <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
@@ -123,7 +129,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else if (trailerId && fullId) {
       // Ambos existen -> tabs
       trailerEl.innerHTML = `
-        <div class="video-tabs" role="tablist" aria-label="Vídeo del proyecto">
+        <div class="video-tabs" role="tablist" aria-label="${ui.aria?.video_tabs}">
           <button role="tab" id="tab-trailer" aria-selected="true" aria-controls="videoPanel">${videoStrings.trailer_tab}</button>
           <button role="tab" id="tab-full" aria-selected="false" tabindex="-1" aria-controls="videoPanel">${videoStrings.completo_tab}</button>
         </div>
@@ -145,6 +151,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
       tabTrailer.addEventListener('click', () => activateTab(tabTrailer, tabFull, trailerId, project.title + ' — ' + (videoStrings.trailer_tab)));
       tabFull.addEventListener('click',    () => activateTab(tabFull, tabTrailer, fullId, project.title + ' — ' + (videoStrings.completo_tab)));
+
+      // Arrow key navigation between tabs
+      trailerEl.querySelector('.video-tabs').addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          const isTrailer = e.key === 'ArrowLeft' ? tabTrailer : tabFull;
+          const isOther   = e.key === 'ArrowLeft' ? tabFull : tabTrailer;
+          const ytId      = e.key === 'ArrowLeft' ? trailerId : fullId;
+          const label     = e.key === 'ArrowLeft'
+            ? project.title + ' — ' + (videoStrings.trailer_tab)
+            : project.title + ' — ' + (videoStrings.completo_tab);
+          activateTab(isTrailer, isOther, ytId, label);
+          isTrailer.focus();
+        }
+        if (e.key === 'Home') { e.preventDefault(); activateTab(tabTrailer, tabFull, trailerId, project.title + ' — ' + (videoStrings.trailer_tab)); tabTrailer.focus(); }
+        if (e.key === 'End')  { e.preventDefault(); activateTab(tabFull, tabTrailer, fullId, project.title + ' — ' + (videoStrings.completo_tab)); tabFull.focus(); }
+      });
     } else {
       // Solo uno de los dos -> sin tabs, directo
       trailerEl.innerHTML = `<div class="video-panel" id="videoPanel"></div>`;
@@ -154,7 +177,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function renderVideoTab(container, ytId, title) {
     container.innerHTML = `
-      <button class="video-facade" aria-label="Reproducir: ${title}">
+      <button class="video-facade" aria-label="${ui.video?.play_aria} ${title}">
         <img src="${UMD.ytThumbUrl(ytId)}" data-yt-id="${ytId}" onload="UMD.ytThumbCheck(this)"
             onerror="UMD.ytThumbAdvance(this)" alt="${title}">
         <span class="video-facade__play" aria-hidden="true">
@@ -168,8 +191,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       this.outerHTML = `
         <iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0"
                 title="${title}"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowfullscreen loading="lazy"></iframe>`;
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"></iframe>`;
     }, { once: true });
   }
 

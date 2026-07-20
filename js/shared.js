@@ -54,6 +54,26 @@ function initNav() {
       ? (_ui?.aria?.cerrar_menu)
       : (_ui?.aria?.abrir_menu));
     document.body.style.overflow = open ? 'hidden' : '';
+
+    if (open) {
+      const firstLink = links.querySelector('a');
+      if (firstLink) firstLink.focus();
+      links._trapHandler = (e) => {
+        if (e.key !== 'Tab') return;
+        const focusable = links.querySelectorAll('a, button');
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      };
+      document.addEventListener('keydown', links._trapHandler);
+    } else if (links._trapHandler) {
+      document.removeEventListener('keydown', links._trapHandler);
+      links._trapHandler = null;
+    }
   });
 
   links.querySelectorAll('a').forEach(a => {
@@ -122,9 +142,15 @@ function initScrollSpy() {
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        links.forEach(l => l.classList.remove('active'));
+        links.forEach(l => {
+          l.classList.remove('active');
+          l.removeAttribute('aria-current');
+        });
         const link = map.get(entry.target.id);
-        if (link) link.classList.add('active');
+        if (link) {
+          link.classList.add('active');
+          link.setAttribute('aria-current', 'section');
+        }
       }
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
@@ -142,14 +168,17 @@ function initLightbox(selector) {
     lightbox = document.createElement('div');
     lightbox.className = 'lightbox';
     lightbox.id = 'umdLightbox';
+    lightbox.setAttribute('role', 'dialog');
+    lightbox.setAttribute('aria-modal', 'true');
+    lightbox.setAttribute('aria-label', _ui?.aria?.lightbox_dialog);
     lightbox.innerHTML = `
-      <button class="lightbox__close" type="button" aria-label="Close">
+      <button class="lightbox__close" type="button" aria-label="${_ui?.aria?.lightbox_close}">
         <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
-      <button class="lightbox__prev" type="button" aria-label="Previous image">
+      <button class="lightbox__prev" type="button" aria-label="${_ui?.aria?.lightbox_prev}">
         <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
       </button>
-      <button class="lightbox__next" type="button" aria-label="Next image">
+      <button class="lightbox__next" type="button" aria-label="${_ui?.aria?.lightbox_next}">
         <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
       </button>
       <img src="" alt="" />
@@ -159,6 +188,7 @@ function initLightbox(selector) {
 
     lightbox._images = [];
     lightbox._index = 0;
+    lightbox._trigger = null;
 
     lightbox._update = () => {
       const { _images: imgs, _index: i } = lightbox;
@@ -174,9 +204,16 @@ function initLightbox(selector) {
       lightbox._update();
     };
 
+    const focusableSelector = 'button:not([disabled]), img[tabindex]';
+    const getFocusable = () => lightbox.querySelectorAll(focusableSelector);
+
     const closeLightbox = () => {
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
+      if (lightbox._trigger && lightbox._trigger.isConnected) {
+        lightbox._trigger.focus();
+      }
+      lightbox._trigger = null;
     };
 
     lightbox.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
@@ -197,6 +234,17 @@ function initLightbox(selector) {
       if (e.key === 'Escape') { closeLightbox(); return; }
       if (e.key === 'ArrowLeft')  lightbox._navigate(lightbox._index - 1);
       if (e.key === 'ArrowRight') lightbox._navigate(lightbox._index + 1);
+      if (e.key === 'Tab') {
+        const focusable = getFocusable();
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      }
     });
 
     let touchX = 0;
@@ -215,12 +263,27 @@ function initLightbox(selector) {
   lightbox._images = arr.map(img => ({ src: img.src, alt: img.alt }));
   arr.forEach((img, i) => {
     img.style.cursor = 'zoom-in';
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', _ui?.aria?.lightbox_zoom);
     img.addEventListener('click', () => {
+      lightbox._trigger = img;
       lightbox._index = i;
       lightbox._update();
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
       lightbox.querySelector('.lightbox__close').focus();
+    });
+    img.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        lightbox._trigger = img;
+        lightbox._index = i;
+        lightbox._update();
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        lightbox.querySelector('.lightbox__close').focus();
+      }
     });
   });
 }
@@ -243,12 +306,12 @@ async function renderNav(config) {
     <button class="nav__burger" id="burger" aria-label="${aria.abrir_menu}" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <nav class="nav__links" id="navLinks" role="navigation">
+    <nav class="nav__links" id="navLinks" aria-label="${aria.main_navigation}">
       <a href="${rootPath('index.html')}#nosotros">${nav_.quienes_somos}</a>
       <a href="${rootPath('index.html')}#servicios">${nav_.servicios}</a>
       <a href="${rootPath('index.html')}#portafolio">${nav_.portafolio}</a>
       <a href="${rootPath('index.html')}#equipo">${nav_.equipo}</a>
-      <a href="${rootPath('index.html')}#contacto">${nav_.contacto || 'Contacto'}</a>
+      <a href="${rootPath('index.html')}#contacto">${nav_.contacto}</a>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="${aria.modo_oscuro}">
         <svg aria-hidden="true" class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg aria-hidden="true" class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"/></svg>
@@ -275,23 +338,23 @@ async function renderFooter(config) {
     <div class="container footer__inner">
       <div class="footer__brand">
         <img src="${logoSrc}" alt="${cfg.brand.logo_alt}" class="footer__logo" />
-        <p>${cfg.brand.tagline}.<br />Málaga · Alcance nacional.</p>
+        <p>${cfg.brand.tagline}.<br />${ft.location_line}</p>
         <div class="footer__socials">
           ${cfg.social.instagram ? `
-          <a href="${cfg.social.instagram}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="Instagram">
+          <a href="${cfg.social.instagram}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="${_ui?.social?.instagram}">
             <span class="icon icon-instagram" aria-hidden="true"></span>
           </a>` : ''}
           ${cfg.social.youtube ? `
-          <a href="${cfg.social.youtube}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="YouTube">
+          <a href="${cfg.social.youtube}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="${_ui?.social?.youtube}">
             <span class="icon icon-youtube" aria-hidden="true"></span>
           </a>` : ''}
           ${cfg.social.tiktok ? `
-          <a href="${cfg.social.tiktok}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="TikTok">
+          <a href="${cfg.social.tiktok}" class="footer__social-icon" target="_blank" rel="noopener" aria-label="${_ui?.social?.tiktok}">
             <span class="icon icon-tiktok" aria-hidden="true"></span>
           </a>` : ''}
         </div>
       </div>
-      <nav class="footer__nav" aria-label="Site navigation">
+      <nav class="footer__nav" aria-label="${aria.main_navigation}">
         <strong>${ft.navegar || 'Navegar'}</strong>
         <a href="${rootPath('index.html')}#nosotros"><span>${_ui?.nav?.quienes_somos}</span></a>
         <a href="${rootPath('index.html')}#servicios"><span>${_ui?.nav?.servicios}</span></a>
@@ -299,17 +362,17 @@ async function renderFooter(config) {
         <a href="${rootPath('index.html')}#equipo"><span>${_ui?.nav?.equipo}</span></a>
         <a href="${rootPath('index.html')}#contacto"><span>${_ui?.nav?.contacto}</span></a>
       </nav>
-      <nav class="footer__nav" aria-label="Social media">
+      <nav class="footer__nav" aria-label="${_ui?.social?.instagram ? (_ui.social.instagram + ' · ' + (_ui.social.youtube)) : 'Social media'}">
         <strong>${ft.redes || 'Redes'}</strong>
-        ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener"><span>Instagram</span></a>` : ''}
-        ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener"><span>YouTube</span></a>` : ''}
-        ${cfg.social.tiktok    ? `<a href="${cfg.social.tiktok}"    target="_blank" rel="noopener"><span>TikTok</span></a>`  : ''}
-        <a href="https://wa.me/${cfg.contact.whatsapp}" target="_blank" rel="noopener">WhatsApp</a>
+        ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener"><span>${_ui?.social?.instagram}</span></a>` : ''}
+        ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener"><span>${_ui?.social?.youtube}</span></a>` : ''}
+        ${cfg.social.tiktok    ? `<a href="${cfg.social.tiktok}"    target="_blank" rel="noopener"><span>${_ui?.social?.tiktok}</span></a>`  : ''}
+        <a href="https://wa.me/${cfg.contact.whatsapp}" target="_blank" rel="noopener">${_ui?.social?.whatsapp}</a>
       </nav>
     </div>
     <div class="footer__bottom">
-      <p>© ${year} ${cfg.footer.copyright_owner}. Todos los derechos reservados.</p>
-      <p>${ft.desarrollado_por || 'Desarrollado por'} <a href="${cfg.footer.dev_url || '#'}" rel="noopener">${cfg.footer.dev_name}</a></p>
+      <p>© ${year} ${cfg.footer.copyright_owner}. ${ft.copyright_suffix}</p>
+      <p>${ft.desarrollado_por} <a href="${cfg.footer.dev_url || '#'}" rel="noopener">${cfg.footer.dev_name}</a></p>
     </div>
   `;
 }
@@ -321,7 +384,15 @@ function renderFAB() {
   fab.removeAttribute('href');
   fab.setAttribute('role', 'button');
   fab.innerHTML = '<span class="icon icon-arrow-up" aria-hidden="true"></span>';
-  fab.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const scrollTo = () => window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+  fab.addEventListener('click', scrollTo);
+  fab.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      scrollTo();
+    }
+  });
   const toggle = () => fab.classList.toggle('visible', window.scrollY > 400);
   window.addEventListener('scroll', toggle, { passive: true });
   toggle();
@@ -330,20 +401,22 @@ function renderFAB() {
 /* ---- Schema JSON-LD LocalBusiness ---- */
 function injectLocalBusinessSchema(config) {
   const s = config.schema;
-  const b = config.brand;
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": b.name,
+    "name": config.brand.name,
     "description": config.seo.description_home,
     "url": config.brand.site_url,
+    "image": `${config.brand.site_url}/${config.seo.og_image}`,
     "telephone": `+${config.contact.whatsapp}`,
     "email": config.contact.email,
     "address": {
       "@type": "PostalAddress",
       "addressLocality": s.address_locality,
       "addressRegion": s.address_region,
-      "addressCountry": s.address_country
+      "addressCountry": s.address_country,
+      "streetAddress": s.street_address || undefined,
+      "postalCode": s.postal_code || undefined
     },
     "geo": {
       "@type": "GeoCoordinates",
@@ -409,7 +482,7 @@ function extractYouTubeId(url) {
 }
 
 function validYtUrl(url) {
-  return url && !url.includes('PLACEHOLDER') && UMD.extractYouTubeId(url);
+  return url && !url.includes('PLACEHOLDER') && extractYouTubeId(url);
 }
 
 /* ---- SEO helpers ---- */
@@ -485,12 +558,13 @@ function buildTeamCard(member, rootPathFn) {
   card.className = 'team-card';
   card.setAttribute('role', 'link');
   card.setAttribute('tabindex', '0');
-  card.setAttribute('aria-label', `Ver perfil de ${member.name}`);
+  card.setAttribute('aria-label', (_ui?.cards?.ver_perfil_aria).replace('{name}', member.name));
   card.innerHTML = `
     <div class="team-card__img-wrap">
       <img class="team-card__img" src="${rootPathFn(member.photo_cover)}"
+          onerror="this.onerror=null; this.src='${rootPathFn('assets/team/placeholder-team.svg')}'"
            alt="${member.name} — ${member.role} — UMD Films" loading="lazy" />
-      <span class="team-card__badge">Ver perfil ↗</span>
+      <span class="team-card__badge">${_ui?.cards?.ver_perfil}</span>
     </div>
     <div class="team-card__info">
       <p class="team-card__name">${member.name}</p>
@@ -503,29 +577,30 @@ function buildTeamCard(member, rootPathFn) {
 }
 
 function buildPortfolioCard(proj, rootPathFn) {
+  if (!proj || !proj.id) return document.createElement('div'); // skip empty or invalid entries
   const card = document.createElement('div');
   const trailerId = validYtUrl(proj.trailer_youtube) ? UMD.extractYouTubeId(proj.trailer_youtube) : null;
   const fullId    = validYtUrl(proj.full_video_youtube) ? UMD.extractYouTubeId(proj.full_video_youtube) : null;
   const heroId = trailerId || fullId;
-  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (proj.thumb || 'assets/portfolio/placeholder.webp');
+  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (proj.thumb || 'assets/portfolio/placeholder.svg');
 
   card.className = 'portfolio-card';
   card.setAttribute('role', 'link');
   card.setAttribute('tabindex', '0');
-  card.setAttribute('aria-label', `Ver proyecto: ${proj.title}`);
+  card.setAttribute('aria-label', (_ui?.cards?.ver_proyecto_aria).replace('{title}', proj.title));
   card.innerHTML = `
-    <img src="${thumbSrc}" data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)"
-        onerror="UMD.ytThumbAdvance(this)" alt="${proj.title} — UMD Films" loading="lazy" />
-    <div class="portfolio-card__overlay">
-      <p class="portfolio-card__cat">${proj.category} · ${proj.year}</p>
+  <img src="${thumbSrc}" data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)"
+  onerror="UMD.ytThumbAdvance(this)" alt="${proj.title} — UMD Films" loading="lazy" />
+  <div class="portfolio-card__overlay">
+  <p class="portfolio-card__cat">${proj.category} · ${proj.year}</p>
       <p class="portfolio-card__title">${proj.title}</p>
     </div>
     <div class="portfolio-card__play" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 24 24"><path d="m5 3 14 9-14 9z"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24"><path d="m5 3 14 9-14 9z"/></svg>
     </div>`;
-  const go = () => { window.location.href = rootPathFn(`portfolio/${proj.id}.html`); };
-  card.addEventListener('click', go);
-  card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    const go = () => { window.location.href = rootPathFn(`portfolio/${proj.id}.html`); };
+    card.addEventListener('click', go);
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
   return card;
 }
 
@@ -543,15 +618,11 @@ window.UMD = {
   fetchJSON,
   rootPath,
   initReveal,
-  initNav,
   renderNav,
   renderFooter,
   renderFAB,
   injectLocalBusinessSchema,
   animateCounter,
-  initTheme,
-  applyTheme,
-  toggleTheme,
   initLightbox,
   ytThumbUrl,
   ytThumbAdvance,

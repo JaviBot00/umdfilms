@@ -1,6 +1,6 @@
 # UMD Films — Complete Technical Documentation
 
-> Version 2.1 · July 2026
+> Version 2.2 · July 2026
 > Developed by **Javier Botella** with help from **Claude (Anthropic)**
 
 ---
@@ -14,13 +14,14 @@
 5. [How to Update Content](#5-how-to-update-content)
 6. [Generating New Pages](#6-generating-new-pages)
 7. [Auto-calculated Stats](#7-auto-calculated-stats)
-8. [SEO Implementation](#8-seo-implementation)
-9. [Accessibility (a11y)](#9-accessibility-a11y)
-10. [UI Strings (ui_strings)](#10-ui-strings-ui_strings)
-11. [Local Development](#11-local-development)
-12. [Deploying to Hostinger](#12-deploying-to-hostinger)
-13. [Scalability & Future Steps](#13-scalability--future-steps)
-14. [File Reference](#14-file-reference)
+8. [Testing & Verification](#8-testing--verification)
+9. [SEO Implementation](#9-seo-implementation)
+10. [Accessibility (a11y)](#10-accessibility-a11y)
+11. [UI Strings (ui_strings)](#11-ui-strings-ui_strings)
+12. [Local Development](#12-local-development)
+13. [Deploying to Hostinger](#13-deploying-to-hostinger)
+14. [Scalability & Future Steps](#14-scalability--future-steps)
+15. [File Reference](#15-file-reference)
 
 ---
 
@@ -187,7 +188,7 @@ Array of equipment available for rental. Photos live in category subfolders unde
 {
   "id": "sony-fx30",
   "name": "Sony Cinema Line FX30",
-  "category": "camara",              // camara | audio | iluminacion | soporte | otro
+   "category": "camara",              // camara | audio | iluminacion | otro
   "quantity": 2,
   "description": "Text...",
   "specs": ["APS-C Super 35", "4K 120fps"],
@@ -266,7 +267,7 @@ Dynamically generates category filters from data and renders equipment cards.
 ```cmd
 User opens team/alejandro-luque.html
   ↓
-Browser loads HTML (empty structure)
+Browser loads HTML (skeleton placeholders visible immediately)
   ↓
 Browser loads shared.js → exposes window.UMD (utilities)
   ↓
@@ -288,11 +289,14 @@ DOMContentLoaded fires:
   Finds member = team.find(m => m.id === "alejandro-luque")
   ↓
   Fills: profileHero, profileBio, profileSocials, profileFicha
+  (skeleton placeholders are replaced by real content via innerHTML/textContent)
   Conditional: profilePhotos (if photos_extra.length > 0)
   Conditional: profileProjects (if there are cross-referenced projects)
   ↓
   initReveal() → IntersectionObserver activates entrance animations
 ```
+
+**Skeleton loading:** while JSON files are being fetched, skeleton placeholder elements (pulsing dark blocks) are visible in the hero, showreel, trust bar, stats, services, and card grids. When JS renders real content, it replaces the skeletons automatically via `innerHTML = ''` (grids) or `innerHTML`/`textContent` assignment (other containers). The skeleton CSS animation respects `prefers-reduced-motion`.
 
 ---
 
@@ -344,7 +348,11 @@ Open `css/style.css`. All CSS variables are at the top of the file:
 :root {
   --red:        #c0202a;   ← Main accent color
   --red-light:  #e02d38;   ← Hover and emphasis
+  --red-border: rgba(192,32,42,0.4);   ← Subtle borders (cards, inputs)
+  --red-hover:  rgba(192,32,42,0.08);  ← Hover backgrounds
   --black:      #080808;   ← Main background
+  --muted:      #888888;   ← Secondary text (5.0:1 contrast on dark)
+  --cream-mid:  #6d6760;   ← Secondary text in light theme (4.7:1 contrast)
   /* ... */
 }
 ```
@@ -399,7 +407,77 @@ stats.location = config.schema.address_locality    // "Málaga"
 
 ---
 
-## 8. SEO Implementation
+## 8. Testing & Verification
+
+No test framework — run these commands after editing JSON, JS, or CSS to validate correctness:
+
+### JS Syntax Check
+```bash
+node -c js/shared.js && node -c js/main.js && node -c js/team.js && node -c js/team-index.js && node -c js/portfolio.js && node -c js/portfolio-index.js && node -c js/equipment.js && node -c js/artists.js
+```
+
+### Page Generator
+```bash
+node generate-pages.js
+```
+Regenerates all team/portfolio HTML files and sitemap.xml.
+
+### Data Contract Check (Cross-references)
+```bash
+node -e "
+const team = require('./data/team.json').map(m => m.id);
+const portfolio = require('./data/portfolio.json');
+const broken = [];
+portfolio.forEach(p => {
+  (p.team_ids || []).forEach(id => {
+    if (!team.includes(id)) broken.push(p.id + ' → team_id ' + id + ' not found');
+  });
+});
+const portIds = portfolio.map(p => p.id);
+require('./data/team.json').forEach(m => {
+  (m.projects || []).forEach(id => {
+    if (!portIds.includes(id)) broken.push(m.id + ' → project ' + id + ' not found');
+  });
+});
+if (broken.length) { console.log('BROKEN:', broken.join('\n')); process.exit(1); }
+else { console.log('✓ All cross-references valid'); }
+"
+```
+
+### Asset Validation
+```bash
+node -e "
+const fs = require('fs');
+const issues = [];
+require('./data/team.json').forEach(m => {
+  if (!fs.existsSync('assets/team/' + m.id + '/cover.avif'))
+    issues.push('MISSING: assets/team/' + m.id + '/cover.avif');
+});
+require('./data/portfolio.json').forEach(p => {
+  if (p.thumb && !fs.existsSync(p.thumb))
+    issues.push('MISSING: ' + p.thumb);
+});
+require('./data/equipment.json').forEach(e => {
+  if (e.photo && !fs.existsSync(e.photo))
+    issues.push('MISSING: ' + e.photo);
+});
+['assets/portfolio/placeholder.svg','assets/equipment/placeholder-gear.svg','assets/logo/og-cover.png'].forEach(f => {
+  if (!fs.existsSync(f)) issues.push('MISSING: ' + f);
+});
+if (issues.length) { console.log(issues.join('\n')); process.exit(1); }
+else { console.log('✓ All referenced assets exist'); }
+"
+```
+
+### Generated HTML Meta Check
+```bash
+grep -l 'og:image.*logo-umd-films.svg' team/*.html portfolio/*.html
+```
+Should return EMPTY — no generated page should still reference the SVG logo as OG image.
+
+---
+
+## 9. SEO Implementation
 
 ### Meta Tags Architecture
 
@@ -458,7 +536,7 @@ If URLs change compared to the current WordPress site, add them in Hostinger:
 
 ---
 
-## 9. Accessibility (a11y)
+## 10. Accessibility (a11y)
 
 WCAG 2.2 AA compliance. All interactive elements must remain keyboard accessible.
 
@@ -471,14 +549,18 @@ WCAG 2.2 AA compliance. All interactive elements must remain keyboard accessible
 | **`:focus-visible`** | Red outline on all interactive elements; box-shadow on buttons, filters, theme toggle, FAB |
 | **Keyboard navigation** | Team cards, portfolio cards, and linked service cards have `role="link"`, `tabindex="0"`, and Enter/Space handlers |
 | **`aria-pressed`** | Filter buttons (portfolio + equipment + artists) announce active state |
-| **`aria-label`** | Footer navs distinguished ("Site navigation" / "Social networks"); sections, social links, burger, theme toggle, FAB all labeled — **now in Spanish** (`ui_strings.aria`), was previously hardcoded in English |
+| **`aria-label`** | Footer navs distinguished ("Site navigation" / "Redes sociales"); sections, social links, burger, theme toggle, FAB all labeled — **now in Spanish** (`ui_strings.aria`), was previously hardcoded in English |
 | **`aria-hidden="true"`** | Decorative SVGs, hero video, overlay/redline, trust bar marquee, service video preview |
-| **Forms** | All inputs have `<label for>` association, `autocomplete`, `aria-invalid` on errors, visible focus ring via `box-shadow` |
+| **Forms** | All inputs have `<label for>` association, `autocomplete`, `aria-invalid` on errors, visible focus ring via `box-shadow`, `role="alert"` on error messages, `aria-live="assertive"` region for form status |
 | **`prefers-reduced-motion`** | Disables all animations, transitions, scroll-behavior, and trust bar marquee |
 | **`prefers-color-scheme`** | Light/dark theme with localStorage persistence; hero/CTA/nav/lightbox/profile-hero/film-hero always dark |
 | **External links** | `rel="noopener"` on all `target="_blank"` links |
-| **Lightbox** | Escape key closes, close button receives focus on open; prev/next arrow buttons, ArrowLeft/ArrowRight keyboard navigation, touch swipe (50px threshold), counter (`2 / 5`) |
+| **Lightbox** | `role="dialog"`, `aria-modal="true"`, `aria-label="Galería de imágenes"`, focus trap (Tab cycling), focus restoration on close, Escape key closes, close button receives focus on open; prev/next arrow buttons, ArrowLeft/ArrowRight keyboard navigation, touch swipe (50px threshold), counter (`2 / 5`); Spanish aria-labels |
+| **Gallery images** | `tabindex="0"`, `role="button"`, `aria-label="Ampliar imagen"`, Enter/Space handlers |
+| **Video tabs** | Left/Right/Home/End arrow navigation between tabs, `aria-pressed` state |
 | **Semantic HTML** | `<header>`, `<nav>`, `<main>`, `<footer>`, `<section>` with `aria-label`; `<aside>` for sidebars |
+| **WhatsApp FAB** | Keyboard Enter/Space handler for activation |
+| **Custom 404** | Dedicated `404.html` page with branded design, nav, footer, skip-link, `<main>` landmark, and shared.js |
 
 ### When Adding New Interactive Elements
 
@@ -499,7 +581,7 @@ WCAG 2.2 AA compliance. All interactive elements must remain keyboard accessible
 
 ---
 
-## 10. UI Strings (`ui_strings`)
+## 11. UI Strings (`ui_strings`)
 
 **Purpose:** every piece of UI chrome text that lived hardcoded inside `.js` files (nav labels, footer labels, aria-labels, category filter labels, 404 messages, empty-state placeholders, ficha técnica/perfil field labels, video tab labels) now lives in `data/config.json` → `ui_strings`, so it can be edited without touching code.
 
@@ -510,8 +592,8 @@ WCAG 2.2 AA compliance. All interactive elements must remain keyboard accessible
 | `nav` | `shared.js` (`renderNav`, `renderFooter`) | Nav links + footer nav link text |
 | `footer` | `shared.js` (`renderFooter`) | "Navegar" / "Redes" / "Desarrollado por" |
 | `aria` | `shared.js` (`initNav`, `applyTheme`) | Burger + theme-toggle aria-labels. Cached in a module-level `_ui` variable inside `shared.js`, populated by `renderNav(config)` — if a page never calls `renderNav()`, these fall back to hardcoded Spanish defaults inline in the code. |
-| `categorias_equipo` | `equipment.js` | Filter button labels |
-| `categorias_portfolio` | `portfolio-index.js` | Filter button labels |
+| `categorias_equipo` | `equipment.js` | Filter button labels (camara, audio, iluminacion, otro) |
+| `categorias_portfolio` | `portfolio-index.js` | Filter button labels (Cortometraje, Videoclips, Musical, Eventos) |
 | `tipos_artista` | `artists.js` | Filter button labels ("Equipo UMD" / "Colaboradores externos") |
 | `errores_404` | `team.js`, `portfolio.js` | 404 page titles + back-link text (also reused for the normal, non-404 hero back-link) |
 | `placeholders` | `team.js`, `portfolio.js` | "Bio/synopsis/video pendiente" empty states |
@@ -524,7 +606,7 @@ WCAG 2.2 AA compliance. All interactive elements must remain keyboard accessible
 
 ---
 
-## 11. Local Development
+## 12. Local Development
 
 Modern browsers block `fetch()` with `file://`. You need a local server.
 
@@ -551,7 +633,7 @@ npx serve .
 
 ---
 
-## 12. Deploying to Hostinger
+## 13. Deploying to Hostinger
 
 ### First Time
 
@@ -584,7 +666,7 @@ public_html/          ← hosting root
 
 ---
 
-## 13. Scalability & Future Steps
+## 14. Scalability & Future Steps
 
 ### When You DON'T Need to Change Anything
 
@@ -617,7 +699,7 @@ The structure is already designed for it:
 
 ---
 
-## 14. File Reference
+## 15. File Reference
 
 | File | Edit when... | Frequency |
 |---|---|---|
@@ -647,4 +729,4 @@ The structure is already designed for it:
 ---
 
 *UMD Films · Málaga · umdfilms.com*
-*Documentation last synced with AGENTS.md/CONTEXT.md in July 2026*
+*Documentation last synced with AGENTS.md/CONTEXT.md — July 2026*
