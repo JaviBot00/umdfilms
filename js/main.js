@@ -114,8 +114,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     /* Portfolio CTA -> YouTube (dato de config, no de home.json) */
     setHTML('portfolioCta', `
       <div class="portfolio__actions">
-        <a href="${UMD.rootPath('portfolio/index.html')}" class="btn btn-outline">${ui.home?.all_projects_cta}</a>
-        <a href="${config.social.youtube}" target="_blank" rel="noopener" class="btn btn-primary">${ui.home?.youtube_cta}</a>
+        <a href="${UMD.rootPath('portfolio/index.html')}" class="btn btn-outline">${_ui.home?.all_projects_cta}</a>
+        <a href="${config.social.youtube}" target="_blank" rel="noopener" class="btn btn-primary">${_ui.home?.youtube_cta}</a>
       </div>
     `);
 
@@ -131,8 +131,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         <span class="icon icon-whatsapp" aria-hidden="true"></span>
         ${home.contact.wa_label}
       </a>
-      ${config.social.instagram ? `<a href="${config.social.instagram}" class="text-link" target="_blank" rel="noopener">${ui.social?.instagram}</a>` : ''}
-      ${config.social.youtube ? `<a href="${config.social.youtube}" class="text-link" target="_blank" rel="noopener">${ui.social?.youtube}</a>` : ''}
+      ${config.social.instagram ? `<a href="${config.social.instagram}" class="text-link" target="_blank" rel="noopener">${_ui.social?.instagram}</a>` : ''}
+      ${config.social.youtube ? `<a href="${config.social.youtube}" class="text-link" target="_blank" rel="noopener">${_ui.social?.youtube}</a>` : ''}
     `);
 
     /* Formulario: labels, placeholders, select dinámico */
