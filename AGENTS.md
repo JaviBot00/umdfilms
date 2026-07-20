@@ -143,7 +143,7 @@ Edit the relevant JS file (e.g., `team.js` for Person). Create a JSON-LD object,
 
 | File | Edit when... |
 |---|---|
-| `data/config.json` | Changing logo, phone, social links, founding year |
+| `data/config.json` | Changing logo, phone, social links, founding year, **or adding UI strings** (`ui_strings` section) |
 | `data/home.json` | Changing home page text (hero, about, CTA, contact) |
 | `data/team.json` | Adding or editing team members |
 | `data/portfolio.json` | Adding or editing projects |
@@ -175,12 +175,27 @@ Before adding a new home-only class to `css/home.css`, grep the class name
 across all `.js`/`.html` files first — this project has a history (Bloque G)
 of classes leaking into other pages via `cardBuilder()` functions in `shared.js`.
 
-## Known pending work (Bloque G — in progress)
+## UI strings convention
+
+**All user-facing text lives in `data/config.json → ui_strings`.** Never hardcode
+a string in JS or HTML that the user will see. The rule:
+
+1. Add a new key to the appropriate `ui_strings` subsection in `config.json`.
+2. Reference it in JS via `config.ui_strings.section.key` (with `|| 'fallback'` for safety).
+3. HTML templates use static fallbacks for SEO/no-JS; JS overwrites them at runtime.
+
+Subsections: `nav`, `footer`, `aria`, `social`, `home`, `stats`, `form`, `cards`,
+`categorias_equipo`, `categorias_portfolio`, `tipos_artista`, `errores_404`,
+`placeholders`, `equipment_extra`, `ficha_tecnica`, `video`, `ficha_perfil`,
+`foto_counter`.
+
+## Known pending work (Bloque G — completed)
 
 - ✅ `css/home.css` creado. Reglas exclusivas de home (hero, trust marquee, about/stats, services, cta-band, contact) movidas fuera de `style.css`. `index.html` carga `style.css` + `home.css` en ese orden — `home.css` depende de variables/clases de `style.css` (`.btn`, `.reveal`, `.eyebrow`, etc.), no es standalone.
 - ✅ Renombradas 3 clases que ataban su nombre a una sección que no siempre estaba presente: `.about__body`→`.lead-text`, `.team__grid`→`.card-grid`, `.contact__social-link`→`.text-link`. Las tres viven en `style.css` (compartidas). Ver `css/style.css` para comentarios inline de por qué se renombraron.
-- ⏳ Pendiente: auditoría de strings hardcodeados en `.js` (category filter labels, 404 messages, placeholder texts). `config.json` era el destino propuesto (`ui_strings`) — no creado aún. Esto es la segunda mitad del Bloque G, chat aparte.
-- ⏳ Pendiente: correr `design-system` skill (grep de colores hardcodeados) sobre `css/home.css` como fichero nuevo, no cubierto por ninguna pasada previa.
+- ✅ Strings hardcodeados migrados a `config.json → ui_strings`. Cubre: aria-labels (lightbox, footer, nav, FAB), social platform names, footer text, stat labels, form validation, card labels, home CTAs, showreel text. Todos los `.js` actualizados.
+- ✅ Auditoría design-system de `css/home.css`: 2 variables nuevas (`--black-overlay-trail`, `--black-overlay-faint`) creadas en `style.css` para el gradiente del hero overlay. Soporte light/dark + always-dark pin.
+- ✅ Limpieza general: eliminados `v1/`, assets sin usar, campos muertos en JSON, CSS muerto (`.reveal.d4`, `--ease-out`), bug `color: white` en `.fab-top`.
 
 ## Accessibility (a11y)
 
@@ -193,7 +208,7 @@ WCAG 2.2 AA baseline. All interactive elements must remain keyboard accessible.
 - **`:focus-visible` styles**: red outline on all interactive elements; box-shadow ring on buttons, filters, theme toggle, FAB
 - **Keyboard navigation**: team cards, portfolio cards, and linked service cards all have `role="link"`, `tabindex="0"`, and Enter/Space handlers
 - **`aria-pressed`**: filter buttons (portfolio + equipment) announce active state
-- **`aria-label`**: footer navs distinguished ("Site navigation" / "Social media"); sections, social links, burger, theme toggle, WhatsApp FAB all labeled
+- **`aria-label`**: footer navs distinguished via `ui_strings.aria.main_navigation`; sections, social links, burger, theme toggle, WhatsApp FAB all labeled from `ui_strings.aria.*`
 - **`aria-hidden="true"`**: decorative SVGs, hero video, hero overlay/redline, trust bar marquee track, service video preview
 - **Form accessibility**: all inputs have `<label for>` association, `autocomplete` attributes, `aria-invalid` on validation errors, visible focus ring via `box-shadow`
 - **`prefers-reduced-motion`**: disables all animations, transitions, scroll-behavior, and the trust bar marquee
