@@ -13,21 +13,6 @@ Desktop.ini
 *.swo
 *~
 
-# Generated files (regenerate with: node generate-pages.js)
-# assets/team/*.*
-# team/*.html
-# !team/template.html
-# !team/index.html
-# portfolio/*.html
-# !portfolio/template.html
-# !portfolio/index.html
-# sitemap.xml
-
-# assets/equipment/*
-
-# Archives
-files.zip
-
 # Env
 .env
 .env.*
