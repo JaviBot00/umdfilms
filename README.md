@@ -545,12 +545,13 @@ WCAG 2.2 AA compliance. All interactive elements must remain keyboard accessible
 | Feature | Location |
 |---|---|
 | **Skip link** | `<a href="#contenido" class="skip-link">` on all pages — visually hidden, appears on Tab focus |
-| **`<main id="contenido">`** | Landmark on all pages |
+| **`<main id="contenido" tabindex="-1">`** | Landmark on all pages |
 | **`:focus-visible`** | Red outline on all interactive elements; box-shadow on buttons, filters, theme toggle, FAB |
 | **Keyboard navigation** | Team cards, portfolio cards, and linked service cards have `role="link"`, `tabindex="0"`, and Enter/Space handlers |
 | **`aria-pressed`** | Filter buttons (portfolio + equipment + artists) announce active state |
 | **`aria-label`** | Footer navs distinguished ("Site navigation" / "Redes sociales"); sections, social links, burger, theme toggle, FAB all labeled — **now in Spanish** (`ui_strings.aria`), was previously hardcoded in English |
-| **`aria-hidden="true"`** | Decorative SVGs, hero video, overlay/redline, trust bar marquee, service video preview |
+| **`aria-hidden="true"`** | Decorative SVGs, hero video, overlay/redline, trust bar marquee inner, service video preview |
+| **Trust bar accessible list** | `<ul class="visually-hidden" id="trustListA11y">` populated by JS for screen readers; visual marquee is `aria-hidden` |
 | **Forms** | All inputs have `<label for>` association, `autocomplete`, `aria-invalid` on errors, visible focus ring via `box-shadow`, `role="alert"` on error messages, `aria-live="assertive"` region for form status |
 | **`prefers-reduced-motion`** | Disables all animations, transitions, scroll-behavior, and trust bar marquee |
 | **`prefers-color-scheme`** | Light/dark theme with localStorage persistence; hero/CTA/nav/lightbox/profile-hero/film-hero always dark |
