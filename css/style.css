@@ -196,6 +196,10 @@ ul { list-style: none; }
 }
 .section { padding-block: var(--section-pad); }
 
+#nosotros, #servicios, #portafolio, #equipo, #contacto {
+  scroll-margin-top: 100px;
+}
+
 /* ---- TIPOGRAFÍA ---- */
 h1, h2, h3, h4 {
   font-family: var(--ff-display);

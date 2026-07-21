@@ -167,6 +167,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Duplicate for marquee (same logic as before)
     let set = trustInner.innerHTML;
     let safety = 0;
+    document.getElementById('trustListA11y').innerHTML = partners.map(p => `<li>${p.name}</li>`).join('');
     while (trustInner.scrollWidth < window.innerWidth * 2 && safety < 10) {
       set += trustInner.innerHTML;
       trustInner.innerHTML = set;
