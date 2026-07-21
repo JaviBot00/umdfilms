@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   UMD.setTwitterMeta('twitter:image',       `${thumbSrc}`);
 
   // Schema VideoObject for projects with video
-  if (project.trailer_youtube && !project.trailer_youtube.includes('PLACEHOLDER')) {
+  if (trailerId || fullId) {
     const schema = {
       "@context": "https://schema.org",
       "@type": "VideoObject",
@@ -78,10 +78,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       "duration": project.duration_min ? `PT${project.duration_min}M` : undefined,
       "director": { "@type": "Person", "name": project.director },
       "productionCompany": { "@type": "Organization", "name": config.brand.name, "url": config.brand.site_url },
-      "url": project.trailer_youtube
+      "url": trailerId ? project.trailer_youtube : project.full_video_youtube
     };
-    if (trailerId) {
-      schema.embedUrl = `https://www.youtube.com/embed/${trailerId}`;
+    if (trailerId || fullId) {
+      schema.embedUrl = `https://www.youtube.com/embed/${trailerId || fullId}`;
     }
     if (!schema.duration) delete schema.duration;
     const tag = document.createElement('script');
