@@ -18,6 +18,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   await UMD.renderFooter(config);
   UMD.renderFAB();
 
+  document.querySelector('.page-hero .container').insertAdjacentHTML('afterbegin', `
+  <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#servicios')}" class="page-back-link reveal">
+    <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+    ${config.ui_strings.common.volver}
+  </a>`);
+
   document.title = config.seo.title_equipment;
   document.querySelector('meta[name="description"]')
     ?.setAttribute('content', config.seo.description_equipment);

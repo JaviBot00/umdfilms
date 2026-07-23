@@ -370,22 +370,23 @@ html[data-theme="light"] .trust__inner img:hover {
 }
 .contact__body { color: var(--cream-mid); margin-bottom: 2rem; }
 .contact__links { display: flex; flex-direction: column; gap: 1rem; }
-.contact__wa {
+.contact__link {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  color: var(--whatsapp);
   font-weight: 500;
   font-size: 0.95rem;
   transition: opacity 0.25s;
 }
-.contact__wa:hover { opacity: 0.75; }
-.contact__wa .icon { width: 22px; height: 22px; }
+.contact__link--wa     { color: var(--whatsapp); }
+.contact__link--email  { color: var(--email); }
+.contact__link:hover   { opacity: 0.75; }
+.contact__link .icon   { width: 22px; height: 22px; }
 
 .contact__form { display: flex; flex-direction: column; gap: 1.3rem; }
 .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
 .form-group label {
-  font-size: 0.68rem;
+  font-size: var(--fs-min);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);

@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
       <div class="profile-hero__overlay" aria-hidden="true"></div>
       <div class="profile-hero__content container">
-        <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#equipo')}" class="profile-hero__back reveal">
+        <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#equipo')}" class="page-back-link reveal">
           <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
           ${err404.perfil_volver}
         </a>

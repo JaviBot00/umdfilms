@@ -10,11 +10,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     UMD.fetchJSON(UMD.rootPath('data/artists.json'))
   ]);
 
+  const ui = config.ui_strings || {};
+
   await UMD.renderNav(config);
   await UMD.renderFooter(config);
   UMD.renderFAB();
 
-  const ui = config.ui_strings || {};
+  document.querySelector('.page-hero .container').insertAdjacentHTML('afterbegin', `
+  <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#servicios')}" class="page-back-link reveal">
+    <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+    ${config.ui_strings.common.volver}
+  </a>`);
 
   /* ---- SEO ---- */
   document.title = config.seo.title_artists;

@@ -100,8 +100,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           alt="${project.title}">
       </div>
       <div class="film-hero__overlay" aria-hidden="true"></div>
-      <div class="film-hero__content">
-        <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#portafolio')}" class="film-hero__back reveal">
+      <div class="film-hero__content container">
+        <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#portafolio')}" class="page-back-link reveal">
           <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
           ${err404.proyecto_volver}
         </a>
@@ -251,7 +251,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         a.className = 'film-team-member reveal';
         a.innerHTML = `
           <img src="${UMD.rootPath(member.photo_cover)}"
-               alt="${member.name}" loading="lazy" />
+            onerror="this.onerror=null; this.src='${UMD.rootPath('assets/team/placeholder-icon.svg')}'"
+            alt="${member.name}" loading="lazy" />
           <div>
             <p class="film-team-member__name">${member.name}</p>
             <p class="film-team-member__role">${member.role}</p>
