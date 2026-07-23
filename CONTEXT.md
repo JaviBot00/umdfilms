@@ -204,6 +204,13 @@ stats.location = config.schema.address_locality               // "Málaga"
 - ✅ Showreel section with YouTube facade pattern
 - ✅ Brand redline-draw animation, service icon container
 - ✅ Custom 404 page with full site structure
+- ✅ Light/dark palette re-audited (July 2026): 4-tone ascending hierarchy per theme, `--muted`/`--cream-mid` recalculated against real WCAG contrast ratios; `--red-eyebrow` raised to #ef5561 for AA margin against --dark
+- ✅ `--fs-min` (0.8rem) as global font-size floor, replacing loose values across 6 CSS files
+- ✅ `.page-back-link` consolidated, removes duplication between `.profile-hero__back`/`.film-hero__back`
+- ✅ "Back" link added to all 4 listing pages (previously only individual team/portfolio pages had one)
+- ✅ `theme-color` meta bug fixed: single `<meta id="themeColorMeta">` updated by JS in `applyTheme()`
+- ✅ `.footer` added to the pinned-dark block (alongside `.hero`/`.nav`) — fixes white+red logo invisibility in light theme without needing an SVG variant
+- ✅ Contact section redesigned: WhatsApp + `mailto:` (email), contact form now opens a prefilled `mailto:` instead of WhatsApp; social links (Instagram/YouTube/TikTok) live only in the footer
 
 ---
 

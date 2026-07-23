@@ -171,6 +171,7 @@ deliberately chosen to not imply a section that isn't always present:
 | `.portfolio-card*`, `.portfolio__grid` | home, `portfolio/index.html`, member profile projects (`team.js`) |
 | `.page-hero` | `team/`, `portfolio/`, `artists/`, `equipment/` index pages |
 | `.skeleton*` | home (hero, showreel, trust, stats, services, grids), team/portfolio profile heroes, all listing page grids |
+| `.page-back-link` | team/[id], portfolio/[id], team/index, portfolio/index, equipment/index, artists/index |
 
 Before adding a new home-only class to `css/home.css`, grep the class name
 across all `.js`/`.html` files first — this project has a history (Bloque G)

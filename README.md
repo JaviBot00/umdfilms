@@ -346,13 +346,32 @@ Open `css/style.css`. All CSS variables are at the top of the file:
 
 ```css
 :root {
-  --red:        #c0202a;   ← Main accent color
-  --red-light:  #e02d38;   ← Hover and emphasis
-  --red-border: rgba(192,32,42,0.4);   ← Subtle borders (cards, inputs)
-  --red-hover:  rgba(192,32,42,0.08);  ← Hover backgrounds
-  --black:      #080808;   ← Main background
-  --muted:      #888888;   ← Secondary text (5.0:1 contrast on dark)
-  --cream-mid:  #6d6760;   ← Secondary text in light theme (4.7:1 contrast)
+  --red:        #c0202a;   /* Main accent color */
+  --red-light:  #e02d38;   /* Hover and emphasis */
+  --red-eyebrow: #ef5561;  /* Eyebrow text — raised from #e84855 for WCAG AA margin against --dark */
+  --red-border: rgba(192,32,42,0.12);  /* Subtle borders (cards, inputs) */
+  --red-hover:  rgba(192,32,42,0.04);  /* Hover backgrounds (dark) — 0.35 in light theme */
+  --black:      #121214;   /* Page body background (dark theme) */
+  --dark:       #18181b;   /* Section backgrounds (.about, .contact, .portfolio...) */
+  --dark-mid:   #202024;   /* Card backgrounds — lighter than --black so cards stand out */
+  --dark-soft:  #29292e;   /* Hover states — lightest of the four, subtle pop */
+  --muted:      #9a9490;   /* Tertiary text — 5.4:1 contrast against --dark-mid (dark theme) */
+  --cream-mid:  #b8b0a6;   /* Secondary text — 7.58:1 contrast against --dark-mid */
+  --fs-min:     0.8rem;    /* Global minimum font size — do not go below this for readable text */
+  /* ... */
+}
+```
+
+Both dark and light palettes use a 4-tone hierarchy (--black < --dark < --dark-mid < --dark-soft) in ascending brightness order in both themes, so cards (--dark-mid) always stand out against the page background (--black). Full contrast audit: July 2026. Light theme values follow the same hierarchy — see css/style.css html[data-theme="light"] block for exact hex values.
+
+```css
+html[data-theme="light"] {
+  --black:      #e8e2d4;   /* Page body — darkest of the four, warm off-white */
+  --dark:       #eee9dc;   /* Section backgrounds */
+  --dark-mid:   #f7f4ec;   /* Card backgrounds — lightest, so cards pop against body */
+  --dark-soft:  #fffcf5;   /* Hover states */
+  --muted:      #6d6760;   /* Tertiary text — 5.09:1 against --dark-mid, 5.46:1 against --dark-soft */
+  --cream-mid:  #5c5650;   /* Secondary text — 6.58:1 against --dark-mid */
   /* ... */
 }
 ```
@@ -602,6 +621,7 @@ WCAG 2.2 AA compliance. All interactive elements must remain keyboard accessible
 | `ficha_tecnica` | `portfolio.js` | Technical sheet field labels (Título/Categoría/Año/Duración/Director/Cliente/Tags) |
 | `video` | `portfolio.js` | Trailer/full-video tab labels + "Ver en YouTube ↗" |
 | `ficha_perfil` | `team.js` | Sidebar info card field labels |
+| `common` | `team-index.js`, `portfolio-index.js`, `equipment.js`, `artists.js` | Link "Volver" (`.page-back-link`) at the 4 listed pages |
 
 **Known limitation:** `equipment_extra.whatsapp_msg_template` uses `{name}`/`{qty}` placeholders substituted via `String.replace()`, which only replaces the **first** occurrence of each token. If a future edit repeats `{name}` twice in the template, the second occurrence won't substitute. Not a bug today, but a trap if the template is edited carelessly.
 
