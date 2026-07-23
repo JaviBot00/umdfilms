@@ -132,6 +132,7 @@ function initTheme() {
 function initScrollSpy() {
   const sections = document.querySelectorAll('main > section[id]');
   const links = document.querySelectorAll('.nav__links a[href*="#"]');
+  const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
   if (!sections.length || !links.length) return;
 
   const map = new Map();
@@ -151,6 +152,9 @@ function initScrollSpy() {
         if (link) {
           link.classList.add('active');
           link.setAttribute('aria-current', 'section');
+        }
+        if (isHome) {
+          sessionStorage.setItem('umd-back-section', entry.target.id);
         }
       }
     });
@@ -508,10 +512,15 @@ function setTwitterMeta(name, content) {
 
 /* ---- Grid genérico con filtros opcionales ---- */
 function renderFilterableGrid({ items, filterEl, gridEl, categoryField, labels = {}, allLabel = 'Todo', cardBuilder }) {
+  function matchesCategory(item, field, filter) {
+    const val = item[field];
+    return Array.isArray(val) ? val.includes(filter) : val === filter;
+  }
+
   function paint(filter) {
     const filtered = (!categoryField || filter === 'all')
       ? items
-      : items.filter(i => i[categoryField] === filter);
+      : items.filter(i => matchesCategory(i, categoryField, filter));
 
     gridEl.innerHTML = '';
     filtered.forEach((item, i) => gridEl.appendChild(cardBuilder(item, i)));
@@ -523,7 +532,9 @@ function renderFilterableGrid({ items, filterEl, gridEl, categoryField, labels =
   }
 
   if (filterEl && categoryField) {
-    const usedCategories = new Set(items.map(i => i[categoryField]));
+    const usedCategories = new Set(
+      items.flatMap(i => Array.isArray(i[categoryField]) ? i[categoryField] : [i[categoryField]])
+    );
     const categories = labels && Object.keys(labels).length
       ? ['all', ...Object.keys(labels).filter(k => usedCategories.has(k))]
       : ['all', ...usedCategories];
@@ -609,6 +620,10 @@ function buildPortfolioCard(proj, rootPathFn) {
 function getBackUrl(fallback) {
   const ref = document.referrer;
   if (ref && ref.startsWith(window.location.origin) && ref !== window.location.href) {
+    if (ref.includes('index.html')) {
+      const section = sessionStorage.getItem('umd-back-section');
+      if (section) return ref.split('#')[0] + '#' + section;
+    }
     return ref;
   }
   return fallback;

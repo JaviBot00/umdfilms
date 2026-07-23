@@ -59,6 +59,10 @@ function buildGearCard(gear, i, config, eqStrings, CATEGORY_LABELS) {
   card.className = `gear-card reveal${!gear.available ? ' gear-card--unavailable' : ''}`;
   card.style.transitionDelay = `${i * 0.06}s`;
 
+  const catLabel = Array.isArray(gear.category)
+    ? gear.category.map(c => CATEGORY_LABELS[c] || c).join(' · ')
+    : (CATEGORY_LABELS[gear.category] || gear.category);
+
   const waMsg = encodeURIComponent(
     (eqStrings.whatsapp_msg_template)
       .replace('{name}', gear.name)
@@ -77,7 +81,7 @@ function buildGearCard(gear, i, config, eqStrings, CATEGORY_LABELS) {
       ${!gear.available ? `<span class="gear-card__unavailable-badge">${eqStrings.no_disponible}</span>` : ''}
     </div>
     <div class="gear-card__body">
-      <p class="gear-card__cat">${CATEGORY_LABELS[gear.category] || gear.category}</p>
+      <p class="gear-card__cat">${catLabel}</p>
       <h3 class="gear-card__name">${gear.name}</h3>
       <p class="gear-card__desc">${gear.description}</p>
       ${gear.specs?.length ? `
