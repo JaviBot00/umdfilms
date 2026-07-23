@@ -14,7 +14,7 @@ Desktop.ini
 *~
 
 # Generated files (regenerate with: node generate-pages.js)
-assets/equipment/**
+# assets/equipment/**
 # team/*.html
 # !team/template.html
 # !team/index.html
