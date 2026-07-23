@@ -75,6 +75,23 @@
     "represented_artist": false
   },
   {
+    "id": "miguel-matarin",
+    "name": "Miguel Matarín",
+    "surname": "",
+    "role": "Director de arte",
+    "bio": "Se encarga de conceptualizar y construir el universo visual y espacial de cada producción. Desde la paleta de colores y la selección de localizaciones hasta el diseño de los decorados, transforma los espacios físicos para que respiren la misma atmósfera que dicta la historia, asegurando una identidad visual única en cada plano.",
+    "photo_cover": "assets/team/miguel-matarin/cover.avif",
+    "photos_extra": ["01","02","03","04"],
+    "social": {
+      "instagram": "https://www.instagram.com/miguelmatariin/",
+      "youtube": ""
+    },
+    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe", "boda-ester-y-juan"],
+    "specialties": [],
+    "featured": true,
+    "represented_artist": false
+  },
+  {
     "id": "javier-costoya",
     "name": "Javier Costoya",
     "surname": "",
@@ -90,40 +107,6 @@
     "specialties": ["Sonido directo", "Mezcla", "Masterización"],
     "featured": false,
     "represented_artist": false
-  },
-  {
-    "id": "ivan-ambrosio",
-    "name": "Iván Ambrosio",
-    "surname": "",
-    "role": "Editor y VFX Artist",
-    "bio": "Según el encargo, editar los proyectos de UMD Films.",
-    "photo_cover": "assets/team/ivan-ambrosio/cover.avif",
-    "photos_extra": [],
-    "social": {
-      "instagram": "https://www.instagram.com/celvlec/",
-      "youtube": ""
-    },
-    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
-    "specialties": ["Edición", "VFX", "Motion Graphics"],
-    "featured": false,
-    "represented_artist": false
-  },
-  {
-    "id": "sergio-pastor",
-    "name": "Sergio Pastor",
-    "surname": "",
-    "role": "Compositor musical y diseñador de sonido",
-    "bio": "Encargado de realizar todos los trabajos musicales de UMD Films.",
-    "photo_cover": "assets/team/sergio-pastor/cover.avif",
-    "photos_extra": ["01","02","03","04","05","06","07"],
-    "social": {
-      "instagram": "https://www.instagram.com/sergiopastormusic/",
-      "youtube": ""
-    },
-    "projects": ["interludio", "cautivo-malaga", "memoria-compromiso-y-fe"],
-    "specialties": ["Composición", "Diseño de sonido", "Bandas sonoras"],
-    "featured": true,
-    "represented_artist": true
   },
   {
     "id": "javier-abelaira",
@@ -143,33 +126,19 @@
     "represented_artist": false
   },
   {
-    "id": "javier-botella",
-    "name": "Javier Botella",
+    "id": "ivan-ambrosio",
+    "name": "Iván Ambrosio",
     "surname": "",
-    "role": "Informático, programador y desarrollador SEO",
-    "bio": "Encargado de realizar todos los trabajos informáticos y gestionar la página web.",
-    "photo_cover": "assets/team/javier-botella/cover.avif",
+    "role": "Editor y VFX Artist",
+    "bio": "Según el encargo, editar los proyectos de UMD Films.",
+    "photo_cover": "assets/team/ivan-ambrosio/cover.avif",
     "photos_extra": [],
     "social": {
-      "instagram": "https://www.instagram.com/javibot00/",
+      "instagram": "https://www.instagram.com/celvlec/",
       "youtube": ""
     },
-    "projects": [],
-    "specialties": [],
-    "featured": true,
-    "represented_artist": false
-  },
-  {
-    "id": "loreto-navas",
-    "name": "Loreto Navas",
-    "surname": "",
-    "role": "Directora de contenidos de Episodio Cero y Málaga Coronada, chica de imagen y equipo creativo",
-    "bio": "Encargada de dirigir cada vídeo de Episodio Cero y crear contenido para `Málaga Coronada` en redes sociales y su creación de contenido. Además, forma parte de nuestro equipo creativo.",
-    "photo_cover": "assets/team/loreto-navas/cover.avif",
-    "photos_extra": [],
-    "social": { "instagram": "", "youtube": "" },
-    "projects": ["memoria-compromiso-y-fe"],
-    "specialties": [],
+    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
+    "specialties": ["Edición", "VFX", "Motion Graphics"],
     "featured": false,
     "represented_artist": false
   },
@@ -221,7 +190,7 @@
     },
     "projects": [],
     "specialties": [],
-    "featured": false,
+    "featured": true,
     "represented_artist": false
   },
   {
@@ -361,20 +330,51 @@
     "represented_artist": false
   },
   {
-    "id": "miguel-matarin",
-    "name": "Miguel Matarín",
+    "id": "javier-botella",
+    "name": "Javier Botella",
     "surname": "",
-    "role": "Director de arte",
-    "bio": "Se encarga de conceptualizar y construir el universo visual y espacial de cada producción. Desde la paleta de colores y la selección de localizaciones hasta el diseño de los decorados, transforma los espacios físicos para que respiren la misma atmósfera que dicta la historia, asegurando una identidad visual única en cada plano.",
-    "photo_cover": "assets/team/miguel-matarin/cover.avif",
-    "photos_extra": ["01","02","03","04"],
+    "role": "Informático, programador y desarrollador SEO",
+    "bio": "Encargado de realizar todos los trabajos informáticos y gestionar la página web.",
+    "photo_cover": "assets/team/javier-botella/cover.avif",
+    "photos_extra": [],
     "social": {
-      "instagram": "https://www.instagram.com/miguelmatariin/",
+      "instagram": "https://www.instagram.com/javibot00/",
       "youtube": ""
     },
-    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe", "boda-ester-y-juan"],
+    "projects": [],
     "specialties": [],
     "featured": false,
     "represented_artist": false
+  },
+  {
+    "id": "loreto-navas",
+    "name": "Loreto Navas",
+    "surname": "",
+    "role": "Directora de contenidos de Episodio Cero y Málaga Coronada, chica de imagen y equipo creativo",
+    "bio": "Encargada de dirigir cada vídeo de Episodio Cero y crear contenido para `Málaga Coronada` en redes sociales y su creación de contenido. Además, forma parte de nuestro equipo creativo.",
+    "photo_cover": "assets/team/loreto-navas/cover.avif",
+    "photos_extra": [],
+    "social": { "instagram": "", "youtube": "" },
+    "projects": ["memoria-compromiso-y-fe"],
+    "specialties": [],
+    "featured": false,
+    "represented_artist": false
+  },
+  {
+    "id": "sergio-pastor",
+    "name": "Sergio Pastor",
+    "surname": "",
+    "role": "Compositor musical y diseñador de sonido",
+    "bio": "Encargado de realizar todos los trabajos musicales de UMD Films.",
+    "photo_cover": "assets/team/sergio-pastor/cover.avif",
+    "photos_extra": ["01","02","03","04","05","06","07"],
+    "social": {
+      "instagram": "https://www.instagram.com/sergiopastormusic/",
+      "youtube": ""
+    },
+    "projects": ["interludio", "cautivo-malaga", "memoria-compromiso-y-fe"],
+    "specialties": ["Composición", "Diseño de sonido", "Bandas sonoras"],
+    "featured": true,
+    "represented_artist": true
   }
 ]
