@@ -199,11 +199,18 @@ stats.location = config.schema.address_locality               // "Málaga"
 - ✅ 404.html rewritten with nav, footer, skip-link, `<main>` landmark, shared.js
 - ✅ Data typo fixes: "fabrica" → "fábrica" in portfolio.json
 - ✅ JS bug fixes: statsGrid/servicesGrid cleared before appending, showreel skeleton classes removed after load
-- ✅ Per-page OG/Twitter meta tags with `og:image:width`/`og:image:height` (1200×630)
+- ✅ Per-page OG/Twitter meta tags with `og:image:width`/`og:image:height` (1200×630 default; team profile uses 1200×1600)
 - ✅ `theme-color` meta tags on all pages
 - ✅ Showreel section with YouTube facade pattern
 - ✅ Brand redline-draw animation, service icon container
 - ✅ Custom 404 page with full site structure
+- ✅ Light/dark palette re-audited (July 2026): 4-tone ascending hierarchy per theme, `--muted`/`--cream-mid` recalculated against real WCAG contrast ratios; `--red-eyebrow` raised to #ef5561 for AA margin against --dark
+- ✅ `--fs-min` (0.8rem) as global font-size floor, replacing loose values across 6 CSS files
+- ✅ `.page-back-link` consolidated, removes duplication between `.profile-hero__back`/`.film-hero__back`
+- ✅ "Back" link added to all 4 listing pages (previously only individual team/portfolio pages had one)
+- ✅ `theme-color` meta bug fixed: single `<meta id="themeColorMeta">` updated by JS in `applyTheme()`
+- ✅ `.footer` added to the pinned-dark block (alongside `.hero`/`.nav`) — fixes white+red logo invisibility in light theme without needing an SVG variant
+- ✅ Contact section redesigned: WhatsApp + `mailto:` (email), contact form now opens a prefilled `mailto:` instead of WhatsApp; social links (Instagram/YouTube/TikTok) live only in the footer
 
 ---
 
@@ -211,22 +218,21 @@ stats.location = config.schema.address_locality               // "Málaga"
 
 **Implemented in code:**
 
-- `LocalBusiness` JSON-LD schema (home) — missing `image` field
-- `VideoObject` JSON-LD schema (project pages with YouTube) — missing `duration`
+- `LocalBusiness` JSON-LD schema (home)
+- `VideoObject` JSON-LD schema (project pages with YouTube)
 - `Person` JSON-LD schema (team member pages)
 - Unique `<title>` per page (static + JS override)
 - Unique `<meta description>` per page (static + JS override)
 - `<link rel="canonical">` on home and equipment (JS overrides on team/portfolio)
 - Descriptive alt text with "UMD Films" and "Málaga"
 - Semantic HTML: `<header>`, `<main>`, `<section>`, `<footer>`, `<article>`
-- `<main id="contenido">` landmark on all pages
+- `<main id="contenido" tabindex="-1">` landmark on all pages
 - Single `<h1>` per page (JS-injected on team/portfolio profiles)
 - Open Graph + Twitter Card on all pages
 - WCAG 2.2 AA accessibility: skip link, `:focus-visible`, `aria-pressed`, `aria-label`, `prefers-reduced-motion`, keyboard on all cards
 
 **Known issues (code fixes needed):**
 
-- OG fallback images in templates are SVG logos (invalid for social cards) — now using `og-cover.png`
 - No `<noscript>` fallback; entire site content depends on JS
 - No BreadcrumbList schema
 

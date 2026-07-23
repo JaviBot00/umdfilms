@@ -36,23 +36,8 @@
 .profile-hero__content {
   position: relative;
   z-index: 2;
-  padding-inline: clamp(1.5rem, 8vw, 8rem);
-  max-width: 720px;
+  text-align: right;
 }
-.profile-hero__back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--cream-mid);
-  margin-bottom: 3rem;
-  transition: color 0.25s;
-}
-.profile-hero__back:hover { color: var(--red-light); }
-.profile-hero__back svg { width: 14px; fill: none; stroke: currentColor; stroke-width: 2; }
-
 .profile-hero__name {
   font-size: clamp(3rem, 7vw, 6rem);
   color: var(--white);
@@ -72,9 +57,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  justify-content: flex-end;
 }
 .specialty-tag {
-  font-size: 0.65rem;
+  font-size: var(--fs-min);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--cream-mid);
@@ -149,7 +135,7 @@
 }
 .profile-info-row:last-child { border-bottom: none; }
 .profile-info-label {
-  font-size: 0.68rem;
+  font-size: var(--fs-min);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);

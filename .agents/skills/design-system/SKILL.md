@@ -49,6 +49,8 @@ etc. These are the variables currently defined:
 | `--red`, `--red-light`, `--red-dim`, `--red-glow` | Accent + states |
 | `--white`, `--cream`, `--cream-mid`, `--muted` | Text |
 | `--line` | Borders (flips between `rgba(255,255,255,0.12)` dark / `rgba(0,0,0,0.1)` light) |
+| `--fs-min` | Global minimum font size (0.8rem) — never go below this for legible text |
+| `--black-rgb` | RGB components of `--black`, unitless, used to build the `--black-overlay-*` family via `rgba(var(--black-rgb), x)` |
 
 A hardcoded `rgba(255,255,255,0.1)` border will look correct in dark mode and
 **disappear or invert oddly in light mode** — it never gets the light-theme flip.

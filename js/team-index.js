@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   await UMD.renderFooter(config);
   UMD.renderFAB();
 
+  document.querySelector('.page-hero .container').insertAdjacentHTML('afterbegin', `
+  <a href="${UMD.rootPath('index.html') + '#equipo'}" class="page-back-link reveal">
+    <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+    ${config.ui_strings.common.volver}
+  </a>`);
+
   document.title = config.seo.title_team_index;
   document.querySelector('meta[name="description"]')
     ?.setAttribute('content', config.seo.description_team_index);

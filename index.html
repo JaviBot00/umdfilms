@@ -18,8 +18,7 @@
   </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" id="themeColorMeta" content="#1a1a1a" />
 
   <!-- SEO (fallback values; main.js overwrites dynamically from config.json) -->
   <title>UMD Films | Productora Audiovisual en Málaga</title>
@@ -28,15 +27,15 @@
   <link rel="canonical" href="https://umdfilms.com/" />
 
   <!-- Open Graph -->
-  <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://umdfilms.com/" />
-  <meta property="og:title"       content="UMD Films | Productora Audiovisual en Málaga" />
-  <meta property="og:description" content="Videoclips, publicidad, cine y producción musical con alma malagueña y alcance nacional." />
-  <meta property="og:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://umdfilms.com/" />
+  <meta property="og:title"        content="UMD Films | Productora Audiovisual en Málaga" />
+  <meta property="og:description"  content="Videoclips, publicidad, cine y producción musical con alma malagueña y alcance nacional." />
+  <meta property="og:image"        content="https://umdfilms.com/assets/logo/og-cover.png" />
   <meta property="og:image:width"  content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:site_name"   content="UMD Films" />
-  <meta property="og:locale"      content="es_ES" />
+  <meta property="og:site_name"    content="UMD Films" />
+  <meta property="og:locale"       content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card"        content="summary_large_image" />
@@ -70,7 +69,7 @@
   <!-- ---- NAV ---- -->
   <header class="nav" id="nav" role="banner"></header>
 
-  <main id="contenido">
+  <main id="contenido" tabindex="-1">
 
   <!-- ---- HERO ---- -->
   <section class="hero" id="hero" aria-label="Portada UMD Films">
@@ -120,8 +119,9 @@
   <!-- ---- TRUST BAR ---- -->
   <section class="trust" aria-label="Clientes">
     <p class="trust__label" id="trustLabel"><span class="skeleton skeleton-text skeleton-text--sm" style="width:80px"></span></p>
-    <div class="trust__track" aria-hidden="true">
-      <div class="trust__inner" id="trustInner">
+    <ul class="visually-hidden" id="trustListA11y"></ul>
+    <div class="trust__track">
+      <div class="trust__inner" id="trustInner" aria-hidden="true">
         <span class="skeleton skeleton--trust-logo"></span>
         <span class="skeleton skeleton--trust-logo"></span>
         <span class="skeleton skeleton--trust-logo"></span>

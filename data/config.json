@@ -14,7 +14,8 @@
   "contact": {
     "whatsapp": "34675185198",
     "whatsapp_msg": "Hola, me interesa contratar vuestros servicios.",
-    "email": "contacto@umdfilms.com"
+    "email": "contacto@umdfilms.com",
+    "email_label": "Escríbenos"
   },
 
   "social": {
@@ -60,6 +61,7 @@
 
   "ui_strings": {
     "_comment": "ALL user-facing strings live here. Never hardcode text in JS/HTML — add a key here instead and reference it via config.ui_strings.",
+    "common": { "volver": "Volver" },
     "nav": {
       "quienes_somos": "Quiénes somos",
       "servicios": "Servicios",

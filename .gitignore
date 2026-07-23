@@ -14,19 +14,13 @@ Desktop.ini
 *~
 
 # Generated files (regenerate with: node generate-pages.js)
-# assets/team/*.*
+assets/equipment/**
 # team/*.html
 # !team/template.html
 # !team/index.html
 # portfolio/*.html
 # !portfolio/template.html
 # !portfolio/index.html
-# sitemap.xml
-
-# assets/equipment/*
-
-# Archives
-files.zip
 
 # Env
 .env
