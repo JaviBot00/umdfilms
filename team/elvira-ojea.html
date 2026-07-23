@@ -18,8 +18,7 @@
   </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" id="themeColorMeta" content="#1a1a1a" />
 
   <!-- SEO: title, description and canonical are dynamically overwritten by team.js -->
   <title>Elvira Ojea — Guionista | UMD Films Málaga</title>
@@ -28,26 +27,26 @@
   <link rel="canonical" href="https://umdfilms.com/team/elvira-ojea.html" />
 
   <!-- Open Graph (team.js overwrites title, description, image, url) -->
-  <meta property="og:type"        content="profile" />
-  <meta property="og:locale"      content="es_ES" />
-  <meta property="og:site_name"   content="UMD Films" />
-  <meta property="og:title"       content="Elvira Ojea — Guionista | UMD Films Málaga" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="UMD Films" />
+  <meta property="og:title" content="Elvira Ojea — Guionista | UMD Films Málaga" />
   <meta property="og:description" content="Elvira Ojea, Guionista en UMD Films Málaga." />
-  <meta property="og:image"       content="https://umdfilms.com/assets/team/elvira-ojea/cover.avif" />
-  <meta property="og:image:width"  content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:url"         content="https://umdfilms.com/team/elvira-ojea.html" />
+  <meta property="og:image" content="https://umdfilms.com/assets/team/elvira-ojea/cover.avif" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1600" />
+  <meta property="og:url" content="https://umdfilms.com/team/elvira-ojea.html" />
 
   <!-- Twitter Card -->
-  <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:site"        content="@UMDFilmsoficial" />
-  <meta name="twitter:title"       content="Elvira Ojea — Guionista | UMD Films Málaga" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@UMDFilmsoficial" />
+  <meta name="twitter:title" content="Elvira Ojea — Guionista | UMD Films Málaga" />
   <meta name="twitter:description" content="Elvira Ojea, Guionista en UMD Films Málaga." />
-  <meta name="twitter:image"       content="https://umdfilms.com/assets/team/elvira-ojea/cover.avif" />
+  <meta name="twitter:image" content="https://umdfilms.com/assets/team/elvira-ojea/cover.avif" />
 
   <!-- Favicon -->
-  <link rel="icon"             href="../assets/logo/favicon.ico" />
-  <link rel="icon"             href="../assets/logo/favicon.svg"  type="image/svg+xml" />
+  <link rel="icon" href="../assets/logo/favicon.ico" />
+  <link rel="icon" href="../assets/logo/favicon.svg"  type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../assets/logo/apple-touch-icon.png" />
 
   <!-- Fonts -->
@@ -70,12 +69,16 @@
   <!-- Nav: rendered by shared.js > renderNav() -->
   <header class="nav" id="nav" role="banner"></header>
 
-  <main id="contenido">
+  <main id="contenido" tabindex="-1">
 
     <!-- ---- PROFILE HERO ------>
     <section class="profile-hero" id="profileHero" aria-label="Perfil de miembro">
       <div class="skeleton skeleton--hero" style="min-height:400px;display:flex;align-items:flex-end;padding:clamp(4rem,10vw,8rem) clamp(1.5rem,5vw,4rem) 3rem">
-        <div><div class="skeleton skeleton-text skeleton-text--sm" style="height:.7rem;width:100px;margin-bottom:.8rem;background:rgba(255,255,255,.15)"></div><div class="skeleton skeleton-text skeleton-text--lg" style="height:2.4rem;width:280px;margin-bottom:.5rem;background:rgba(255,255,255,.15)"></div><div class="skeleton skeleton-text skeleton-text--md" style="height:1rem;width:160px;background:rgba(255,255,255,.1)"></div></div>
+        <div>
+          <div class="skeleton skeleton-text skeleton-text--sm" style="height:.7rem;width:100px;margin-bottom:.8rem;background:rgba(255,255,255,.15)"></div>
+          <div class="skeleton skeleton-text skeleton-text--lg" style="height:2.4rem;width:280px;margin-bottom:.5rem;background:rgba(255,255,255,.15)"></div>
+          <div class="skeleton skeleton-text skeleton-text--md" style="height:1rem;width:160px;background:rgba(255,255,255,.1)"></div>
+        </div>
       </div>
     </section>
 

@@ -85,7 +85,7 @@ html[data-theme="light"] .gear-card__qty {
 
 .gear-card__body { padding: 1.25rem; }
 .gear-card__cat {
-  font-size: 0.6rem;
+  font-size: var(--fs-min);
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--red);
@@ -106,7 +106,7 @@ html[data-theme="light"] .gear-card__qty {
   margin-bottom: 1.25rem;
 }
 .gear-spec {
-  font-size: 0.58rem;
+  font-size: var(--fs-min);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--cream-mid);

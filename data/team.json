@@ -30,7 +30,7 @@
     "role": "Productor general y director de contenidos tradicional",
     "bio": "Encargado de la supervisión general y dirección estratégica de la línea de contenido tradicional y documental.",
     "photo_cover": "assets/team/adrian-roman/cover.avif",
-    "photos_extra": ["01","02","03","04","05","06","07"],
+    "photos_extra": ["01","02","03","04","05","06","07","08","09"],
     "social": {
       "instagram": "https://www.instagram.com/adrianroman18/",
       "youtube": ""
@@ -41,13 +41,30 @@
     "represented_artist": false
   },
   {
+    "id": "pol-ojea",
+    "name": "Pol Ojea",
+    "surname": "",
+    "role": "Subdirector y director de contenidos en redes sociales",
+    "bio": "Control parcial de la productora y toma de decisión junto con los directores en cada movimiento. Toma total de decisiones respecto a la imagen de UMD Films en redes sociales y creación de contenido.",
+    "photo_cover": "assets/team/pol-ojea/cover.avif",
+    "photos_extra": ["01","02","03","04"],
+    "social": {
+      "instagram": "https://www.instagram.com/pabloojea_/",
+      "youtube": ""
+    },
+    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
+    "specialties": [],
+    "featured": true,
+    "represented_artist": false
+  },
+  {
     "id": "ivan-pascual",
     "name": "Iván Pascual",
     "surname": "",
     "role": "Director de Fotografía",
     "bio": "El responsable de traducir las emociones del guion en imágenes. Diseña la iluminación, la composición y el movimiento de cámara, trabajando estrechamente con dirección para crear la atmósfera visual, la textura y la identidad cromática de cada producción.",
     "photo_cover": "assets/team/ivan-pascual/cover.avif",
-    "photos_extra": ["01","02","03","04","05","06"],
+    "photos_extra": ["01","02","03","04","05","06","07"],
     "social": {
       "instagram": "https://www.instagram.com/ivanpg_dop/",
       "youtube": ""
@@ -98,7 +115,7 @@
     "role": "Compositor musical y diseñador de sonido",
     "bio": "Encargado de realizar todos los trabajos musicales de UMD Films.",
     "photo_cover": "assets/team/sergio-pastor/cover.avif",
-    "photos_extra": ["01","02","03","04"],
+    "photos_extra": ["01","02","03","04","05","06","07"],
     "social": {
       "instagram": "https://www.instagram.com/sergiopastormusic/",
       "youtube": ""
@@ -107,23 +124,6 @@
     "specialties": ["Composición", "Diseño de sonido", "Bandas sonoras"],
     "featured": true,
     "represented_artist": true
-  },
-  {
-    "id": "javier-botella",
-    "name": "Javier Botella",
-    "surname": "",
-    "role": "Informático, programador y desarrollador SEO",
-    "bio": "Encargado de realizar todos los trabajos informáticos y gestionar la página web.",
-    "photo_cover": "assets/team/javier-botella/cover.avif",
-    "photos_extra": [],
-    "social": {
-      "instagram": "https://www.instagram.com/javibot00/",
-      "youtube": ""
-    },
-    "projects": [],
-    "specialties": [],
-    "featured": true,
-    "represented_artist": false
   },
   {
     "id": "javier-abelaira",
@@ -143,18 +143,18 @@
     "represented_artist": false
   },
   {
-    "id": "pol-ojea",
-    "name": "Pol Ojea",
+    "id": "javier-botella",
+    "name": "Javier Botella",
     "surname": "",
-    "role": "Subdirector y director de contenidos en redes sociales",
-    "bio": "Control parcial de la productora y toma de decisión junto con los directores en cada movimiento. Toma total de decisiones respecto a la imagen de UMD Films en redes sociales y creación de contenido.",
-    "photo_cover": "assets/team/pol-ojea/cover.avif",
-    "photos_extra": ["01","02","03"],
+    "role": "Informático, programador y desarrollador SEO",
+    "bio": "Encargado de realizar todos los trabajos informáticos y gestionar la página web.",
+    "photo_cover": "assets/team/javier-botella/cover.avif",
+    "photos_extra": [],
     "social": {
-      "instagram": "https://www.instagram.com/pabloojea_/",
+      "instagram": "https://www.instagram.com/javibot00/",
       "youtube": ""
     },
-    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
+    "projects": [],
     "specialties": [],
     "featured": true,
     "represented_artist": false
@@ -265,7 +265,7 @@
     "role": "Guionista",
     "bio": "La mente detrás de las historias que contamos. Traduce conceptos abstractos en narrativas cinematográficas potentes, diseñando la estructura dramática y el ritmo visual del guion. Trabaja en la base del desarrollo para asegurar que cada proyecto tenga un mensaje claro y enganche desde la primera página. Además, forma parte de nuestro equipo creativo.",
     "photo_cover": "assets/team/elvira-ojea/cover.avif",
-    "photos_extra": [],
+    "photos_extra": ["01","02"],
     "social": {
       "instagram": "https://www.instagram.com/_elviraa_ojm_/",
       "youtube": ""
@@ -367,7 +367,7 @@
     "role": "Director de arte",
     "bio": "Se encarga de conceptualizar y construir el universo visual y espacial de cada producción. Desde la paleta de colores y la selección de localizaciones hasta el diseño de los decorados, transforma los espacios físicos para que respiren la misma atmósfera que dicta la historia, asegurando una identidad visual única en cada plano.",
     "photo_cover": "assets/team/miguel-matarin/cover.avif",
-    "photos_extra": ["01"],
+    "photos_extra": ["01","02","03","04"],
     "social": {
       "instagram": "https://www.instagram.com/miguelmatariin/",
       "youtube": ""

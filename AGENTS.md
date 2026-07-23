@@ -171,6 +171,7 @@ deliberately chosen to not imply a section that isn't always present:
 | `.portfolio-card*`, `.portfolio__grid` | home, `portfolio/index.html`, member profile projects (`team.js`) |
 | `.page-hero` | `team/`, `portfolio/`, `artists/`, `equipment/` index pages |
 | `.skeleton*` | home (hero, showreel, trust, stats, services, grids), team/portfolio profile heroes, all listing page grids |
+| `.page-back-link` | team/[id], portfolio/[id], team/index, portfolio/index, equipment/index, artists/index |
 
 Before adding a new home-only class to `css/home.css`, grep the class name
 across all `.js`/`.html` files first — this project has a history (Bloque G)
@@ -208,12 +209,13 @@ WCAG 2.2 AA baseline. All interactive elements must remain keyboard accessible.
 ### What's in place
 
 - **Skip link**: `<a href="#contenido" class="skip-link">` on all pages — visually hidden, appears on Tab focus
-- **`<main id="contenido">`**: landmark on all pages (index.html wraps hero through contact; subpage templates already had `<main>`; 404.html includes it too)
+- **`<main id="contenido" tabindex="-1">`**: landmark on all pages (index.html wraps hero through contact; subpage templates already had `<main>`; 404.html includes it too)
 - **`:focus-visible` styles**: red outline on all interactive elements; box-shadow ring on buttons, filters, theme toggle, FAB
 - **Keyboard navigation**: team cards, portfolio cards, and linked service cards all have `role="link"`, `tabindex="0"`, and Enter/Space handlers
 - **`aria-pressed`**: filter buttons (portfolio + equipment) announce active state
 - **`aria-label`**: footer navs distinguished via `ui_strings.aria.main_navigation`; sections, social links, burger, theme toggle, WhatsApp FAB all labeled from `ui_strings.aria.*`
-- **`aria-hidden="true"`**: decorative SVGs, hero video, hero overlay/redline, trust bar marquee track, service video preview
+- **`aria-hidden="true"`**: decorative SVGs, hero video, hero overlay/redline, trust bar marquee inner, service video preview
+- **Trust bar accessible list**: `<ul class="visually-hidden" id="trustListA11y">` populated by JS for screen readers; visual marquee track is `aria-hidden`
 - **Form accessibility**: all inputs have `<label for>` association, `autocomplete` attributes, `aria-invalid` on validation errors, visible focus ring via `box-shadow`
 - **`prefers-reduced-motion`**: disables all animations, transitions, scroll-behavior, trust bar marquee, and skeleton pulse animation
 - **`prefers-color-scheme`**: light/dark theme with localStorage persistence; hero/CTA/nav always dark

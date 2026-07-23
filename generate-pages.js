@@ -17,6 +17,27 @@ function readTemplate(relPath) {
   return fs.readFileSync(path.join(ROOT, relPath), 'utf8');
 }
 
+/* ---- Safe replace (collects errors, never aborts mid-loop) ---- */
+function safeReplace(html, oldStr, newStr, label) {
+  if (!html.includes(oldStr)) {
+    return { html, error: label };
+  }
+  return { html: html.replace(oldStr, newStr), error: null };
+}
+
+/* ---- Validate URL-safe ID ---- */
+const URL_SAFE_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+function isUrlSafeId(id) {
+  return typeof id === 'string' && URL_SAFE_RE.test(id);
+}
+
+/* ---- Check required fields and return missing list ---- */
+function missingFields(obj, fields, label) {
+  return fields
+    .filter(f => obj[f] === undefined || obj[f] === null || obj[f] === '')
+    .map(f => `${label}.${f}`);
+}
+
 /* ---- Write file ---- */
 function writeFile(relPath, content) {
   const fullPath = path.join(ROOT, relPath);
@@ -40,63 +61,58 @@ function generateTeamPages() {
   console.log(`\n👤 Generating ${team.length} team pages...`);
 
   team.forEach(member => {
+    if (!member || !member.id) return;
+
+    if (!isUrlSafeId(member.id)) {
+      console.error(`  ⚠ Skipping team "${member.id || '(no id)'}": ID not URL-safe (use lowercase-words-only)`);
+      return;
+    }
+
+    const missing = missingFields(member, ['name', 'role'], `team/${member.id}`);
+    if (missing.length) {
+      console.error(`  ⚠ Skipping team "${member.id}": missing fields: ${missing.join(', ')}`);
+      return;
+    }
+
     const fullName = member.name + (member.surname ? ' ' + member.surname : '');
     const pageUrl  = `${SITE_URL}/team/${member.id}.html`;
     const ogImage  = member.photo_cover
       ? `${SITE_URL}/${member.photo_cover}`
       : OG_IMAGE_FALLBACK;
 
-    const html = template
-      // <title>
-      .replace(
-        '<title>Equipo | UMD Films — Productora Audiovisual Málaga</title>',
-        `<title>${fullName} — ${member.role} | ${config.seo.site_suffix}</title>`
-      )
-      // <meta description>
-      .replace(
-        `<meta name="description" content="Perfil de miembro del equipo ${config.seo.site_suffix}." />`,
-        `<meta name="description" content="${fullName}, ${member.role} en ${config.seo.site_suffix}. Conoce a nuestro equipo." />`
-      )
-      // canonical
-      .replace(
-        '<link rel="canonical" href="https://umdfilms.com/team/" />',
-        `<link rel="canonical" href="${pageUrl}" />`
-      )
-      // OG title
-      .replace(
-        '<meta property="og:title"       content="Equipo | UMD Films Málaga" />',
-        `<meta property="og:title"       content="${fullName} — ${member.role} | ${config.seo.site_suffix}" />`
-      )
-      // OG description
-      .replace(
-        '<meta property="og:description" content="Conoce al equipo de UMD Films, productora audiovisual en Málaga." />',
-        `<meta property="og:description" content="${fullName}, ${member.role} en ${config.seo.site_suffix}." />`
-      )
-      // OG image
-      .replace(
-        '<meta property="og:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />',
-        `<meta property="og:image"       content="${ogImage}" />`
-      )
-      // OG url
-      .replace(
-        '<meta property="og:url"         content="https://umdfilms.com/team/" />',
-        `<meta property="og:url"         content="${pageUrl}" />`
-      )
-      // Twitter title
-      .replace(
-        '<meta name="twitter:title"       content="Equipo | UMD Films Málaga" />',
-        `<meta name="twitter:title"       content="${fullName} — ${member.role} | ${config.seo.site_suffix}" />`
-      )
-      // Twitter description
-      .replace(
-        '<meta name="twitter:description" content="Conoce al equipo de UMD Films, productora audiovisual en Málaga." />',
-        `<meta name="twitter:description" content="${fullName}, ${member.role} en ${config.seo.site_suffix}." />`
-      )
-      // Twitter image
-      .replace(
-        '<meta name="twitter:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />',
-        `<meta name="twitter:image"       content="${ogImage}" />`
-      );
+    let html = template;
+    const errors = [];
+
+    function doReplace(oldStr, newStr, label) {
+      const result = safeReplace(html, oldStr, newStr, label);
+      html = result.html;
+      if (result.error) errors.push(result.error);
+    }
+
+    doReplace('<title>Equipo | UMD Films — Productora Audiovisual Málaga</title>',
+      `<title>${fullName} — ${member.role} | ${config.seo.site_suffix}</title>`, 'title');
+    doReplace(`<meta name="description" content="Perfil de miembro del equipo ${config.seo.site_suffix}." />`,
+      `<meta name="description" content="${fullName}, ${member.role} en ${config.seo.site_suffix}. Conoce a nuestro equipo." />`, 'meta description');
+    doReplace('<link rel="canonical" href="https://umdfilms.com/team/" />',
+      `<link rel="canonical" href="${pageUrl}" />`, 'canonical');
+    doReplace('<meta property="og:title" content="Equipo | UMD Films Málaga" />',
+      `<meta property="og:title" content="${fullName} — ${member.role} | ${config.seo.site_suffix}" />`, 'OG title');
+    doReplace('<meta property="og:description" content="Conoce al equipo de UMD Films, productora audiovisual en Málaga." />',
+      `<meta property="og:description" content="${fullName}, ${member.role} en ${config.seo.site_suffix}." />`, 'OG description');
+    doReplace('<meta property="og:image" content="https://umdfilms.com/assets/logo/og-cover.png" />',
+      `<meta property="og:image" content="${ogImage}" />`, 'OG image');
+    doReplace('<meta property="og:url" content="https://umdfilms.com/team/" />',
+      `<meta property="og:url" content="${pageUrl}" />`, 'OG url');
+    doReplace('<meta name="twitter:title" content="Equipo | UMD Films Málaga" />',
+      `<meta name="twitter:title" content="${fullName} — ${member.role} | ${config.seo.site_suffix}" />`, 'Twitter title');
+    doReplace('<meta name="twitter:description" content="Conoce al equipo de UMD Films, productora audiovisual en Málaga." />',
+      `<meta name="twitter:description" content="${fullName}, ${member.role} en ${config.seo.site_suffix}." />`, 'Twitter description');
+    doReplace('<meta name="twitter:image" content="https://umdfilms.com/assets/logo/og-cover.png" />',
+      `<meta name="twitter:image" content="${ogImage}" />`, 'Twitter image');
+
+    if (errors.length) {
+      console.error(`  ⚠ team/${member.id}.html: template replacements not found: ${errors.join(', ')}`);
+    }
 
     writeFile(`team/${member.id}.html`, html);
   });
@@ -110,62 +126,56 @@ function generatePortfolioPages() {
 
   portfolio.forEach(project => {
     if (!project || !project.id) return;
+
+    if (!isUrlSafeId(project.id)) {
+      console.error(`  ⚠ Skipping portfolio "${project.id}": ID not URL-safe (use lowercase-words-only)`);
+      return;
+    }
+
+    const missing = missingFields(project, ['title', 'category', 'year'], `portfolio/${project.id}`);
+    if (missing.length) {
+      console.error(`  ⚠ Skipping portfolio "${project.id}": missing fields: ${missing.join(', ')}`);
+      return;
+    }
+
     const pageUrl = `${SITE_URL}/portfolio/${project.id}.html`;
     const ogImage = project.thumb
       ? `${SITE_URL}/${project.thumb}`
       : OG_IMAGE_FALLBACK;
 
-    const html = template
-      // <title>
-      .replace(
-        '<title>Proyecto | UMD Films — Productora Audiovisual Málaga</title>',
-        `<title>${project.title} | ${config.seo.site_suffix}</title>`
-      )
-      // <meta description>
-      .replace(
-        '<meta name="description" content="Proyecto de UMD Films, productora audiovisual en Málaga." />',
-        `<meta name="description" content="${project.title} — ${project.category} producido por UMD Films en ${project.year}. Descubre este proyecto." />`
-      )
-      // canonical
-      .replace(
-        '<link rel="canonical" href="https://umdfilms.com/portfolio/" />',
-        `<link rel="canonical" href="${pageUrl}" />`
-      )
-      // OG title
-      .replace(
-        '<meta property="og:title"       content="Proyecto | UMD Films Málaga" />',
-        `<meta property="og:title"       content="${project.title} | ${config.seo.site_suffix}" />`
-      )
-      // OG description
-      .replace(
-        '<meta property="og:description" content="Descubre nuestros proyectos de producción audiovisual en Málaga." />',
-        `<meta property="og:description" content="${project.title} — ${project.category} producido por UMD Films en ${project.year}." />`
-      )
-      // OG image
-      .replace(
-        '<meta property="og:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />',
-        `<meta property="og:image"       content="${ogImage}" />`
-      )
-      // OG url
-      .replace(
-        '<meta property="og:url"         content="https://umdfilms.com/portfolio/" />',
-        `<meta property="og:url"         content="${pageUrl}" />`
-      )
-      // Twitter title
-      .replace(
-        '<meta name="twitter:title"       content="Proyecto | UMD Films Málaga" />',
-        `<meta name="twitter:title"       content="${project.title} | ${config.seo.site_suffix}" />`
-      )
-      // Twitter description
-      .replace(
-        '<meta name="twitter:description" content="Descubre nuestros proyectos de producción audiovisual en Málaga." />',
-        `<meta name="twitter:description" content="${project.title} — ${project.category} producido por UMD Films en ${project.year}." />`
-      )
-      // Twitter image
-      .replace(
-        '<meta name="twitter:image"       content="https://umdfilms.com/assets/logo/og-cover.png" />',
-        `<meta name="twitter:image"       content="${ogImage}" />`
-      );
+    let html = template;
+    const errors = [];
+
+    function doReplace(oldStr, newStr, label) {
+      const result = safeReplace(html, oldStr, newStr, label);
+      html = result.html;
+      if (result.error) errors.push(result.error);
+    }
+
+    doReplace('<title>Proyecto | UMD Films — Productora Audiovisual Málaga</title>',
+      `<title>${project.title} | ${config.seo.site_suffix}</title>`, 'title');
+    doReplace('<meta name="description" content="Proyecto de UMD Films, productora audiovisual en Málaga." />',
+      `<meta name="description" content="${project.title} — ${project.category} producido por UMD Films en ${project.year}. Descubre este proyecto." />`, 'meta description');
+    doReplace('<link rel="canonical" href="https://umdfilms.com/portfolio/" />',
+      `<link rel="canonical" href="${pageUrl}" />`, 'canonical');
+    doReplace('<meta property="og:title" content="Proyecto | UMD Films Málaga" />',
+      `<meta property="og:title" content="${project.title} | ${config.seo.site_suffix}" />`, 'OG title');
+    doReplace('<meta property="og:description" content="Descubre nuestros proyectos de producción audiovisual en Málaga." />',
+      `<meta property="og:description" content="${project.title} — ${project.category} producido por UMD Films en ${project.year}." />`, 'OG description');
+    doReplace('<meta property="og:image" content="https://umdfilms.com/assets/logo/og-cover.png" />',
+      `<meta property="og:image" content="${ogImage}" />`, 'OG image');
+    doReplace('<meta property="og:url" content="https://umdfilms.com/portfolio/" />',
+      `<meta property="og:url" content="${pageUrl}" />`, 'OG url');
+    doReplace('<meta name="twitter:title" content="Proyecto | UMD Films Málaga" />',
+      `<meta name="twitter:title" content="${project.title} | ${config.seo.site_suffix}" />`, 'Twitter title');
+    doReplace('<meta name="twitter:description" content="Descubre nuestros proyectos de producción audiovisual en Málaga." />',
+      `<meta name="twitter:description" content="${project.title} — ${project.category} producido por UMD Films en ${project.year}." />`, 'Twitter description');
+    doReplace('<meta name="twitter:image" content="https://umdfilms.com/assets/logo/og-cover.png" />',
+      `<meta name="twitter:image" content="${ogImage}" />`, 'Twitter image');
+
+    if (errors.length) {
+      console.error(`  ⚠ portfolio/${project.id}.html: template replacements not found: ${errors.join(', ')}`);
+    }
 
     writeFile(`portfolio/${project.id}.html`, html);
   });

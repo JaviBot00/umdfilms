@@ -34,23 +34,6 @@
     "featured": true
   },
   {
-    "id": "memoria-compromiso-y-fe",
-    "title": "Memoria, Compromiso y Fe | Videoclip oficial",
-    "category": "Videoclip",
-    "year": 2026,
-    "duration_min": 4,
-    "director": "Alejandro Luque",
-    "client": "Sergio Pastor",
-    "synopsis": "Contamos la herencia que nos dejan nuestros mayores y la huella imborrable de nuestra ciudad",
-    "thumb": "assets/portfolio/memoria-compromiso-y-fe/cover.avif",
-    "photos_extra": ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17"],
-    "trailer_youtube": "",
-    "full_video_youtube": "https://youtu.be/FtjIAztekkw",
-    "team_ids": ["alejandro-luque", "sergio-pastor", "pol-ojea", "ivan-ambrosio", "ivan-pascual", "sofia-garcia", "miguel-matarin", "eva-cano", "javier-abelaira", "julia-flores", "loreto-navas", "dario-gonzalez", "alicia-caro"],
-    "tags": ["Videoclip", "Deporte", "Málaga"],
-    "featured": true
-  },
-  {
     "id": "interludio",
     "title": "Interludio",
     "category": "Cortometraje",
@@ -65,6 +48,23 @@
     "full_video_youtube": "https://youtu.be/VPC95rFQ9Os",
     "team_ids": ["alejandro-luque", "adrian-roman", "sergio-pastor"],
     "tags": ["Cine", "Salud mental"],
+    "featured": true
+  },
+  {
+    "id": "memoria-compromiso-y-fe",
+    "title": "Memoria, Compromiso y Fe | Videoclip oficial",
+    "category": "Videoclip",
+    "year": 2026,
+    "duration_min": 4,
+    "director": "Alejandro Luque",
+    "client": "Sergio Pastor",
+    "synopsis": "Contamos la herencia que nos dejan nuestros mayores y la huella imborrable de nuestra ciudad",
+    "thumb": "assets/portfolio/memoria-compromiso-y-fe/cover.avif",
+    "photos_extra": ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17"],
+    "trailer_youtube": "",
+    "full_video_youtube": "https://youtu.be/FtjIAztekkw",
+    "team_ids": ["alejandro-luque", "sergio-pastor", "pol-ojea", "ivan-ambrosio", "ivan-pascual", "sofia-garcia", "miguel-matarin", "eva-cano", "javier-abelaira", "julia-flores", "loreto-navas", "dario-gonzalez", "alicia-caro"],
+    "tags": ["Videoclip", "Deporte", "Málaga"],
     "featured": true
   },
   {

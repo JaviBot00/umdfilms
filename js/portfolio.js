@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   UMD.setTwitterMeta('twitter:image',       `${thumbSrc}`);
 
   // Schema VideoObject for projects with video
-  if (project.trailer_youtube && !project.trailer_youtube.includes('PLACEHOLDER')) {
+  if (trailerId || fullId) {
     const schema = {
       "@context": "https://schema.org",
       "@type": "VideoObject",
@@ -78,10 +78,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       "duration": project.duration_min ? `PT${project.duration_min}M` : undefined,
       "director": { "@type": "Person", "name": project.director },
       "productionCompany": { "@type": "Organization", "name": config.brand.name, "url": config.brand.site_url },
-      "url": project.trailer_youtube
+      "url": trailerId ? project.trailer_youtube : project.full_video_youtube
     };
-    if (trailerId) {
-      schema.embedUrl = `https://www.youtube.com/embed/${trailerId}`;
+    if (trailerId || fullId) {
+      schema.embedUrl = `https://www.youtube.com/embed/${trailerId || fullId}`;
     }
     if (!schema.duration) delete schema.duration;
     const tag = document.createElement('script');
@@ -100,8 +100,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           alt="${project.title}">
       </div>
       <div class="film-hero__overlay" aria-hidden="true"></div>
-      <div class="film-hero__content">
-        <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#portafolio')}" class="film-hero__back reveal">
+      <div class="film-hero__content container">
+        <a href="${UMD.getBackUrl(UMD.rootPath('index.html') + '#portafolio')}" class="page-back-link reveal">
           <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
           ${err404.proyecto_volver}
         </a>
@@ -251,7 +251,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         a.className = 'film-team-member reveal';
         a.innerHTML = `
           <img src="${UMD.rootPath(member.photo_cover)}"
-               alt="${member.name}" loading="lazy" />
+            onerror="this.onerror=null; this.src='${UMD.rootPath('assets/team/placeholder-icon.svg')}'"
+            alt="${member.name}" loading="lazy" />
           <div>
             <p class="film-team-member__name">${member.name}</p>
             <p class="film-team-member__role">${member.role}</p>

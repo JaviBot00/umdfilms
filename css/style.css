@@ -10,17 +10,17 @@
 
 :root {
   /* Colores */
-  --black:      #080808;
-  --dark:       #0f0f0f;
-  --dark-mid:   #161616;
-  --dark-soft:  #1e1e1e;
+  --black:      #121214;
+  --dark:       #18181b;
+  --dark-mid:   #202024;
+  --dark-soft:  #29292e;
   --red:        #c0202a;
   --red-light:  #e02d38;
   --red-dim:    rgba(192, 32, 42, 0.15);
   --red-glow:   rgba(192, 32, 42, 0.35);
   --red-border: rgba(192, 32, 42, 0.12);
   --red-hover:  rgba(192, 32, 42, 0.4);
-  --red-eyebrow: #e84855;
+  --red-eyebrow: #ef5561;
   --red-hero-text: #f05560;
   --red-focus:  rgba(192, 32, 42, 0.5);
   --red-overlay: rgba(192, 32, 42, 0.55);
@@ -29,7 +29,8 @@
   --cream:      #f0ece6;
   --cream-mid:  #b8b0a6;
   --muted:      #9a9490;
-  --whatsapp:   #25D366;
+  --whatsapp:   #1da851;
+  --email:      #4A90D9;
 
   /* Overlay family */
   --black-overlay-light:  rgba(8, 8, 8, 0.5);
@@ -49,6 +50,7 @@
   /* Tipografía */
   --ff-display: 'Cormorant Garamond', Georgia, serif;
   --ff-body:    'DM Sans', sans-serif;
+  --fs-min: 0.8rem;
 
   /* Layout */
   --container:    1200px;
@@ -65,10 +67,10 @@
 
 /* ---- TEMA CLARO ---- */
 html[data-theme="light"] {
-  --black:      #faf9f7;
-  --dark:       #f3f1ec;
-  --dark-mid:   #ffffff;
-  --dark-soft:  #f5f2ec;
+  --black:      #e8e2d4;
+  --dark:       #eee9dc;
+  --dark-mid:   #f7f4ec;
+  --dark-soft:  #fffcf5;
   --red:        #c0202a;
   --red-light:  #a01620;
   --red-dim:    rgba(192, 32, 42, 0.08);
@@ -84,7 +86,8 @@ html[data-theme="light"] {
   --cream:      #1b1816;
   --cream-mid:  #5c5650;
   --muted:      #6d6760;
-  --whatsapp:   #25D366;
+  --whatsapp:   #1da851;
+  --email:      #4A90D9;
   --black-overlay-light:  rgba(250, 249, 247, 0.5);
   --black-overlay-mid:    rgba(250, 249, 247, 0.75);
   --black-overlay-heavy:  rgba(250, 249, 247, 0.92);
@@ -106,18 +109,19 @@ html[data-theme="light"] {
 .hero,
 .nav,
 .profile-hero,
-.film-hero {
-  --black:      #080808;
-  --dark:       #0f0f0f;
-  --dark-mid:   #161616;
-  --dark-soft:  #1e1e1e;
+.film-hero,
+.footer {
+  --black:      #121214;
+  --dark:       #18181b;
+  --dark-mid:   #202024;
+  --dark-soft:  #29292e;
   --red:        #c0202a;
   --red-light:  #e02d38;
   --red-dim:    rgba(192, 32, 42, 0.15);
   --red-glow:   rgba(192, 32, 42, 0.35);
   --red-border: rgba(192, 32, 42, 0.12);
   --red-hover:  rgba(192, 32, 42, 0.4);
-  --red-eyebrow: #e84855;
+  --red-eyebrow: #ef5561;
   --red-hero-text: #f05560;
   --red-focus:  rgba(192, 32, 42, 0.5);
   --red-overlay: rgba(192, 32, 42, 0.55);
@@ -126,7 +130,8 @@ html[data-theme="light"] {
   --cream:      #f0ece6;
   --cream-mid:  #b8b0a6;
   --muted:      #9a9490;
-  --whatsapp:   #25D366;
+  --whatsapp:   #1da851;
+  --email:      #4A90D9;
   --black-overlay-light:  rgba(8, 8, 8, 0.5);
   --black-overlay-mid:    rgba(8, 8, 8, 0.75);
   --black-overlay-heavy:  rgba(8, 8, 8, 0.92);
@@ -157,7 +162,7 @@ html[data-theme="light"] .team-card,
 html[data-theme="light"] .portfolio-card,
 html[data-theme="light"] .service-card,
 html[data-theme="light"] .gear-card {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 body {
@@ -196,6 +201,10 @@ ul { list-style: none; }
 }
 .section { padding-block: var(--section-pad); }
 
+#nosotros, #servicios, #portafolio, #equipo, #contacto {
+  scroll-margin-top: 100px;
+}
+
 /* ---- TIPOGRAFÍA ---- */
 h1, h2, h3, h4 {
   font-family: var(--ff-display);
@@ -209,7 +218,7 @@ em, i { font-style: italic; color: var(--red-light); }
 .eyebrow {
   display: inline-block;
   font-family: var(--ff-body);
-  font-size: 0.68rem;
+  font-size: var(--fs-min);
   font-weight: 500;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -525,6 +534,21 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   background: linear-gradient(to right, transparent, var(--red), transparent);
   opacity: 0.3;
 }
+.page-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-min);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cream-mid);
+  margin-bottom: 1.5rem;
+  transition: color 0.25s;
+}
+/* .profile-hero__content .page-back-link { margin-bottom: 3rem; } */
+/* .film-hero__content .page-back-link { margin-bottom: 4rem; } */
+.page-back-link:hover { color: var(--red-light); }
+.page-back-link svg { width: 14px; fill: none; stroke: currentColor; stroke-width: 2; }
 
 /* =====================================================
    FILTROS (compartido — portfolio, artists, equipment)
@@ -958,6 +982,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   -webkit-mask-position: center;
   -webkit-mask-size: contain;
 }
+.icon-email     { mask-image: url('../assets/icon/email.svg');     -webkit-mask-image: url('../assets/icon/email.svg'); }
 .icon-whatsapp  { mask-image: url('../assets/icon/whatsapp.svg');  -webkit-mask-image: url('../assets/icon/whatsapp.svg'); }
 .icon-instagram { mask-image: url('../assets/icon/instagram.svg'); -webkit-mask-image: url('../assets/icon/instagram.svg'); }
 .icon-youtube   { mask-image: url('../assets/icon/youtube.svg');   -webkit-mask-image: url('../assets/icon/youtube.svg'); }
