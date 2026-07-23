@@ -127,12 +127,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     /* Enlaces de contacto -> WhatsApp + redes, dato de config, no de home.json */
     const waHref = `https://wa.me/${config.contact.whatsapp}?text=${encodeURIComponent(config.contact.whatsapp_msg)}`;
     setHTML('contactLinks', `
-      <a href="${waHref}" class="contact__wa" target="_blank" rel="noopener">
+      <a href="${waHref}" class="contact__link contact__link--wa" target="_blank" rel="noopener">
         <span class="icon icon-whatsapp" aria-hidden="true"></span>
         ${home.contact.wa_label}
       </a>
-      ${config.social.instagram ? `<a href="${config.social.instagram}" class="text-link" target="_blank" rel="noopener">${_ui.social?.instagram}</a>` : ''}
-      ${config.social.youtube ? `<a href="${config.social.youtube}" class="text-link" target="_blank" rel="noopener">${_ui.social?.youtube}</a>` : ''}
+      <a href="mailto:${config.contact.email}" class="contact__link contact__link--email">
+        <span class="icon icon-email" aria-hidden="true"></span>
+        ${home.contact.email_label || config.contact.email}
+      </a>
     `);
 
     /* Formulario: labels, placeholders, select dinámico */
@@ -300,7 +302,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- CONTACT FORM ---- */
   const form = document.getElementById('contactForm');
   if (form) {
-    const wa  = config.contact.whatsapp;
     const formStatus = document.getElementById('formStatus');
 
     const clearErrors = () => {
@@ -357,13 +358,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         (service ? `\nServicio: ${service}` : '') +
         (message ? `\n\n${message}` : '')
       );
-      window.open(`https://wa.me/${wa}?text=${text}`, '_blank', 'noopener');
+
+      const subject = encodeURIComponent(`Contacto web — ${name}`);
+      const body = encodeURIComponent(
+        `Nombre: ${name}\nEmail: ${email}` +
+        (service ? `\nServicio: ${service}` : '') +
+        (message ? `\n\nMensaje:\n${message}` : '')
+      );
+      window.location.href = `mailto:${config.contact.email}?subject=${subject}&body=${body}`;
     });
   }
-
 
   /* ---- Reveal: at the end, to also detect dynamically created
      .reveal elements (services, etc.) ---- */
   UMD.initReveal();
-
 });

@@ -97,6 +97,7 @@ function getPreferredTheme() {
 }
 
 function applyTheme(theme) {
+  document.getElementById('themeColorMeta')?.setAttribute('content', theme === 'light' ? '#ffffff' : '#1a1a1a');
   document.documentElement.setAttribute('data-theme', theme);
   const btn = document.getElementById('themeToggle');
   if (btn) {
@@ -368,7 +369,6 @@ async function renderFooter(config) {
         ${cfg.social.instagram ? `<a href="${cfg.social.instagram}" target="_blank" rel="noopener"><span>${_ui?.social?.instagram}</span></a>` : ''}
         ${cfg.social.youtube   ? `<a href="${cfg.social.youtube}"   target="_blank" rel="noopener"><span>${_ui?.social?.youtube}</span></a>` : ''}
         ${cfg.social.tiktok    ? `<a href="${cfg.social.tiktok}"    target="_blank" rel="noopener"><span>${_ui?.social?.tiktok}</span></a>`  : ''}
-        <a href="https://wa.me/${cfg.contact.whatsapp}" target="_blank" rel="noopener">${_ui?.social?.whatsapp}</a>
       </nav>
     </div>
     <div class="footer__bottom">
