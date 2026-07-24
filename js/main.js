@@ -372,4 +372,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- Reveal: at the end, to also detect dynamically created
      .reveal elements (services, etc.) ---- */
   UMD.initReveal();
+
+  /* ---- Scroll to hash after full render (fixes layout-shift issue) ---- */
+  const hash = window.location.hash;
+  if (hash) {
+    const target = document.querySelector(hash);
+    if (target) target.scrollIntoView({ behavior: 'instant' });
+  }
 });
