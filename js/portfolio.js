@@ -93,11 +93,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* ---- PROJECT HERO ---- */
   const filmHero = document.getElementById('filmHero');
   if (filmHero) {
+    // Móvil: si hay thumb vertical propio, se sirve en <= 600px vía <picture>.
+    // Desktop/tablet: se mantiene el frame de YouTube tal como estaba —
+    // decisión explícita de no rediseñar film-hero por ahora.
+    const thumbIsLocal = !!(project.thumb && project.thumb.trim() !== '');
+    const mobileSrc = thumbIsLocal ? UMD.rootPath(project.thumb) : null;
+
     filmHero.innerHTML = `
       <div class="film-hero__bg">
-        <img src="${thumbSrc}" data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)"
-          onerror="UMD.ytThumbAdvance(this)"
-          alt="${project.title}">
+        <picture>
+          ${mobileSrc ? `<source media="(max-width: 700px)" srcset="${mobileSrc}" type="image/avif">` : ''}
+          <img src="${thumbSrc}" data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)"
+            onerror="UMD.ytThumbAdvance(this)" loading="eager" decoding="async"
+            alt="${project.title}">
+        </picture>
       </div>
       <div class="film-hero__overlay" aria-hidden="true"></div>
       <div class="film-hero__content container">

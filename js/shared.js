@@ -588,21 +588,40 @@ function buildTeamCard(member, rootPathFn) {
   return card;
 }
 
+/*
+  ---- CAMBIO: buildPortfolioCard ----
+  Prioridad invertida: proj.thumb (vertical, editorial) manda sobre el frame
+  de YouTube. Fallback a YT solo si no hay thumb. Fallback final a placeholder.
+  FIX: proj.thumb ahora pasa por rootPathFn — antes se usaba tal cual y rompía
+  en portfolio/index.html y team/[id].html (subcarpetas), solo que nunca se
+  notaba porque heroId siempre ganaba antes.
+*/
 function buildPortfolioCard(proj, rootPathFn) {
   if (!proj || !proj.id) return document.createElement('div'); // skip empty or invalid entries
   const card = document.createElement('div');
+
   const trailerId = validYtUrl(proj.trailer_youtube) ? UMD.extractYouTubeId(proj.trailer_youtube) : null;
   const fullId    = validYtUrl(proj.full_video_youtube) ? UMD.extractYouTubeId(proj.full_video_youtube) : null;
-  const heroId = trailerId || fullId;
-  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (proj.thumb || 'assets/portfolio/placeholder.svg');
+  const heroId    = trailerId || fullId;
+
+  const hasThumb = !!(proj.thumb && proj.thumb.trim() !== '');
+
+  const thumbSrc = hasThumb
+    ? rootPathFn(proj.thumb)
+    : (heroId ? UMD.ytThumbUrl(heroId) : rootPathFn('assets/portfolio/placeholder.svg'));
+
+  // Atributos de imagen: si hay thumb propio, solo fallback a placeholder.
+  // Si no hay thumb, mantiene la cadena de fallback de resoluciones de YouTube.
+  const imgExtraAttrs = hasThumb
+    ? `onerror="this.onerror=null; this.src='${rootPathFn('assets/portfolio/placeholder.svg')}'"`
+    : `data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)" onerror="UMD.ytThumbAdvance(this)"`;
 
   card.className = 'portfolio-card';
   card.setAttribute('role', 'link');
   card.setAttribute('tabindex', '0');
   card.setAttribute('aria-label', (_ui?.cards?.ver_proyecto_aria).replace('{title}', proj.title));
   card.innerHTML = `
-  <img src="${thumbSrc}" data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)"
-  onerror="UMD.ytThumbAdvance(this)" alt="${proj.title} — UMD Films" loading="lazy" />
+  <img src="${thumbSrc}" ${imgExtraAttrs} alt="${proj.title} — UMD Films" loading="lazy" />
   <div class="portfolio-card__overlay">
   <p class="portfolio-card__cat">${proj.category} · ${proj.year}</p>
       <p class="portfolio-card__title">${proj.title}</p>
