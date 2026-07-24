@@ -94,10 +94,11 @@
     },
     "categorias_equipo": {
       "all": "Todo",
-      "camara": "Cámara",
-      "audio": "Audio",
-      "iluminacion": "Iluminación",
-      "otro": "Otro"
+      "camera": "Cámara",
+      "lens": "Lentes",
+      "sound": "Sonido",
+      "ilumination": "Iluminación",
+      "extra": "Extra"
     },
     "categorias_portfolio": {
       "Cortometraje": "Cortometraje",

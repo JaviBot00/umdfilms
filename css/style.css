@@ -372,14 +372,10 @@ body::before {
   align-items: center;
   justify-content: space-between;
   padding: 1.8rem clamp(1.5rem, 5vw, 4rem);
-  background: linear-gradient(to bottom, var(--black-overlay-mid), transparent);
-  transition: background 0.5s ease, padding 0.5s ease, border-color 0.5s ease;
-}
-.nav.scrolled {
+  padding-block: 1.1rem;
   background: var(--black-overlay-heavy);
   backdrop-filter: blur(16px) saturate(160%);
-  padding-block: 1.1rem;
-  border-bottom-color: var(--red-border);
+  transition: background 0.5s ease;
 }
 
 .nav__logo {
@@ -580,13 +576,13 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
    ===================================================== */
 .portfolio__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
 }
 
 .portfolio-card {
   position: relative;
-  aspect-ratio: 16/9;
+  aspect-ratio: 2/3;
   border-radius: var(--radius-card);
   overflow: hidden;
   cursor: pointer;

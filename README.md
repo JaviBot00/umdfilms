@@ -170,7 +170,7 @@ Array of projects. Styled as a "movie poster board" card.
   "director": "Alejandro Luque",
   "client": "Banda de cornetas y tambores Jesús Cautivo de Málaga",
   "synopsis": "Project description...",
-  "thumb": "assets/portfolio/cautivo-malaga/cover.avif",
+  "thumb": "assets/portfolio/cautivo-malaga/cover.avif", // ← 2:3 vertical image. Primary card/mobile hero source — YouTube frame is fallback if "thumb" is empty.
   "photos_extra": ["assets/portfolio/cautivo-malaga/01.avif"],
   "trailer_youtube": "https://youtu.be/REAL_ID",
   "full_video_youtube": "",          // Optional — if both exist, project page shows tabs
@@ -240,6 +240,7 @@ The JS:
 1. Reads the `id` from the URL
 2. Looks it up in `portfolio.json`
 3. Fills in hero, trailer (YouTube facade → iframe on click, with persistent "Ver en YouTube" fallback link; tabs if both `trailer_youtube` and `full_video_youtube` exist), synopsis, technical sheet, project team, gallery
+   - Hero image uses `<picture>`: on viewports ≤600px, serves `project.thumb` (vertical 2:3) if present; on wider viewports, keeps the YouTube frame as before. Desktop hero layout was deliberately left unchanged — see CONTEXT.md.
 4. Gallery photos open in a lightbox with prev/next arrows, keyboard navigation (ArrowLeft/ArrowRight), and touch swipe
 5. Hero back button uses `document.referrer` to return to the previous page (falls back to `index.html#portafolio`)
 6. Injects `VideoObject` schema in `<head>` for SEO
