@@ -47,6 +47,8 @@ Run after editing `data/team.json` or `data/portfolio.json`. Generates individua
 
 `shared.js` exports `renderFilterableGrid()`, `buildTeamCard()`, `buildPortfolioCard()`, `validYtUrl()`, `setCanonical()`, `setOgMeta()`, `setTwitterMeta()`, `getBackUrl()` — used by home, `team/index.html`, `portfolio/index.html`, `artists.js`, and `equipment.js`. Before writing a new filtered grid anywhere, use these instead of copying the filter-button loop again.
 
+`buildPortfolioCard()` prioritizes `proj.thumb` over the YouTube frame — `thumb` is the primary image source (must be 2:3 vertical), YouTube (`heroId`) is only a fallback when `thumb` is empty. Do not revert this priority without checking CONTEXT.md first.
+
 `shared.js` also exports the YouTube thumbnail fallback chain: `ytThumbUrl()`, `ytThumbCheck()`, `ytThumbAdvance()`, `extractYouTubeId()`. Always validate a YouTube URL with a real ID check before deriving a thumbnail from it — do not assume any `trailer_youtube`/`full_video_youtube` string is non-empty and non-placeholder.
 
 ## Development
@@ -168,7 +170,7 @@ deliberately chosen to not imply a section that isn't always present:
 | `.card-grid` | home `#teamGrid`, `team/index.html`, `artists/index.html` |
 | `.text-link` | home contact social links, `artists.js` external artist Instagram link |
 | `.team-card*` | home, `team/index.html`, `artists/index.html` |
-| `.portfolio-card*`, `.portfolio__grid` | home, `portfolio/index.html`, member profile projects (`team.js`) |
+| `.portfolio-card*`, `.portfolio__grid` | home, `portfolio/index.html`, member profile projects (`team.js`) — aspect-ratio 2/3 (vertical poster), changed from 16/9 in July 2026 |
 | `.page-hero` | `team/`, `portfolio/`, `artists/`, `equipment/` index pages |
 | `.skeleton*` | home (hero, showreel, trust, stats, services, grids), team/portfolio profile heroes, all listing page grids |
 | `.page-back-link` | team/[id], portfolio/[id], team/index, portfolio/index, equipment/index, artists/index |

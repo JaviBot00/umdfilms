@@ -151,7 +151,6 @@ stats.location = config.schema.address_locality               // "Málaga"
 ## Pending (Assets Alejandro Needs to Provide)
 
 - [ ] **Team photos** for 8 members missing cover images: ivan-ambrosio, javier-botella, javier-abelaira, loreto-navas, elvira-ojea, marta-guerra, pau-soles, sandra-jimenez
-- [ ] **Portfolio assets** for boda-ester-y-juan and musical-charlie (no photos/thumbnails — currently using YouTube thumbnails)
 - [ ] **Hero poster image** (`assets/portfolio/hero-poster.jpg`) — currently blank until video loads
 - [ ] **Hero video MP4 fallback** — only `hero.webm` exists; older Safari browsers have no video
 - [ ] **Artist photo** for maria-hernandez (`assets/artists/maria-hernandez.webp`)
@@ -211,6 +210,7 @@ stats.location = config.schema.address_locality               // "Málaga"
 - ✅ `theme-color` meta bug fixed: single `<meta id="themeColorMeta">` updated by JS in `applyTheme()`
 - ✅ `.footer` added to the pinned-dark block (alongside `.hero`/`.nav`) — fixes white+red logo invisibility in light theme without needing an SVG variant
 - ✅ Contact section redesigned: WhatsApp + `mailto:` (email), contact form now opens a prefilled `mailto:` instead of WhatsApp; social links (Instagram/YouTube/TikTok) live only in the footer
+- ✅ Portfolio orientation changed horizontal → vertical (2:3 poster): `thumb` is now the primary image source in `buildPortfolioCard()` (YouTube frame is fallback only, was previously the reverse), `.portfolio-card`/`.portfolio__grid` aspect-ratio and min-column-width updated in `style.css`, `.profile-projects__grid` min-width aligned in `team.css`. `boda-ester-y-juan` and `musical-charlie` now have real `thumb` assets, filled in `portfolio.json`. `film-hero` on individual project pages intentionally left unchanged on desktop/tablet (client hasn't decided on a redesign); on viewports ≤600px it now serves the vertical `thumb` via `<picture>` instead of the YouTube frame.
 
 ---
 

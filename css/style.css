@@ -576,7 +576,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
    ===================================================== */
 .portfolio__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
 }
 
