@@ -1,10 +1,8 @@
 [
   {
-    "_comment": "Formato nombre: 'Nombre del producto xN' donde N es la cantidad. Fotos en assets/equipment/",
-
     "id": "blackmagic-pocket-4k",
     "name": "Blackmagic Pocket Cinema Camera 4K",
-    "category": "camara",
+    "category": "camera",
     "quantity": 1,
     "description": "Cámara de cine digital con sensor Micro Four Thirds de 4/3 y grabación RAW/ProRes hasta 4K. Rango dinámico de 13 stops y pantalla táctil integrada, pensada para producción cinematográfica con montura intercambiable.",
     "specs": ["MFT 4K", "13 stops", "RAW/ProRes"],
@@ -15,7 +13,7 @@
   {
     "id": "blackmagic-pocket-6k",
     "name": "Blackmagic Pocket Cinema Camera 6K",
-    "category": "camara",
+    "category": "camera",
     "quantity": 1,
     "description": "Versión con sensor Super 35 de 6K, montura Canon EF nativa y mayor rango dinámico. Ideal para proyectos que requieren reencuadre en postproducción sin perder calidad.",
     "specs": ["Super 35 6K", "Montura EF", "13 stops"],
@@ -26,7 +24,7 @@
   {
     "id": "sony-alpha-7-iii",
     "name": "Sony Alpha 7 III",
-    "category": "camara",
+    "category": "camera",
     "quantity": 1,
     "description": "Cámara mirrorless full-frame híbrida foto/vídeo, con estabilización de 5 ejes en el cuerpo y grabación 4K a partir de sensor completo. Versátil para reportaje, foto fija de producción y planos secundarios.",
     "specs": ["Full-frame", "5-axis IBIS", "4K"],
@@ -37,7 +35,7 @@
   {
     "id": "dji-osmo-pocket-3",
     "name": "DJI Osmo Pocket 3",
-    "category": "camara",
+    "category": "camera",
     "quantity": 2,
     "description": "Cámara de bolsillo con gimbal integrado de 3 ejes y sensor 1 pulgada. Pantalla giratoria orientable, pensada para vlogging, B-roll rápido y planos en movimiento sin rig adicional.",
     "specs": ["Sensor 1\"", "Gimbal 3 ejes", "4K 120fps"],
@@ -48,7 +46,7 @@
   {
     "id": "sony-fx30",
     "name": "Sony Cinema Line FX30",
-    "category": "camara",
+    "category": "camera",
     "quantity": 2,
     "description": "Cámara de cine digital compacta con sensor Super 35 (APS-C) de 26 MP. Graba en 4K hasta 120 fps con perfiles S-Cinetone y S-Log3, pensada para producciones exigentes con formato reducido.",
     "specs": ["APS-C Super 35", "4K 120fps", "S-Cinetone"],
@@ -57,9 +55,31 @@
     "available": true
   },
   {
+    "id": "dji-osmo-360",
+    "name": "DJI Osmo 360",
+    "category": "camera",
+    "quantity": 1,
+    "description": "Cámara de acción 360° con doble sensor cuadrado de 1/1.1\", grabación panorámica nativa en 8K a 30fps y modo de lente única hasta 4K/120fps con FOV de 170°. Resistente al agua hasta 10 m sin carcasa adicional.",
+    "specs": ["8K 360° 30fps", "Sensor dual 1/1.1\"", "IP68 10m", "120MP foto panorámica"],
+    "photo": "assets/equipment/cameras/dji-osmo-360.avif",
+    "price_day": 0,
+    "available": true
+  },
+  {
+    "id": "sony-e-18-105mm-f4",
+    "name": "Sony E PZ 18-105mm F4 G OSS",
+    "category": ["camera", "lens"],
+    "quantity": 1,
+    "description": "Objetivo zoom estándar para montura Sony E, formato APS-C — nativo en la FX30, funciona en modo recorte en la Alpha 7 III. Apertura constante f/4, zoom motorizado (power zoom) y estabilización óptica OSS, pensado para vídeo.",
+    "specs": ["18-105mm f/4 constante", "Power zoom + OSS", "Montura Sony E · APS-C", "Filtro 72mm"],
+    "photo": "assets/equipment/lens/sony-e-18-105mm-f4.avif",
+    "price_day": 0,
+    "available": true
+  },
+  {
     "id": "paneles-led-neewer",
     "name": "Kit 3 Paneles LED Neewer NL660",
-    "category": "iluminacion",
+    "category": "ilumination",
     "quantity": 1,
     "description": "Kit de iluminación de 3 puntos con paneles LED Bi-Color regulables. Incluye viseras, trípodes, difusores y bolsas de transporte. Funciona mediante corriente AC o baterías tipo Sony NP-F.",
     "photo": "assets/equipment/ilumination/paneles-led-neewer.avif",
@@ -69,7 +89,7 @@
   {
     "id": "zhiyun-molus-x100",
     "name": "Zhiyun Molus X100",
-    "category": "iluminacion",
+    "category": "ilumination",
     "quantity": 1,
     "description": "Luz COB de bolsillo con 100W de potencia y temperatura de color ajustable entre 2700K y 6500K. CRI/TLCI 95/97, control por app vía Bluetooth y sistema de refrigeración DynaVort para uso silencioso en set.",
     "specs": ["100W COB", "2700-6500K", "CRI 95"],
@@ -80,7 +100,7 @@
   {
     "id": "sennheiser-mke600",
     "name": "Sennheiser MKE 600",
-    "category": "audio",
+    "category": "sound",
     "quantity": 2,
     "description": "Micrófono de cañón (shotgun) de patrón supercardioide para sonido directo en cámara o boom. Requiere alimentación phantom o pila, con filtro de graves integrado para reducir ruido de manejo.",
     "specs": ["Shotgun", "Supercardioide", "Phantom 48V"],
@@ -91,7 +111,7 @@
   {
     "id": "rode-nt5-mp-kit",
     "name": "Rode NT5-MP Kit Black",
-    "category": "audio",
+    "category": "sound",
     "quantity": 1,
     "description": "Par de micrófonos de condensador de diafragma pequeño, pensados para grabación de instrumentos y captación estéreo en producción musical.",
     "specs": ["Condensador", "Diafragma pequeño", "Par estéreo"],
@@ -102,7 +122,7 @@
   {
     "id": "hollyland-lark-max",
     "name": "Hollyland Lark Max",
-    "category": "audio",
+    "category": "sound",
     "quantity": 2,
     "description": "Sistema de micrófono inalámbrico compacto con transmisores petaca y receptor, cancelación de ruido asistida por IA y grabación interna de respaldo. Pensado para entrevistas y reportaje ágil.",
     "specs": ["Inalámbrico", "Reducción de ruido IA", "Grabación interna"],
@@ -113,11 +133,33 @@
   {
     "id": "zoom-h6",
     "name": "Zoom H6",
-    "category": "audio",
+    "category": "sound",
     "quantity": 3,
     "description": "Grabadora portátil multipista con cápsula intercambiable y 4 entradas XLR/TRS adicionales. Ideal para sonido directo, tomas ambiente y grabación de respaldo en rodaje.",
     "specs": ["6 pistas", "4x XLR/TRS", "Cápsula intercambiable"],
     "photo": "assets/equipment/sound/zoom-h6.avif",
+    "price_day": 0,
+    "available": true
+  },
+  {
+    "id": "zoom-h8",
+    "name": "Zoom H8",
+    "category": "sound",
+    "quantity": 1,
+    "description": "Grabadora portátil multipista, hermana mayor de la H6. 4 entradas XLR con pad y ganancia dedicada más 2 combo XLR/TRS con Hi-Z, cápsula estéreo intercambiable incluida (XYH-6), hasta 12 pistas simultáneas y grabación 24-bit/96kHz.",
+    "specs": ["6 entradas físicas", "12 pistas", "4x XLR + 2x XLR/TRS Hi-Z", "Cápsula intercambiable", "24-bit/96kHz"],
+    "photo": "assets/equipment/sound/zoom-h8.avif",
+    "price_day": 0,
+    "available": true
+  },
+  {
+    "id": "zhiyun-crane-3-lab",
+    "name": "Zhiyun Crane 3 LAB",
+    "category": "extra",
+    "quantity": 1,
+    "description": "Estabilizador de mano de 3 ejes para cámaras DSLR/mirrorless, con payload de hasta 4.5 kg. Incluye transmisión de imagen inalámbrica FHD 1080p, control motorizado dual de zoom y enfoque, y placa de liberación rápida Manfrotto.",
+    "specs": ["Payload 650g–4.5kg", "Transmisión FHD 1080p", "Zoom/enfoque motorizado dual", "Placa Manfrotto"],
+    "photo": "assets/equipment/extra/gimbal-zhiyun-crane-3-lab.avif",
     "price_day": 0,
     "available": true
   },

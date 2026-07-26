@@ -132,6 +132,7 @@ function initTheme() {
 function initScrollSpy() {
   const sections = document.querySelectorAll('main > section[id]');
   const links = document.querySelectorAll('.nav__links a[href*="#"]');
+  const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
   if (!sections.length || !links.length) return;
 
   const map = new Map();
@@ -151,6 +152,9 @@ function initScrollSpy() {
         if (link) {
           link.classList.add('active');
           link.setAttribute('aria-current', 'section');
+        }
+        if (isHome) {
+          sessionStorage.setItem('umd-back-section', entry.target.id);
         }
       }
     });
@@ -508,10 +512,15 @@ function setTwitterMeta(name, content) {
 
 /* ---- Grid genérico con filtros opcionales ---- */
 function renderFilterableGrid({ items, filterEl, gridEl, categoryField, labels = {}, allLabel = 'Todo', cardBuilder }) {
+  function matchesCategory(item, field, filter) {
+    const val = item[field];
+    return Array.isArray(val) ? val.includes(filter) : val === filter;
+  }
+
   function paint(filter) {
     const filtered = (!categoryField || filter === 'all')
       ? items
-      : items.filter(i => i[categoryField] === filter);
+      : items.filter(i => matchesCategory(i, categoryField, filter));
 
     gridEl.innerHTML = '';
     filtered.forEach((item, i) => gridEl.appendChild(cardBuilder(item, i)));
@@ -523,7 +532,9 @@ function renderFilterableGrid({ items, filterEl, gridEl, categoryField, labels =
   }
 
   if (filterEl && categoryField) {
-    const usedCategories = new Set(items.map(i => i[categoryField]));
+    const usedCategories = new Set(
+      items.flatMap(i => Array.isArray(i[categoryField]) ? i[categoryField] : [i[categoryField]])
+    );
     const categories = labels && Object.keys(labels).length
       ? ['all', ...Object.keys(labels).filter(k => usedCategories.has(k))]
       : ['all', ...usedCategories];
@@ -577,21 +588,40 @@ function buildTeamCard(member, rootPathFn) {
   return card;
 }
 
+/*
+  ---- CAMBIO: buildPortfolioCard ----
+  Prioridad invertida: proj.thumb (vertical, editorial) manda sobre el frame
+  de YouTube. Fallback a YT solo si no hay thumb. Fallback final a placeholder.
+  FIX: proj.thumb ahora pasa por rootPathFn — antes se usaba tal cual y rompía
+  en portfolio/index.html y team/[id].html (subcarpetas), solo que nunca se
+  notaba porque heroId siempre ganaba antes.
+*/
 function buildPortfolioCard(proj, rootPathFn) {
   if (!proj || !proj.id) return document.createElement('div'); // skip empty or invalid entries
   const card = document.createElement('div');
+
   const trailerId = validYtUrl(proj.trailer_youtube) ? UMD.extractYouTubeId(proj.trailer_youtube) : null;
   const fullId    = validYtUrl(proj.full_video_youtube) ? UMD.extractYouTubeId(proj.full_video_youtube) : null;
-  const heroId = trailerId || fullId;
-  const thumbSrc = heroId ? UMD.ytThumbUrl(heroId) : (proj.thumb || 'assets/portfolio/placeholder.svg');
+  const heroId    = trailerId || fullId;
+
+  const hasThumb = !!(proj.thumb && proj.thumb.trim() !== '');
+
+  const thumbSrc = hasThumb
+    ? rootPathFn(proj.thumb)
+    : (heroId ? UMD.ytThumbUrl(heroId) : rootPathFn('assets/portfolio/placeholder.svg'));
+
+  // Atributos de imagen: si hay thumb propio, solo fallback a placeholder.
+  // Si no hay thumb, mantiene la cadena de fallback de resoluciones de YouTube.
+  const imgExtraAttrs = hasThumb
+    ? `onerror="this.onerror=null; this.src='${rootPathFn('assets/portfolio/placeholder.svg')}'"`
+    : `data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)" onerror="UMD.ytThumbAdvance(this)"`;
 
   card.className = 'portfolio-card';
   card.setAttribute('role', 'link');
   card.setAttribute('tabindex', '0');
   card.setAttribute('aria-label', (_ui?.cards?.ver_proyecto_aria).replace('{title}', proj.title));
   card.innerHTML = `
-  <img src="${thumbSrc}" data-yt-id="${heroId}" onload="UMD.ytThumbCheck(this)"
-  onerror="UMD.ytThumbAdvance(this)" alt="${proj.title} — UMD Films" loading="lazy" />
+  <img src="${thumbSrc}" ${imgExtraAttrs} alt="${proj.title} — UMD Films" loading="lazy" />
   <div class="portfolio-card__overlay">
   <p class="portfolio-card__cat">${proj.category} · ${proj.year}</p>
       <p class="portfolio-card__title">${proj.title}</p>
@@ -605,10 +635,86 @@ function buildPortfolioCard(proj, rootPathFn) {
   return card;
 }
 
+/* ---- Photo pager: ventana deslizante de 1 fila, avanza de 1 en 1 ---- */
+function initPhotoPager(gridEl, { prevLabel = 'Foto anterior', nextLabel = 'Siguiente foto' } = {}) {
+  if (!gridEl) return;
+  const items = Array.from(gridEl.children);
+  if (items.length < 2) return;
+
+  let wrap = gridEl.parentElement;
+  if (!wrap.classList.contains('photo-pager')) {
+    wrap = document.createElement('div');
+    wrap.className = 'photo-pager';
+    gridEl.replaceWith(wrap);
+    wrap.appendChild(gridEl);
+  }
+
+  let prevBtn = wrap.querySelector('.photo-pager__nav--prev');
+  let nextBtn = wrap.querySelector('.photo-pager__nav--next');
+  if (!prevBtn) {
+    prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'photo-pager__nav photo-pager__nav--prev';
+    prevBtn.setAttribute('aria-label', prevLabel);
+    prevBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>';
+    wrap.appendChild(prevBtn);
+  }
+  if (!nextBtn) {
+    nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'photo-pager__nav photo-pager__nav--next';
+    nextBtn.setAttribute('aria-label', nextLabel);
+    nextBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>';
+    wrap.appendChild(nextBtn);
+  }
+
+  let current = 0;
+  let windowSize = 1;
+  let maxStart = 0;
+
+  function measure() {
+    items.forEach(el => { el.style.display = ''; });
+    const firstTop = items[0].offsetTop;
+    let perRow = 0;
+    for (const el of items) {
+      if (el.offsetTop === firstTop) perRow++; else break;
+    }
+    windowSize = Math.max(perRow, 1);
+    maxStart = Math.max(items.length - windowSize, 0);
+    current = Math.min(current, maxStart);
+    show(current);
+  }
+
+  function show(start) {
+    current = start;
+    items.forEach((el, i) => {
+      el.style.display = (i >= current && i < current + windowSize) ? '' : 'none';
+    });
+    const scrollable = maxStart > 0;
+    prevBtn.hidden = !scrollable || current === 0;
+    nextBtn.hidden = !scrollable || current === maxStart;
+  }
+
+  prevBtn.addEventListener('click', () => show(Math.max(0, current - 1)));
+  nextBtn.addEventListener('click', () => show(Math.min(maxStart, current + 1)));
+
+  measure();
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(measure, 200);
+  });
+}
+
 /* ---- Back URL based on referrer ---- */
 function getBackUrl(fallback) {
   const ref = document.referrer;
   if (ref && ref.startsWith(window.location.origin) && ref !== window.location.href) {
+    if (ref.includes('index.html')) {
+      const section = sessionStorage.getItem('umd-back-section');
+      if (section) return ref.split('#')[0] + '#' + section;
+    }
     return ref;
   }
   return fallback;
@@ -636,5 +742,6 @@ window.UMD = {
   renderFilterableGrid,
   buildTeamCard,
   buildPortfolioCard,
+  initPhotoPager,
   getBackUrl
 };
