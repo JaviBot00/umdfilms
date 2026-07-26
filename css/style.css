@@ -40,6 +40,12 @@
   --black-overlay-trail:  rgba(8, 8, 8, 0.3);
   --black-overlay-faint:  rgba(8, 8, 8, 0.1);
 
+  /* Tinte de transición de tema para overlays de hero (::before compartido).
+     NO declarar esta variable dentro del bloque pineado .hero/.profile-hero/
+     .film-hero/.nav/.footer más abajo: si se pinea, el aclarado en tema claro
+     deja de funcionar y esto se vuelve a "romper" en silencio. */
+  --overlay-theme-tint:   transparent;
+
   /* White semi-transparent */
   --white-faint:        rgba(255, 255, 255, 0.05);
   --white-border:       rgba(255, 255, 255, 0.2);
@@ -94,6 +100,7 @@ html[data-theme="light"] {
   --black-overlay-max:    rgba(250, 249, 247, 0.95);
   --black-overlay-trail:  rgba(250, 249, 247, 0.3);
   --black-overlay-faint:  rgba(250, 249, 247, 0.1);
+  --overlay-theme-tint:   rgba(250, 249, 247, 0.22);
   --white-faint:        rgba(0, 0, 0, 0.05);
   --white-border:       rgba(0, 0, 0, 0.1);
   --white-hover-bg:     rgba(0, 0, 0, 0.08);
@@ -144,6 +151,24 @@ html[data-theme="light"] {
   --white-hover-border: rgba(255, 255, 255, 0.4);
   --white-counter:      rgba(255, 255, 255, 0.7);
   --line:       rgba(255, 255, 255, 0.15);
+}
+
+/* Mecanismo compartido de transición de tema para overlays de hero.
+   El vignette horizontal/vertical propio de cada página vive en su CSS
+   (home.css/team.css/portfolio.css) y no se toca aquí.
+   mask-image difumina el borde (en vez de un inset recortado en seco,
+   que se ve como un bloque plano pegado sobre el vídeo/foto). */
+.hero__overlay::before,
+.profile-hero__overlay::before,
+.film-hero__overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--overlay-theme-tint);
+  transition: background-color 0.4s ease;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 75%);
+  mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 75%);
+  pointer-events: none;
 }
 
 html { scroll-behavior: smooth; font-size: 16px; }
@@ -577,7 +602,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 .portfolio__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .portfolio-card {
@@ -716,6 +741,39 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   margin-bottom: 0.2rem;
 }
 .team-card__role { font-size: 0.73rem; color: var(--muted); line-height: 1.4; }
+
+/* =====================================================
+   PHOTO PAGER (compartido — profile-photos__grid, film-gallery__grid)
+   ===================================================== */
+.photo-pager { position: relative; }
+.photo-pager__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--white-border);
+  background: var(--black-overlay-mid);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background 0.25s, border-color 0.25s;
+}
+.photo-pager__nav:hover { background: var(--red); border-color: var(--red); }
+.photo-pager__nav[hidden] { display: none; }
+.photo-pager__nav svg {
+  width: 18px; height: 18px;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.photo-pager__nav--prev { left: -22px; }
+.photo-pager__nav--next { right: -22px; }
+@media (max-width: 640px) {
+  .photo-pager__nav--prev { left: 0.25rem; }
+  .photo-pager__nav--next { right: 0.25rem; }
+}
 
 /* =====================================================
    FOOTER (compartido — todas las páginas)

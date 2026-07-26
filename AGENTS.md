@@ -45,7 +45,9 @@ Run after editing `data/team.json` or `data/portfolio.json`. Generates individua
 
 ## Shared grid/filter logic (avoid re-duplicating)
 
-`shared.js` exports `renderFilterableGrid()`, `buildTeamCard()`, `buildPortfolioCard()`, `validYtUrl()`, `setCanonical()`, `setOgMeta()`, `setTwitterMeta()`, `getBackUrl()` — used by home, `team/index.html`, `portfolio/index.html`, `artists.js`, and `equipment.js`. Before writing a new filtered grid anywhere, use these instead of copying the filter-button loop again.
+`shared.js` exports `renderFilterableGrid()`, `buildTeamCard()`, `buildPortfolioCard()`, `validYtUrl()`, `setCanonical()`, `setOgMeta()`, `setTwitterMeta()`, `getBackUrl()`, `initLightbox()`, `initPhotoPager()` — used by home, `team/index.html`, `portfolio/index.html`, `artists.js`, and `equipment.js`. Before writing a new filtered grid anywhere, use these instead of copying the filter-button loop again.
+
+`initPhotoPager(gridEl, { prevLabel, nextLabel } = {})` turns any grid into a sliding-window carousel (window size = current columns-per-row, measured via `offsetTop`, advances 1 item at a time). Used on `.profile-photos__grid`/`.film-gallery__grid` (with `initLightbox`) and on `.profile-projects__grid` in `team/[id].html` only — not on the home or `portfolio/index.html` project grids. Next/prev buttons hide automatically when there's no full row left in that direction; by design this can repeat 1-2 already-seen items in the very last position rather than leave visual gaps.
 
 `buildPortfolioCard()` prioritizes `proj.thumb` over the YouTube frame — `thumb` is the primary image source (must be 2:3 vertical), YouTube (`heroId`) is only a fallback when `thumb` is empty. Do not revert this priority without checking CONTEXT.md first.
 
