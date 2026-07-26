@@ -211,6 +211,7 @@ stats.location = config.schema.address_locality               // "Málaga"
 - ✅ `.footer` added to the pinned-dark block (alongside `.hero`/`.nav`) — fixes white+red logo invisibility in light theme without needing an SVG variant
 - ✅ Contact section redesigned: WhatsApp + `mailto:` (email), contact form now opens a prefilled `mailto:` instead of WhatsApp; social links (Instagram/YouTube/TikTok) live only in the footer
 - ✅ Portfolio orientation changed horizontal → vertical (2:3 poster): `thumb` is now the primary image source in `buildPortfolioCard()` (YouTube frame is fallback only, was previously the reverse), `.portfolio-card`/`.portfolio__grid` aspect-ratio and min-column-width updated in `style.css`, `.profile-projects__grid` min-width aligned in `team.css`. `boda-ester-y-juan` and `musical-charlie` now have real `thumb` assets, filled in `portfolio.json`. `film-hero` on individual project pages intentionally left unchanged on desktop/tablet (client hasn't decided on a redesign); on viewports ≤600px it now serves the vertical `thumb` via `<picture>` instead of the YouTube frame.
+- ✅ Photo pager (sliding-window carousel, `UMD.initPhotoPager()` in `shared.js`): `.profile-photos__grid`, `.film-gallery__grid` (both pages), and `.profile-projects__grid` on `team/[id].html` only. Advances 1 item at a time; hides prev/next at the ends; prioritizes "no gaps in the row" over "never repeat an item" at the tail — was the reverse in an earlier iteration, reverted after visual testing.
 
 ---
 

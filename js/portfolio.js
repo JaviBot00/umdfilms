@@ -277,8 +277,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   /* ---- PHOTO GALLERY ---- */
-  const galleryGrid    = document.getElementById('filmGalleryGrid');
   const gallerySection = document.getElementById('filmGallery');
+  const galleryGrid    = document.getElementById('filmGalleryGrid');
 
   if (galleryGrid && project.photos_extra?.length) {
     project.photos_extra.forEach((num, i) => {
@@ -295,6 +295,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /* ---- Gallery lightbox ---- */
   UMD.initLightbox('.film-gallery__img');
+  UMD.initPhotoPager(galleryGrid);
 
   /* ---- Reveal ---- */
   UMD.initReveal();

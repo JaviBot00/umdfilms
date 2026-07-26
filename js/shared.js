@@ -635,6 +635,78 @@ function buildPortfolioCard(proj, rootPathFn) {
   return card;
 }
 
+/* ---- Photo pager: ventana deslizante de 1 fila, avanza de 1 en 1 ---- */
+function initPhotoPager(gridEl, { prevLabel = 'Foto anterior', nextLabel = 'Siguiente foto' } = {}) {
+  if (!gridEl) return;
+  const items = Array.from(gridEl.children);
+  if (items.length < 2) return;
+
+  let wrap = gridEl.parentElement;
+  if (!wrap.classList.contains('photo-pager')) {
+    wrap = document.createElement('div');
+    wrap.className = 'photo-pager';
+    gridEl.replaceWith(wrap);
+    wrap.appendChild(gridEl);
+  }
+
+  let prevBtn = wrap.querySelector('.photo-pager__nav--prev');
+  let nextBtn = wrap.querySelector('.photo-pager__nav--next');
+  if (!prevBtn) {
+    prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'photo-pager__nav photo-pager__nav--prev';
+    prevBtn.setAttribute('aria-label', prevLabel);
+    prevBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>';
+    wrap.appendChild(prevBtn);
+  }
+  if (!nextBtn) {
+    nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'photo-pager__nav photo-pager__nav--next';
+    nextBtn.setAttribute('aria-label', nextLabel);
+    nextBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>';
+    wrap.appendChild(nextBtn);
+  }
+
+  let current = 0;
+  let windowSize = 1;
+  let maxStart = 0;
+
+  function measure() {
+    items.forEach(el => { el.style.display = ''; });
+    const firstTop = items[0].offsetTop;
+    let perRow = 0;
+    for (const el of items) {
+      if (el.offsetTop === firstTop) perRow++; else break;
+    }
+    windowSize = Math.max(perRow, 1);
+    maxStart = Math.max(items.length - windowSize, 0);
+    current = Math.min(current, maxStart);
+    show(current);
+  }
+
+  function show(start) {
+    current = start;
+    items.forEach((el, i) => {
+      el.style.display = (i >= current && i < current + windowSize) ? '' : 'none';
+    });
+    const scrollable = maxStart > 0;
+    prevBtn.hidden = !scrollable || current === 0;
+    nextBtn.hidden = !scrollable || current === maxStart;
+  }
+
+  prevBtn.addEventListener('click', () => show(Math.max(0, current - 1)));
+  nextBtn.addEventListener('click', () => show(Math.min(maxStart, current + 1)));
+
+  measure();
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(measure, 200);
+  });
+}
+
 /* ---- Back URL based on referrer ---- */
 function getBackUrl(fallback) {
   const ref = document.referrer;
@@ -670,5 +742,6 @@ window.UMD = {
   renderFilterableGrid,
   buildTeamCard,
   buildPortfolioCard,
+  initPhotoPager,
   getBackUrl
 };

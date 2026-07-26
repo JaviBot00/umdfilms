@@ -577,7 +577,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
 .portfolio__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .portfolio-card {
@@ -716,6 +716,39 @@ html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
   margin-bottom: 0.2rem;
 }
 .team-card__role { font-size: 0.73rem; color: var(--muted); line-height: 1.4; }
+
+/* =====================================================
+   PHOTO PAGER (compartido — profile-photos__grid, film-gallery__grid)
+   ===================================================== */
+.photo-pager { position: relative; }
+.photo-pager__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--white-border);
+  background: var(--black-overlay-mid);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background 0.25s, border-color 0.25s;
+}
+.photo-pager__nav:hover { background: var(--red); border-color: var(--red); }
+.photo-pager__nav[hidden] { display: none; }
+.photo-pager__nav svg {
+  width: 18px; height: 18px;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.photo-pager__nav--prev { left: -22px; }
+.photo-pager__nav--next { right: -22px; }
+@media (max-width: 640px) {
+  .photo-pager__nav--prev { left: 0.25rem; }
+  .photo-pager__nav--next { right: 0.25rem; }
+}
 
 /* =====================================================
    FOOTER (compartido — todas las páginas)

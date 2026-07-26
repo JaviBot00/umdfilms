@@ -193,6 +193,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     /* ---- Gallery lightbox ---- */
     UMD.initLightbox('.profile-photos__img');
+    UMD.initPhotoPager(photosGrid);
   }
 
   /* ---- PROJECTS THEY PARTICIPATED IN ---- */
@@ -203,6 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     );
     if (memberProjects.length) {
       memberProjects.forEach(proj => projectsGrid.appendChild(UMD.buildPortfolioCard(proj, UMD.rootPath)));
+      UMD.initPhotoPager(projectsGrid, { prevLabel: 'Proyecto anterior', nextLabel: 'Siguiente proyecto' });
     } else {
       document.getElementById('profileProjects')?.style.setProperty('display', 'none');
     }

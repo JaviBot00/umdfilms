@@ -578,6 +578,7 @@ WCAG 2.2 AA compliance. All interactive elements must remain keyboard accessible
 | **External links** | `rel="noopener"` on all `target="_blank"` links |
 | **Lightbox** | `role="dialog"`, `aria-modal="true"`, `aria-label="Galería de imágenes"`, focus trap (Tab cycling), focus restoration on close, Escape key closes, close button receives focus on open; prev/next arrow buttons, ArrowLeft/ArrowRight keyboard navigation, touch swipe (50px threshold), counter (`2 / 5`); Spanish aria-labels |
 | **Gallery images** | `tabindex="0"`, `role="button"`, `aria-label="Ampliar imagen"`, Enter/Space handlers |
+| **Photo pager** | Sliding-window carousel on photo/project grids; native `<button>` prev/next auto-hide at each end. No arrow-key navigation like the lightbox has — keyboard users tab to the visible button only. |
 | **Video tabs** | Left/Right/Home/End arrow navigation between tabs, `aria-pressed` state |
 | **Semantic HTML** | `<header>`, `<nav>`, `<main>`, `<footer>`, `<section>` with `aria-label`; `<aside>` for sidebars |
 | **WhatsApp FAB** | Keyboard Enter/Space handler for activation |
