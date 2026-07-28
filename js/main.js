@@ -252,7 +252,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="service-card__icon">${svc.icon}</div>
         <h3 class="service-card__title">${svc.title}</h3>
         <p class="service-card__desc">${svc.description}</p>
-        ${svc.core ? `<span class="service-card__tag">${ui.home?.core_service_tag}</span>` : ''}
       `;
 
       if (svc.link) {

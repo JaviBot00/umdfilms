@@ -316,18 +316,7 @@ html[data-theme="light"] .trust__inner img:hover {
   margin-bottom: 0.5rem;
 }
 .service-card__desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
-.service-card__tag {
-  display: inline-block;
-  margin-top: 1rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--red-light);
-  background: var(--red-dim);
-  border: 1px solid var(--red-border-mid);
-  padding: 0.25em 0.8em;
-  border-radius: 100px;
-}
+
 .service-card--link { cursor: pointer; }
 .service-card--link:hover .service-card__title { color: var(--red-light); }
 
