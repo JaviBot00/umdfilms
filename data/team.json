@@ -3,8 +3,8 @@
     "id": "alejandro-luque",
     "name": "Alejandro Luque",
     "surname": "",
-    "role": "Director creativo y ejecutivo",
-    "bio": "(Málaga, 2002), es un joven director creativo y ejecutivo malagueño cuyas obras destacan por su sensibilidad visual y su profundo vínculo con las raíces y tradiciones de su tierra. Su cine se caracteriza por tener un enfoque humano, crítico y valiente. Gracias a su último proyecto fue seleccionado por el Festival de Málaga, convirtiéndose en el director de cine más joven en presentar su proyecto profesional.",
+    "role": "Director ejecutivo y creativo",
+    "bio": "Director ejecutivo y creativo de UMD Films, con control total de la productora y la última palabra en cada proyecto; dirige también los contenidos de Episodio Cero junto a Loreto Navas y forma parte de la imagen pública de la marca en redes sociales. Nacido en Málaga en 2002, es un director malagueño cuyas obras destacan por su sensibilidad visual y su vínculo con las raíces y tradiciones de su tierra, con un enfoque humano, crítico y valiente. Su último proyecto fue seleccionado por el Festival de Málaga, convirtiéndose en el director más joven en presentar un proyecto profesional en el certamen.",
     "photo_cover": "assets/team/alejandro-luque/cover.avif",
     "photos_extra": ["01","02","03","04","05","06","07","08","09","10","11","12"],
     "social": {
@@ -27,8 +27,8 @@
     "id": "adrian-roman",
     "name": "Adrián Román",
     "surname": "",
-    "role": "Productor general y director de contenidos tradicional",
-    "bio": "Encargado de la supervisión general y dirección estratégica de la línea de contenido tradicional y documental.",
+    "role": "Productor general y director de contenidos",
+    "bio": "Encargado de la supervisión general y la dirección estratégica de la línea de contenido tradicional y documental de UMD Films. Ha participado en producciones como Sin paz no hay descanso, Interludio y el musical Charlie.",
     "photo_cover": "assets/team/adrian-roman/cover.avif",
     "photos_extra": ["01","02","03","04","05","06","07","08","09"],
     "social": {
@@ -44,8 +44,8 @@
     "id": "pol-ojea",
     "name": "Pol Ojea",
     "surname": "",
-    "role": "Subdirector y director de contenidos en redes sociales",
-    "bio": "Control parcial de la productora y toma de decisión junto con los directores en cada movimiento. Toma total de decisiones respecto a la imagen de UMD Films en redes sociales y creación de contenido.",
+    "role": "Subdirector y director de contenido",
+    "bio": "Subdirector de UMD Films, con toma de decisión junto a los directores en cada movimiento de la productora, y director de contenidos en redes sociales, responsable de la imagen digital de la marca. Forma parte también del equipo creativo y del equipo de edición, y ha participado en Cautivo (Málaga) y Memoria, compromiso y fe.",
     "photo_cover": "assets/team/pol-ojea/cover.avif",
     "photos_extra": ["01","02","03","04"],
     "social": {
@@ -61,8 +61,8 @@
     "id": "ivan-pascual",
     "name": "Iván Pascual",
     "surname": "",
-    "role": "Director de Fotografía",
-    "bio": "El responsable de traducir las emociones del guion en imágenes. Diseña la iluminación, la composición y el movimiento de cámara, trabajando estrechamente con dirección para crear la atmósfera visual, la textura y la identidad cromática de cada producción.",
+    "role": "Director de fotografía",
+    "bio": "Director de fotografía de UMD Films, encargado de traducir las emociones del guion en imágenes. Diseña la iluminación, la composición y el movimiento de cámara, trabajando estrechamente con dirección para crear la atmósfera visual, la textura y la identidad cromática de cada producción.",
     "photo_cover": "assets/team/ivan-pascual/cover.avif",
     "photos_extra": ["01","02","03","04","05","06","07"],
     "social": {
@@ -79,7 +79,7 @@
     "name": "Miguel Matarín",
     "surname": "",
     "role": "Director de arte",
-    "bio": "Se encarga de conceptualizar y construir el universo visual y espacial de cada producción. Desde la paleta de colores y la selección de localizaciones hasta el diseño de los decorados, transforma los espacios físicos para que respiren la misma atmósfera que dicta la historia, asegurando una identidad visual única en cada plano.",
+    "bio": "Director de arte de UMD Films, encargado de conceptualizar y construir el universo visual y espacial de cada producción. Desde la paleta de colores y la selección de localizaciones hasta el diseño de los decorados, transforma los espacios físicos para que respiren la misma atmósfera que dicta la historia.",
     "photo_cover": "assets/team/miguel-matarin/cover.avif",
     "photos_extra": ["01","02","03","04"],
     "social": {
@@ -95,8 +95,8 @@
     "id": "javier-costoya",
     "name": "Javier Costoya",
     "surname": "",
-    "role": "Ingeniero de Sonido",
-    "bio": "El responsable de gestionar y ejecutar todos los aspectos técnicos del audio.",
+    "role": "Ingeniero de sonido",
+    "bio": "Ingeniero de sonido de UMD Films, responsable de gestionar y ejecutar todos los aspectos técnicos del audio en rodaje y postproducción. Especializado en sonido directo, mezcla y masterización, ha participado en Cautivo (Málaga).",
     "photo_cover": "assets/team/javier-costoya/cover.avif",
     "photos_extra": ["01","02","03"],
     "social": {
@@ -113,7 +113,7 @@
     "name": "Javier Abelaira",
     "surname": "",
     "role": "Jefe de teatro y director de actores",
-    "bio": "Director de teatro junto a Alejandro y director de actores en cada proyecto audiovisual que realicemos.",
+    "bio": "Jefe de teatro y director de actores de UMD Films, encargado de la búsqueda y gestión de obras teatrales y de la dirección de actores en cada proyecto audiovisual. Forma parte también de la imagen pública de la productora en redes sociales.",
     "photo_cover": "assets/team/javier-abelaira/cover.avif",
     "photos_extra": ["01","02","03","04"],
     "social": {
@@ -130,7 +130,7 @@
     "name": "Iván Ambrosio",
     "surname": "",
     "role": "Editor y VFX Artist",
-    "bio": "Según el encargo, editar los proyectos de UMD Films.",
+    "bio": "Editor y artista de VFX de UMD Films, encargado del montaje y los efectos visuales de los proyectos según encargo. Ha participado en Cautivo (Málaga) y Memoria, compromiso y fe.",
     "photo_cover": "assets/team/ivan-ambrosio/cover.avif",
     "photos_extra": [],
     "social": {
@@ -147,7 +147,7 @@
     "name": "Eva Cano",
     "surname": "",
     "role": "Cost controller y técnico audiovisual",
-    "bio": "Su función exclusiva es auditar, justificar y vigilar el gasto diario de cada departamento para no superar el presupuesto asignado.",
+    "bio": "Cost controller y técnico audiovisual de UMD Films, encargada de auditar y justificar el gasto diario de cada departamento para no superar el presupuesto asignado. Ha colaborado en el rodaje de Memoria, compromiso y fe.",
     "photo_cover": "assets/team/eva-cano/cover.avif",
     "photos_extra": ["01","02","03"],
     "social": {
@@ -164,7 +164,7 @@
     "name": "María Arnés",
     "surname": "",
     "role": "Caracterización y maquillaje profesional",
-    "bio": "Encargada de realizar efectos especiales (heridas, prótesis, criaturas, envejecimiento), maquillaje profesional y peluquería.",
+    "bio": "Encargada de la caracterización y el maquillaje profesional en las producciones de UMD Films, realizando efectos especiales (heridas, prótesis, envejecimiento), maquillaje y peluquería para cada rodaje.",
     "photo_cover": "assets/team/maria-arnes/cover.avif",
     "photos_extra": ["01","02"],
     "social": {
@@ -180,8 +180,8 @@
     "id": "cristina-rivas",
     "name": "Cristina Rivas",
     "surname": "",
-    "role": "Directora de arte y diseño gráfico",
-    "bio": "Se encarga de construir la identidad visual de cada proyecto, definiendo la estética, el color y la línea gráfica desde la fase de desarrollo hasta el cartel final. Su objetivo es asegurar que la propuesta visual potencie la narrativa de cada producción con coherencia, fuerza y estilo propio. Además, forma parte de nuestro equipo creativo.",
+    "role": "Diseñadora gráfica y directora de arte",
+    "bio": "Diseñadora gráfica de UMD Films, encargada de todos los trabajos gráficos de la productora, y directora de arte, responsable de construir la identidad visual de cada proyecto: estética, color y línea gráfica desde el desarrollo hasta el cartel final. Forma parte también del equipo creativo.",
     "photo_cover": "assets/team/cristina-rivas/cover.avif",
     "photos_extra": [],
     "social": {
@@ -198,7 +198,7 @@
     "name": "Julia Flores",
     "surname": "",
     "role": "Jefa de producción",
-    "bio": "Rol clave para preproducción y día a día en la productora. Realización y revisión de documentos, organización previo a rodajes y mano derecha de los directores. Además, forma parte de nuestro equipo creativo.",
+    "bio": "Jefa de producción de UMD Films, responsable de la preproducción y el día a día de la productora: realización y revisión de documentos, organización previa a los rodajes y mano derecha de los directores. Forma parte también del equipo creativo y ha colaborado en Memoria, compromiso y fe.",
     "photo_cover": "assets/team/julia-flores/cover.avif",
     "photos_extra": ["01","02","03","04","05","06","07"],
     "social": {
@@ -215,7 +215,7 @@
     "name": "Darío González",
     "surname": "",
     "role": "Ayudante de producción",
-    "bio": "Rol de soporte clave en la logística diaria de los rodajes, gestión de órdenes de trabajo en set y asistencia directa a la Jefa de Producción en el día a día.",
+    "bio": "Ayudante de producción de UMD Films, encargado del soporte logístico diario en los rodajes, la gestión de órdenes de trabajo en set y la asistencia directa a la jefa de producción. Ha colaborado en Memoria, compromiso y fe.",
     "photo_cover": "assets/team/dario-gonzalez/cover.avif",
     "photos_extra": ["01","02","03","04"],
     "social": {
@@ -232,7 +232,7 @@
     "name": "Elvira Ojea",
     "surname": "",
     "role": "Guionista",
-    "bio": "La mente detrás de las historias que contamos. Traduce conceptos abstractos en narrativas cinematográficas potentes, diseñando la estructura dramática y el ritmo visual del guion. Trabaja en la base del desarrollo para asegurar que cada proyecto tenga un mensaje claro y enganche desde la primera página. Además, forma parte de nuestro equipo creativo.",
+    "bio": "Guionista de UMD Films, encargada de traducir conceptos abstractos en narrativas cinematográficas: diseña la estructura dramática y el ritmo visual del guion desde el desarrollo del proyecto. Forma parte también del equipo creativo y ha participado en Cautivo (Málaga).",
     "photo_cover": "assets/team/elvira-ojea/cover.avif",
     "photos_extra": ["01","02"],
     "social": {
@@ -249,7 +249,7 @@
     "name": "Marta Guerra",
     "surname": "",
     "role": "Directora de fotografía",
-    "bio": "La responsable de traducir las emociones del guion en imágenes. Diseña la iluminación, la composición y el movimiento de cámara, trabajando estrechamente con dirección para crear la atmósfera visual, la textura y la identidad cromática de cada producción.",
+    "bio": "Directora de fotografía de UMD Films. Diseña la iluminación, la composición y el movimiento de cámara, trabajando junto a dirección para construir la atmósfera visual, la textura y la identidad cromática de cada producción.",
     "photo_cover": "assets/team/marta-guerra/cover.avif",
     "photos_extra": [],
     "social": {
@@ -266,7 +266,7 @@
     "name": "Pau Solés",
     "surname": "",
     "role": "Productor ejecutivo asociado",
-    "bio": "Co-responsable de la estrategia comercial de la productora, enfocado en el cierre de contratos publicitarios o cinematográficos y la optimización de recursos para los proyectos de línea de la productora. ",
+    "bio": "Productor ejecutivo asociado de UMD Films, co-responsable de la estrategia comercial de la productora. Se encarga del cierre de contratos publicitarios y cinematográficos y de la optimización de recursos para los proyectos de la línea de la productora.",
     "photo_cover": "assets/team/pau-soles/cover.avif",
     "photos_extra": [],
     "social": {
@@ -282,8 +282,8 @@
     "id": "sofia-garcia",
     "name": "Sofía García",
     "surname": "",
-    "role": "Equipo creativo",
-    "bio": "Es el nexo visual y la representación de la productora ante el público y los clientes. Integrada en el equipo creativo, se encarga de proyectar la identidad, el estilo y los valores de la marca en eventos, campañas y activaciones, asegurando que nuestra presencia pública sea siempre impecable, coherente y magnética.",
+    "role": "Imagen de marca y equipo creativo",
+    "bio": "Imagen pública de UMD Films y miembro del equipo creativo, encargada de proyectar la identidad, el estilo y los valores de la marca en eventos, campañas y activaciones. Ha participado en Cautivo (Málaga) y Memoria, compromiso y fe.",
     "photo_cover": "assets/team/sofia-garcia/cover.avif",
     "photos_extra": ["01","02","03","04","05","06"],
     "social": {
@@ -300,7 +300,7 @@
     "name": "Sandra Jiménez",
     "surname": "",
     "role": "Fotógrafa y foto fija",
-    "bio": "Encargada de capturar la esencia de la productora tanto dentro como fuera del set. Su rol abarca desde la foto fija en rodajes (inmortalizando el detrás de cámaras y la fuerza visual de cada producción) hasta la cobertura de eventos, sesiones editoriales con modelos y proyectos comerciales, aportando siempre una mirada estética e identidad propia a cada captura.",
+    "bio": "Fotógrafa de UMD Films, encargada de la foto fija en rodajes y de la cobertura de eventos, sesiones editoriales y proyectos comerciales, aportando una mirada estética propia a cada captura.",
     "photo_cover": "assets/team/sandra-jimenez/cover.avif",
     "photos_extra": [],
     "social": {
@@ -317,7 +317,7 @@
     "name": "Alicia Caro",
     "surname": "",
     "role": "Fotógrafa y foto fija",
-    "bio": "Encargada de capturar la esencia de la productora tanto dentro como fuera del set. Su rol abarca desde la foto fija en rodajes (inmortalizando el detrás de cámaras y la fuerza visual de cada producción) hasta la cobertura de eventos, sesiones editoriales con modelos y proyectos comerciales, aportando siempre una mirada estética e identidad propia a cada captura.",
+    "bio": "Fotógrafa de UMD Films, encargada de la foto fija en rodajes y de la cobertura de eventos, sesiones editoriales y proyectos comerciales. Ha colaborado en Memoria, compromiso y fe.",
     "photo_cover": "assets/team/alicia-caro/cover.avif",
     "photos_extra": ["01","02","03"],
     "social": {
@@ -333,8 +333,8 @@
     "id": "javier-botella",
     "name": "Javier Botella",
     "surname": "",
-    "role": "Informático, programador y desarrollador SEO",
-    "bio": "Encargado de realizar todos los trabajos informáticos y gestionar la página web.",
+    "role": "Informático y desarrollador web",
+    "bio": "Informático y desarrollador de UMD Films, encargado de todos los trabajos informáticos y de la gestión y el SEO de la página web de la productora.",
     "photo_cover": "assets/team/javier-botella/cover.avif",
     "photos_extra": [],
     "social": {
@@ -350,8 +350,8 @@
     "id": "loreto-navas",
     "name": "Loreto Navas",
     "surname": "",
-    "role": "Directora de contenidos de Episodio Cero y Málaga Coronada, chica de imagen y equipo creativo",
-    "bio": "Encargada de dirigir cada vídeo de Episodio Cero y crear contenido para `Málaga Coronada` en redes sociales y su creación de contenido. Además, forma parte de nuestro equipo creativo.",
+    "role": "Directora de contenidos y equipo creativo",
+    "bio": "Directora de contenidos de Episodio Cero, dirige cada vídeo del canal, y de Málaga Coronada en redes sociales. Forma parte también de la imagen pública de la productora y del equipo creativo, y ha colaborado en Memoria, compromiso y fe.",
     "photo_cover": "assets/team/loreto-navas/cover.avif",
     "photos_extra": [],
     "social": { "instagram": "", "youtube": "" },
@@ -365,7 +365,7 @@
     "name": "Sergio Pastor",
     "surname": "",
     "role": "Compositor musical y diseñador de sonido",
-    "bio": "Encargado de realizar todos los trabajos musicales de UMD Films.",
+    "bio": "Compositor musical y diseñador de sonido de UMD Films, encargado de todos los trabajos musicales de la productora. Ha compuesto la banda sonora de Interludio, Cautivo (Málaga) y Memoria, compromiso y fe.",
     "photo_cover": "assets/team/sergio-pastor/cover.avif",
     "photos_extra": ["01","02","03","04","05","06","07"],
     "social": {
