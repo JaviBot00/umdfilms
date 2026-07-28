@@ -163,7 +163,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (trustInner) {
     // Render logos from JSON
     trustInner.innerHTML = partners.map(p =>
-      `<img src="${UMD.rootPath(p.logo)}" alt="${p.name}" />`
+      p.url
+        ? `<a href="${p.url}" target="_blank" rel="noopener"><img src="${UMD.rootPath(p.logo)}" alt="${p.name}" /></a>`
+        : `<img src="${UMD.rootPath(p.logo)}" alt="${p.name}" />`
     ).join('');
 
     // Duplicate for marquee (same logic as before)
