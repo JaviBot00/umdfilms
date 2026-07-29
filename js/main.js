@@ -248,7 +248,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     services.forEach(svc => {
       const card = document.createElement('article');
       card.className = `service-card reveal${svc.link ? ' service-card--link' : ''}`;
-      if (svc.video_preview) card.dataset.video = svc.video_preview;
 
       card.innerHTML = `
         <div class="service-card__icon">${svc.icon}</div>
