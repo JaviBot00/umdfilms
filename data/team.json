@@ -4,7 +4,7 @@
     "name": "Alejandro Luque",
     "surname": "",
     "role": "Director ejecutivo y creativo",
-    "bio": "Director ejecutivo y creativo de UMD Films, con control total de la productora y la última palabra en cada proyecto; dirige también los contenidos de Episodio Cero junto a Loreto Navas y forma parte de la imagen pública de la marca en redes sociales. Nacido en Málaga en 2002, es un director malagueño cuyas obras destacan por su sensibilidad visual y su vínculo con las raíces y tradiciones de su tierra, con un enfoque humano, crítico y valiente. Su último proyecto fue seleccionado por el Festival de Málaga, convirtiéndose en el director más joven en presentar un proyecto profesional en el certamen.",
+    "bio": "Director ejecutivo y creativo de UMD Films, con control total de la productora y la última palabra en cada proyecto; dirige también los contenidos de Episodio Cero junto a Loreto Navas y forma parte de la imagen pública de la marca en redes sociales. Nacido en Málaga en 2002, es un director malagueño cuyas obras destacan por su sensibilidad visual y su vínculo con las raíces y tradiciones de su tierra, con un enfoque humano, crítico y valiente. Su último proyecto fue seleccionado por el Festival de Málaga, convirtiéndose en el director más joven en presentar un proyecto profesional en el festival.",
     "photo_cover": "assets/team/alejandro-luque/cover.avif",
     "photos_extra": ["01","02","03","04","05","06","07","08","09","10","11","12"],
     "social": {
@@ -12,14 +12,7 @@
       "youtube": ""
     },
     "projects": ["cautivo-malaga", "sin-paz-no-hay-descanso", "memoria-compromiso-y-fe", "interludio", "boda-ester-y-juan"],
-    "specialties": [
-      "Dirección",
-      "Producción ejecutiva",
-      "Concepto creativo",
-      "Eventos",
-      "Comunicación",
-      "Liderazgo"
-    ],
+    "specialties": ["Dirección", "Producción ejecutiva", "Contenido creativo", "Redes sociales"],
     "featured": true,
     "represented_artist": false
   },
@@ -53,7 +46,7 @@
       "youtube": ""
     },
     "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
-    "specialties": [],
+    "specialties": ["Subdirección", "Redes sociales", "Edición", "Equipo creativo"],
     "featured": true,
     "represented_artist": false
   },
@@ -87,7 +80,7 @@
       "youtube": ""
     },
     "projects": ["cautivo-malaga", "memoria-compromiso-y-fe", "boda-ester-y-juan"],
-    "specialties": [],
+    "specialties": ["Dirección de arte", "Diseño de producción", "Localizaciones", "Decorados"],
     "featured": true,
     "represented_artist": false
   },
@@ -98,7 +91,7 @@
     "role": "Ingeniero de sonido",
     "bio": "Ingeniero de sonido de UMD Films, responsable de gestionar y ejecutar todos los aspectos técnicos del audio en rodaje y postproducción. Especializado en sonido directo, mezcla y masterización, ha participado en Cautivo (Málaga).",
     "photo_cover": "assets/team/javier-costoya/cover.avif",
-    "photos_extra": ["01","02","03"],
+    "photos_extra": ["01","02","03","04","05"],
     "social": {
       "instagram": "https://www.instagram.com/javicostoya__/",
       "youtube": ""
@@ -121,7 +114,7 @@
       "youtube": ""
     },
     "projects": ["memoria-compromiso-y-fe"],
-    "specialties": [],
+    "specialties": ["Dirección de actores", "Casting", "Teatro"],
     "featured": true,
     "represented_artist": false
   },
@@ -132,7 +125,7 @@
     "role": "Editor y VFX Artist",
     "bio": "Editor y artista de VFX de UMD Films, encargado del montaje y los efectos visuales de los proyectos según encargo. Ha participado en Cautivo (Málaga) y Memoria, compromiso y fe.",
     "photo_cover": "assets/team/ivan-ambrosio/cover.avif",
-    "photos_extra": [],
+    "photos_extra": ["01"],
     "social": {
       "instagram": "https://www.instagram.com/celvlec/",
       "youtube": ""
@@ -155,7 +148,7 @@
       "youtube": ""
     },
     "projects": ["memoria-compromiso-y-fe"],
-    "specialties": [],
+    "specialties": ["Control de costes", "Producción", "Presupuestos"],
     "featured": false,
     "represented_artist": false
   },
@@ -172,7 +165,7 @@
       "youtube": ""
     },
     "projects": [],
-    "specialties": [],
+    "specialties": ["Maquillaje", "Caracterización", "Efectos especiales", "Peluquería"],
     "featured": false,
     "represented_artist": false
   },
@@ -189,7 +182,7 @@
       "youtube": ""
     },
     "projects": [],
-    "specialties": [],
+    "specialties": ["Diseño gráfico", "Dirección de arte", "Identidad visual", "Cartelería"],
     "featured": true,
     "represented_artist": false
   },
@@ -206,7 +199,7 @@
       "youtube": ""
     },
     "projects": ["memoria-compromiso-y-fe"],
-    "specialties": [],
+    "specialties": ["Producción", "Organización", "Equipo creativo"],
     "featured": false,
     "represented_artist": false
   },
@@ -223,7 +216,7 @@
       "youtube": ""
     },
     "projects": ["memoria-compromiso-y-fe"],
-    "specialties": [],
+    "specialties": ["Producción", "Logística", "Set"],
     "featured": false,
     "represented_artist": false
   },
@@ -240,7 +233,7 @@
       "youtube": ""
     },
     "projects": ["cautivo-malaga"],
-    "specialties": [],
+    "specialties": ["Guion", "Narrativa", "Equipo creativo"],
     "featured": false,
     "represented_artist": false
   },
@@ -257,7 +250,7 @@
       "youtube": ""
     },
     "projects": [],
-    "specialties": [],
+    "specialties": ["Fotografía", "Iluminación", "Cámara"],
     "featured": false,
     "represented_artist": false
   },
@@ -274,7 +267,7 @@
       "youtube": ""
     },
     "projects": [],
-    "specialties": [],
+    "specialties": ["Producción ejecutiva", "Estrategia comercial", "Contratos publicitarios"],
     "featured": false,
     "represented_artist": false
   },
@@ -291,7 +284,7 @@
       "youtube": ""
     },
     "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
-    "specialties": [],
+    "specialties": ["Imagen de marca", "Eventos", "Equipo creativo"],
     "featured": false,
     "represented_artist": false
   },
@@ -308,7 +301,7 @@
       "youtube": ""
     },
     "projects": [],
-    "specialties": [],
+    "specialties": ["Fotografía", "Foto fija", "Eventos"],
     "featured": false,
     "represented_artist": false
   },
@@ -325,7 +318,7 @@
       "youtube": ""
     },
     "projects": ["memoria-compromiso-y-fe"],
-    "specialties": [],
+    "specialties": ["Fotografía", "Foto fija", "Eventos"],
     "featured": false,
     "represented_artist": false
   },
@@ -342,7 +335,7 @@
       "youtube": ""
     },
     "projects": [],
-    "specialties": [],
+    "specialties": ["Desarrollo web", "SEO", "Soporte técnico"],
     "featured": false,
     "represented_artist": false
   },
@@ -356,7 +349,7 @@
     "photos_extra": [],
     "social": { "instagram": "", "youtube": "" },
     "projects": ["memoria-compromiso-y-fe"],
-    "specialties": [],
+    "specialties": ["Dirección de contenidos", "Redes sociales", "Equipo creativo"],
     "featured": false,
     "represented_artist": false
   },
