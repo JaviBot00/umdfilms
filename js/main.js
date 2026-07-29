@@ -163,7 +163,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (trustInner) {
     // Render logos from JSON
     trustInner.innerHTML = partners.map(p =>
-      `<img src="${UMD.rootPath(p.logo)}" alt="${p.name}" />`
+      p.url
+        ? `<a href="${p.url}" target="_blank" rel="noopener"><img src="${UMD.rootPath(p.logo)}" alt="${p.name}" /></a>`
+        : `<img src="${UMD.rootPath(p.logo)}" alt="${p.name}" />`
     ).join('');
 
     // Duplicate for marquee (same logic as before)
@@ -246,13 +248,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     services.forEach(svc => {
       const card = document.createElement('article');
       card.className = `service-card reveal${svc.link ? ' service-card--link' : ''}`;
-      if (svc.video_preview) card.dataset.video = svc.video_preview;
 
       card.innerHTML = `
         <div class="service-card__icon">${svc.icon}</div>
         <h3 class="service-card__title">${svc.title}</h3>
         <p class="service-card__desc">${svc.description}</p>
-        ${svc.core ? `<span class="service-card__tag">${ui.home?.core_service_tag}</span>` : ''}
       `;
 
       if (svc.link) {
