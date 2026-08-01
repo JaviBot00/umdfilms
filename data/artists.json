@@ -10,16 +10,5 @@
       "instagram": "",
       "youtube": ""
     }
-  },
-  {
-    "id": "maria-hernandez",
-    "name": "María Hernández",
-    "role": "Cantante y compositora",
-    "bio": "Cantante y compositora con una voz única y un estilo que fusiona géneros. Su música transmite emociones profundas y conecta con el público de manera especial.",
-    "photo": "assets/artists/maria-hernandez.webp",
-    "social": {
-      "instagram": "https://www.instagram.com/mariahernandezmusic/",
-      "youtube": "https://www.youtube.com/channel/UCmariahernandez"
-    }
   }
 ]
