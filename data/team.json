@@ -51,6 +51,23 @@
     "represented_artist": false
   },
   {
+    "id": "marta-guerra",
+    "name": "Marta Guerra",
+    "surname": "",
+    "role": "Directora de fotografía",
+    "bio": "Directora de fotografía de UMD Films. Diseña la iluminación, la composición y el movimiento de cámara, trabajando junto a dirección para construir la atmósfera visual, la textura y la identidad cromática de cada producción.",
+    "photo_cover": "assets/team/marta-guerra/cover.avif",
+    "photos_extra": [],
+    "social": {
+      "instagram": "https://www.instagram.com/martaagueerra/",
+      "youtube": ""
+    },
+    "projects": [],
+    "specialties": ["Fotografía", "Iluminación", "Cámara"],
+    "featured": true,
+    "represented_artist": false
+  },
+  {
     "id": "ivan-pascual",
     "name": "Iván Pascual",
     "surname": "",
@@ -85,6 +102,105 @@
     "represented_artist": false
   },
   {
+    "id": "cristina-rivas",
+    "name": "Cristina Rivas",
+    "surname": "",
+    "role": "Directora de arte y diseñadora gráfica",
+    "bio": "Diseñadora gráfica de UMD Films, encargada de todos los trabajos gráficos de la productora, y directora de arte, responsable de construir la identidad visual de cada proyecto: estética, color y línea gráfica desde el desarrollo hasta el cartel final. Forma parte también del equipo creativo.",
+    "photo_cover": "assets/team/cristina-rivas/cover.avif",
+    "photos_extra": [],
+    "social": {
+      "instagram": "https://www.instagram.com/carretedekris/",
+      "youtube": ""
+    },
+    "projects": [],
+    "specialties": ["Diseño gráfico", "Dirección de arte", "Identidad visual", "Cartelería"],
+    "featured": true,
+    "represented_artist": false
+  },
+  {
+    "id": "javier-abelaira",
+    "name": "Javier Abelaira",
+    "surname": "",
+    "role": "Director de actores y jefe de teatro",
+    "bio": "Director de actores y jefe de teatro de UMD Films, encargado de la búsqueda y gestión de obras teatrales y de la dirección de actores en cada proyecto audiovisual. Forma parte también de la imagen pública de la productora en redes sociales.",
+    "photo_cover": "assets/team/javier-abelaira/cover.avif",
+    "photos_extra": ["01","02","03","04"],
+    "social": {
+      "instagram": "https://www.instagram.com/javiabelaira/",
+      "youtube": ""
+    },
+    "projects": ["memoria-compromiso-y-fe"],
+    "specialties": ["Dirección de actores", "Casting", "Teatro"],
+    "featured": true,
+    "represented_artist": false
+  },
+  {
+    "id": "loreto-navas",
+    "name": "Loreto Navas",
+    "surname": "",
+    "role": "Directora de contenidos y equipo creativo",
+    "bio": "Directora de contenidos de Episodio Cero, dirige cada vídeo del canal, y de Málaga Coronada en redes sociales. Forma parte también de la imagen pública de la productora y del equipo creativo, y ha colaborado en Memoria, compromiso y fe.",
+    "photo_cover": "assets/team/loreto-navas/cover.avif",
+    "photos_extra": [],
+    "social": { "instagram": "", "youtube": "" },
+    "projects": ["memoria-compromiso-y-fe"],
+    "specialties": ["Dirección de contenidos", "Redes sociales", "Equipo creativo"],
+    "featured": true,
+    "represented_artist": false
+  },
+  {
+    "id": "julia-flores",
+    "name": "Julia Flores",
+    "surname": "",
+    "role": "Jefa de producción",
+    "bio": "Jefa de producción de UMD Films, responsable de la preproducción y el día a día de la productora: realización y revisión de documentos, organización previa a los rodajes y mano derecha de los directores. Forma parte también del equipo creativo y ha colaborado en Memoria, compromiso y fe.",
+    "photo_cover": "assets/team/julia-flores/cover.avif",
+    "photos_extra": ["01","02","03","04","05","06"],
+    "social": {
+      "instagram": "https://www.instagram.com/juliiaa_3605/",
+      "youtube": ""
+    },
+    "projects": ["memoria-compromiso-y-fe"],
+    "specialties": ["Producción", "Organización", "Equipo creativo"],
+    "featured": true,
+    "represented_artist": false
+  },
+  {
+    "id": "dario-gonzalez",
+    "name": "Darío González",
+    "surname": "",
+    "role": "Ayudante de producción",
+    "bio": "Ayudante de producción de UMD Films, encargado del soporte logístico diario en los rodajes, la gestión de órdenes de trabajo en set y la asistencia directa a la jefa de producción. Ha colaborado en Memoria, compromiso y fe.",
+    "photo_cover": "assets/team/dario-gonzalez/cover.avif",
+    "photos_extra": ["01","02","03","04"],
+    "social": {
+      "instagram": "https://www.instagram.com/dariogonrz/",
+      "youtube": ""
+    },
+    "projects": ["memoria-compromiso-y-fe"],
+    "specialties": ["Producción", "Logística", "Set"],
+    "featured": false,
+    "represented_artist": false
+  },
+  {
+    "id": "elvira-ojea",
+    "name": "Elvira Ojea",
+    "surname": "",
+    "role": "Guionista",
+    "bio": "Guionista de UMD Films, encargada de traducir conceptos abstractos en narrativas cinematográficas: diseña la estructura dramática y el ritmo visual del guion desde el desarrollo del proyecto. Forma parte también del equipo creativo y ha participado en Cautivo (Málaga).",
+    "photo_cover": "assets/team/elvira-ojea/cover.avif",
+    "photos_extra": ["01","02"],
+    "social": {
+      "instagram": "https://www.instagram.com/_elviraa_ojm_/",
+      "youtube": ""
+    },
+    "projects": ["cautivo-malaga"],
+    "specialties": ["Guion", "Narrativa", "Equipo creativo"],
+    "featured": false,
+    "represented_artist": false
+  },
+  {
     "id": "javier-costoya",
     "name": "Javier Costoya",
     "surname": "",
@@ -99,23 +215,6 @@
     "projects": ["cautivo-malaga"],
     "specialties": ["Sonido directo", "Mezcla", "Masterización"],
     "featured": false,
-    "represented_artist": false
-  },
-  {
-    "id": "javier-abelaira",
-    "name": "Javier Abelaira",
-    "surname": "",
-    "role": "Jefe de teatro y director de actores",
-    "bio": "Jefe de teatro y director de actores de UMD Films, encargado de la búsqueda y gestión de obras teatrales y de la dirección de actores en cada proyecto audiovisual. Forma parte también de la imagen pública de la productora en redes sociales.",
-    "photo_cover": "assets/team/javier-abelaira/cover.avif",
-    "photos_extra": ["01","02","03","04"],
-    "social": {
-      "instagram": "https://www.instagram.com/javiabelaira/",
-      "youtube": ""
-    },
-    "projects": ["memoria-compromiso-y-fe"],
-    "specialties": ["Dirección de actores", "Casting", "Teatro"],
-    "featured": true,
     "represented_artist": false
   },
   {
@@ -166,108 +265,6 @@
     },
     "projects": [],
     "specialties": ["Maquillaje", "Caracterización", "Efectos especiales", "Peluquería"],
-    "featured": false,
-    "represented_artist": false
-  },
-  {
-    "id": "cristina-rivas",
-    "name": "Cristina Rivas",
-    "surname": "",
-    "role": "Diseñadora gráfica y directora de arte",
-    "bio": "Diseñadora gráfica de UMD Films, encargada de todos los trabajos gráficos de la productora, y directora de arte, responsable de construir la identidad visual de cada proyecto: estética, color y línea gráfica desde el desarrollo hasta el cartel final. Forma parte también del equipo creativo.",
-    "photo_cover": "assets/team/cristina-rivas/cover.avif",
-    "photos_extra": [],
-    "social": {
-      "instagram": "https://www.instagram.com/carretedekris/",
-      "youtube": ""
-    },
-    "projects": [],
-    "specialties": ["Diseño gráfico", "Dirección de arte", "Identidad visual", "Cartelería"],
-    "featured": true,
-    "represented_artist": false
-  },
-  {
-    "id": "julia-flores",
-    "name": "Julia Flores",
-    "surname": "",
-    "role": "Jefa de producción",
-    "bio": "Jefa de producción de UMD Films, responsable de la preproducción y el día a día de la productora: realización y revisión de documentos, organización previa a los rodajes y mano derecha de los directores. Forma parte también del equipo creativo y ha colaborado en Memoria, compromiso y fe.",
-    "photo_cover": "assets/team/julia-flores/cover.avif",
-    "photos_extra": ["01","02","03","04","05","06","07"],
-    "social": {
-      "instagram": "https://www.instagram.com/juliiaa_3605/",
-      "youtube": ""
-    },
-    "projects": ["memoria-compromiso-y-fe"],
-    "specialties": ["Producción", "Organización", "Equipo creativo"],
-    "featured": false,
-    "represented_artist": false
-  },
-  {
-    "id": "dario-gonzalez",
-    "name": "Darío González",
-    "surname": "",
-    "role": "Ayudante de producción",
-    "bio": "Ayudante de producción de UMD Films, encargado del soporte logístico diario en los rodajes, la gestión de órdenes de trabajo en set y la asistencia directa a la jefa de producción. Ha colaborado en Memoria, compromiso y fe.",
-    "photo_cover": "assets/team/dario-gonzalez/cover.avif",
-    "photos_extra": ["01","02","03","04"],
-    "social": {
-      "instagram": "https://www.instagram.com/dariogonrz/",
-      "youtube": ""
-    },
-    "projects": ["memoria-compromiso-y-fe"],
-    "specialties": ["Producción", "Logística", "Set"],
-    "featured": false,
-    "represented_artist": false
-  },
-  {
-    "id": "elvira-ojea",
-    "name": "Elvira Ojea",
-    "surname": "",
-    "role": "Guionista",
-    "bio": "Guionista de UMD Films, encargada de traducir conceptos abstractos en narrativas cinematográficas: diseña la estructura dramática y el ritmo visual del guion desde el desarrollo del proyecto. Forma parte también del equipo creativo y ha participado en Cautivo (Málaga).",
-    "photo_cover": "assets/team/elvira-ojea/cover.avif",
-    "photos_extra": ["01","02"],
-    "social": {
-      "instagram": "https://www.instagram.com/_elviraa_ojm_/",
-      "youtube": ""
-    },
-    "projects": ["cautivo-malaga"],
-    "specialties": ["Guion", "Narrativa", "Equipo creativo"],
-    "featured": false,
-    "represented_artist": false
-  },
-  {
-    "id": "marta-guerra",
-    "name": "Marta Guerra",
-    "surname": "",
-    "role": "Directora de fotografía",
-    "bio": "Directora de fotografía de UMD Films. Diseña la iluminación, la composición y el movimiento de cámara, trabajando junto a dirección para construir la atmósfera visual, la textura y la identidad cromática de cada producción.",
-    "photo_cover": "assets/team/marta-guerra/cover.avif",
-    "photos_extra": [],
-    "social": {
-      "instagram": "https://www.instagram.com/martaagueerra/",
-      "youtube": ""
-    },
-    "projects": [],
-    "specialties": ["Fotografía", "Iluminación", "Cámara"],
-    "featured": false,
-    "represented_artist": false
-  },
-  {
-    "id": "pau-soles",
-    "name": "Pau Solés",
-    "surname": "",
-    "role": "Productor ejecutivo asociado",
-    "bio": "Productor ejecutivo asociado de UMD Films, co-responsable de la estrategia comercial de la productora. Se encarga del cierre de contratos publicitarios y cinematográficos y de la optimización de recursos para los proyectos de la línea de la productora.",
-    "photo_cover": "assets/team/pau-soles/cover.avif",
-    "photos_extra": [],
-    "social": {
-      "instagram": "https://www.instagram.com/pau.soles/",
-      "youtube": ""
-    },
-    "projects": [],
-    "specialties": ["Producción ejecutiva", "Estrategia comercial", "Contratos publicitarios"],
     "featured": false,
     "represented_artist": false
   },
@@ -340,16 +337,19 @@
     "represented_artist": false
   },
   {
-    "id": "loreto-navas",
-    "name": "Loreto Navas",
+    "id": "pau-soles",
+    "name": "Pau Solés",
     "surname": "",
-    "role": "Directora de contenidos y equipo creativo",
-    "bio": "Directora de contenidos de Episodio Cero, dirige cada vídeo del canal, y de Málaga Coronada en redes sociales. Forma parte también de la imagen pública de la productora y del equipo creativo, y ha colaborado en Memoria, compromiso y fe.",
-    "photo_cover": "assets/team/loreto-navas/cover.avif",
+    "role": "Productor ejecutivo asociado",
+    "bio": "Productor ejecutivo asociado de UMD Films, co-responsable de la estrategia comercial de la productora. Se encarga del cierre de contratos publicitarios y cinematográficos y de la optimización de recursos para los proyectos de la línea de la productora.",
+    "photo_cover": "assets/team/pau-soles/cover.avif",
     "photos_extra": [],
-    "social": { "instagram": "", "youtube": "" },
-    "projects": ["memoria-compromiso-y-fe"],
-    "specialties": ["Dirección de contenidos", "Redes sociales", "Equipo creativo"],
+    "social": {
+      "instagram": "https://www.instagram.com/pau.soles/",
+      "youtube": ""
+    },
+    "projects": [],
+    "specialties": ["Producción ejecutiva", "Estrategia comercial", "Contratos publicitarios"],
     "featured": false,
     "represented_artist": false
   },
@@ -367,7 +367,7 @@
     },
     "projects": ["interludio", "cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": ["Composición", "Diseño de sonido", "Bandas sonoras"],
-    "featured": true,
+    "featured": false,
     "represented_artist": true
   }
 ]

@@ -44,14 +44,8 @@
   {
     "id": "representacion-artistas",
     "icon": "🤝",
-    "title": "Representación de Artistas",
-    "description": "Gestión de marca en redes y representación con estrategia creativa."
-  },
-  {
-    "id": "alquiler-material",
-    "icon": "🎥",
-    "title": "Alquiler de Material ↗",
-    "description": "Cámara, sonido, iluminación y soporte profesional. Disponible para producciones externas.",
-    "link": "equipment/index.html"
+    "title": "Representación de Artistas ↗",
+    "description": "Gestión de marca en redes y representación con estrategia creativa.",
+    "link": "artists/index.html"
   }
 ]
