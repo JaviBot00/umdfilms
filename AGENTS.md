@@ -191,7 +191,7 @@ a string in JS or HTML that the user will see. The rule:
 3. HTML templates use static fallbacks for SEO/no-JS; JS overwrites them at runtime.
 
 Subsections: `nav`, `footer`, `aria`, `social`, `home`, `stats`, `form`, `cards`,
-`categorias_equipo`, `categorias_portfolio`, `tipos_artista`, `errores_404`,
+`categorias_equipo`, `categorias_portfolio`, `tipos_artista`, `profesiones_artista`, `errores_404`,
 `placeholders`, `equipment_extra`, `ficha_tecnica`, `video`, `ficha_perfil`,
 `foto_counter`.
 

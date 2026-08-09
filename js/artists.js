@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   UMD.setTwitterMeta('twitter:image',       `${config.brand.site_url}/${config.seo.og_image}`);
 
 
-  /* ---- Fusiona las dos fuentes en un solo array con "type" ---- */
+  /* ---- Fusiona las dos fuentes en un solo array ---- */
   const artistList = [
     ...team.filter(m => m.represented_artist).map(m => ({
       id: m.id,
@@ -48,22 +48,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       role: m.role,
       photo: m.photo_cover,
       social: m.social,
-      type: 'team'
+      category: m.category || '',
+      _source: 'team'
     })),
     ...artists
       .filter(a => a.id !== 'artista-externo-placeholder') // quita el placeholder de plantilla al ir a producción
-      .map(a => ({ ...a, type: 'external' }))
+      .map(a => ({ ...a, _source: 'external' }))
   ];
 
-  /* ---- Filtro: Equipo / Externos ---- */
-  const TYPE_LABELS = config.ui_strings?.tipos_artista;
+  /* ---- Filtro: Profesión ---- */
+  const PROFESSION_LABELS = config.ui_strings?.profesiones_artista;
 
   UMD.renderFilterableGrid({
     items: artistList,
     filterEl: document.getElementById('artistsFilters'),
     gridEl: document.getElementById('artistsGrid'),
-    categoryField: 'type',
-    labels: TYPE_LABELS,
+    categoryField: 'category',
+    labels: PROFESSION_LABELS,
     cardBuilder: (artist) => buildArtistCard(artist, UMD.rootPath, ui)
   });
 
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 function buildArtistCard(artist, rootPathFn, ui) {
   const card = document.createElement('div');
   card.className = 'team-card reveal';
-  const clickable = artist.type === 'team';
+  const clickable = artist._source === 'team';
   const socialStrings = ui?.social || {};
   const cardStrings = ui?.cards || {};
 

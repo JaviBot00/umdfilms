@@ -110,6 +110,18 @@
       "team": "Equipo UMD",
       "external": "Colaboradores externos"
     },
+    "profesiones_artista": {
+      "influencer": "Influencers",
+      "actor": "Actores",
+      "actriz": "Actrices",
+      "compositor": "Compositores",
+      "cantante": "Cantantes",
+      "musico": "Músicos",
+      "fotografo": "Fotógrafos",
+      "bailarin": "Bailarines",
+      "model": "Modelos",
+      "guionista": "Guionistas"
+    },
     "errores_404": {
       "perfil_titulo": "Perfil no encontrado",
       "perfil_volver": "Volver",
