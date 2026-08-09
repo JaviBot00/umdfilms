@@ -14,7 +14,8 @@
     "projects": ["cautivo-malaga", "sin-paz-no-hay-descanso", "memoria-compromiso-y-fe", "interludio", "boda-ester-y-juan"],
     "specialties": ["Dirección", "Producción ejecutiva", "Contenido creativo", "Redes sociales"],
     "featured": true,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "adrian-roman",
@@ -31,7 +32,8 @@
     "projects": ["sin-paz-no-hay-descanso", "interludio", "musical-charlie"],
     "specialties": ["Producción", "Corporativo", "Documentales"],
     "featured": true,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "pol-ojea",
@@ -48,7 +50,8 @@
     "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": ["Subdirección", "Redes sociales", "Edición", "Equipo creativo"],
     "featured": true,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "marta-guerra",
@@ -65,7 +68,8 @@
     "projects": [],
     "specialties": ["Fotografía", "Iluminación", "Cámara"],
     "featured": true,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "ivan-pascual",
@@ -82,7 +86,8 @@
     "projects": ["cautivo-malaga", "memoria-compromiso-y-fe", "boda-ester-y-juan"],
     "specialties": ["Fotografía", "Iluminación", "Cine"],
     "featured": true,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "miguel-matarin",
@@ -99,7 +104,8 @@
     "projects": ["cautivo-malaga", "memoria-compromiso-y-fe", "boda-ester-y-juan"],
     "specialties": ["Dirección de arte", "Diseño de producción", "Localizaciones", "Decorados"],
     "featured": true,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "cristina-rivas",
@@ -116,7 +122,8 @@
     "projects": [],
     "specialties": ["Diseño gráfico", "Dirección de arte", "Identidad visual", "Cartelería"],
     "featured": true,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "javier-abelaira",
@@ -133,7 +140,8 @@
     "projects": ["memoria-compromiso-y-fe"],
     "specialties": ["Dirección de actores", "Casting", "Teatro"],
     "featured": true,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "loreto-navas",
@@ -147,7 +155,8 @@
     "projects": ["memoria-compromiso-y-fe"],
     "specialties": ["Dirección de contenidos", "Redes sociales", "Equipo creativo"],
     "featured": true,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "julia-flores",
@@ -164,7 +173,8 @@
     "projects": ["memoria-compromiso-y-fe"],
     "specialties": ["Producción", "Organización", "Equipo creativo"],
     "featured": true,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "dario-gonzalez",
@@ -181,7 +191,8 @@
     "projects": ["memoria-compromiso-y-fe"],
     "specialties": ["Producción", "Logística", "Set"],
     "featured": false,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "elvira-ojea",
@@ -198,7 +209,8 @@
     "projects": ["cautivo-malaga"],
     "specialties": ["Guion", "Narrativa", "Equipo creativo"],
     "featured": false,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "javier-costoya",
@@ -215,7 +227,8 @@
     "projects": ["cautivo-malaga"],
     "specialties": ["Sonido directo", "Mezcla", "Masterización"],
     "featured": false,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "ivan-ambrosio",
@@ -232,7 +245,8 @@
     "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": ["Edición", "VFX", "Motion Graphics"],
     "featured": false,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "eva-cano",
@@ -249,7 +263,8 @@
     "projects": ["memoria-compromiso-y-fe"],
     "specialties": ["Control de costes", "Producción", "Presupuestos"],
     "featured": false,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "maria-arnes",
@@ -266,7 +281,8 @@
     "projects": [],
     "specialties": ["Maquillaje", "Caracterización", "Efectos especiales", "Peluquería"],
     "featured": false,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "sofia-garcia",
@@ -283,7 +299,8 @@
     "projects": ["cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": ["Imagen de marca", "Eventos", "Equipo creativo"],
     "featured": false,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "sandra-jimenez",
@@ -300,7 +317,8 @@
     "projects": [],
     "specialties": ["Fotografía", "Foto fija", "Eventos"],
     "featured": false,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "alicia-caro",
@@ -317,7 +335,8 @@
     "projects": ["memoria-compromiso-y-fe"],
     "specialties": ["Fotografía", "Foto fija", "Eventos"],
     "featured": false,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "javier-botella",
@@ -334,7 +353,8 @@
     "projects": [],
     "specialties": ["Desarrollo web", "SEO", "Soporte técnico"],
     "featured": false,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "pau-soles",
@@ -351,7 +371,8 @@
     "projects": [],
     "specialties": ["Producción ejecutiva", "Estrategia comercial", "Contratos publicitarios"],
     "featured": false,
-    "represented_artist": false
+    "represented_artist": false,
+    "category": ""
   },
   {
     "id": "sergio-pastor",
@@ -368,6 +389,7 @@
     "projects": ["interludio", "cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": ["Composición", "Diseño de sonido", "Bandas sonoras"],
     "featured": false,
-    "represented_artist": true
+    "represented_artist": true,
+    "category": "compositor"
   }
 ]
