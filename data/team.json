@@ -357,6 +357,24 @@
     "category": ""
   },
   {
+    "id": "oliver",
+    "name": "Oliver",
+    "surname": "",
+    "role": "Batman",
+    "bio": "",
+    "photo_cover": "assets/team/oliver/cover.avif",
+    "photos_extra": [],
+    "social": {
+      "instagram": "",
+      "youtube": ""
+    },
+    "projects": [],
+    "specialties": [],
+    "featured": false,
+    "represented_artist": false,
+    "category": ""
+  },
+  {
     "id": "sergio-pastor",
     "name": "Sergio Pastor",
     "surname": "",
