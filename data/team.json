@@ -72,24 +72,6 @@
     "category": ""
   },
   {
-    "id": "ivan-pascual",
-    "name": "Iván Pascual",
-    "surname": "",
-    "role": "Director de fotografía",
-    "bio": "Director de fotografía de UMD Films, encargado de traducir las emociones del guion en imágenes. Diseña la iluminación, la composición y el movimiento de cámara, trabajando estrechamente con dirección para crear la atmósfera visual, la textura y la identidad cromática de cada producción.",
-    "photo_cover": "assets/team/ivan-pascual/cover.avif",
-    "photos_extra": ["01","02","03","04","05","06","07"],
-    "social": {
-      "instagram": "https://www.instagram.com/ivanpg_dop/",
-      "youtube": ""
-    },
-    "projects": ["cautivo-malaga", "memoria-compromiso-y-fe", "boda-ester-y-juan"],
-    "specialties": ["Fotografía", "Iluminación", "Cine"],
-    "featured": true,
-    "represented_artist": false,
-    "category": ""
-  },
-  {
     "id": "miguel-matarin",
     "name": "Miguel Matarín",
     "surname": "",
@@ -357,8 +339,8 @@
     "category": ""
   },
   {
-    "id": "oliver",
-    "name": "Oliver",
+    "id": "oliver-meneses",
+    "name": "Oliver Meneses",
     "surname": "",
     "role": "Batman",
     "bio": "",
