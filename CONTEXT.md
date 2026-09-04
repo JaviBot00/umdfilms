@@ -150,7 +150,7 @@ stats.location = config.schema.address_locality               // "Málaga"
 
 ## Pending (Assets Alejandro Needs to Provide)
 
-- [ ] **Team photos** for 8 members missing cover images: ivan-ambrosio, javier-botella, javier-abelaira, loreto-navas, elvira-ojea, marta-guerra, pau-soles, sandra-jimenez
+- [ ] **Team photos** for 8 members missing cover images: ivan-ambrosio, javier-botella, javier-abelaira, loreto-navas, elvira-ojea, marta-guerra
 - [ ] **Hero poster image** (`assets/portfolio/hero-poster.jpg`) — currently blank until video loads
 - [ ] **Hero video MP4 fallback** — only `hero.webm` exists; older Safari browsers have no video
 - [ ] **Artist photo** for maria-hernandez (`assets/artists/maria-hernandez.webp`)
