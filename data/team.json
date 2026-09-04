@@ -127,10 +127,10 @@
   },
   {
     "id": "javier-abelaira",
-    "name": "Javier Abelaira",
+    "name": "Javi Abelaira",
     "surname": "",
-    "role": "Director de actores y jefe de teatro",
-    "bio": "Director de actores y jefe de teatro de UMD Films, encargado de la búsqueda y gestión de obras teatrales y de la dirección de actores en cada proyecto audiovisual. Forma parte también de la imagen pública de la productora en redes sociales.",
+    "role": "Director de actores",
+    "bio": "Director de actores de UMD Films, encargado de la dirección de actores en cada proyecto audiovisual. Actor desde 2024, ha participado en producciones como Punk Rock y La puerta estrecha (ESAD de Málaga), Eterno Retorno (Compañía Primer Movimiento), y los mediometrajes Memento Mori e Una historia circular. Forma parte también de la imagen pública de la productora en redes sociales.",
     "photo_cover": "assets/team/javier-abelaira/cover.avif",
     "photos_extra": ["01","02","03","04"],
     "social": {
@@ -303,24 +303,6 @@
     "category": ""
   },
   {
-    "id": "sandra-jimenez",
-    "name": "Sandra Jiménez",
-    "surname": "",
-    "role": "Fotógrafa y foto fija",
-    "bio": "Fotógrafa de UMD Films, encargada de la foto fija en rodajes y de la cobertura de eventos, sesiones editoriales y proyectos comerciales, aportando una mirada estética propia a cada captura.",
-    "photo_cover": "assets/team/sandra-jimenez/cover.avif",
-    "photos_extra": [],
-    "social": {
-      "instagram": "https://www.instagram.com/sandra_pht_cosp/",
-      "youtube": ""
-    },
-    "projects": [],
-    "specialties": ["Fotografía", "Foto fija", "Eventos"],
-    "featured": false,
-    "represented_artist": false,
-    "category": ""
-  },
-  {
     "id": "alicia-caro",
     "name": "Alicia Caro",
     "surname": "",
@@ -357,19 +339,19 @@
     "category": ""
   },
   {
-    "id": "pau-soles",
-    "name": "Pau Solés",
+    "id": "paula-pelaez",
+    "name": "Paula Peláez",
     "surname": "",
-    "role": "Productor ejecutivo asociado",
-    "bio": "Productor ejecutivo asociado de UMD Films, co-responsable de la estrategia comercial de la productora. Se encarga del cierre de contratos publicitarios y cinematográficos y de la optimización de recursos para los proyectos de la línea de la productora.",
-    "photo_cover": "assets/team/pau-soles/cover.avif",
-    "photos_extra": [],
+    "role": "Catwoman",
+    "bio": "",
+    "photo_cover": "assets/team/paula-pelaez/cover.avif",
+    "photos_extra": ["01","02"],
     "social": {
-      "instagram": "https://www.instagram.com/pau.soles/",
+      "instagram": "",
       "youtube": ""
     },
     "projects": [],
-    "specialties": ["Producción ejecutiva", "Estrategia comercial", "Contratos publicitarios"],
+    "specialties": [],
     "featured": false,
     "represented_artist": false,
     "category": ""
@@ -389,7 +371,7 @@
     "projects": ["interludio", "cautivo-malaga", "memoria-compromiso-y-fe"],
     "specialties": ["Composición", "Diseño de sonido", "Bandas sonoras"],
     "featured": false,
-    "represented_artist": true,
+    "represented_artist": false,
     "category": "compositor"
   }
 ]
