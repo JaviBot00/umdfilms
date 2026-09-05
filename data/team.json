@@ -72,6 +72,24 @@
     "category": ""
   },
   {
+    "id": "oliver-meneses",
+    "name": "Oliver Meneses",
+    "surname": "",
+    "role": "Director de fotografía",
+    "bio": "",
+    "photo_cover": "assets/team/oliver-meneses/cover.avif",
+    "photos_extra": [],
+    "social": {
+      "instagram": "",
+      "youtube": ""
+    },
+    "projects": [],
+    "specialties": [],
+    "featured": true,
+    "represented_artist": false,
+    "category": ""
+  },
+  {
     "id": "miguel-matarin",
     "name": "Miguel Matarín",
     "surname": "",
@@ -324,28 +342,10 @@
     "id": "paula-pelaez",
     "name": "Paula Peláez",
     "surname": "",
-    "role": "Catwoman",
+    "role": "Editora y Técnico",
     "bio": "",
     "photo_cover": "assets/team/paula-pelaez/cover.avif",
     "photos_extra": ["01","02"],
-    "social": {
-      "instagram": "",
-      "youtube": ""
-    },
-    "projects": [],
-    "specialties": [],
-    "featured": false,
-    "represented_artist": false,
-    "category": ""
-  },
-  {
-    "id": "oliver-meneses",
-    "name": "Oliver Meneses",
-    "surname": "",
-    "role": "Batman",
-    "bio": "",
-    "photo_cover": "assets/team/oliver/cover.avif",
-    "photos_extra": [],
     "social": {
       "instagram": "",
       "youtube": ""
